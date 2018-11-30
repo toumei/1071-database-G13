@@ -4,23 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// Auth
+var jwt= require('jsonwebtoken');
+
+// Router
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var productsRouter = require('./routes/products');
 
 var app = express();
-
-var mysql = require('mysql');
-var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '0000',
-    database: 'dbdemo'
-});
-
-con.connect(function(err) {
-    if (err) throw err;
-    console.log('MySQL connection successful');
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,13 +24,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req, res, next) {
-  req.con = con;
+// set Header
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); 
+  res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
 
+// Router Path
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
