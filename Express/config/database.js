@@ -8,4 +8,3 @@ module.exports = {
         connectionLimit: 10
     }
 };
-

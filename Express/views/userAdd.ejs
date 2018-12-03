@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel='stylesheet' href='/css/style.css' />
-    <title>Product Add</title>
+    <title>User Add</title>
     <script type="text/javascript">
         function Check() {
-            var id = document.getElementsByName('id')[0].value;
             var name = document.getElementsByName('name')[0].value;
-            var price = document.getElementsByName('price')[0].value;
-            if (id && name && price) {
+            var email = document.getElementsByName('email')[0].value;
+            var pwd = document.getElementsByName('pwd')[0].value;
+            if (name && email && pwd) {
                 return true;
             }
             alert('please input the info.');
@@ -27,16 +27,21 @@
 
 <body>
     <div class="container">
-        <h1 class="text-center d-4">Product - Add</h1>
-        <form name="addform" action="/products/add" method="post" accept-charset="utf-8" onSubmit="return Check();">
+        <h1 class="text-center d-4">User - Add</h1>
+        <form name="addform" action="/users/add" method="post" accept-charset="utf-8" onSubmit="return Check();">
             <div class="form-group">
-                <label for="prodNameInput">Product Name：</label>
-                <input type="text" class="form-control" id="prodNameInput" name="name" aria-describedby="prodNameHelp"
-                    placeholder="Product Name">
+                <label for="userNameInput">User Name</label>
+                <input type="text" class="form-control" id="userNameInput" name="name" aria-describedby="userNameHelp"
+                    placeholder="User Name">
             </div>
             <div class="form-group">
-                <label for="priceInput">Price</label>
-                <input type="text" class="form-control" id="priceInput" name="price" placeholder="Price">
+                <label for="emailInput">Email</label>
+                <input type="text" class="form-control" id="emailInput" name="email" aria-describedby="emailHelp"
+                    placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="pwdInput">Password</label>
+                <input type="text" class="form-control" id="pwdInput" name="pwd" placeholder="Password">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

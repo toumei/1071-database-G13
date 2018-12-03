@@ -3,16 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
-// Auth
-var jwt= require('jsonwebtoken');
+var passport = require('passport');
 
 // Router
 var indexRouter = require('./routes/index');
+var loginRouter = require('./routes/login');
 var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/products');
 
 var app = express();
+
+//set passport
+require('./config/passport-strategy');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,6 +25,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // set Header
 app.use(function (req, res, next) {
@@ -35,6 +40,7 @@ app.use(function (req, res, next) {
 
 // Router Path
 app.use('/', indexRouter);
+app.use('/login', loginRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 
