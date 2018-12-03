@@ -3,11 +3,11 @@
 ### 目前所做的功能：
 
 * https server
-* MVC
+* 將 三層架構 調整為 MVC
 * 登入系統(email, pwd)：passport、JWT、bcrypt(加密密碼)
 
 ### 前端可操作之Table：
-* products (以此為基礎修改，兼功能測試用)
+* product (課本教材，以此為基礎修改，兼功能測試用)
 * user
 
 ### 正在做的功能：
