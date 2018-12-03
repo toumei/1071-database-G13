@@ -12,7 +12,7 @@ module.exports = {
     getSearch: (req, res, next) => {
         productsModel.fetchById(req.query.id)
             .then(([data]) => {
-                res.render('productsSearch', { title: 'Product Search', data: data });
+                res.render('products', { title: 'Product Search', data: data });
             })
             .catch(err => console.log(err));
     },
