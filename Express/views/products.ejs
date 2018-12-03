@@ -16,26 +16,39 @@
         function Edit(id) {
             window.location.href = "/products/edit?id=" + id;
         }
-        
+
         function Delete(id) {
             var rs = confirm('Confirm to delete?');
             if (rs) {
-               window.location.href = "/products/delete?id=" + id;
+                window.location.href = "/products/delete?id=" + id;
             }
         }
-        function Add(){
+
+        function Add() {
             window.location.href = "/products/add";
+        }
+
+        function Search() {
+            var id = document.getElementById('idInput').value;
+            if (id)
+                window.location.href = "/products/search?id=" + document.getElementById('idInput').value;
+            else
+                window.location.href = "/products";
         }
     </script>
 </head>
 
 <body>
     <div class="container">
-       <div justify-content-between> 
+        <div justify-content-between>
             <h1 class="text-center d-4">Product - List</h1>
             <input type="button" name="add" value="Add" class="btn btn-danger" onclick="Add();" />
-       </div>
-       <table class="table table-striped">
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" id="idInput" placeholder="搜尋id">
+            <input type="button" value="搜尋" class="btn btn-primary" onclick="Search();" />
+        </div>
+        <table class="table table-striped">
             <thead class="bg-info">
                 <tr>
                     <th scope="row" class="align-middle m-2">Product ID</th>
@@ -43,7 +56,7 @@
                     <th scope="row" class="align-middle m-2">Price</th>
                     <th scope="row" class="align-middle m-2">Action</th>
                 </tr>
-    
+
             </thead>
             <tbody>
                 <% for ( var i = 0 ; i < data.length ; i++){ %>
@@ -51,13 +64,13 @@
                     <td class="align-middle">
                         <%= data[i].id  %>
                     </td>
-                    <td  class="align-middle">
+                    <td class="align-middle">
                         <%= data[i].name  %>
                     </td>
-                    <td  class="align-middle">
+                    <td class="align-middle">
                         <%= data[i].price  %>
                     </td>
-                    <td  class="align-middle">
+                    <td class="align-middle">
                         <input type="button" name="edit" value="Edit" class="btn btn-success btn-sm" onclick="Edit('<%= data[i].id  %>');" />
                         <input type="button" name="delete" value="Del" class="btn btn-warning btn-sm" onclick="Delete('<%= data[i].id  %>');" />
                     </td>
@@ -66,7 +79,7 @@
             </tbody>
         </table>
     </div>
-    
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/js/jquery-3.3.1.slim.min.js"></script>
