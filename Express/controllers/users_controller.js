@@ -1,11 +1,12 @@
 const usersModel = require('../models/users_model');
 var bcrypt = require('bcryptjs');
+var path = 'database/userTable/';
 
 module.exports = {
     getList: (req, res, next) => {
         usersModel.fetchAll()
         .then( ( [data] ) => {
-            res.render('users', { title: 'User List', data: data });
+            res.render(path + 'users', { title: 'User List', data: data });
         })
         .catch( err => console.log(err));
     },
@@ -13,7 +14,7 @@ module.exports = {
     getSearch: (req, res, next) => {
         usersModel.fetchById(req.query.uid)
         .then( ( [data] ) => {
-            res.render('usersSearch', { title: 'User Search', data: data });
+            res.render(path + 'usersSearch', { title: 'User Search', data: data });
         })
         .catch( err => console.log(err));
     },
@@ -21,7 +22,7 @@ module.exports = {
     getEdit: (req, res, next) => {
         usersModel.fetchById(req.query.uid)
         .then( ( [data] ) => {
-            res.render('userEdit', { title: 'User Edit', data: data });
+            res.render(path + 'userEdit', { title: 'User Edit', data: data });
         })
         .catch( err => console.log(err));
     },
@@ -34,22 +35,22 @@ module.exports = {
             pwd: bcrypt.hashSync(req.body.pwd, 10)
         };
         usersModel.update(sqlData, req.body.uid)
-        .then( ( [data] ) => {
-            res.redirect('/users');
+        .then( () => {
+            res.redirect(path + 'users');
         })
         .catch( err => console.log(err));
     },
 
     getDelete: (req, res, next) => {
         usersModel.delete(req.query.uid)
-        .then( ( [data] ) => {
-            res.redirect('/users');
+        .then( () => {
+            res.redirect(path + 'users');
         })
         .catch( err => console.log(err));
     },
 
     getAdd: (req, res, next) => {
-        res.render('userAdd', { title: 'Add User', msg: '' });
+        res.render(path + 'userAdd', { title: 'Add User', msg: '' });
     },
     
     postAdd: (req, res, next) => {
@@ -59,8 +60,8 @@ module.exports = {
             pwd: bcrypt.hashSync(req.body.pwd, 10)
         };
         usersModel.insert(sqlData)
-        .then( ( [data] ) => {
-            res.redirect('/users');
+        .then( () => {
+            res.redirect(path + 'users');
         })
         .catch( err => console.log(err));
     },
