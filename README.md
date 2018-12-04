@@ -8,9 +8,9 @@
 ---
 
 ### 命名相關
-* 學生宿舍網路維修管理系統，大概就簡稱ResNetCMMS
-  > residence network (ResNet)
-  > computerized maintenance management system (CMMS)
+* 學生宿舍網路維修管理系統，簡稱 **ResNetCMMS**
+  * residence network (ResNet)
+  * computerized maintenance management system (CMMS)
 
 * **SQL Table**
   1. apply 申報(故障交換器)
