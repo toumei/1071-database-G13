@@ -3,7 +3,8 @@
 ### 重要資訊：
 * 2019年01月05日 (六) 繳交報告
 * 2019年01月07日 (一) 口頭報告
-* 可用 npm run devstart 啟動服務器(不用重啟服務器)
+* "scripts": {"start": "nodemon ./bin/www"} 可用 npm start 自動重啟服務器
+
 
 ### 檔案移動：
 * Express\dbdemo_product.sql -> sql\dbdemo_product.sql
