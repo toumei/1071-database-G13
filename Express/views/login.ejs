@@ -4,11 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-    <link rel='stylesheet' href='/stylesheets/style.css' />    
-    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <title>
+        <%= title %>
+    </title>
     <script type="text/javascript">
         function Check() {
             var email = document.getElementsByName('email')[0].value;
@@ -23,12 +25,16 @@
 </head>
 
 <body>
+    <!-- START HERE -->
+    <%- include navbar.ejs %>
+
     <div class="container">
         <h1 class="text-center d-4">Log in</h1>
         <form name="addform" action="/login" method="post" accept-charset="utf-8" onSubmit="return Check();">
             <div class="form-group">
                 <label for="emailInput">Email</label>
-                <input type="text" class="form-control" id="EmailInput" name="email" aria-describedby="EmailHelp" placeholder="Email">
+                <input type="text" class="form-control" id="EmailInput" name="email" aria-describedby="EmailHelp"
+                    placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="passwordInput">Password</label>
