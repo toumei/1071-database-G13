@@ -12,16 +12,16 @@
   > residence network (ResNet)
   > computerized maintenance management system (CMMS)
 
-* Table
-1. apply 申報(故障交換器)
-1. sweep 清掃(機櫃)
-1. malfunction 故障(報修單)
-1. processing 處理過程(維修單)
-1. switch 交換器
-1. cabinet 機櫃
-1. vendor 廠商
-1. user 用戶(學生)
-1. employee 工作人員(學生)
+* **SQL Table**
+  1. apply 申報(故障交換器)
+  1. sweep 清掃(機櫃)
+  1. malfunction 故障(報修單)
+  1. processing 處理過程(維修單)
+  1. switch 交換器
+  1. cabinet 機櫃
+  1. vendor 廠商
+  1. user 用戶(學生)
+  1. employee 工作人員(學生)
 ---
 
 ### 使用的套件
