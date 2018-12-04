@@ -46,6 +46,7 @@
 * client端：Axios (具 promise 的js)，紀錄回傳token，若token失效則重新送login資訊
 * API安全(攔截用戶API請求，驗證token是否有效)：passport-jwt、express-jwt
 * 帳戶權限：ACL、BRAC
+ * 登入時判斷身份為 一般使用者 、 工作人員 、 DB管理員，切換至不同的使用頁面。
 
 ### 預期做的部分：
 * 在DB權限下，可用web操控後端table
