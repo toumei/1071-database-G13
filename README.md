@@ -30,6 +30,7 @@
 * passport-local
 * passport-jwt
 * jsonwebtoken
+* axios
 ---
 
 ### 目前所做的部分：
