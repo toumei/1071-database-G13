@@ -21,6 +21,7 @@
 * user
 
 ### 正在做的功能：
+* client端：Axios (具 promise 的js)，紀錄回傳token，若token失效則重新送login資訊
 * API安全(攔截用戶API請求，驗證token是否有效)：passport-jwt、express-jwt
 * 帳戶權限：ACL、BRAC
 
