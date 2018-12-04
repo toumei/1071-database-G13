@@ -5,11 +5,13 @@
 * 2019年01月07日 (一) 口頭報告
 * "scripts": {"start": "nodemon ./bin/www"} 
 當下npm start指令後，ctrl+s後會自動重啟服務器
+---
 
-### 命名
+### 命名相關
 #### 學生宿舍網路維修管理系統，大概就簡稱ResNetCMMS
 * residence network (ResNet)
 * computerized maintenance management system (CMMS)
+---
 
 ### 使用的套件
 * mysql2
@@ -17,6 +19,7 @@
 * passport-local
 * passport-jwt
 * jsonwebtoken
+---
 
 ### 目前所做的部分：
 * https server：https://localhost:port
