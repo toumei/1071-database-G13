@@ -5,6 +5,9 @@
 * 2019年01月07日 (一) 口頭報告
 * 可用 npm run devstart 啟動服務器(不用重啟服務器)
 
+### 可刪除的檔案：
+* Express\views\productsSearch.ejs -> 用products.ejs代替
+
 ### 目前所做的功能：
 
 * https server
