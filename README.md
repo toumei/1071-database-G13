@@ -5,11 +5,13 @@
 * 2019年01月07日 (一) 口頭報告
 * 可用 npm run devstart 啟動服務器(不用重啟服務器)
 
+### 檔案移動：
+* Express\dbdemo_product.sql -> sql\dbdemo_product.sql
+
 ### 可刪除的檔案：
 * Express\views\productsSearch.ejs -> 用products.ejs代替
 
 ### 目前所做的功能：
-
 * https server
 * 將 三層架構 調整為 MVC
 * 登入系統(email, pwd)：passport、JWT、bcrypt(加密密碼)
