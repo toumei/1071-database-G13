@@ -73,7 +73,11 @@ CREATE TABLE `declare` (
   `switchID` int(11) unsigned NOT NULL COMMENT '交換器編號',
   `vendorID` int(11) unsigned NOT NULL COMMENT '廠商代號',
   `date` date DEFAULT NULL COMMENT '申報日期',
-  `desc` varchar(45) DEFAULT NULL COMMENT '維護說明'
+  `desc` varchar(45) DEFAULT NULL COMMENT '維護說明',
+  KEY `FK_employeeID_declare` (`employeeID`),
+  KEY `FK_switchID_vendorID_declare` (`switchID`,`vendorID`),
+  CONSTRAINT `FK_employeeID_declare` FOREIGN KEY (`employeeID`) REFERENCES `employee` (`employeeid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_switchID_vendorID_declare` FOREIGN KEY (`switchID`, `vendorID`) REFERENCES `switch` (`switchid`, `vendorid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='申報';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -126,7 +130,9 @@ CREATE TABLE `repair` (
   `matter` varchar(45) DEFAULT NULL COMMENT '報修事項',
   `desc` varchar(45) DEFAULT NULL COMMENT '狀況描述',
   `time` date DEFAULT NULL COMMENT '方便維修時段',
-  PRIMARY KEY (`repairID`)
+  PRIMARY KEY (`repairID`),
+  KEY `FK_studentID_repair` (`studentID`),
+  CONSTRAINT `FK_studentID_repair` FOREIGN KEY (`studentID`) REFERENCES `boarder` (`studentid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='報修單';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -151,7 +157,11 @@ CREATE TABLE `rma` (
   `repairID` int(11) unsigned NOT NULL COMMENT '單號',
   `date` date DEFAULT NULL COMMENT '維修日期',
   `result` varchar(45) DEFAULT NULL COMMENT '維修結果',
-  `detail` varchar(45) DEFAULT NULL COMMENT '處理內容'
+  `detail` varchar(45) DEFAULT NULL COMMENT '處理內容',
+  KEY `FK_repairID_rma` (`repairID`),
+  KEY `FK_employeeID_rma` (`employeeID`),
+  CONSTRAINT `FK_employeeID_rma` FOREIGN KEY (`employeeID`) REFERENCES `employee` (`employeeid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_repairID_rma` FOREIGN KEY (`repairID`) REFERENCES `repair` (`repairid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='維修單';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -174,7 +184,9 @@ DROP TABLE IF EXISTS `sweep`;
 CREATE TABLE `sweep` (
   `employeeID` int(11) unsigned NOT NULL COMMENT '員工編號',
   `cabinetID` int(11) unsigned NOT NULL COMMENT '機櫃編號',
-  `date` date DEFAULT NULL COMMENT '清掃日期'
+  `date` date DEFAULT NULL COMMENT '清掃日期',
+  KEY `FK_employeeID_sweep` (`employeeID`),
+  CONSTRAINT `FK_employeeID_sweep` FOREIGN KEY (`employeeID`) REFERENCES `employee` (`employeeid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='清掃';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -196,11 +208,15 @@ DROP TABLE IF EXISTS `switch`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `switch` (
   `switchID` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '交換器編號',
-  `cabinetID` int(11) unsigned NOT NULL COMMENT '機櫃編號',
   `vendorID` int(11) unsigned NOT NULL COMMENT '廠商代號',
+  `cabinetID` int(11) unsigned NOT NULL COMMENT '機櫃編號',
   `status` tinyint(3) unsigned NOT NULL COMMENT '狀態',
   `specification` varchar(45) DEFAULT NULL COMMENT '規格',
-  PRIMARY KEY (`switchID`,`cabinetID`)
+  PRIMARY KEY (`switchID`,`vendorID`),
+  KEY `FK_vendorID_switch` (`vendorID`) /*!80000 INVISIBLE */,
+  KEY `FK_cabinetID_switch` (`cabinetID`),
+  CONSTRAINT `FK_cabinetID_switch` FOREIGN KEY (`cabinetID`) REFERENCES `cabinet` (`cabinetid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_vendorID_switch` FOREIGN KEY (`vendorID`) REFERENCES `vendor` (`vendorid`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='交換器';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -247,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-04 12:34:02
+-- Dump completed on 2018-12-04 13:13:32
