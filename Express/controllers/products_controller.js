@@ -32,7 +32,7 @@ module.exports = {
             price: req.body.price,
         };
         productsModel.update(sqlData, req.body.id)
-            .then(([data]) => {
+            .then(() => {
                 res.redirect('/products');
             })
             .catch(err => console.log(err));
@@ -40,7 +40,7 @@ module.exports = {
 
     getDelete: (req, res, next) => {
         productsModel.delete(req.query.id)
-            .then(([data]) => {
+            .then(() => {
                 res.redirect('/products');
             })
             .catch(err => console.log(err));
@@ -56,7 +56,7 @@ module.exports = {
             price: req.body.price,
         };
         productsModel.insert(sqlData)
-            .then(([data]) => {
+            .then(() => {
                 res.redirect('/products');
             })
             .catch(err => console.log(err));
