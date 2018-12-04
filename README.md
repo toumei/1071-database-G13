@@ -3,13 +3,25 @@
 ### 重要資訊：
 * 2019年01月05日 (六) 繳交報告
 * 2019年01月07日 (一) 口頭報告
-* **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，下 **npm run devstart** 指令後，ctrl+s後會自動重啟服務器
+* **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，
+  > 下 **npm run devstart** 指令後，ctrl+s後會自動重啟服務器
 ---
 
 ### 命名相關
-#### 學生宿舍網路維修管理系統，大概就簡稱ResNetCMMS
-* residence network (ResNet)
-* computerized maintenance management system (CMMS)
+* 學生宿舍網路維修管理系統，大概就簡稱ResNetCMMS
+  > residence network (ResNet)
+  > computerized maintenance management system (CMMS)
+
+#### Table
+1. apply 申報(故障交換器)
+1. sweep 清掃(機櫃)
+1. malfunction 故障(報修單)
+1. processing 處理過程(維修單)
+1. switch 交換器
+1. cabinet 機櫃
+1. vendor 廠商
+1. user 用戶(學生)
+1. employee 工作人員(學生)
 ---
 
 ### 使用的套件
