@@ -12,7 +12,7 @@
   > residence network (ResNet)
   > computerized maintenance management system (CMMS)
 
-#### Table
+* Table
 1. apply 申報(故障交換器)
 1. sweep 清掃(機櫃)
 1. malfunction 故障(報修單)
