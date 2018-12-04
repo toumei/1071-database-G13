@@ -3,14 +3,19 @@
 ### 重要資訊：
 * 2019年01月05日 (六) 繳交報告
 * 2019年01月07日 (一) 口頭報告
-* "scripts": {"start": "nodemon ./bin/www"} 可用 npm start 自動重啟服務器
+* "scripts": {"start": "nodemon ./bin/www"} 
+當下npm start指令後，ctrl+s後會自動重啟服務器
 
+### 命名
+#### 學生宿舍網路維修管理系統，大概就簡稱ResNetCMMS
+* residence network (ResNet)
+* computerized maintenance management system (CMMS)
 
-### 檔案移動：
-* Express\dbdemo_product.sql -> sql\dbdemo_product.sql
-
-### 可刪除的檔案：
-* Express\views\productsSearch.ejs -> 用products.ejs代替
+### 使用的套件
+mysql2
+passport
+passport-local
+passport-jwt
 
 ### 目前所做的功能：
 * https server
