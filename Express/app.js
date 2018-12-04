@@ -9,7 +9,7 @@ var passport = require('passport');
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
 var usersRouter = require('./routes/users');
-var databaseRouter = require('./routes/database');
+var dbCtrlRouter = require('./routes/dbCtrl');
 var productsRouter = require('./routes/products');
 
 var app = express();
@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/users', usersRouter);
-app.use('/database', databaseRouter);
+app.use('/dbCtrl', dbCtrlRouter);
 app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
