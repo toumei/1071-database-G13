@@ -43,6 +43,7 @@ HttpServer.listen(port, (err)=>{
     console.log(err);
   }else{
     console.log("Http server listening on port " + port);
+    console.log("http://localhost:" + port);
   }
 });
 HttpServer.on('error', onError);
@@ -53,6 +54,7 @@ HttpsServer.listen(httpsport, (err)=>{
     console.log(err);
   }else{
     console.log('Https server listening on port ' + httpsport);
+    console.log("https://localhost:" + port);
   }
 });
 
