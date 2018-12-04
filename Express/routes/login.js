@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', passport.authenticate('login',{ session: false }), function(req, res, next) {
     var token = jwt.sign(req.body, jwtConfig.secretOrKey, { expiresIn: '1h' });
-    res.send({ success: true, message: 'OK', token: token});
+    res.send({ success: true, message: 'OK', token: 'Bearer' + token});
 });
 
 module.exports = router;

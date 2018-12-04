@@ -38,23 +38,21 @@ var HttpsServer = https.createServer(options, app);
  * Listen on provided port, on all network interfaces.
  */
 
-HttpServer.listen(port, (err) => {
-  if (err) {
+HttpServer.listen(port, (err)=>{
+  if(err){
     console.log(err);
-  } else {
+  }else{
     console.log("Http server listening on port " + port);
-    console.log("http://localhost:" + port);
   }
 });
 HttpServer.on('error', onError);
 HttpServer.on('listening', onListening);
 
-HttpsServer.listen(httpsport, (err) => {
-  if (err) {
+HttpsServer.listen(httpsport, (err)=>{
+  if(err){
     console.log(err);
-  } else {
+  }else{
     console.log('Https server listening on port ' + httpsport);
-    console.log("https://localhost:" + port);
   }
 });
 
