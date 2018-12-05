@@ -17,7 +17,7 @@
 
 ---
 
-### git 指令：
+### git  指令：
 * 第一次載入專案
   * $ cd /d
   * $ git clone git@github.com:toumei/1071-database-G13.git
@@ -101,3 +101,17 @@
 * 在admin權限下，可填寫報修單、維修單
 * 在user權限下，可填寫報修單
 * 在guest權限下，只能瀏覽index、login，不可進入此系統
+
+### 參考資料：
+* bootstrap 官方文件(英文版)
+  * https://getbootstrap.com/
+* bootstrap 官方文件(中文版)
+  * https://bootstrap.hexschool.com/
+* react 官方文件
+  * https://reactjs.org/tutorial/tutorial.html
+* react-bootstrap-table
+  * https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Export%20CSV&selectedStory=Format%20CSV%20Column&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
+* git bash 指令
+  * https://zlargon.gitbooks.io/git-tutorial/content/patch/
+* MySQL 指令
+  * http://note.drx.tw/2012/12/mysql-syntax.html
