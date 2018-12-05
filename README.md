@@ -8,6 +8,14 @@
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
 ---
 
+### 更新資訊
+* 修正controllers變更path而產生的錯誤
+* EJS 模組化(pages、partials)
+* 修正narbar的index path問題
+* 新增head的fontawesome link
+
+---
+
 ### 基本需求：
 1. 基於web的DB操作
 1. 資料需求
@@ -45,6 +53,7 @@
 ### 目前所做的部分：
 * https server：https://localhost:port
 * 將 三層架構 調整為 Model–view–controller (MVC)
+* EJS 模組化(pages、partials)
 * 登入系統(email, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
