@@ -54,7 +54,7 @@ HttpsServer.listen(httpsport, (err)=>{
     console.log(err);
   }else{
     console.log('Https server listening on port ' + httpsport);
-    console.log("https://localhost:" + port);
+    console.log("https://localhost:" + httpsport);
   }
 });
 
