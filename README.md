@@ -8,6 +8,21 @@
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
 ---
 
+### git 指令：
+* 第一次載入專案
+  * $ cd /d
+  * $ git clone git@github.com:toumei/1071-database-G13.git
+  * $ cd 1071-database-G13/
+  * $ git config --global user.email "youremail@gms.tku.edu.tw"
+  * $ git config --global user.name "yourname"
+* 新增檔案
+  * $ git add *
+  * $ git commmit -m "write your log message"
+  * $ git push
+* 更新專案
+  * $ 
+---
+
 ### 更新資訊
 * 修正controllers變更path而產生的錯誤
 * EJS 模組化(pages、partials)
