@@ -1,10 +1,19 @@
 # 1071-database-G13
 
 ### 重要資訊：
+* 2019年12月10日 (一) 第一次進度報告
 * 2019年01月05日 (六) 繳交報告
 * 2019年01月07日 (一) 口頭報告
 * **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
+---
+
+### 基本需求：
+1. 基於web的DB操作
+1. 資料需求
+1. ER model
+1. 關聯模式
+1. demo測試資料
 ---
 
 ### 命名相關
@@ -12,16 +21,16 @@
   * residence network (ResNet)
   * computerized maintenance management system (CMMS)
 
-* **SQL Table**
-  1. apply 申報(故障交換器)
-  1. sweep 清掃(機櫃)
-  1. malfunction 故障(報修單)
-  1. processing 處理過程(維修單)
-  1. switch 交換器
-  1. cabinet 機櫃
-  1. vendor 廠商
-  1. user 用戶(學生)
-  1. employee 工作人員(學生)
+### **SQL Table**
+1. apply 申報(故障交換器)
+1. sweep 清掃(機櫃)
+1. malfunction 故障(報修單)
+1. processing 處理過程(維修單)
+1. switch 交換器
+1. cabinet 機櫃
+1. vendor 廠商
+1. user 用戶(學生)
+1. employee 工作人員(學生)
 ---
 
 ### 使用的套件
@@ -30,6 +39,7 @@
 * passport-local
 * passport-jwt
 * jsonwebtoken
+* axios
 ---
 
 ### 目前所做的部分：
