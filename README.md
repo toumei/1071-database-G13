@@ -18,12 +18,20 @@
 * 新增檔案
   * 新增全部專案的檔案
     * $ git add *
+    * $ git add -A
+    * $ git add --all
   * 新增該資料夾下的全部檔案
     * $ git add .
   * 新增一個檔案
     * $ git add 檔名.副檔名
-  * $ git commmit -m "write your log message"
+* 檔案修改內容
+  * $ git commmit -m "主標題"
+  * $ git commmit -m "主標題" -m "副標題"
+  * $ git commmit -m "主標題" -m "副標題1" -m "副標題2" ...
+* 提交檔案
   * $ git push
+* 重新命名資料夾
+  * $ git mv 原本資料夾名稱 修改後資料夾名稱
 * 更新專案
   * $ git pull
 ---
