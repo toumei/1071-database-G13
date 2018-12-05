@@ -8,6 +8,15 @@
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
 ---
 
+### 更新資訊
+* 修正controllers變更path而產生的錯誤
+* EJS 模組化(pages、partials)
+* 修正narbar的index path問題
+* 新增head的fontawesome link
+* 新增client端
+
+---
+
 ### git 指令：
 * 第一次載入專案
   * $ cd /d
@@ -34,14 +43,6 @@
   * $ git mv 原本資料夾名稱 修改後資料夾名稱
 * 更新專案
   * $ git pull
----
-
-### 更新資訊
-* 修正controllers變更path而產生的錯誤
-* EJS 模組化(pages、partials)
-* 修正narbar的index path問題
-* 新增head的fontawesome link
-
 ---
 
 ### 基本需求：
