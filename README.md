@@ -16,11 +16,12 @@
   * $ git config --global user.email "youremail@gms.tku.edu.tw"
   * $ git config --global user.name "yourname"
 * 新增檔案
-  * $ git add *
+  * 新增全部檔案
+    * $ git add *
   * $ git commmit -m "write your log message"
   * $ git push
 * 更新專案
-  * $ 
+  * $ git pull
 ---
 
 ### 更新資訊
