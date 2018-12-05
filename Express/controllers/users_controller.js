@@ -36,7 +36,7 @@ module.exports = {
         };
         usersModel.update(sqlData, req.body.uid)
         .then( () => {
-            res.redirect(path + 'users');
+            res.redirect('/users');
         })
         .catch( err => console.log(err));
     },
@@ -44,7 +44,7 @@ module.exports = {
     getDelete: (req, res, next) => {
         usersModel.delete(req.query.uid)
         .then( () => {
-            res.redirect(path + 'users');
+            res.redirect('/users');
         })
         .catch( err => console.log(err));
     },
@@ -61,7 +61,7 @@ module.exports = {
         };
         usersModel.insert(sqlData)
         .then( () => {
-            res.redirect(path + 'users');
+            res.redirect('/users');
         })
         .catch( err => console.log(err));
     },

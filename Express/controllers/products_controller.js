@@ -34,7 +34,7 @@ module.exports = {
         };
         productsModel.update(sqlData, req.body.id)
         .then( () => {
-            res.redirect(path + 'products');
+            res.redirect('/products');
         })
         .catch( err => console.log(err));
     },
@@ -42,7 +42,7 @@ module.exports = {
     getDelete: (req, res, next) => {
         productsModel.delete(req.query.id)
         .then( () => {
-            res.redirect(path + 'products');
+            res.redirect('/products');
         })
         .catch( err => console.log(err));
     },
@@ -58,7 +58,7 @@ module.exports = {
         };
         productsModel.insert(sqlData)
         .then( () => {
-            res.redirect(path + 'products');
+            res.redirect('/products');
         })
         .catch( err => console.log(err));
     },
