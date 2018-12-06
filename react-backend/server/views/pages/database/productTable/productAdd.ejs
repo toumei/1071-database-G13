@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% path = '../../../partials/' %>
+    <%- include(path + 'head') %>
+
+    <script type="text/javascript">
+        function Check() {
+            var name = document.getElementsByName('name')[0].value;
+            var price = document.getElementsByName('price')[0].value;
+            if (name && price) {
+                return true;
+            }
+            alert('please input the info.');
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="text-center d-4">Product - Add</h1>
+        <form name="addform" action="/products/add" method="post" accept-charset="utf-8" onSubmit="return Check();">
+            <div class="form-group">
+                <label for="prodNameInput">Product Name</label>
+                <input type="text" class="form-control" id="prodNameInput" name="name" aria-describedby="prodNameHelp"
+                    placeholder="Product Name">
+            </div>
+            <div class="form-group">
+                <label for="priceInput">Price</label>
+                <input type="text" class="form-control" id="priceInput" name="price" placeholder="Price">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- JavaScript -->
+    <%- include(path + 'JavaScript') %>
+</body>
+
+</html>

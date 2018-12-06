@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% path = '../../../partials/' %>
+    <% CRUDpath = '/products/' %>
+    <%- include(path + 'head') %>
+
+    <script src="/js/CRUD.js"></script>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <%- include(path + 'navbar') %>
+    <!-- HEADER -->
+    <%- include(path + 'header') %>
+
+    <div class="container">
+        <div justify-content-between>
+            <h1 class="text-center d-4">Product - List</h1>
+            <input type="button" name="add" value="Add" class="btn btn-danger" onclick="Add('<%= CRUDpath %>');" />
+        </div>
+        <div class="input-group">
+            <input type="text" class="form-control" id="idInput" placeholder="search id">
+            <input type="button" value="search" class="btn btn-primary" onclick="Search('<%= CRUDpath %>');" />
+        </div>
+        <table class="table table-striped">
+            <thead class="bg-info">
+                <tr>
+                    <th scope="row" class="align-middle m-2">Product ID</th>
+                    <th scope="row" class="align-middle m-2">Product Name</th>
+                    <th scope="row" class="align-middle m-2">Price</th>
+                    <th scope="row" class="align-middle m-2">Action</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <% for ( var i = 0 ; i < data.length ; i++){ %>
+                <tr>
+                    <td class="align-middle">
+                        <%= data[i].id  %>
+                    </td>
+                    <td class="align-middle">
+                        <%= data[i].name  %>
+                    </td>
+                    <td class="align-middle">
+                        <%= data[i].price  %>
+                    </td>
+                    <td class="align-middle">
+                        <input type="button" name="edit" value="Edit" class="btn btn-success btn-sm" onclick="Edit('<%= CRUDpath %>', '<%= data[i].id  %>');" />
+                        <input type="button" name="delete" value="Del" class="btn btn-warning btn-sm" onclick="Delete('<%= CRUDpath %>', '<%= data[i].id  %>');" />
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JavaScript -->
+    <%- include(path + 'JavaScript') %>
+</body>
+
+</html>
