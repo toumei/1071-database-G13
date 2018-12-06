@@ -4,33 +4,50 @@ import Navbar from './partials/Navbar';
 import Header from './partials/Header';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import { BrowserRouter, HashRouter, Route } from 'react-router-dom'
+import {
+    BrowserRouter as Router, Route
+} from 'react-router-dom'
 
-ReactDOM.render(<Navbar />, document.getElementById('navbar'));
-ReactDOM.render(<Header />, document.getElementById('header'));
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<Navbar />, document.getElementById('navbar'));
+// ReactDOM.render(<App />, document.getElementById('root'));
 
-// function Home() {
-//     return <h2>Home Page</h2>
-// }
+const index = () => (
+    <div>
 
-// function Second() {
-//     return <h2>a Page</h2>
-// }
+    </div>
+)
 
-// function Third() {
-//     return <h2>b Page</h2>
-// }
+const dbCtrl = () => (
+    <div>
+        <section class="bg-light py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a class="btn btn-primary text-light btn-block" href="#"><i class="fas fa-plus"></i> Add Post</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-success text-light btn-block" href="#"><i class="fas fa-plus"></i> Add Category</a>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-warning btn-block" href="#"><i class="fas fa-plus"></i> Add Users</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <App />
+    </div>
+)
 
-// ReactDOM.render(
-//     (
-//         <BrowserRouter>
-//             <Route path='/' component={Home}></Route>
-//             {/* <Route path='/second' component={Second}></Route>
-//             <Route path='/third' component={Third}></Route> */}
-//         </BrowserRouter>
-//     ),
-//     document.getElementById('root')
-// );
+ReactDOM.render(
+    <Router>
+        <div>
+            <Navbar />
+            <Header />
+            <Route exact path="/" component={index} />
+            <Route path="/dbCtrl" component={dbCtrl} />
+            <Route path="/products" component={App} />
+        </div>
+    </Router>,
+    document.getElementById('root'));
 
 serviceWorker.unregister();
