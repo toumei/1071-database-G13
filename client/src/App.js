@@ -5,6 +5,16 @@ import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import axios from 'axios';
 
+function nameFormatter(column, colIndex, { sortElement, filterElement }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      {filterElement}
+      {column.text}
+      {sortElement}
+    </div>
+  );
+}
+
 class App extends Component {
   state = {
     products: [],
@@ -17,7 +27,8 @@ class App extends Component {
       dataField: 'name',
       text: 'Product Name',
       sort: true,
-      filter: textFilter()
+      filter: textFilter(),
+      headerFormatter: nameFormatter
     }, {
       dataField: 'price',
       text: 'Product Price',
@@ -26,7 +37,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3000/users')
+    axios.get('http://localhost:3000/products/client')
       .then(response => {
         this.setState({
           products: response.data
