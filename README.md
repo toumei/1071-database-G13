@@ -11,9 +11,9 @@
 ### 更新資訊：
 * 修正controllers變更path而產生的錯誤
 * EJS 模組化(pages、partials)
-* 修正narbar的index path問題
+* 修正navbar的index path問題
 * 新增head的fontawesome link
-* 新增client端
+* 新增client端，並將Express改名為server
 ---
 
 ### WIKI：
