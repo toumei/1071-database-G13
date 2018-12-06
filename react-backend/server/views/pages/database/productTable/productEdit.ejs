@@ -4,11 +4,12 @@
 <head>
     <% path = '../../../partials/' %>
     <%- include(path + 'head') %>
-    
+
     <script type="text/javascript">
         function Check() {
             var id = document.getElementsByName('id')[0].value;
             var name = document.getElementsByName('name')[0].value;
+            var price = document.getElementsByName('price')[0].value;
             if (id && name && price) {
                 return true;
             }
@@ -24,8 +25,8 @@
         <h1 class="text-center d-4">Product - Edit</h1>
         <div class="form-group">
             <label for="idInput">Product ID：</label>
-            <input type="text" class="form-control" id="idInput" name="id" value="<%=data[0].id %>"
-                aria-describedby="idNameHelp" placeholder="Product ID" readonly>
+            <input type="text" class="form-control" id="idInput" name="id" value="<%=data[0].id %>" aria-describedby="idNameHelp"
+                placeholder="Product ID" readonly>
         </div>
         <div class="form-group">
             <label for="prodNameInput">Product Name：</label>
