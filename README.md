@@ -17,6 +17,7 @@
 ---
 
 ### WIKI：
+* [簡介](https://github.com/toumei/1071-database-G13/wiki/H)
 * [git指令](https://github.com/toumei/1071-database-G13/wiki/git-command)
 * [SQL Table](https://github.com/toumei/1071-database-G13/wiki/SQL-Table)
 * [參考資料](https://github.com/toumei/1071-database-G13/wiki/Reference)
