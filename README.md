@@ -8,75 +8,18 @@
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
 ---
 
-### 更新資訊
+### 更新資訊：
 * 修正controllers變更path而產生的錯誤
 * EJS 模組化(pages、partials)
 * 修正narbar的index path問題
 * 新增head的fontawesome link
 * 新增client端
-
 ---
 
-### git  指令：
-* 第一次載入專案
-  * $ cd /d
-  * $ git clone git@github.com:toumei/1071-database-G13.git
-  * $ cd 1071-database-G13/
-  * $ git config --global user.email "youremail@gms.tku.edu.tw"
-  * $ git config --global user.name "yourname"
-* 新增檔案
-  * 新增全部專案的檔案
-    * $ git add *
-    * $ git add -A
-    * $ git add --all
-  * 新增該資料夾下的全部檔案
-    * $ git add .
-  * 新增一個檔案
-    * $ git add 檔名.副檔名
-* 檔案修改內容
-  * $ git commmit -m "主標題"
-  * $ git commmit -m "主標題" -m "副標題"
-  * $ git commmit -m "主標題" -m "副標題1" -m "副標題2" ...
-* 提交檔案
-  * $ git push
-* 重新命名資料夾
-  * $ git mv 原本資料夾名稱 修改後資料夾名稱
-* 更新專案
-  * $ git pull
----
-
-### 基本需求：
-1. 基於web的DB操作
-1. 資料需求
-1. ER model
-1. 關聯模式
-1. demo測試資料
----
-
-### 命名相關
-* 學生宿舍網路維修管理系統，簡稱 **ResNetCMMS**
-  * residence network (ResNet)
-  * computerized maintenance management system (CMMS)
-
-### **SQL Table**
-1. apply 申報(故障交換器)
-1. sweep 清掃(機櫃)
-1. malfunction 故障(報修單)
-1. processing 處理過程(維修單)
-1. switch 交換器
-1. cabinet 機櫃
-1. vendor 廠商
-1. user 用戶(學生)
-1. employee 工作人員(學生)
----
-
-### 使用的套件
-* mysql2
-* passport
-* passport-local
-* passport-jwt
-* jsonwebtoken
-* axios
+### WIKI：
+* [git指令](https://github.com/toumei/1071-database-G13/wiki/git-command)
+* [SQL Table](https://github.com/toumei/1071-database-G13/wiki/SQL-Table)
+* [參考資料](https://github.com/toumei/1071-database-G13/wiki/Reference)
 ---
 
 ### 目前所做的部分：
@@ -101,17 +44,3 @@
 * 在admin權限下，可填寫報修單、維修單
 * 在user權限下，可填寫報修單
 * 在guest權限下，只能瀏覽index、login，不可進入此系統
-
-### 參考資料：
-* bootstrap 官方文件(英文版)
-  * https://getbootstrap.com/
-* bootstrap 官方文件(中文版)
-  * https://bootstrap.hexschool.com/
-* react 官方文件
-  * https://reactjs.org/tutorial/tutorial.html
-* react-bootstrap-table
-  * https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Export%20CSV&selectedStory=Format%20CSV%20Column&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
-* git bash 指令
-  * https://zlargon.gitbooks.io/git-tutorial/content/patch/
-* MySQL 指令
-  * http://note.drx.tw/2012/12/mysql-syntax.html
