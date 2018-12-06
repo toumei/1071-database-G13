@@ -29,26 +29,22 @@ class Navbar extends Component {
 
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                                    <i class="fas fa-user"></i>
-                                    <Link to="/Welcome">Welcome Brad</Link>
-                                </a>
+                                <Link class="nav-link dropdown-toggle" data-toggle="dropdown" to="/user">
+                                    <i class="fas fa-user"></i> Welcome Brad
+                                </Link>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-user-circle"></i>
-                                        <Link to="/Profile">Profile</Link>
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="fas fa-cog"></i>
-                                        <Link to="/Settings">Settings</Link>
-                                    </a>
+                                    <Link class="dropdown-item" to="/profile">
+                                        <i class="fas fa-user-circle"></i> Profile
+                                    </Link>
+                                    <Link class="dropdown-item" to="/settings">
+                                        <i class="fas fa-cog"></i> Settings
+                                    </Link>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-user-times"></i>
-                                    <Link to="/Logout">Logout</Link>
-                                </a>
+                                <Link class="nav-link" to="/login">
+                                    <i class="fas fa-user-times"></i> Logout
+                                </Link>
                             </li>
 
                         </ul>

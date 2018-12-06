@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Navbar from './partials/Navbar';
 import Header from './partials/Header';
-import App from './App';
+import DBCtrl from './pages/DBCtrl';
+import Products from './pages/Products';
+import Login from './pages/Login';
 import * as serviceWorker from './serviceWorker';
 import {
     BrowserRouter as Router, Route
 } from 'react-router-dom'
-
-// ReactDOM.render(<Navbar />, document.getElementById('navbar'));
-// ReactDOM.render(<App />, document.getElementById('root'));
 
 const index = () => (
     <div>
@@ -23,18 +22,18 @@ const dbCtrl = () => (
             <div class="container">
                 <div class="row">
                     <div class="col-md-2">
-                        <a class="btn btn-primary text-light btn-block" href="#"><i class="fas fa-plus"></i> Add Post</a>
+                        <button class="btn btn-primary text-light btn-block"><i class="fas fa-plus"></i> Add Post</button>
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-success text-light btn-block" href="#"><i class="fas fa-plus"></i> Add Category</a>
+                        <button class="btn btn-success text-light btn-block"><i class="fas fa-plus"></i> Add Category</button>
                     </div>
                     <div class="col-md-2">
-                        <a class="btn btn-warning btn-block" href="#"><i class="fas fa-plus"></i> Add Users</a>
+                        <button class="btn btn-warning btn-block"><i class="fas fa-plus"></i> Add Users</button>
                     </div>
                 </div>
             </div>
         </section>
-        <App />
+        <DBCtrl />
     </div>
 )
 
@@ -45,7 +44,8 @@ ReactDOM.render(
             <Header />
             <Route exact path="/" component={index} />
             <Route path="/dbCtrl" component={dbCtrl} />
-            <Route path="/products" component={App} />
+            <Route path="/products" component={Products} />
+            <Route path="/login" component={Login} />
         </div>
     </Router>,
     document.getElementById('root'));
