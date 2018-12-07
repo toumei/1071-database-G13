@@ -9,7 +9,7 @@
 * **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
 * server http-port：http://localhost:3000
-* server https-port：https://localhost:3000
+* server https-port：https://localhost:8000
 * client http-port：http://localhost:3001
 ---
 
