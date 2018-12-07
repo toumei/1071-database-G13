@@ -17,6 +17,7 @@
 * 修正navbar的index path問題
 * 新增head的fontawesome link
 * 新增client端，並將Express改名為server
+* 更新wiki 簡介
 ---
 
 ### WIKI：
