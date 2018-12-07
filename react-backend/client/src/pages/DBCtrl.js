@@ -4,7 +4,6 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import axios from 'axios';
-// import DBColumn from './DBColumn';
 
 function nameFormatter(column, colIndex, { sortElement, filterElement }) {
     return (
@@ -16,49 +15,56 @@ function nameFormatter(column, colIndex, { sortElement, filterElement }) {
     );
 }
 
-// console.log(DBColumn);
-
 class DBCtrl extends Component {
-    state = {
-        products: [],
-        columns: [{
-            dataField: 'studentID',
-            text: '123',
-            sort: true,
-            filter: textFilter(),
-            headerFormatter: nameFormatter
-        },
-        {
-            dataField: 'name',
-            text: '姓名',
-            sort: true,
-            filter: textFilter(),
-            headerFormatter: nameFormatter
-        }]
+    constructor() {
+        super();
+        this.state = {
+            data: [],
+            columns: []
+        };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         axios.get('http://localhost:3000/dbCtrl/List')
             .then(response => {
+                var columns = []
+                response.data[0].forEach(element => {
+                    columns.push({
+                        dataField: element['COLUMN_NAME'],
+                        text: element['COLUMN_COMMENT'],
+                        sort: true,
+                        filter: textFilter(),
+                        headerFormatter: nameFormatter
+                    });
+                });
                 this.setState({
-                    products: response.data
+                    columns: columns,
+                    data: response.data[1]
                 });
             });
     }
 
+    componentDidMount() {
+    }
+
     render() {
-        return (
-            <div className="container" style={{ marginTop: 50 }}>
-                <BootstrapTable
-                    striped
-                    hover
-                    keyField='studentID'
-                    data={this.state.products}
-                    columns={this.state.columns}
-                    filter={filterFactory()}
-                    pagination={paginationFactory()} />
-            </div>
-        );
+        if (this.state.data.length > 0) {
+            return (
+                <div>
+                    <div className="container" style={{ marginTop: 50 }}>
+                        <BootstrapTable
+                            striped
+                            hover
+                            keyField='studentID'
+                            data={this.state.data}
+                            columns={this.state.columns}
+                            filter={filterFactory()}
+                            pagination={paginationFactory()} />
+                    </div>
+                </div>
+            );
+        }
+        return (null)
     }
 }
 

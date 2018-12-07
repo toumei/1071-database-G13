@@ -14,17 +14,17 @@ const index = () => (
 
 const dbCtrl = () => (
     <div>
-        <section class="bg-light py-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-2">
-                        <button class="btn btn-primary text-light btn-block"><i class="fas fa-plus"></i> Add Post</button>
+        <section className="bg-light py-4">
+            <div className="container">
+                <div className="row">
+                    <div className="col-md-2">
+                        <button className="btn btn-primary text-light btn-block"><i className="fas fa-plus"></i> Add Post</button>
                     </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-success text-light btn-block"><i class="fas fa-plus"></i> Add Category</button>
+                    <div className="col-md-2">
+                        <button className="btn btn-success text-light btn-block"><i className="fas fa-plus"></i> Add Category</button>
                     </div>
-                    <div class="col-md-2">
-                        <button class="btn btn-warning btn-block"><i class="fas fa-plus"></i> Add Users</button>
+                    <div className="col-md-2">
+                        <button className="btn btn-warning btn-block"><i className="fas fa-plus"></i> Add Users</button>
                     </div>
                 </div>
             </div>
