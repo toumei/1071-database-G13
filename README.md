@@ -52,7 +52,7 @@
 * client (express)
 
 * client (react)
-  * db 介面操作
+  * db 介面操作與接收資料
 
 ### 尚未做的部分：
 * server
