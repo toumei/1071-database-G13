@@ -1,64 +1,59 @@
 import React, { Component } from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
-import paginationFactory from 'react-bootstrap-table2-paginator';
-import axios from 'axios';
+import Navbar from './partials/Navbar';
+import Header from './partials/Header';
+import DBCtrl from './pages/DBCtrl';
+import Products from './pages/Products';
+import Login from './pages/Login';
+import { Switch, Route } from 'react-router-dom'
 
-function nameFormatter(column, colIndex, { sortElement, filterElement }) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {filterElement}
-      {column.text}
-      {sortElement}
+const index = () => (
+    <div>
+
     </div>
-  );
-}
+)
+
+const dbCtrl = () => (
+    <div>
+        <section class="bg-light py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="btn btn-primary text-light btn-block"><i class="fas fa-plus"></i> Add Post</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-success text-light btn-block"><i class="fas fa-plus"></i> Add Category</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-warning btn-block"><i class="fas fa-plus"></i> Add Users</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <DBCtrl />
+    </div>
+)
+
+const Main = () => (
+    <main>
+        <Switch>
+            <Route exact path="/" component={index} />
+            <Route path="/dbCtrl" component={dbCtrl} />
+            <Route path="/products" component={Products} />
+            <Route path="/login" component={Login} />
+        </Switch>
+    </main>
+)
 
 class App extends Component {
-  state = {
-    products: [],
-    columns: [{
-      dataField: 'id',
-      text: 'Product ID',
-      sort: true
-    },
-    {
-      dataField: 'name',
-      text: 'Product Name',
-      sort: true,
-      filter: textFilter(),
-      headerFormatter: nameFormatter
-    }, {
-      dataField: 'price',
-      text: 'Product Price',
-      sort: true
-    }]
-  }
-
-  componentDidMount() {
-    axios.get('http://localhost:3000/products/client')
-      .then(response => {
-        this.setState({
-          products: response.data
-        });
-      });
-  }
-
-  render() {
-    return (
-      <div className="container" style={{ marginTop: 50 }}>
-        <BootstrapTable
-          striped
-          hover
-          keyField='id'
-          data={this.state.products}
-          columns={this.state.columns}
-          filter={filterFactory()}
-          pagination={paginationFactory()} />
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div>
+                <Navbar />
+                <Header />
+                <Main />
+            </div>
+        );
+    }
 }
 
 export default App;

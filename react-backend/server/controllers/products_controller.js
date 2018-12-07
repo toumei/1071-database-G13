@@ -20,7 +20,15 @@ module.exports = {
         })
         .catch( err => console.log(err));
     },
-    
+
+    getClientList: (req, res, next) => {
+        productsModel.fetchAll()
+            .then(([data]) => {
+                res.send(data);
+            })
+            .catch(err => console.log(err));
+    },
+
     getSearch: (req, res, next) => {
         var data = {
             colName: [],
@@ -59,8 +67,9 @@ module.exports = {
         var sqlData = {
             id: req.body.id,
             name: req.body.name,
-            price: req.body.price,
+            price: req.body.price
         };
+
         productsModel.update(sqlData, req.body.id)
         .then( () => {
             res.redirect(router);
@@ -89,7 +98,7 @@ module.exports = {
         .catch( err => console.log(err));
         
     },
-    
+
     postAdd: (req, res, next) => {
         var sqlData = {
             name: req.body.name,

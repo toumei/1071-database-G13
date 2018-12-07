@@ -4,8 +4,13 @@
 * 2019年12月10日 (一) 第一次進度報告
 * 2019年01月05日 (六) 繳交報告
 * 2019年01月07日 (一) 口頭報告
+* 有任何參考資料請放上來，這樣比較好協助了解程式碼和報告
+* 請更新server/config/database.js
 * **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
+* server http-port：http://localhost:3000
+* server https-port：https://localhost:3000
+* client http-port：http://localhost:3001
 ---
 
 ### 更新資訊：
@@ -14,9 +19,13 @@
 * 修正navbar的index path問題
 * 新增head的fontawesome link
 * 新增client端，並將Express改名為server
+* 更新wiki 簡介
+* client端 新增router
+* 新增res_net_cmms資料庫連線
 ---
 
 ### WIKI：
+* [簡介](https://github.com/toumei/1071-database-G13/wiki/Home)
 * [git指令](https://github.com/toumei/1071-database-G13/wiki/git-command)
 * [SQL Table](https://github.com/toumei/1071-database-G13/wiki/SQL-Table)
 * [參考資料](https://github.com/toumei/1071-database-G13/wiki/Reference)

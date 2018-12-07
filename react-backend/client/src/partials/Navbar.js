@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Navbar extends Component {
     render() {
         return (
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <div class="container">
-                    <a class="navbar-brand" href="/">首頁</a>
+                    <Link class="navbar-brand" to="/">首頁</Link>
                     <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -13,36 +14,37 @@ class Navbar extends Component {
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">資料庫</a>
+                                <Link class="nav-link" to="/dbCtrl">資料庫</Link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">報修單</a>
+                                <Link class="nav-link" to="/malfunction">報修單</Link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">維修單</a>
+                                <Link class="nav-link" to="/processing">維修單</Link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">products</a>
+                                <Link class="nav-link" to="/products">products</Link>
                             </li>
                         </ul>
 
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                                <Link class="nav-link dropdown-toggle" data-toggle="dropdown" to="/user">
                                     <i class="fas fa-user"></i> Welcome Brad
-                                </a>
+                                </Link>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">
+                                    <Link class="dropdown-item" to="/profile">
                                         <i class="fas fa-user-circle"></i> Profile
-                                    </a>
-                                    <a class="dropdown-item" href="#">
+                                    </Link>
+                                    <Link class="dropdown-item" to="/settings">
                                         <i class="fas fa-cog"></i> Settings
-                                    </a>
+                                    </Link>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-user-times"></i> Logout</a>
+                                <Link class="nav-link" to="/login">
+                                    <i class="fas fa-user-times"></i> Logout
+                                </Link>
                             </li>
 
                         </ul>

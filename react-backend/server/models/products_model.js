@@ -1,8 +1,8 @@
 const db = require('../config/mysql');
 const $sql = require('./mapper').product;
 
-module.exports = class Product{
-    constructor(id, name, price){
+module.exports = class Product {
+    constructor(id, name, price) {
         this.id = id;
         this.name = name;
         this.price = price;
