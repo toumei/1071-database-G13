@@ -11,7 +11,15 @@ module.exports = {
     },
 
     getTableList: (req, res, next) => {
-        dbCtrlModel.fetchAll()
+        dbCtrlModel.fetchTableAll()
+            .then(([data]) => {
+                res.send(data);
+            })
+            .catch(err => console.log(err));
+    },
+
+    getColumnList: (req, res, next) => {
+        dbCtrlModel.fetchColumnAll()
             .then(([data]) => {
                 res.send(data);
             })

@@ -9,6 +9,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/TableList', dbCtrlController.getTableList);
+router.get('/ColumnList', dbCtrlController.getColumnList);
 router.get('/List', dbCtrlController.getList);
 
 module.exports = router;

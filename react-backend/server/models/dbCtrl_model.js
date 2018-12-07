@@ -11,6 +11,8 @@ module.exports = class Product {
     static insert(sqlData) { return db.query($sql.insert, sqlData); };
     static update(sqlData, id) { return db.query($sql.update, [sqlData, id]); };
     static delete(id) { return db.execute($sql.delete, [id]); };
-    static fetchAll() { return db.query($sql.fetchAll + $sql.fetchColumnAll); };
+    static fetchAll() { return db.query($sql.fetchTableAll + $sql.fetchAll); };
+    static fetchTableAll() { return db.query($sql.fetchTableAll); };
+    static fetchColumnAll() { return db.query($sql.fetchAll); };
     static fetchById(id) { return db.execute($sql.fetchById, [id]); };
 };

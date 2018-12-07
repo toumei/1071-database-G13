@@ -22,7 +22,7 @@ module.exports = {
 		update: 'UPDATE product SET ? WHERE id = ?;',
 		delete: 'DELETE FROM product WHERE id = ?;',
 		fetchById: 'SELECT * FROM product WHERE id = ?;',
-		fetchColumnAll: 'select column_name, column_comment from information_schema.columns where table_schema="res_net_cmms" and table_name="boarder";',
+		fetchTableAll: 'select column_name, column_comment from information_schema.columns where table_schema="res_net_cmms" and table_name="apply";',
 		fetchAll: 'SELECT * FROM boarder;'
 	}
 };
