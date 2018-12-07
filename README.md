@@ -29,7 +29,7 @@
 * [參考資料](https://github.com/toumei/1071-database-G13/wiki/Reference)
 ---
 
-### 目前所做的部分：
+### 已經做的部分：
 * server
   * https server：https://localhost:port
   * 將 三層架構 調整為 Model–view–controller (MVC)
@@ -38,20 +38,31 @@
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
 * client
-  * router 設計
-
-### 前端可操作之Table：
-* product (課本教材，以此為基礎修改，兼功能測試用)
-* user
+  * router 規劃與設計
 
 ### 正在做的部分：
-* client端：Axios (具 promise 的js)，紀錄回傳token，若token失效則重新送login資訊
-* API安全(攔截用戶API請求，驗證token是否有效)：passport-jwt、express-jwt
-* 帳戶權限：ACL、RBAC
-  * 登入時判斷身份為 一般使用者 、 工作人員 、 DB管理員，切換至不同的使用頁面。
+* sever
+  * client端：Axios (具 promise 的js)，紀錄回傳token，若token失效則重新送login資訊
+  * API安全(攔截用戶API請求，驗證token是否有效)：passport-jwt、express-jwt
+  * 帳戶權限：ACL、RBAC
+    * 登入時判斷身份為 一般使用者 、 工作人員 、 DB管理員，切換至不同的使用頁面。
+* client
+  * db 介面操作
+
+### 尚未做的部分：
+* server
+* client
+  * https server
+  * Axios
+  * ACL、RBAC
+---
 
 ### 預期做的部分：
 * 在DB權限下，可用web操控後端table
 * 在admin權限下，可填寫報修單、維修單
 * 在user權限下，可填寫報修單
 * 在guest權限下，只能瀏覽index、login，不可進入此系統
+
+### 前端可操作之Table：
+* product (課本教材，以此為基礎修改，兼功能測試用)
+* user
