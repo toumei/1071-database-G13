@@ -15,14 +15,7 @@
 ---
 
 ### 更新資訊：
-* 修正controllers變更path而產生的錯誤
 * EJS 模組化(pages、partials)
-* 修正navbar的index path問題
-* 新增head的fontawesome link
-* 新增client端，並將Express改名為server
-* 更新wiki 簡介
-* client端 新增router
-* 新增res_net_cmms資料庫連線
 * 新增sql指令：describe: 'DESCRIBE table'，取得column_name
 * 將list、add、edit改成通用模式
 ---
