@@ -52,9 +52,10 @@
 ### 尚未做的部分：
 * server
 * client
-  * https server
-  * Axios
-  * ACL、RBAC
+  * db 分析
+  * https server (配合server)
+  * Axios (配合server)
+  * ACL、RBAC (配合server)
 ---
 
 ### 預期做的部分：
@@ -65,4 +66,7 @@
 
 ### 前端可操作之Table：
 * product (課本教材，以此為基礎修改，兼功能測試用)
+* DB ctrl
+* malfunction
+* processing
 * user
