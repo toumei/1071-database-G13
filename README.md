@@ -18,6 +18,7 @@
 * 新增head的fontawesome link
 * 新增client端，並將Express改名為server
 * 更新wiki 簡介
+* client端 新增router
 ---
 
 ### WIKI：
