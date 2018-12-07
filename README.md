@@ -5,6 +5,7 @@
 * 2019年01月05日 (六) 繳交報告
 * 2019年01月07日 (一) 口頭報告
 * 有任何參考資料請放上來，這樣比較好協助了解程式碼和報告
+* 請更新server/config/database.js
 * **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
 * server http-port：http://localhost:3000
@@ -20,6 +21,7 @@
 * 新增client端，並將Express改名為server
 * 更新wiki 簡介
 * client端 新增router
+* 新增res_net_cmms資料庫連線
 ---
 
 ### WIKI：
