@@ -22,6 +22,8 @@
 * 更新wiki 簡介
 * client端 新增router
 * 新增res_net_cmms資料庫連線
+* 新增sql指令：describe: 'DESCRIBE table'，取得column_name
+* 將list、add、edit改成通用模式
 ---
 
 ### WIKI：
