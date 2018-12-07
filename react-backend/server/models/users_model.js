@@ -9,6 +9,7 @@ module.exports = class User{
         this.pwd = pwd;
     }
 
+    static describe(){ return db.execute($sql.describe); };
     static insert(sqlData){ return db.query($sql.insert, sqlData); };
     static update(sqlData, id){ return db.query($sql.update, [sqlData, id]);};
     static delete(id){return db.execute($sql.delete, [id]);};

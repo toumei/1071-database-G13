@@ -1,28 +1,57 @@
 const usersModel = require('../models/users_model');
 var bcrypt = require('bcryptjs');
-var path = 'database/userTable/';
+var path = 'database/';
+var router = '/users';
+var table = 'User';
 
 module.exports = {
     getList: (req, res, next) => {
-        usersModel.fetchAll()
-        .then( ( [data] ) => {
-            res.render(path + 'users', { title: 'User List', data: data });
+        var data = {
+            colName: [],
+            table: []
+        };
+        usersModel.describe()
+        .then( ( [results] ) => {
+            data.colName = results;
+            return usersModel.fetchAll();
+        })
+        .then( ( [results] ) => {
+            data.table = results;
+            res.render(path + 'list', { title: table + ' List', router: router, table: table, data: data });
         })
         .catch( err => console.log(err));
     },
     
     getSearch: (req, res, next) => {
-        usersModel.fetchById(req.query.uid)
-        .then( ( [data] ) => {
-            res.render(path + 'usersSearch', { title: 'User Search', data: data });
+        var data = {
+            colName: [],
+            table: []
+        };
+        usersModel.describe()
+        .then( ( [results] ) => {
+            data.colName = results;
+            return usersModel.fetchById(req.query.id);
+        })
+        .then( ( [results] ) => {
+            data.table = results;
+            res.render(path + 'search', { title: table + ' Search', router: router, table: table, data: data });
         })
         .catch( err => console.log(err));
     },
 
     getEdit: (req, res, next) => {
-        usersModel.fetchById(req.query.uid)
-        .then( ( [data] ) => {
-            res.render(path + 'userEdit', { title: 'User Edit', data: data });
+        var data = {
+            colName: [],
+            table: []
+        };
+        usersModel.describe()
+        .then( ( [results] ) => {
+            data.colName = results;
+            return usersModel.fetchById(req.query.id);
+        })
+        .then( ( [results] ) => {
+            data.table = results;
+            res.render(path + 'edit', { title: table + ' Edit', router: router, table: table, data: data });
         })
         .catch( err => console.log(err));
     },
@@ -36,21 +65,31 @@ module.exports = {
         };
         usersModel.update(sqlData, req.body.uid)
         .then( () => {
-            res.redirect('/users');
+            res.redirect(router);
         })
         .catch( err => console.log(err));
     },
 
     getDelete: (req, res, next) => {
-        usersModel.delete(req.query.uid)
+        usersModel.delete(req.query.id)
         .then( () => {
-            res.redirect('/users');
+            res.redirect(router);
         })
         .catch( err => console.log(err));
     },
 
     getAdd: (req, res, next) => {
-        res.render(path + 'userAdd', { title: 'Add User', msg: '' });
+        var data = {
+            colName: [],
+            table: []
+        };
+        usersModel.describe()
+        .then( ( [results] ) => {
+            data.colName = results;
+            res.render(path + 'add', { title: 'Add ' + table, router: router, table: table, data: data });
+        })
+        .catch( err => console.log(err));
+        
     },
     
     postAdd: (req, res, next) => {
@@ -61,7 +100,7 @@ module.exports = {
         };
         usersModel.insert(sqlData)
         .then( () => {
-            res.redirect('/users');
+            res.redirect(router);
         })
         .catch( err => console.log(err));
     },

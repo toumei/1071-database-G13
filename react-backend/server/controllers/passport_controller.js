@@ -47,8 +47,11 @@ module.exports = {
                     email: req.body.email,
                     pwd: bcrypt.hashSync(req.body.pwd, 10)
                 };
-                usersModel.insert(data).then( ( [data] ) => { return done(null, results[0]); })
+                return usersModel.insert(data);
             }
+        })
+        .then( ( [data] ) => {
+            return done(null, data[0]);
         })
         .catch( err => { return done(err); });
     }

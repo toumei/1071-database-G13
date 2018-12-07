@@ -1,5 +1,7 @@
+
 module.exports = {
 	product: {
+		describe: 'DESCRIBE product',
 		insert:'INSERT INTO product SET ?',
 		update:'UPDATE product SET ? WHERE id = ?',
 		delete: 'DELETE FROM product WHERE id = ?',
@@ -7,6 +9,7 @@ module.exports = {
 		fetchAll: 'SELECT * FROM product'
 	},
 	user: {
+		describe: 'DESCRIBE user',
 		insert:'INSERT INTO user SET ?',
 		update:'UPDATE user SET ? WHERE uid = ?',
 		delete: 'DELETE FROM user WHERE uid = ?',
