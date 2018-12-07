@@ -29,7 +29,7 @@
 
 ### WIKI：
 * [簡介](https://github.com/toumei/1071-database-G13/wiki/Home)
-* [VS code擴充插件](https://github.com/toumei/1071-database-G13/wiki/VS-code-Extensions)
+* [VS code 快捷鍵 & 擴充插件](https://github.com/toumei/1071-database-G13/wiki/VS-code-Extensions)
 * [git指令](https://github.com/toumei/1071-database-G13/wiki/git-command)
 * [SQL Table](https://github.com/toumei/1071-database-G13/wiki/SQL-Table)
 * [參考資料](https://github.com/toumei/1071-database-G13/wiki/Reference)
