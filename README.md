@@ -37,7 +37,9 @@
   * 登入系統(email, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
-* client
+* client (express)
+
+* client (react)
   * router 規劃與設計
 
 ### 正在做的部分：
@@ -46,23 +48,47 @@
   * API安全(攔截用戶API請求，驗證token是否有效)：passport-jwt、express-jwt
   * 帳戶權限：ACL、RBAC
     * 登入時判斷身份為 一般使用者 、 工作人員 、 DB管理員，切換至不同的使用頁面。
-* client
+
+* client (express)
+
+* client (react)
   * db 介面操作
 
 ### 尚未做的部分：
 * server
-* client
+
+* client (express)
+  * malfunction
+  * processing
+
+* client (react)
+  * malfunction (express->react)
+  * processing (express->react)
+  * db CRUD
   * db 分析
-  * https server (配合server)
-  * Axios (配合server)
-  * ACL、RBAC (配合server)
 ---
 
 ### 預期做的部分：
-* 在DB權限下，可用web操控後端table
-* 在admin權限下，可填寫報修單、維修單
-* 在user權限下，可填寫報修單
-* 在guest權限下，只能瀏覽index、login，不可進入此系統
+* server
+  * 在DB權限下，可用web操控後端table
+  * 在admin權限下，可填寫報修單、維修單
+  * 在user權限下，可填寫報修單
+  * 在guest權限下，只能瀏覽index、login，不可進入此系統
+
+* client (express)
+  * 顯示那個用戶登入
+  * 顯示更動的資料
+  * 顯示哪個用戶填了報修單或維修單
+  * 顯示CRUD的操作
+ 
+* client (react)
+  * MVC (能實現的話)
+  * https server (配合server)
+  * Axios (配合server)
+  * ACL、RBAC (配合server)
+  * 即時顯示新資訊 (學生填報修單通知工作人員，工作人員報修完畢通知學生)
+  * 多國語言
+  * 支援手機排版 (全部非部分)
 
 ### 前端可操作之Table：
 * product (課本教材，以此為基礎修改，兼功能測試用)
