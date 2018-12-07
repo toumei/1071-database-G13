@@ -1,17 +1,17 @@
-const productsModel = require('../models/products_model');
+const dbCtrlModel = require('../models/dbCtrl_model');
 var path = 'database/productTable/';
 
 module.exports = {
     getList: (req, res, next) => {
-        productsModel.fetchAll()
+        dbCtrlModel.fetchAll()
             .then(([data]) => {
-                res.render(path + 'products', { title: 'Product List', data: data });
+                res.send(data);
             })
             .catch(err => console.log(err));
     },
 
-    getClientList: (req, res, next) => {
-        productsModel.fetchAll()
+    getTableList: (req, res, next) => {
+        dbCtrlModel.fetchAll()
             .then(([data]) => {
                 res.send(data);
             })
@@ -19,7 +19,7 @@ module.exports = {
     },
 
     getSearch: (req, res, next) => {
-        productsModel.fetchById(req.query.id)
+        dbCtrlModel.fetchById(req.query.id)
             .then(([data]) => {
                 res.render(path + 'products', { title: 'Product Search', data: data });
             })
@@ -27,7 +27,7 @@ module.exports = {
     },
 
     getEdit: (req, res, next) => {
-        productsModel.fetchById(req.query.id)
+        dbCtrlModel.fetchById(req.query.id)
             .then(([data]) => {
                 res.render(path + 'productEdit', { title: 'Product Edit', data: data });
             })
@@ -41,7 +41,7 @@ module.exports = {
             price: req.body.price
         };
 
-        productsModel.update(sqlData, req.body.id)
+        dbCtrlModel.update(sqlData, req.body.id)
             .then(() => {
                 res.redirect('/products');
             })
@@ -49,7 +49,7 @@ module.exports = {
     },
 
     getDelete: (req, res, next) => {
-        productsModel.delete(req.query.id)
+        dbCtrlModel.delete(req.query.id)
             .then(() => {
                 res.redirect('/products');
             })
@@ -65,7 +65,7 @@ module.exports = {
             name: req.body.name,
             price: req.body.price,
         };
-        productsModel.insert(sqlData)
+        dbCtrlModel.insert(sqlData)
             .then(() => {
                 res.redirect('/products');
             })
