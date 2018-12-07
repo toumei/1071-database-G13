@@ -8,10 +8,10 @@ module.exports = class Product {
         this.price = price;
     }
 
-    static describe(){ return db.execute($sql.describe); };
-    static insert(sqlData){ return db.query($sql.insert, sqlData); };
-    static update(sqlData, id){ return db.query($sql.update, [sqlData, id]);};
-    static delete(id){return db.execute($sql.delete, [id]);};
-    static fetchAll(){ return db.execute($sql.fetchAll); };
-    static fetchById(id){ return db.execute($sql.fetchById, [id]); };
+    static describe() { return db.execute($sql.describe); };
+    static insert(sqlData) { return db.query($sql.insert, sqlData); };
+    static update(sqlData, id) { return db.query($sql.update, [sqlData, id]); };
+    static delete(id) { return db.execute($sql.delete, [id]); };
+    static fetchAll() { return db.execute($sql.fetchAll); };
+    static fetchById(id) { return db.execute($sql.fetchById, [id]); };
 };

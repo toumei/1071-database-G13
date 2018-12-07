@@ -4,12 +4,12 @@
 <head>
     <% path = '../../partials/' %>
     <%- include(path + 'head') %>
-    
+
     <script type="text/javascript">
         function Check() {
             var data = JSON.parse('<%- JSON.stringify(data)%>');
-            for ( var i = 1 ; i < data.colName.length ; i++){
-                if(!document.getElementsByName(data.colName[i].Field)[0].value){
+            for (var i = 1; i < data.colName.length; i++) {
+                if (!document.getElementsByName(data.colName[i].Field)[0].value) {
                     alert('please input the info.');
                     return false;
                 }
@@ -21,15 +21,23 @@
 
 <body>
     <div class="container">
-        <h1 class="text-center d-4"><%= title %></h1>
+        <h1 class="text-center d-4">
+            <%= title %>
+        </h1>
         <form name="editform" action="<%= router %>/update" method="post" accept-charset="utf-8" onSubmit="return Check();">
             <% for ( var i = 0 ; i < data.colName.length ; i++){ %>
             <div class="form-group">
-                <label for="<%= data.colName[i].Field %>Input"><%= table %> <%= data.colName[i].Field %></label>
+                <label for="<%= data.colName[i].Field %>Input">
+                    <%= table %>
+                    <%= data.colName[i].Field %></label>
                 <% if(i == 0){ %>
-                <input type="text" class="form-control" id="<%= data.colName[i].Field %>Input" name="<%= data.colName[i].Field %>" value="<%= data.table[0][data.colName[i].Field] %>" aria-describedby="<%= data.colName[i].Field %>Help" placeholder="<%= table %> <%= data.colName[i].Field %>" readonly>
+                <input type="text" class="form-control" id="<%= data.colName[i].Field %>Input" name="<%= data.colName[i].Field %>"
+                    value="<%= data.table[0][data.colName[i].Field] %>" aria-describedby="<%= data.colName[i].Field %>Help"
+                    placeholder="<%= table %> <%= data.colName[i].Field %>" readonly>
                 <% }else { %>
-                <input type="text" class="form-control" id="<%= data.colName[i].Field %>Input" name="<%= data.colName[i].Field %>" value="<%= data.table[0][data.colName[i].Field] %>" aria-describedby="<%= data.colName[i].Field %>Help" placeholder="<%= table %> <%= data.colName[i].Field %>">
+                <input type="text" class="form-control" id="<%= data.colName[i].Field %>Input" name="<%= data.colName[i].Field %>"
+                    value="<%= data.table[0][data.colName[i].Field] %>" aria-describedby="<%= data.colName[i].Field %>Help"
+                    placeholder="<%= table %> <%= data.colName[i].Field %>">
                 <% } %>
             </div>
             <% } %>

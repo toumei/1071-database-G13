@@ -10,15 +10,15 @@ module.exports = {
             table: []
         };
         productsModel.describe()
-        .then( ( [results] ) => {
-            data.colName = results;
-            return productsModel.fetchAll();
-        })
-        .then( ( [results] ) => {
-            data.table = results;
-            res.render(path + 'list', { title: table + ' List', router: router, table: table, data: data });
-        })
-        .catch( err => console.log(err));
+            .then(([results]) => {
+                data.colName = results;
+                return productsModel.fetchAll();
+            })
+            .then(([results]) => {
+                data.table = results;
+                res.render(path + 'list', { title: table + ' List', router: router, table: table, data: data });
+            })
+            .catch(err => console.log(err));
     },
 
     getClientList: (req, res, next) => {
@@ -35,15 +35,15 @@ module.exports = {
             table: []
         };
         productsModel.describe()
-        .then( ( [results] ) => {
-            data.colName = results;
-            return productsModel.fetchById(req.query.id);
-        })
-        .then( ( [results] ) => {
-            data.table = results;
-            res.render(path + 'search', { title: table + ' Search', router: router, table: table, data: data });
-        })
-        .catch( err => console.log(err));
+            .then(([results]) => {
+                data.colName = results;
+                return productsModel.fetchById(req.query.id);
+            })
+            .then(([results]) => {
+                data.table = results;
+                res.render(path + 'search', { title: table + ' Search', router: router, table: table, data: data });
+            })
+            .catch(err => console.log(err));
     },
 
     getEdit: (req, res, next) => {
@@ -52,15 +52,15 @@ module.exports = {
             table: []
         };
         productsModel.describe()
-        .then( ( [results] ) => {
-            data.colName = results;
-            return productsModel.fetchById(req.query.id);
-        })
-        .then( ( [results] ) => {
-            data.table = results;
-            res.render(path + 'edit', { title: table + ' Edit', router: router, table: table, data: data });
-        })
-        .catch( err => console.log(err));
+            .then(([results]) => {
+                data.colName = results;
+                return productsModel.fetchById(req.query.id);
+            })
+            .then(([results]) => {
+                data.table = results;
+                res.render(path + 'edit', { title: table + ' Edit', router: router, table: table, data: data });
+            })
+            .catch(err => console.log(err));
     },
 
     postUpdate: (req, res, next) => {
@@ -71,18 +71,18 @@ module.exports = {
         };
 
         productsModel.update(sqlData, req.body.id)
-        .then( () => {
-            res.redirect(router);
-        })
-        .catch( err => console.log(err));
+            .then(() => {
+                res.redirect(router);
+            })
+            .catch(err => console.log(err));
     },
 
     getDelete: (req, res, next) => {
         productsModel.delete(req.query.id)
-        .then( () => {
-            res.redirect(router);
-        })
-        .catch( err => console.log(err));
+            .then(() => {
+                res.redirect(router);
+            })
+            .catch(err => console.log(err));
     },
 
     getAdd: (req, res, next) => {
@@ -91,12 +91,12 @@ module.exports = {
             table: []
         };
         productsModel.describe()
-        .then( ( [results] ) => {
-            data.colName = results;
-            res.render(path + 'add', { title: 'Add ' + table, router: router, table: table, data: data });
-        })
-        .catch( err => console.log(err));
-        
+            .then(([results]) => {
+                data.colName = results;
+                res.render(path + 'add', { title: 'Add ' + table, router: router, table: table, data: data });
+            })
+            .catch(err => console.log(err));
+
     },
 
     postAdd: (req, res, next) => {
@@ -105,9 +105,9 @@ module.exports = {
             price: req.body.price,
         };
         productsModel.insert(sqlData)
-        .then( () => {
-            res.redirect(router);
-        })
-        .catch( err => console.log(err));
+            .then(() => {
+                res.redirect(router);
+            })
+            .catch(err => console.log(err));
     },
 };

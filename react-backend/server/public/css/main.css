@@ -82,7 +82,7 @@ article{
 }
 
 fieldset{
-  -moz-border-radius; 10px;
+  -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10 px;   
   margin: 10px auto;
@@ -93,10 +93,10 @@ fieldset legend{
 }
 
 img{
-    -moz-border-radius; 15px;
+    -moz-border-radius: 15px;
   -webkit-border-radius: 15px;
   border-radius: 15 px; 
-    margin; 10px;
+    margin: 10px;
     
 }
 
