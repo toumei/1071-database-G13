@@ -4,6 +4,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import axios from 'axios';
+// import DBColumn from './DBColumn';
 
 function nameFormatter(column, colIndex, { sortElement, filterElement }) {
     return (
@@ -15,29 +16,29 @@ function nameFormatter(column, colIndex, { sortElement, filterElement }) {
     );
 }
 
+// console.log(DBColumn);
+
 class DBCtrl extends Component {
     state = {
         products: [],
         columns: [{
-            dataField: 'id',
-            text: 'Product ID',
-            sort: true
-        },
-        {
-            dataField: 'name',
-            text: 'Product Name',
+            dataField: 'studentID',
+            text: '123',
             sort: true,
             filter: textFilter(),
             headerFormatter: nameFormatter
-        }, {
-            dataField: 'price',
-            text: 'Product Price',
-            sort: true
+        },
+        {
+            dataField: 'name',
+            text: '姓名',
+            sort: true,
+            filter: textFilter(),
+            headerFormatter: nameFormatter
         }]
     }
 
     componentDidMount() {
-        axios.get('http://localhost:3000/products/client')
+        axios.get('http://localhost:3000/dbCtrl/List')
             .then(response => {
                 this.setState({
                     products: response.data
@@ -51,7 +52,7 @@ class DBCtrl extends Component {
                 <BootstrapTable
                     striped
                     hover
-                    keyField='id'
+                    keyField='studentID'
                     data={this.state.products}
                     columns={this.state.columns}
                     filter={filterFactory()}
