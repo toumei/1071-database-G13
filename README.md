@@ -21,6 +21,7 @@
 * 新增sql指令：describe: 'DESCRIBE table'，取得column_name
 * 將list、add、edit改成通用模式
 * 將*-controller.js和*-model.js分別重新命名為*.controller.js和*.model.js
+* server-client 資料加解密
 ---
 
 ### WIKI：
@@ -44,6 +45,7 @@
 
 * client (react)
   * router 規劃與設計
+  * server-client 資料加解密
 
 ### 正在做的部分：
 * sever
