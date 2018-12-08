@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import DBTable from "./DBTable";
-import DBDatabase from "./DBDatabase";
 
 class DBCtrl extends Component {
   render() {
@@ -27,12 +26,7 @@ class DBCtrl extends Component {
             </div>
           </div>
         </section>
-        <div className="container-fluid">
-          <div className="row">
-            <DBDatabase />
-            <DBTable />
-          </div>
-        </div>
+        <DBTable />
       </div>
     );
   }

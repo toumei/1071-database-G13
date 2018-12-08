@@ -5,9 +5,9 @@ var path = "database/productTable/";
 module.exports = {
   getList: (req, res, next) => {
     dbCtrlModel
-      .fetchAll("boarder")
+      .fetchAll(req.query.table)
       .then(([data]) => {
-        res.send(data);
+        res.send(cryptModel.encrypt(data));
       })
       .catch(err => console.log(err));
   },
@@ -23,7 +23,7 @@ module.exports = {
 
   getColumnList: (req, res, next) => {
     dbCtrlModel
-      .fetchColumnAll("boarder")
+      .fetchColumnAll(req.query.table)
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })

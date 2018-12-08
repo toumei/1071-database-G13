@@ -2,83 +2,159 @@ import React, { Component } from "react";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
+import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import axios from "axios";
 import Crypt from "../models/crypt.model";
 
-class DBTable extends Component {
+class DBDatabase extends Component {
   constructor() {
     super();
     this.state = {
-      data: [],
-      columns: []
+      dataDatabase: [],
+      columnsDatabase: [
+        {
+          dataField: "TABLE_COMMENT",
+          text: "資料庫",
+          sort: true,
+          headerAlign: "center",
+          align: "center",
+          events: {
+            onClick: (e, column, columnIndex, row, rowIndex) => {
+              this.props.handleAdd(row.TABLE_NAME);
+            }
+          }
+        }
+      ]
     };
   }
 
   componentWillMount() {
-    axios.post("http://localhost:3000/dbCtrl/ColumnList").then(response => {
+    axios.post("http://localhost:3000/dbCtrl/TableList").then(response => {
       var decryptedJSON = Crypt.decrypt(response.data);
-      var columns = [];
-      decryptedJSON[0].forEach(element => {
-        columns.push({
-          dataField: element["COLUMN_NAME"],
-          text: element["COLUMN_COMMENT"],
-          sort: true,
-          sortCaret: (order, column) => {
-            if (!order) return <span>&nbsp;&nbsp;Asc/Desc</span>;
-            else if (order === "asc")
-              return (
-                <span>
-                  &nbsp;&nbsp;<font color="red">Asc</font>/Desc
-                </span>
-              );
-            else if (order === "desc")
-              return (
-                <span>
-                  &nbsp;&nbsp;Asc/<font color="red">Desc</font>
-                </span>
-              );
-            return null;
-          },
-          headerAlign: "center",
+      var dataDatabase = [];
+      decryptedJSON.forEach(element => {
+        dataDatabase.push({
+          TABLE_COMMENT: element["TABLE_COMMENT"],
+          TABLE_NAME: element["TABLE_NAME"],
           align: "center"
         });
       });
-      columns.push({
-        dataField: "action",
-        isDummyField: true,
-        text: "操作",
-        formatter: (cellContent, row) => {
-          return (
-            <div>
-              <input
-                type="button"
-                name="edit"
-                value="編輯"
-                className="btn btn-success btn-sm"
-              />
-              <input
-                type="button"
-                name="delete"
-                value="刪除"
-                className="btn btn-warning btn-sm"
-              />
-            </div>
-          );
-        }
+      this.setState({
+        dataDatabase: dataDatabase
       });
-      this.setState({ columns: columns, data: decryptedJSON[1] });
     });
+  }
+  render() {
+    return (
+      <div className="col-md-2" style={{ marginTop: 10 }}>
+        <BootstrapTable
+          hover
+          keyField="TABLE_COMMENT"
+          data={this.state.dataDatabase}
+          columns={this.state.columnsDatabase}
+          filter={filterFactory()}
+        />
+      </div>
+    );
+  }
+}
+
+class DBTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      table: props.table,
+      dataTable: [],
+      columnsTable: []
+    };
+  }
+  componentWillMount() {
+    this.getData();
+  }
+
+  componentWillUpdate(prevProps, prevState) {
+    if (prevProps.table !== this.state.table) {
+      this.setState({ table: prevProps.table });
+      console.log(this.state);
+      this.getData();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {}
+
+  getData() {
+    axios
+      .post("http://localhost:3000/dbCtrl/ColumnList?table=" + this.state.table)
+      .then(response => {
+        var columnsTable = [];
+        Crypt.decrypt(response.data).forEach(element => {
+          columnsTable.push({
+            dataField: element["COLUMN_NAME"],
+            text: element["COLUMN_COMMENT"],
+            sort: true,
+            sortCaret: (order, column) => {
+              if (!order) return <span>&nbsp;&nbsp;Asc/Desc</span>;
+              else if (order === "asc")
+                return (
+                  <span>
+                    &nbsp;&nbsp;<font color="red">Asc</font>/Desc
+                  </span>
+                );
+              else if (order === "desc")
+                return (
+                  <span>
+                    &nbsp;&nbsp;Asc/<font color="red">Desc</font>
+                  </span>
+                );
+              return null;
+            },
+            headerAlign: "center",
+            align: "center"
+          });
+        });
+        columnsTable.push({
+          dataField: "action",
+          isDummyField: true,
+          text: "操作",
+          formatter: (cellContent, row) => {
+            return (
+              <div>
+                <input
+                  type="button"
+                  name="edit"
+                  value="編輯"
+                  className="btn btn-success btn-sm"
+                />
+                <input
+                  type="button"
+                  name="delete"
+                  value="刪除"
+                  className="btn btn-warning btn-sm"
+                />
+              </div>
+            );
+          }
+        });
+        axios
+          .post("http://localhost:3000/dbCtrl/List?table=" + this.state.table)
+          .then(response => {
+            this.setState({
+              columnsTable: columnsTable,
+              dataTable: Crypt.decrypt(response.data)
+            });
+          });
+      });
   }
 
   render() {
-    if (this.state.columns.length > 0) {
+    if (this.state.columnsTable.length > 0) {
       const { SearchBar } = Search;
       return (
         <ToolkitProvider
-          keyField={this.state.columns[0].dataField}
-          data={this.state.data}
-          columns={this.state.columns}
+          keyField={this.state.columnsTable[0].dataField}
+          data={this.state.dataTable}
+          columns={this.state.columnsTable}
           search
         >
           {props => (
@@ -93,7 +169,10 @@ class DBTable extends Component {
                 noDataIndication="沒有資料"
                 selectRow={{ mode: "checkbox" }}
                 defaultSorted={[
-                  { dataField: this.state.columns[0].dataField, order: "asc" }
+                  {
+                    dataField: this.state.columnsTable[0].dataField,
+                    order: "asc"
+                  }
                 ]}
               />
             </div>
@@ -105,4 +184,24 @@ class DBTable extends Component {
   }
 }
 
-export default DBTable;
+class DB extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { table: "boarder" };
+  }
+  handleAdd(table) {
+    this.setState({ table: table });
+  }
+  render() {
+    return (
+      <div className="container-fluid">
+        <div className="row">
+          <DBDatabase handleAdd={table => this.handleAdd(table)} />
+          <DBTable table={this.state.table} />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default DB;

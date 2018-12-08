@@ -21,7 +21,7 @@ module.exports = class Product {
     return db.query($sql.fetchAll + table);
   }
   static fetchColumnAll(table) {
-    return db.query($sql.fetchColumnAll + $sql.fetchAll + table, [table]);
+    return db.query($sql.fetchColumnAll, [table]);
   }
   static fetchTableAll() {
     return db.query($sql.fetchTableAll);
