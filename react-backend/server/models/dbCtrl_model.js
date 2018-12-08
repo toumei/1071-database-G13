@@ -17,14 +17,14 @@ module.exports = class Product {
   static delete(id) {
     return db.execute($sql.delete, [id]);
   }
-  static fetchAll() {
-    return db.query($sql.fetchTableAll + $sql.fetchAll);
+  static fetchAll(table) {
+    return db.query($sql.fetchAll + table);
+  }
+  static fetchColumnAll(table) {
+    return db.query($sql.fetchColumnAll + $sql.fetchAll + table, [table]);
   }
   static fetchTableAll() {
     return db.query($sql.fetchTableAll);
-  }
-  static fetchColumnAll() {
-    return db.query($sql.fetchAll);
   }
   static fetchById(id) {
     return db.execute($sql.fetchById, [id]);

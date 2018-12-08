@@ -2,7 +2,7 @@ module.exports = {
   mysql: {
     host: "localhost",
     user: "root",
-    password: "0000",
+    password: "sakura*520",
     database: "dbdemo",
     port: 3306,
     connectionLimit: 10
@@ -10,7 +10,7 @@ module.exports = {
   mysql2: {
     host: "localhost",
     user: "root",
-    password: "0000",
+    password: "sakura*520",
     database: "res_net_cmms",
     port: 3306,
     connectionLimit: 10,

@@ -1,69 +1,40 @@
 import React, { Component } from "react";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import BootstrapTable from "react-bootstrap-table-next";
-import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import axios from "axios";
-
-function nameFormatter(column, colIndex, { sortElement, filterElement }) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      {filterElement}
-      {column.text}
-      {sortElement}
-    </div>
-  );
-}
+import DBTable from "./DBTable";
+import DBDatabase from "./DBDatabase";
 
 class DBCtrl extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: [],
-      columns: []
-    };
-  }
-
-  componentWillMount() {
-    axios.get("http://localhost:3000/dbCtrl/List").then(response => {
-      var columns = [];
-      response.data[0].forEach(element => {
-        columns.push({
-          dataField: element["COLUMN_NAME"],
-          text: element["COLUMN_COMMENT"],
-          sort: true,
-          filter: textFilter(),
-          headerFormatter: nameFormatter
-        });
-      });
-      this.setState({
-        columns: columns,
-        data: response.data[1]
-      });
-    });
-  }
-
-  componentDidMount() {}
-
   render() {
-    if (this.state.data.length > 0) {
-      return (
-        <div>
-          <div className="container" style={{ marginTop: 50 }}>
-            <BootstrapTable
-              striped
-              hover
-              keyField="studentID"
-              data={this.state.data}
-              columns={this.state.columns}
-              filter={filterFactory()}
-              pagination={paginationFactory()}
-            />
+    return (
+      <div>
+        <section className="bg-light py-4">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-2">
+                <button className="btn btn-primary text-light btn-block">
+                  <i className="fas fa-plus" /> Add Post
+                </button>
+              </div>
+              <div className="col-md-2">
+                <button className="btn btn-success text-light btn-block">
+                  <i className="fas fa-plus" /> Add Category
+                </button>
+              </div>
+              <div className="col-md-2">
+                <button className="btn btn-warning btn-block">
+                  <i className="fas fa-plus" /> Add Users
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div className="container-fluid">
+          <div className="row">
+            <DBDatabase />
+            <DBTable />
           </div>
         </div>
-      );
-    }
-    return null;
+      </div>
+    );
   }
 }
 

@@ -8,38 +8,11 @@ import { Switch, Route } from "react-router-dom";
 
 const index = () => <div />;
 
-const dbCtrl = () => (
-  <div>
-    <section className="bg-light py-4">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-2">
-            <button className="btn btn-primary text-light btn-block">
-              <i className="fas fa-plus" /> Add Post
-            </button>
-          </div>
-          <div className="col-md-2">
-            <button className="btn btn-success text-light btn-block">
-              <i className="fas fa-plus" /> Add Category
-            </button>
-          </div>
-          <div className="col-md-2">
-            <button className="btn btn-warning btn-block">
-              <i className="fas fa-plus" /> Add Users
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-    <DBCtrl />
-  </div>
-);
-
 const Main = () => (
   <main>
     <Switch>
       <Route exact path="/" component={index} />
-      <Route path="/dbCtrl" component={dbCtrl} />
+      <Route path="/dbCtrl" component={DBCtrl} />
       <Route path="/products" component={Products} />
       <Route path="/login" component={Login} />
     </Switch>

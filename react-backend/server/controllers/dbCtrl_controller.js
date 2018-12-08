@@ -4,7 +4,7 @@ var path = "database/productTable/";
 module.exports = {
   getList: (req, res, next) => {
     dbCtrlModel
-      .fetchAll()
+      .fetchAll("boarder")
       .then(([data]) => {
         res.send(data);
       })
@@ -22,7 +22,7 @@ module.exports = {
 
   getColumnList: (req, res, next) => {
     dbCtrlModel
-      .fetchColumnAll()
+      .fetchColumnAll("boarder")
       .then(([data]) => {
         res.send(data);
       })
