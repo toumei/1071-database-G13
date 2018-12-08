@@ -1,4 +1,5 @@
 const dbCtrlModel = require("../models/dbCtrl.model");
+const cryptModel = require("../models/crypt.model");
 var path = "database/productTable/";
 
 module.exports = {
@@ -15,7 +16,7 @@ module.exports = {
     dbCtrlModel
       .fetchTableAll()
       .then(([data]) => {
-        res.send(data);
+        res.send(cryptModel.encrypt(data));
       })
       .catch(err => console.log(err));
   },
@@ -24,7 +25,7 @@ module.exports = {
     dbCtrlModel
       .fetchColumnAll("boarder")
       .then(([data]) => {
-        res.send(data);
+        res.send(cryptModel.encrypt(data));
       })
       .catch(err => console.log(err));
   },

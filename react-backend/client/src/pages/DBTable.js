@@ -4,6 +4,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import axios from "axios";
+import Crypt from "../models/crypt.model";
 
 class DBTable extends Component {
   constructor() {
@@ -16,8 +17,9 @@ class DBTable extends Component {
 
   componentWillMount() {
     axios.post("http://localhost:3000/dbCtrl/ColumnList").then(response => {
+      var decryptedJSON = Crypt.decrypt(response.data);
       var columns = [];
-      response.data[0].forEach(element => {
+      decryptedJSON[0].forEach(element => {
         columns.push({
           dataField: element["COLUMN_NAME"],
           text: element["COLUMN_COMMENT"],
@@ -65,7 +67,7 @@ class DBTable extends Component {
           );
         }
       });
-      this.setState({ columns: columns, data: response.data[1] });
+      this.setState({ columns: columns, data: decryptedJSON[1] });
     });
   }
 

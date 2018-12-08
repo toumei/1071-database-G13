@@ -3,6 +3,7 @@ import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import axios from "axios";
+import Crypt from "../models/crypt.model";
 
 class DBDatabase extends Component {
   constructor() {
@@ -23,8 +24,9 @@ class DBDatabase extends Component {
 
   componentWillMount() {
     axios.post("http://localhost:3000/dbCtrl/TableList").then(response => {
+      var decryptedJSON = Crypt.decrypt(response.data);
       var data = [];
-      response.data.forEach(element => {
+      decryptedJSON.forEach(element => {
         data.push({
           TABLE_COMMENT: element["TABLE_COMMENT"],
           align: "center"
