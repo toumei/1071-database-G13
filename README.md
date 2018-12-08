@@ -20,6 +20,7 @@
 * EJS 模組化(pages、partials)
 * 新增sql指令：describe: 'DESCRIBE table'，取得column_name
 * 將list、add、edit改成通用模式
+* 將*-controller.js和*-model.js分別重新命名為*.controller.js和*.model.js
 ---
 
 ### WIKI：
