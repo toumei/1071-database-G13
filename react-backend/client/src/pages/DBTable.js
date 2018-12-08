@@ -15,7 +15,7 @@ class DBTable extends Component {
   }
 
   componentWillMount() {
-    axios.get("http://localhost:3000/dbCtrl/ColumnList").then(response => {
+    axios.post("http://localhost:3000/dbCtrl/ColumnList").then(response => {
       var columns = [];
       response.data[0].forEach(element => {
         columns.push({

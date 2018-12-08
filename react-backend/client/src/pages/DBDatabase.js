@@ -22,7 +22,7 @@ class DBDatabase extends Component {
   }
 
   componentWillMount() {
-    axios.get("http://localhost:3000/dbCtrl/TableList").then(response => {
+    axios.post("http://localhost:3000/dbCtrl/TableList").then(response => {
       var data = [];
       response.data.forEach(element => {
         data.push({

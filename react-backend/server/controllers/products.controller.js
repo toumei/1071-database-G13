@@ -1,4 +1,4 @@
-const productsModel = require("../models/products_model");
+const productsModel = require("../models/products.model");
 var path = "database/";
 var router = "/products";
 var table = "Product";

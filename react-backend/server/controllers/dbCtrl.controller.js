@@ -1,4 +1,4 @@
-const dbCtrlModel = require("../models/dbCtrl_model");
+const dbCtrlModel = require("../models/dbCtrl.model");
 var path = "database/productTable/";
 
 module.exports = {
