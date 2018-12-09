@@ -5,7 +5,7 @@ class DBCtrl extends Component {
   render() {
     return (
       <div>
-        <section className="bg-light py-4">
+        <section className="bg-light py-1">
           <div className="container">
             <div className="row">
               <div className="col-md-2">
