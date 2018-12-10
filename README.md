@@ -44,6 +44,7 @@
   * 將 三層架構 調整為 Model–view–controller (MVC)
   * EJS 模組化(pages、partials)
   * 登入系統(email, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
+    > 測試用 userTable(uid, name, email, pwd)
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
 * client (express)
