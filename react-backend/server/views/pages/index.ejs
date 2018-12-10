@@ -1,46 +1,37 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <% path = '../partials/' %> <%- include(path + 'head') %>
+  </head>
 
-<head>
-    <% path = '../partials/' %>
-    <%- include(path + 'head') %>
-</head>
-
-<body>
+  <body>
     <!-- NAVBAR -->
     <%- include(path + 'navbar') %>
     <!-- HEADER -->
     <%- include(path + 'header') %>
     <!-- ACTIONS -->
     <div class="container">
-        <table class="table table-striped">
-            <thead class="bg-info">
-                <tr>
-                    <th scope="row" class="align-middle m-2">Product ID</th>
-                    <th scope="row" class="align-middle m-2">Product Name</th>
-                    <th scope="row" class="align-middle m-2">Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for ( var i = 0 ; i < 10 ; i++){ %>
-                <tr>
-                    <td class="align-middle">
-                        1
-                    </td>
-                    <td class="align-middle">
-                        1
-                    </td>
-                    <td class="align-middle">
-                        1
-                    </td>
-                </tr>
-                <% } %>
-            </tbody>
-        </table>
+      <table class="table table-striped">
+        <thead class="bg-info">
+          <tr>
+            <th scope="row" class="align-middle m-2">Product ID</th>
+            <th scope="row" class="align-middle m-2">Product Name</th>
+            <th scope="row" class="align-middle m-2">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for ( var i = 0 ; i < 10 ; i++){ %>
+          <tr>
+            <td class="align-middle">1</td>
+            <td class="align-middle">1</td>
+            <td class="align-middle">1</td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
     </div>
 
     <!-- JavaScript -->
     <%- include(path + 'JavaScript') %>
-</body>
-
+  </body>
 </html>

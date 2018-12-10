@@ -1,65 +1,35 @@
-import React, { Component } from 'react';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
-import paginationFactory from 'react-bootstrap-table2-paginator';
-import axios from 'axios';
-// import DBColumn from './DBColumn';
-
-function nameFormatter(column, colIndex, { sortElement, filterElement }) {
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-            {filterElement}
-            {column.text}
-            {sortElement}
-        </div>
-    );
-}
-
-// console.log(DBColumn);
+import React, { Component } from "react";
+import DBTable from "./DBTable";
 
 class DBCtrl extends Component {
-    state = {
-        products: [],
-        columns: [{
-            dataField: 'studentID',
-            text: '123',
-            sort: true,
-            filter: textFilter(),
-            headerFormatter: nameFormatter
-        },
-        {
-            dataField: 'name',
-            text: '姓名',
-            sort: true,
-            filter: textFilter(),
-            headerFormatter: nameFormatter
-        }]
-    }
-
-    componentDidMount() {
-        axios.get('http://localhost:3000/dbCtrl/List')
-            .then(response => {
-                this.setState({
-                    products: response.data
-                });
-            });
-    }
-
-    render() {
-        return (
-            <div className="container" style={{ marginTop: 50 }}>
-                <BootstrapTable
-                    striped
-                    hover
-                    keyField='studentID'
-                    data={this.state.products}
-                    columns={this.state.columns}
-                    filter={filterFactory()}
-                    pagination={paginationFactory()} />
+  render() {
+    return (
+      <div>
+        <section className="bg-light py-1">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-2">
+                <button className="btn btn-primary text-light btn-block">
+                  <i className="fas fa-plus" /> Add Post
+                </button>
+              </div>
+              <div className="col-md-2">
+                <button className="btn btn-success text-light btn-block">
+                  <i className="fas fa-plus" /> Add Category
+                </button>
+              </div>
+              <div className="col-md-2">
+                <button className="btn btn-warning btn-block">
+                  <i className="fas fa-plus" /> Add Users
+                </button>
+              </div>
             </div>
-        );
-    }
+          </div>
+        </section>
+        <DBTable />
+      </div>
+    );
+  }
 }
 
 export default DBCtrl;

@@ -1,64 +1,84 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <% path = '../../partials/' %> <%- include(path + 'head') %>
 
-<head>
-    <% path = '../../partials/' %>
-    <%- include(path + 'head') %>
-</head>
+    <script src="/js/CRUD.js"></script>
+  </head>
 
-<body>
+  <body>
     <!-- NAVBAR -->
     <%- include(path + 'navbar') %>
     <!-- HEADER -->
     <%- include(path + 'header') %>
 
     <div class="container">
-        <div justify-content-between>
-            <h1 class="text-center d-4">
-                <%= title %>
-            </h1>
-            <input type="button" name="add" id="add" value="Add" class="btn btn-danger" onclick="Add('<%= router %>');" />
-        </div>
-        <div class="input-group">
-            <input type="text" class="form-control" id="idInput" placeholder="search id">
-            <input type="button" value="search" class="btn btn-primary" onclick="Search('<%= router %>');" />
-        </div>
-        <table class="table table-striped">
-            <thead class="bg-info">
-                <tr>
-                    <% for ( var i = 0 ; i < data.colName.length ; i++){ %>
-                    <th scope="row" class="align-middle m-2">
-                        <%= table %>
-                        <%= data.colName[i].Field %>
-                    </th>
-                    <% } %>
-                    <th scope="row" class="align-middle m-2">Action</th>
-                </tr>
-
-            </thead>
-            <tbody>
-                <% for ( var i = 0 ; i < data.table.length ; i++){ %>
-                <tr>
-                    <% for ( var j = 0 ; j < data.colName.length ; j++){ %>
-                    <td class="align-middle">
-                        <%= data.table[i][data.colName[j].Field]  %>
-                    </td>
-                    <% } %>
-                    <td class="align-middle">
-                        <input type="button" name="edit" id="edit" value="Edit" class="btn btn-success btn-sm" onclick="Edit('<%= router %>', '<%= data.table[i][data.colName[0].Field]  %>');" />
-                        <input type="button" name="delete" id="delete" value="Del" class="btn btn-warning btn-sm"
-                            onclick="Delete('<%= router %>', '<%= data.table[i][data.colName[0].Field]  %>');" />
-                    </td>
-                </tr>
-                <% } %>
-            </tbody>
-        </table>
+      <div justify-content-between>
+        <h1 class="text-center d-4"><%= title %></h1>
+        <input
+          type="button"
+          name="add"
+          value="Add"
+          class="btn btn-danger"
+          onclick="Add('<%= router %>');"
+        />
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          id="idInput"
+          placeholder="search id"
+        />
+        <input
+          type="button"
+          value="search"
+          class="btn btn-primary"
+          onclick="Search('<%= router %>');"
+        />
+      </div>
+      <table class="table table-striped">
+        <thead class="bg-info">
+          <tr>
+            <% for ( var i = 0 ; i < data.colName.length ; i++){ %>
+            <th scope="row" class="align-middle m-2">
+              <%= table %> <%= data.colName[i].Field %>
+            </th>
+            <% } %>
+            <th scope="row" class="align-middle m-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for ( var i = 0 ; i < data.table.length ; i++){ %>
+          <tr>
+            <% for ( var j = 0 ; j < data.colName.length ; j++){ %>
+            <td class="align-middle">
+              <%= data.table[i][data.colName[j].Field] %>
+            </td>
+            <% } %>
+            <td class="align-middle">
+              <input
+                type="button"
+                name="edit"
+                value="Edit"
+                class="btn btn-success btn-sm"
+                onclick="Edit('<%= router %>', '<%= data.table[i][data.colName[0].Field]  %>');"
+              />
+              <input
+                type="button"
+                name="delete"
+                value="Del"
+                class="btn btn-warning btn-sm"
+                onclick="Delete('<%= router %>', '<%= data.table[i][data.colName[0].Field]  %>');"
+              />
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
     </div>
 
     <!-- JavaScript -->
     <%- include(path + 'JavaScript') %>
-    <script src="/js/CRUD.js"></script>
-    <script src="/js/interceptors.js"></script>
-</body>
-
+  </body>
 </html>

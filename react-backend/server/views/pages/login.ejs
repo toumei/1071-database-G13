@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <% path = '../partials/' %> <%- include(path + 'head') %>
+    <script type="text/javascript">
+      function Check() {
+        var email = document.getElementsByName("email")[0].value;
+        var pwd = document.getElementsByName("pwd")[0].value;
+        if (email && pwd) {
+          return true;
+        }
+        alert("please input the info.");
+        return false;
+      }
+    </script>
+  </head>
 
-<head>
-    <% path = '../partials/' %>
-    <%- include(path + 'head') %>
-</head>
-
-<body>
+  <body>
     <!-- NAVBAR -->
     <%- include(path + 'navbar') %>
     <!-- HEADER -->
@@ -14,19 +23,37 @@
 
     <!-- ACTIONS -->
     <div class="container">
-        <h1 class="text-center d-4">Log in</h1>
-        <form name="loginForm" id="loginForm">
-            <div class="form-group">
-                <label for="emailInput">Email</label>
-                <input type="text" class="form-control" id="EmailInput" name="email" aria-describedby="EmailHelp"
-                    placeholder="Email">
-            </div>
-            <div class="form-group">
-                <label for="passwordInput">Password</label>
-                <input type="text" class="form-control" id="passwordInput" name="pwd" placeholder="Password">
-            </div>
-            <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
-        </form>
+      <h1 class="text-center d-4">Log in</h1>
+      <form
+        name="addform"
+        action="/login"
+        method="post"
+        accept-charset="utf-8"
+        onSubmit="return Check();"
+      >
+        <div class="form-group">
+          <label for="emailInput">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            id="EmailInput"
+            name="email"
+            aria-describedby="EmailHelp"
+            placeholder="Email"
+          />
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input
+            type="text"
+            class="form-control"
+            id="passwordInput"
+            name="pwd"
+            placeholder="Password"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </div>
 
     <!-- JavaScript -->
