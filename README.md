@@ -41,7 +41,9 @@
 * 將list、add、edit改成通用模式
 * 將*-controller.js和*-model.js分別重新命名為*.controller.js和*.model.js
 * server-client 資料加解密
-* 
+* 登入後會將token記錄在本地端 Local Storage
+* 使用http攔截器，攔截請求，若header無token，則setHeader(Local Storage的token資料)
+
 ---
 
 ### WIKI：
