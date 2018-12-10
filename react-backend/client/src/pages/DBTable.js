@@ -7,6 +7,7 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import axios from "axios";
 import Crypt from "../models/crypt.model";
+import { Grid, Row, Col, ButtonGroup, Button } from "react-bootstrap";
 
 class DBDatabase extends Component {
   constructor(props) {
@@ -54,7 +55,7 @@ class DBDatabase extends Component {
 
   render() {
     return (
-      <div className="col-md-2" style={{ marginTop: 10 }}>
+      <Col md={2} style={{ marginTop: 10 }}>
         <BootstrapTable
           hover
           keyField="TABLE_COMMENT"
@@ -73,7 +74,7 @@ class DBDatabase extends Component {
             }
           }}
         />
-      </div>
+      </Col>
     );
   }
 }
@@ -112,28 +113,34 @@ class DBTable extends Component {
   }
 
   edit(row) {
-    this.state.data.filter((x, i) => {
-      if (x === row) {
-        var data = this.state.data;
-        data[i].name = x.name = 2;
-        this.setState({ data: data });
-        axios.post("http://localhost:3000/dbCtrl/update", {
-          table: this.state.table,
-          data: x
-        });
-      }
-      return true;
-    });
+    var rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
+    if (rs) {
+      this.state.data.filter((x, i) => {
+        if (x === row) {
+          var data = this.state.data;
+          data[i].name = x.name = 2;
+          this.setState({ data: data });
+          axios.post("http://localhost:3000/dbCtrl/update", {
+            table: this.state.table,
+            data: x
+          });
+        }
+        return true;
+      });
+    }
   }
 
   delete(row) {
-    axios.post("http://localhost:3000/dbCtrl/delete", {
-      table: this.state.table,
-      id: row.ID
-    });
-    this.setState({
-      data: this.state.data.filter((x, i) => x !== row)
-    });
+    var rs = window.confirm("是否要刪除ID：" + row.ID + " ?");
+    if (rs) {
+      axios.post("http://localhost:3000/dbCtrl/delete", {
+        table: this.state.table,
+        id: row.ID
+      });
+      this.setState({
+        data: this.state.data.filter((x, i) => x !== row)
+      });
+    }
   }
 
   getColumnList() {
@@ -173,22 +180,24 @@ class DBTable extends Component {
           text: "操作",
           formatter: (cell, row) => {
             return (
-              <div>
-                <input
+              <ButtonGroup>
+                <Button
                   type="button"
                   name="edit"
-                  value="編輯"
                   className="btn btn-success btn-sm"
                   onClick={e => this.edit(row)}
-                />
-                <input
+                >
+                  編輯
+                </Button>
+                <Button
                   type="button"
                   name="delete"
-                  value="刪除"
                   className="btn btn-warning btn-sm"
                   onClick={e => this.delete(row)}
-                />
-              </div>
+                >
+                  刪除
+                </Button>
+              </ButtonGroup>
             );
           },
           headerStyle: {
@@ -255,7 +264,7 @@ class DBTable extends Component {
           search
         >
           {props => (
-            <div className="col-md-10" style={{ marginTop: 10 }}>
+            <Col md={10} style={{ marginTop: 10 }}>
               <section className="bg-light py-1">
                 <div className="container">
                   <div className="row">
@@ -292,7 +301,7 @@ class DBTable extends Component {
                 defaultSorted={[{ dataField: "ID", order: "asc" }]}
                 cellEdit={cellEditFactory({ mode: "click" })}
               />
-            </div>
+            </Col>
           )}
         </ToolkitProvider>
       );
@@ -313,15 +322,15 @@ class DB extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
-        <div className="row">
+      <Grid fluid>
+        <Row>
           <DBDatabase
             table={this.state.table}
             handleAdd={table => this.handleAdd(table)}
           />
           <DBTable table={this.state.table} />
-        </div>
-      </div>
+        </Row>
+      </Grid>
     );
   }
 }
