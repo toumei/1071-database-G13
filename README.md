@@ -1,5 +1,18 @@
 # 1071-database-G13
 
+### 寫 code 前該做的事情：
+* 請先開啟 VS code 打開到此專案
+* 然後再 git pull 更新檔案
+* 最後去 VS code 檢查檔案是否有被更新
+
+### 上傳 github 前要做的事情：
+* 先 git status 確認有那些檔案已被更改過
+* 然後再 git add . git commit -m ""
+* 最後 git push 上傳檔案
+* 再次 git status 確認還有沒有沒上傳到的檔案
+* 再次 git push 確認全部推上去
+* 最後再 git pull
+
 ### 重要資訊：
 * **每次開工前請先 git pull 更新其他人上傳的檔案**
 * **現在可以用 git add . 全部更新，不用擔心上傳到 node_modules**
