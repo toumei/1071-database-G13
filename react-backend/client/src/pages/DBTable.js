@@ -12,6 +12,7 @@ class DBDatabase extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selected: "boarder",
       data: [],
       columns: [
         {
@@ -19,13 +20,8 @@ class DBDatabase extends Component {
           text: "資料庫",
           headerAlign: "center",
           align: "center",
-          events: {
-            onClick: (e, column, columnIndex, row, rowIndex) => {
-              this.props.handleAdd(row.TABLE_NAME);
-            }
-          },
           style: (cell, row, rowIndex, colIndex) => {
-            if (rowIndex === 1) {
+            if (row.TABLE_NAME === this.state.selected) {
               return { cursor: "pointer", backgroundColor: "#81c784" };
             }
             return { cursor: "pointer", backgroundColor: "white" };
@@ -56,6 +52,11 @@ class DBDatabase extends Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selected !== this.state.selected) {
+    }
+  }
+
   render() {
     return (
       <div className="col-md-2" style={{ marginTop: 10 }}>
@@ -65,13 +66,15 @@ class DBDatabase extends Component {
           data={this.state.data}
           columns={this.state.columns}
           filter={filterFactory()}
-          rowEvents={{
-            onClick: (e, row, rowIndex) => {
-              console.log(`clicked on row with index: ${rowIndex}`);
-              // if (row.TABLE_NAME === this.state.index) {
-              //   return { cursor: "pointer", backgroundColor: "#81c784" };
-              // }
-              // return { cursor: "pointer", backgroundColor: "white" };
+          selectRow={{
+            mode: "radio",
+            clickToSelect: true,
+            hideSelectColumn: true,
+            bgColor: "#c8e6c9",
+            onSelect: (row, isSelect, rowIndex, e) => {
+              this.props.handleAdd(row.TABLE_NAME);
+              this.setState({ selected: row.TABLE_NAME });
+              return false;
             }
           }}
         />
@@ -114,15 +117,20 @@ class DBTable extends Component {
   }
 
   edit(row) {
-    var data = this.state.data;
-    data[row.i].studentID = 2;
-    data[row.i].name = 2;
-    this.setState({ data: data });
+    this.state.data.filter((x, i) => {
+      if (x === row) {
+        var data = this.state.data;
+        data[i].studentID = 2;
+        data[i].name = 2;
+        this.setState({ data: data });
+      }
+      return true;
+    });
   }
 
   delete(row) {
     this.setState({
-      data: this.state.data.filter((x, i) => i !== row.i)
+      data: this.state.data.filter((x, i) => x !== row)
     });
   }
 
@@ -131,11 +139,6 @@ class DBTable extends Component {
       .post("http://localhost:3000/dbCtrl/ColumnList?table=" + this.state.table)
       .then(response => {
         var columns = [];
-        columns.push({
-          dataField: "i",
-          text: "i",
-          hidden: true
-        });
         Crypt.decrypt(response.data).forEach(element => {
           columns.push({
             dataField: element["COLUMN_NAME"],
@@ -202,10 +205,6 @@ class DBTable extends Component {
     axios
       .post("http://localhost:3000/dbCtrl/List?table=" + this.state.table)
       .then(response => {
-        // console.log(Crypt.decrypt(response.data));
-        // this.a = Crypt.decrypt(response.data)[0];
-        // this.a["index"] = 0;
-        // console.log(this.a);
         this.setState({
           data: Crypt.decrypt(response.data)
         });

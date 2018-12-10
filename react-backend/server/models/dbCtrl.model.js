@@ -18,7 +18,7 @@ module.exports = class Product {
     return db.execute($sql.delete, [id]);
   }
   static fetchAll(table) {
-    return db.query($sql.fetchAll + table + " r , (SELECT @i:=-1) i");
+    return db.query($sql.fetchAll + table);
   }
   static fetchColumnAll(table) {
     return db.query($sql.fetchColumnAll, [table]);

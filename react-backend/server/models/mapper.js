@@ -25,6 +25,6 @@ module.exports = {
       'select column_name, column_comment from information_schema.columns where table_schema = "res_net_cmms" and table_name = ?  order by ordinal_position;',
     fetchTableAll:
       'select table_name, table_comment from information_schema.tables where table_schema = "res_net_cmms";',
-    fetchAll: "SELECT (@i:=@i+1) i, r.* FROM "
+    fetchAll: "SELECT * FROM "
   }
 };
