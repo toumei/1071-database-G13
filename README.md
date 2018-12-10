@@ -16,7 +16,8 @@
 * server http-port：http://localhost:3000
 * server https-port：https://localhost:8000
 * client http-port：http://localhost:3001 
-  > {"proxy": "http://localhost:3001"} => 應該指向 server port而非3001
+  > * "start": "set PORT=3001&&react-scripts start" => 設定 port
+  > * {"proxy": "http://localhost:3001"} => 應該指向 server port而非3001
 ---
 ### 更新資訊：
 * EJS 模組化(pages、partials)
@@ -44,7 +45,6 @@
   * 將 三層架構 調整為 Model–view–controller (MVC)
   * EJS 模組化(pages、partials)
   * 登入系統(email, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
-    > 測試用 userTable(uid, name, email, pwd)
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
 * client (express)
