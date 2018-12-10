@@ -16,8 +16,8 @@
 * server http-port：http://localhost:3000
 * server https-port：https://localhost:8000
 * client http-port：http://localhost:3001 
-  > * "start": "set PORT=3001&&react-scripts start" => 設定 port
-  > * {"proxy": "http://localhost:3001"} => 應該指向 server port而非3001
+  >  "start": "set PORT=3001&&react-scripts start" => 設定 port
+  >  {"proxy": "http://localhost:3001"} => 指向 server port：3001 
 ---
 ### 更新資訊：
 * EJS 模組化(pages、partials)
