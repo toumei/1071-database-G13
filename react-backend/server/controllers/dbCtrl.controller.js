@@ -49,25 +49,20 @@ module.exports = {
   },
 
   postUpdate: (req, res, next) => {
-    var sqlData = {
-      id: req.body.id,
-      name: req.body.name,
-      price: req.body.price
-    };
-
     dbCtrlModel
-      .update(sqlData, req.body.id)
-      .then(() => {
-        res.redirect("/products");
+      .update(req.body.table, req.body.data, req.body.data.ID)
+      .then(res => {
+        console.log(res);
       })
       .catch(err => console.log(err));
   },
 
-  getDelete: (req, res, next) => {
+  postDelete: (req, res, next) => {
+    console.log(req.body);
     dbCtrlModel
-      .delete(req.query.id)
-      .then(() => {
-        res.redirect("/products");
+      .delete(req.body.table, req.body.id)
+      .then(res => {
+        console.log(res);
       })
       .catch(err => console.log(err));
   },

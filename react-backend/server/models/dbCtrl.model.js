@@ -11,11 +11,11 @@ module.exports = class Product {
   static insert(sqlData) {
     return db.query($sql.insert, sqlData);
   }
-  static update(sqlData, id) {
-    return db.query($sql.update, [sqlData, id]);
+  static update(table, sqlData, id) {
+    return db.query("UPDATE " + table + $sql.update, [sqlData, id]);
   }
-  static delete(id) {
-    return db.execute($sql.delete, [id]);
+  static delete(table, id) {
+    return db.execute("DELETE FROM " + table + $sql.delete, [id]);
   }
   static fetchAll(table) {
     return db.query($sql.fetchAll + table);

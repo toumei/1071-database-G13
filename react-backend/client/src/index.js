@@ -9,9 +9,9 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />
-      <Route path="/dbCtrl" component={App} />
-      <Route path="/products" component={App} />
-      <Route path="/login" component={App} />
+      <Route exact path="/dbCtrl" component={App} />
+      <Route exact path="/products" component={App} />
+      <Route exact path="/login" component={App} />
       <Route component={Error} />
     </Switch>
   </BrowserRouter>,

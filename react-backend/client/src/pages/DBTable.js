@@ -12,7 +12,7 @@ class DBDatabase extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: "boarder",
+      selected: this.props.table,
       data: [],
       columns: [
         {
@@ -50,11 +50,6 @@ class DBDatabase extends Component {
         data: data
       });
     });
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.selected !== this.state.selected) {
-    }
   }
 
   render() {
@@ -120,15 +115,22 @@ class DBTable extends Component {
     this.state.data.filter((x, i) => {
       if (x === row) {
         var data = this.state.data;
-        data[i].studentID = 2;
-        data[i].name = 2;
+        data[i].name = x.name = 2;
         this.setState({ data: data });
+        axios.post("http://localhost:3000/dbCtrl/update", {
+          table: this.state.table,
+          data: x
+        });
       }
       return true;
     });
   }
 
   delete(row) {
+    axios.post("http://localhost:3000/dbCtrl/delete", {
+      table: this.state.table,
+      id: row.ID
+    });
     this.setState({
       data: this.state.data.filter((x, i) => x !== row)
     });
@@ -313,7 +315,10 @@ class DB extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <DBDatabase handleAdd={table => this.handleAdd(table)} />
+          <DBDatabase
+            table={this.state.table}
+            handleAdd={table => this.handleAdd(table)}
+          />
           <DBTable table={this.state.table} />
         </div>
       </div>
