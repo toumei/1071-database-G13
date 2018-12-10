@@ -23,12 +23,10 @@
 ### 重要資訊：
 * **每次開工前請先 git pull 更新其他人上傳的檔案**
 * **現在可以用 git add . 全部更新，不用擔心上傳到 node_modules**
-* 2019年12月10日 (一) 第一次進度報告
 * 2019年01月05日 (六) 繳交報告
 * 2019年01月07日 (一) 口頭報告
 * **有任何參考資料請放上來，這樣比較好協助了解程式碼和報告**
 * **安裝擴充插件，以便於後續編程**
-* 請更新server/config/database.js
 * **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
 * server http-port：http://localhost:3000
@@ -43,6 +41,7 @@
 * 將list、add、edit改成通用模式
 * 將*-controller.js和*-model.js分別重新命名為*.controller.js和*.model.js
 * server-client 資料加解密
+* 
 ---
 
 ### WIKI：
@@ -59,11 +58,12 @@
   * https server：https://localhost:port
   * 將 三層架構 調整為 Model–view–controller (MVC)
   * EJS 模組化(pages、partials)
-  * 登入系統(email, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)
+  * 登入系統(email, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
 * client (express)
-
+  * Ajax 紀錄回傳token
+  * Axios攔截器尚未測試(server端無法跑)，若token失效則重新導向login
 * client (react)
   * router 規劃與設計
   * server-client 資料加解密
@@ -71,8 +71,6 @@
 
 ### 正在做的部分：
 * sever
-  * client端：Axios (具 promise 的js)，紀錄回傳token，若token失效則重新送login資訊
-  * API安全(攔截用戶API請求，驗證token是否有效)：passport-jwt、express-jwt
   * 帳戶權限：ACL、RBAC
     * 登入時判斷身份為 一般使用者 、 工作人員 、 DB管理員，切換至不同的使用頁面。
 
