@@ -1,28 +1,28 @@
 {
-    "name": "mwapp-backend",
-    "version": "0.0.0",
-    "private": true,
-    "scripts": {
-        "start": "nodemon ./bin/www"
-    },
-    "dependencies": {
-        "axios": "^0.18.0",
-        "bcryptjs": "^2.4.3",
-        "cookie-parser": "~1.4.3",
-        "debug": "~2.6.9",
-        "ejs": "~2.5.7",
-        "express": "~4.16.0",
-        "express-jwt": "^5.3.1",
-        "font-awesome": "^4.7.0",
-        "http-errors": "^1.6.3",
-        "jsonwebtoken": "^8.4.0",
-        "morgan": "~1.9.0",
-        "mysql2": "^1.6.4",
-        "passport": "^0.4.0",
-        "passport-jwt": "^4.0.0",
-        "passport-local": "^1.0.0"
-    },
-    "devDependencies": {
-        "@fortawesome/fontawesome-free": "^5.5.0"
-    }
+  "name": "mwapp-backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "express-jwt": "^5.3.1",
+    "font-awesome": "^4.7.0",
+    "http-errors": "^1.6.3",
+    "jsonwebtoken": "^8.4.0",
+    "morgan": "~1.9.0",
+    "mysql2": "^1.6.4",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.5.0"
+  }
 }
