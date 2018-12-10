@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+// import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import filterFactory from "react-bootstrap-table2-filter";
@@ -7,7 +7,6 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import axios from "axios";
 import Crypt from "../models/crypt.model";
-import { Grid, Row, Col, ButtonGroup, Button } from "react-bootstrap";
 
 class DBDatabase extends Component {
   constructor(props) {
@@ -55,7 +54,7 @@ class DBDatabase extends Component {
 
   render() {
     return (
-      <Col md={2} style={{ marginTop: 10 }}>
+      <div className="col-md-2" style={{ marginTop: 10 }}>
         <BootstrapTable
           hover
           keyField="TABLE_COMMENT"
@@ -74,7 +73,7 @@ class DBDatabase extends Component {
             }
           }}
         />
-      </Col>
+      </div>
     );
   }
 }
@@ -180,24 +179,68 @@ class DBTable extends Component {
           text: "操作",
           formatter: (cell, row) => {
             return (
-              <ButtonGroup>
-                <Button
+              <div class="btn-group">
+                <button
                   type="button"
                   name="edit"
                   className="btn btn-success btn-sm"
                   onClick={e => this.edit(row)}
+                  data-toggle="modal"
+                  data-target="#exampleModal"
                 >
                   編輯
-                </Button>
-                <Button
+                </button>
+                <button
                   type="button"
                   name="delete"
                   className="btn btn-warning btn-sm"
                   onClick={e => this.delete(row)}
+                  data-toggle="modal"
+                  data-target="#deleteModal"
                 >
                   刪除
-                </Button>
-              </ButtonGroup>
+                </button>
+
+                <div
+                  class="modal fade"
+                  id="deleteModal"
+                  tabindex="-1"
+                  role="dialog"
+                  aria-labelledby="deleteModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">
+                          刪除
+                        </h5>
+                        <button
+                          type="button"
+                          class="close"
+                          data-dismiss="modal"
+                          aria-label="Close"
+                        >
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">是否要刪除ID： {row.ID} ?</div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                          Save changes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             );
           },
           headerStyle: {
@@ -264,7 +307,7 @@ class DBTable extends Component {
           search
         >
           {props => (
-            <Col md={10} style={{ marginTop: 10 }}>
+            <div className="col-md-10" style={{ marginTop: 10 }}>
               <section className="bg-light py-1">
                 <div className="container">
                   <div className="row">
@@ -301,7 +344,7 @@ class DBTable extends Component {
                 defaultSorted={[{ dataField: "ID", order: "asc" }]}
                 cellEdit={cellEditFactory({ mode: "click" })}
               />
-            </Col>
+            </div>
           )}
         </ToolkitProvider>
       );
@@ -322,15 +365,15 @@ class DB extends Component {
 
   render() {
     return (
-      <Grid fluid>
-        <Row>
+      <div className="container-fluid">
+        <div className="row">
           <DBDatabase
             table={this.state.table}
             handleAdd={table => this.handleAdd(table)}
           />
           <DBTable table={this.state.table} />
-        </Row>
-      </Grid>
+        </div>
+      </div>
     );
   }
 }
