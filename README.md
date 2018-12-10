@@ -3,6 +3,7 @@
 ### 寫 code 必做之事：
 1. 開啟 VS code 打開到此專案
 1. 在 git bash 上 git pull 更新本機檔案
+1. 在 git bash 上 再次 git pull 一次 確認是否顯示 Already up to date.
 1. 去 VS code 檢查檔案被更新的部分
 
 ### 上傳 github 必做之事：
@@ -12,12 +13,12 @@
 1. git push (上傳檔案)
    * 有上傳成功 
      1. git status (再次確認是否有沒新增到的檔案)
-     1. git push (再次確認是否有全部上傳上去)
+     1. git push (再次確認是否有顯示 Everything up-to-date)
    * 沒上傳成功
      1. git pull (先更新本機檔案)
      1. 去 VS code 檢查檔案
      1. git status (再次確認是否有沒新增到的檔案)
-     1. git push (再次確認是否有全部上傳上去)
+     1. git push (再次確認是否有顯示 Everything up-to-date)
 
 ### 重要資訊：
 * **每次開工前請先 git pull 更新其他人上傳的檔案**
