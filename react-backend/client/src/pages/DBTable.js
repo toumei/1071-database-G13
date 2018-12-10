@@ -19,11 +19,16 @@ class DBDatabase extends Component {
           text: "資料庫",
           headerAlign: "center",
           align: "center",
-          style: { cursor: "pointer" },
           events: {
             onClick: (e, column, columnIndex, row, rowIndex) => {
               this.props.handleAdd(row.TABLE_NAME);
             }
+          },
+          style: (cell, row, rowIndex, colIndex) => {
+            if (rowIndex === 1) {
+              return { cursor: "pointer", backgroundColor: "#81c784" };
+            }
+            return { cursor: "pointer", backgroundColor: "white" };
           }
         }
       ]
@@ -60,6 +65,15 @@ class DBDatabase extends Component {
           data={this.state.data}
           columns={this.state.columns}
           filter={filterFactory()}
+          rowEvents={{
+            onClick: (e, row, rowIndex) => {
+              console.log(`clicked on row with index: ${rowIndex}`);
+              // if (row.TABLE_NAME === this.state.index) {
+              //   return { cursor: "pointer", backgroundColor: "#81c784" };
+              // }
+              // return { cursor: "pointer", backgroundColor: "white" };
+            }
+          }}
         />
       </div>
     );
@@ -99,15 +113,17 @@ class DBTable extends Component {
     this.setState({ data: this.state.data });
   }
 
-  edit(id) {
+  edit(row) {
     var data = this.state.data;
-    data[0].studentID = 2;
-    data[0].name = 2;
+    data[row.i].studentID = 2;
+    data[row.i].name = 2;
     this.setState({ data: data });
   }
 
-  delete(id) {
-    this.setState({ data: this.state.data.filter((x, i) => i !== 0) });
+  delete(row) {
+    this.setState({
+      data: this.state.data.filter((x, i) => i !== row.i)
+    });
   }
 
   getColumnList() {
@@ -115,6 +131,11 @@ class DBTable extends Component {
       .post("http://localhost:3000/dbCtrl/ColumnList?table=" + this.state.table)
       .then(response => {
         var columns = [];
+        columns.push({
+          dataField: "i",
+          text: "i",
+          hidden: true
+        });
         Crypt.decrypt(response.data).forEach(element => {
           columns.push({
             dataField: element["COLUMN_NAME"],
@@ -145,7 +166,7 @@ class DBTable extends Component {
           dataField: "action",
           isDummyField: true,
           text: "操作",
-          formatter: (cellContent, row) => {
+          formatter: (cell, row) => {
             return (
               <div>
                 <input
@@ -153,14 +174,14 @@ class DBTable extends Component {
                   name="edit"
                   value="編輯"
                   className="btn btn-success btn-sm"
-                  onClick={e => this.edit(row.ID)}
+                  onClick={e => this.edit(row)}
                 />
                 <input
                   type="button"
                   name="delete"
                   value="刪除"
                   className="btn btn-warning btn-sm"
-                  onClick={e => this.delete(row.ID)}
+                  onClick={e => this.delete(row)}
                 />
               </div>
             );
@@ -181,6 +202,10 @@ class DBTable extends Component {
     axios
       .post("http://localhost:3000/dbCtrl/List?table=" + this.state.table)
       .then(response => {
+        // console.log(Crypt.decrypt(response.data));
+        // this.a = Crypt.decrypt(response.data)[0];
+        // this.a["index"] = 0;
+        // console.log(this.a);
         this.setState({
           data: Crypt.decrypt(response.data)
         });
@@ -218,11 +243,6 @@ class DBTable extends Component {
         { text: "50", value: 50 },
         { text: "100", value: 100 }
       ]
-    };
-    this.rowEvents = {
-      onClick(e, row, rowIndex) {
-        console.log(`clicked on row with index: ${rowIndex}`);
-      }
     };
     if (this.state.columns.length > 0) {
       const { SearchBar } = Search;
@@ -270,7 +290,6 @@ class DBTable extends Component {
                 }}
                 defaultSorted={[{ dataField: "ID", order: "asc" }]}
                 cellEdit={cellEditFactory({ mode: "click" })}
-                rowEvents={this.rowEvents}
               />
             </div>
           )}
