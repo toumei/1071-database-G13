@@ -4,8 +4,6 @@
 <head>
     <% path = '../../partials/' %>
     <%- include(path + 'head') %>
-
-    <script src="/js/CRUD.js"></script>
 </head>
 
 <body>
@@ -19,7 +17,7 @@
             <h1 class="text-center d-4">
                 <%= title %>
             </h1>
-            <input type="button" name="add" value="Add" class="btn btn-danger" onclick="Add('<%= router %>');" />
+            <input type="button" name="add" id="add" value="Add" class="btn btn-danger" onclick="Add('<%= router %>');" />
         </div>
         <div class="input-group">
             <input type="text" class="form-control" id="idInput" placeholder="search id">
@@ -47,8 +45,9 @@
                     </td>
                     <% } %>
                     <td class="align-middle">
-                        <input type="button" name="edit" value="Edit" class="btn btn-success btn-sm" onclick="Edit('<%= router %>', '<%= data.table[i][data.colName[0].Field]  %>');" />
-                        <input type="button" name="delete" value="Del" class="btn btn-warning btn-sm" onclick="Delete('<%= router %>', '<%= data.table[i][data.colName[0].Field]  %>');" />
+                        <input type="button" name="edit" id="edit" value="Edit" class="btn btn-success btn-sm" onclick="Edit('<%= router %>', '<%= data.table[i][data.colName[0].Field]  %>');" />
+                        <input type="button" name="delete" id="delete" value="Del" class="btn btn-warning btn-sm"
+                            onclick="Delete('<%= router %>', '<%= data.table[i][data.colName[0].Field]  %>');" />
                     </td>
                 </tr>
                 <% } %>
@@ -58,6 +57,8 @@
 
     <!-- JavaScript -->
     <%- include(path + 'JavaScript') %>
+    <script src="/js/CRUD.js"></script>
+    <script src="/js/interceptors.js"></script>
 </body>
 
 </html>
