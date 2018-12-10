@@ -1,17 +1,23 @@
 # 1071-database-G13
 
-### 寫 code 前該做的事情：
-* 請先開啟 VS code 打開到此專案
-* 然後再 git pull 更新檔案
-* 最後去 VS code 檢查檔案是否有被更新
+### 寫 code 必做之事：
+1. 開啟 VS code 打開到此專案
+1. 在 git bash 上 git pull 更新本機檔案
+1. 去 VS code 檢查檔案被更新的部分
 
-### 上傳 github 前要做的事情：
-* 先 git status 確認有那些檔案已被更改過
-* 然後再 git add . git commit -m ""
-* 最後 git push 上傳檔案
-* 再次 git status 確認還有沒有沒上傳到的檔案
-* 再次 git push 確認全部推上去
-* 最後再 git pull
+### 上傳 github 必做之事：
+1. git status (確認已修改的檔案)
+1. git add . (新增檔案)
+1. git commit -m "" (添加註解)
+1. git push (上傳檔案)
+   * 有上傳成功 
+     1. git status (再次確認是否有沒新增到的檔案)
+     1. git push (再次確認是否有全部上傳上去)
+   * 沒上傳成功
+     1. git pull (先更新本機檔案)
+     1. 去 VS code 檢查檔案
+     1. git status (再次確認是否有沒新增到的檔案)
+     1. git push (再次確認是否有全部上傳上去)
 
 ### 重要資訊：
 * **每次開工前請先 git pull 更新其他人上傳的檔案**
