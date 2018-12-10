@@ -34,6 +34,7 @@
 * server http-port：http://localhost:3000
 * server https-port：https://localhost:8000
 * client http-port：http://localhost:3001
+* 請重新匯入一次 sql 檔案
 ---
 
 ### 更新資訊：
@@ -66,6 +67,7 @@
 * client (react)
   * router 規劃與設計
   * server-client 資料加解密
+  * 基本 CRUD 完成
 
 ### 正在做的部分：
 * sever
