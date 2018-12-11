@@ -89,6 +89,13 @@ class DBTable extends Component {
   }
 
   componentDidMount() {
+    window.onbeforeunload = function(e) {
+      e = e || window.event;
+      if (e) {
+        e.returnValue = "close";
+      }
+      return "close";
+    };
     this.getColumnList();
     this.getList();
   }
@@ -106,6 +113,9 @@ class DBTable extends Component {
     }
   }
 
+  componentWillUnmount() {
+    window.onbeforeunload = undefined;
+  }
   add(id, studentID, name) {
     this.state.data.push({ ID: id, studentID: studentID, name: name });
     this.setState({ data: this.state.data });
@@ -261,40 +271,53 @@ class DBTable extends Component {
     });
   }
 
-  render() {
-    this.customTotal = (from, to, size) => (
-      <span className="react-bootstrap-table-pagination-total">
-        第 {from} 筆到 {to} 筆資料 (共 {size} 筆資料)
-      </span>
-    );
+  customTotal = (from, to, size) => (
+    <span className="react-bootstrap-table-pagination-total">
+      第 {from} 筆到 {to} 筆資料 (共 {size} 筆資料)
+    </span>
+  );
 
-    this.options = {
-      paginationSize: 10,
-      pageStartIndex: 1,
-      alwaysShowAllBtns: true,
-      hidePageListOnlyOnePage: true,
-      firstPageText: "<<",
-      prePageText: "<",
-      nextPageText: ">",
-      lastPageText: ">>",
-      nextPageTitle: "首頁",
-      prePageTitle: "上一頁",
-      firstPageTitle: "下一頁",
-      lastPageTitle: "尾頁",
-      showTotal: true,
-      paginationTotalRenderer: this.customTotal,
-      sizePerPageList: [
-        { text: "5", value: 5 },
-        { text: "10", value: 10 },
-        { text: "15", value: 15 },
-        { text: "20", value: 20 },
-        { text: "25", value: 25 },
-        { text: "50", value: 50 },
-        { text: "100", value: 100 }
-      ]
-    };
+  options = {
+    paginationSize: 10,
+    pageStartIndex: 1,
+    alwaysShowAllBtns: true,
+    hidePageListOnlyOnePage: true,
+    firstPageText: "<<",
+    prePageText: "<",
+    nextPageText: ">",
+    lastPageText: ">>",
+    nextPageTitle: "首頁",
+    prePageTitle: "上一頁",
+    firstPageTitle: "下一頁",
+    lastPageTitle: "尾頁",
+    showTotal: true,
+    paginationTotalRenderer: this.customTotal,
+    sizePerPageList: [
+      { text: "5", value: 5 },
+      { text: "10", value: 10 },
+      { text: "15", value: 15 },
+      { text: "20", value: 20 },
+      { text: "25", value: 25 },
+      { text: "50", value: 50 },
+      { text: "100", value: 100 }
+    ]
+  };
+
+  beforeSaveCell(oldValue, newValue, row, column, done) {
+    setTimeout(() => {
+      if (window.confirm("確定改變新的值?")) {
+        done(true);
+      } else {
+        done(false);
+      }
+    }, 0);
+    return { async: true };
+  }
+
+  render() {
     if (this.state.columns.length > 0) {
       const { SearchBar } = Search;
+      const beforeSaveCell = this.beforeSaveCell;
       return (
         <ToolkitProvider
           keyField={"ID"}
@@ -332,13 +355,11 @@ class DBTable extends Component {
                 hover
                 pagination={paginationFactory(this.options)}
                 noDataIndication={"尚未有資料"}
-                selectRow={{
-                  mode: "checkbox",
-                  clickToSelect: true,
-                  bgColor: "#c8e6c9"
-                }}
                 defaultSorted={[{ dataField: "ID", order: "asc" }]}
-                cellEdit={cellEditFactory({ mode: "click" })}
+                cellEdit={cellEditFactory({
+                  mode: "click",
+                  beforeSaveCell
+                })}
               />
             </div>
           )}
