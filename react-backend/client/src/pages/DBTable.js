@@ -36,7 +36,7 @@ class DBDatabase extends Component {
   }
 
   getTableList() {
-    axios.post("http://localhost:3000/dbCtrl/TableList").then(response => {
+    axios.post("dbCtrl/TableList").then(response => {
       var decryptedJSON = Crypt.decrypt(response.data);
       var data = [];
       decryptedJSON.forEach(element => {
@@ -119,7 +119,7 @@ class DBTable extends Component {
           var data = this.state.data;
           data[i].name = x.name = 2;
           this.setState({ data: data });
-          axios.post("http://localhost:3000/dbCtrl/update", {
+          axios.post("dbCtrl/update", {
             table: this.state.table,
             data: x
           });
@@ -132,7 +132,7 @@ class DBTable extends Component {
   delete(row) {
     var rs = window.confirm("是否要刪除ID：" + row.ID + " ?");
     if (rs) {
-      axios.post("http://localhost:3000/dbCtrl/delete", {
+      axios.post("dbCtrl/delete", {
         table: this.state.table,
         id: row.ID
       });
@@ -143,126 +143,122 @@ class DBTable extends Component {
   }
 
   getColumnList() {
-    axios
-      .post("http://localhost:3000/dbCtrl/ColumnList?table=" + this.state.table)
-      .then(response => {
-        var columns = [];
-        Crypt.decrypt(response.data).forEach(element => {
-          columns.push({
-            dataField: element["COLUMN_NAME"],
-            text: element["COLUMN_COMMENT"],
-            sort: true,
-            sortCaret: (order, column) => {
-              if (!order) return <span>&nbsp;&nbsp;↑↓</span>;
-              else if (order === "asc")
-                return (
-                  <span>
-                    &nbsp;&nbsp;<font color="red">↑</font>↓
-                  </span>
-                );
-              else if (order === "desc")
-                return (
-                  <span>
-                    &nbsp;&nbsp;↑<font color="red">↓</font>
-                  </span>
-                );
-              return null;
-            },
-            headerAlign: "center",
-            align: "center",
-            headerStyle: { cursor: "pointer" }
-          });
-        });
+    axios.post("dbCtrl/ColumnList?table=" + this.state.table).then(response => {
+      var columns = [];
+      Crypt.decrypt(response.data).forEach(element => {
         columns.push({
-          dataField: "action",
-          isDummyField: true,
-          text: "操作",
-          formatter: (cell, row) => {
-            return (
-              <div class="btn-group">
-                <button
-                  type="button"
-                  name="edit"
-                  className="btn btn-success btn-sm"
-                  onClick={e => this.edit(row)}
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                >
-                  編輯
-                </button>
-                <button
-                  type="button"
-                  name="delete"
-                  className="btn btn-warning btn-sm"
-                  onClick={e => this.delete(row)}
-                  data-toggle="modal"
-                  data-target="#deleteModal"
-                >
-                  刪除
-                </button>
+          dataField: element["COLUMN_NAME"],
+          text: element["COLUMN_COMMENT"],
+          sort: true,
+          sortCaret: (order, column) => {
+            if (!order) return <span>&nbsp;&nbsp;↑↓</span>;
+            else if (order === "asc")
+              return (
+                <span>
+                  &nbsp;&nbsp;<font color="red">↑</font>↓
+                </span>
+              );
+            else if (order === "desc")
+              return (
+                <span>
+                  &nbsp;&nbsp;↑<font color="red">↓</font>
+                </span>
+              );
+            return null;
+          },
+          headerAlign: "center",
+          align: "center",
+          headerStyle: { cursor: "pointer" }
+        });
+      });
+      columns.push({
+        dataField: "action",
+        isDummyField: true,
+        text: "操作",
+        formatter: (cell, row) => {
+          return (
+            <div className="btn-group">
+              <button
+                type="button"
+                name="edit"
+                className="btn btn-success btn-sm"
+                onClick={e => this.edit(row)}
+                data-toggle="modal"
+                data-target="#exampleModal"
+              >
+                編輯
+              </button>
+              <button
+                type="button"
+                name="delete"
+                className="btn btn-warning btn-sm"
+                onClick={e => this.delete(row)}
+                data-toggle="modal"
+                data-target="#deleteModal"
+              >
+                刪除
+              </button>
 
-                <div
-                  class="modal fade"
-                  id="deleteModal"
-                  tabindex="-1"
-                  role="dialog"
-                  aria-labelledby="deleteModalLabel"
-                  aria-hidden="true"
-                >
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="deleteModalLabel">
-                          刪除
-                        </h5>
-                        <button
-                          type="button"
-                          class="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">是否要刪除ID： {row.ID} ?</div>
-                      <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-secondary"
-                          data-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button type="button" class="btn btn-primary">
-                          Save changes
-                        </button>
-                      </div>
+              <div
+                className="modal fade"
+                id="deleteModal"
+                tabIndex="-1"
+                role="dialog"
+                aria-labelledby="deleteModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="deleteModalLabel">
+                        刪除
+                      </h5>
+                      <button
+                        type="button"
+                        className="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">是否要刪除ID： {row.ID} ?</div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button type="button" className="btn btn-primary">
+                        Save changes
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-            );
-          },
-          headerStyle: {
-            width: "140px"
-          },
-          headerAlign: "center",
-          align: "center"
-        });
-        this.setState({
-          columns: columns
-        });
+            </div>
+          );
+        },
+        headerStyle: {
+          width: "140px"
+        },
+        headerAlign: "center",
+        align: "center"
       });
+      this.setState({
+        columns: columns
+      });
+    });
   }
 
   getList() {
-    axios
-      .post("http://localhost:3000/dbCtrl/List?table=" + this.state.table)
-      .then(response => {
-        this.setState({
-          data: Crypt.decrypt(response.data)
-        });
+    axios.post("dbCtrl/List?table=" + this.state.table).then(response => {
+      this.setState({
+        data: Crypt.decrypt(response.data)
       });
+    });
   }
 
   render() {
