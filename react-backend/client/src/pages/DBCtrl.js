@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DBTable from "./DBTable";
+import { Link } from "react-router-dom";
 
 class DBCtrl extends Component {
   render() {
@@ -8,24 +9,24 @@ class DBCtrl extends Component {
         <section className="bg-light">
           <ul className="nav nav-tabs justify-content-center">
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link active" to="\dbCtrl">
                 Active
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#">
+              <Link className="nav-link" to="/products">
                 Link
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to="">
                 Link
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to="">
                 Disabled
-              </a>
+              </Link>
             </li>
           </ul>
         </section>
