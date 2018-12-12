@@ -6,6 +6,7 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import axios from "axios";
 import Crypt from "../models/crypt.model";
+import DBNav from "./DBNav";
 
 class DBTable extends Component {
   constructor(props) {
@@ -13,7 +14,10 @@ class DBTable extends Component {
     this.state = {
       table: props.table,
       data: [],
-      columns: []
+      columns: [],
+      beforeEdit: [],
+      afterEdit: [],
+      delete: []
     };
   }
 
@@ -69,16 +73,14 @@ class DBTable extends Component {
   }
 
   delete(row) {
-    var rs = window.confirm("是否要刪除ID：" + row.ID + " ?");
-    if (rs) {
-      axios.post("dbCtrl/delete", {
-        table: this.state.table,
-        id: row.ID
-      });
-      this.setState({
-        data: this.state.data.filter((x, i) => x !== row)
-      });
-    }
+    // axios.post("dbCtrl/delete", {
+    //   table: this.state.table,
+    //   id: row.ID
+    // });
+    this.setState({
+      data: this.state.data.filter((x, i) => x !== row),
+      delete: [...this.state.delete, row]
+    });
   }
 
   async getColumnList() {
@@ -109,7 +111,12 @@ class DBTable extends Component {
             },
             headerAlign: "center",
             align: "center",
-            headerStyle: { cursor: "pointer" }
+            headerStyle: {
+              cursor: "pointer",
+              headerStyle: {
+                width: "140px"
+              }
+            }
           });
         });
         columns.push({
@@ -121,66 +128,12 @@ class DBTable extends Component {
               <div className="btn-group">
                 <button
                   type="button"
-                  name="edit"
-                  className="btn btn-success btn-sm"
-                  onClick={e => this.edit(row)}
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                >
-                  編輯
-                </button>
-                <button
-                  type="button"
                   name="delete"
                   className="btn btn-warning btn-sm"
                   onClick={e => this.delete(row)}
-                  // data-toggle="modal"
-                  // data-target="#deleteModal"
                 >
                   刪除
                 </button>
-
-                <div
-                  className="modal fade"
-                  id="deleteModal"
-                  tabIndex="-1"
-                  role="dialog"
-                  aria-labelledby="deleteModalLabel"
-                  aria-hidden="true"
-                >
-                  <div className="modal-dialog" role="document">
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <h5 className="modal-title" id="deleteModalLabel">
-                          刪除
-                        </h5>
-                        <button
-                          type="button"
-                          className="close"
-                          data-dismiss="modal"
-                          aria-label="Close"
-                        >
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div className="modal-body">
-                        是否要刪除ID： {row.ID} ?
-                      </div>
-                      <div className="modal-footer">
-                        <button
-                          type="button"
-                          className="btn btn-secondary"
-                          data-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button type="button" className="btn btn-primary">
-                          Save changes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             );
           },
@@ -188,7 +141,8 @@ class DBTable extends Component {
             width: "140px"
           },
           headerAlign: "center",
-          align: "center"
+          align: "center",
+          editable: false
         });
         this.setState({
           columns: columns
@@ -260,27 +214,14 @@ class DBTable extends Component {
         >
           {props => (
             <div className="col-md-10" style={{ marginTop: 10 }}>
-              <section className="bg-light py-1">
-                <div className="container">
-                  <div className="row">
-                    <div className="col-md-2">
-                      <button className="btn btn-primary text-light btn-block">
-                        <i className="fas fa-plus" /> Add Post
-                      </button>
-                    </div>
-                    <div className="col-md-2">
-                      <button className="btn btn-success text-light btn-block">
-                        <i className="fas fa-plus" /> Add Category
-                      </button>
-                    </div>
-                    <div className="col-md-2">
-                      <button className="btn btn-warning btn-block">
-                        <i className="fas fa-plus" /> Add Users
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </section>
+              <DBNav
+                navColumns={JSON.stringify(
+                  this.state.columns.map((x, i) => {
+                    return { COLUMN_NAME: x.dataField, COLUMN_COMMENT: x.text };
+                  })
+                )}
+                delete={this.state.delete}
+              />
               <SearchBar {...props.searchProps} placeholder="搜尋。。。" />
               <BootstrapTable
                 {...props.baseProps}
