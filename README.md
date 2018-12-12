@@ -29,7 +29,7 @@
 * server-client 資料加解密
 * 登入後會將token記錄在本地端 Local Storage
 * 使用http攔截器，攔截請求，若header無token，則setHeader(Local Storage的token資料)
-* [react練習/測試檔](https://github.com/toumei/107-01-database-4B/tree/master/example-create-react-app-express)
+* [react練習/測試檔](https://github.com/toumei/107-01-database-4B/tree/master/example-create-react-app-express) - 12/10
 ---
 
 ### WIKI：
