@@ -8,6 +8,7 @@
 * 2019年01月07日 (一) 口頭報告
 ---
 ### 重要資訊：
+* **更新資訊後面請補上更新日期，之後不定期清理不必要資訊**
 * **有Git忽略文件(.gitignore)，就不用擔心上傳到 node_modules**
 * **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
@@ -24,12 +25,9 @@
 ### 更新資訊：
 * EJS 模組化(pages、partials)
 * 新增sql指令：describe: 'DESCRIBE table'，取得column_name
-* 將list、add、edit改成通用模式
-* 將*-controller.js和*-model.js分別重新命名為*.controller.js和*.model.js
-* server-client 資料加解密
 * 登入後會將token記錄在本地端 Local Storage
 * 使用http攔截器，攔截請求，若header無token，則setHeader(Local Storage的token資料)
-* [react練習/測試檔](https://github.com/toumei/107-01-database-4B/tree/master/example-create-react-app-express)
+* [react練習/測試檔](https://github.com/toumei/107-01-database-4B/tree/master/example-create-react-app-express) - 12/10
 ---
 
 ### WIKI：
