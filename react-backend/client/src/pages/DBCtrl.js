@@ -9,23 +9,18 @@ class DBCtrl extends Component {
         <section className="bg-light">
           <ul className="nav nav-tabs justify-content-center">
             <li className="nav-item">
+              <Link className="nav-link" to="">
+                分析表
+              </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link active" to="\dbCtrl">
-                Active
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/products">
-                Link
+                表格編輯
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="">
-                Link
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="">
-                Disabled
+                匯出csv
               </Link>
             </li>
           </ul>
