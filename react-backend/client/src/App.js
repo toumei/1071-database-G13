@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "./partials/Navbar";
 import Header from "./partials/Header";
-import DBCtrl from "./pages/DBCtrl";
+import DB from "./pages/DB";
 import Products from "./pages/Products";
 import Login from "./pages/Login";
 import { Switch, Route } from "react-router-dom";
@@ -12,7 +12,7 @@ const Main = () => (
   <main>
     <Switch>
       <Route exact path="/" component={index} />
-      <Route path="/dbCtrl" component={DBCtrl} />
+      <Route path="/database" component={DB} />
       <Route path="/products" component={Products} />
       <Route path="/login" component={Login} />
     </Switch>

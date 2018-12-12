@@ -2,81 +2,10 @@ import React, { Component } from "react";
 // import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import filterFactory from "react-bootstrap-table2-filter";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import axios from "axios";
 import Crypt from "../models/crypt.model";
-
-class DBDatabase extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: this.props.table,
-      data: [],
-      columns: [
-        {
-          dataField: "TABLE_COMMENT",
-          text: "資料庫",
-          headerAlign: "center",
-          align: "center",
-          style: (cell, row, rowIndex, colIndex) => {
-            if (row.TABLE_NAME === this.state.selected) {
-              return { cursor: "pointer", backgroundColor: "#81c784" };
-            }
-            return { cursor: "pointer", backgroundColor: "white" };
-          }
-        }
-      ]
-    };
-  }
-
-  async componentDidMount() {
-    await this.getTableList();
-  }
-
-  async getTableList() {
-    await axios.post("dbCtrl/TableList").then(response => {
-      let decryptedJSON = Crypt.decrypt(response.data);
-      let data = [];
-      decryptedJSON.forEach(element => {
-        data.push({
-          TABLE_COMMENT: element["TABLE_COMMENT"],
-          TABLE_NAME: element["TABLE_NAME"],
-          align: "center"
-        });
-      });
-      this.setState({
-        data: data
-      });
-    });
-  }
-
-  render() {
-    return (
-      <div className="col-md-2" style={{ marginTop: 10 }}>
-        <BootstrapTable
-          hover
-          keyField="TABLE_COMMENT"
-          data={this.state.data}
-          columns={this.state.columns}
-          filter={filterFactory()}
-          selectRow={{
-            mode: "radio",
-            clickToSelect: true,
-            hideSelectColumn: true,
-            bgColor: "#c8e6c9",
-            onSelect: (row, isSelect, rowIndex, e) => {
-              this.props.handleAdd(row.TABLE_NAME);
-              this.setState({ selected: row.TABLE_NAME });
-              return false;
-            }
-          }}
-        />
-      </div>
-    );
-  }
-}
 
 class DBTable extends Component {
   constructor(props) {
@@ -89,13 +18,13 @@ class DBTable extends Component {
   }
 
   async componentDidMount() {
-    window.onbeforeunload = function(e) {
-      e = e || window.event;
-      if (e) {
-        e.returnValue = "close";
-      }
-      return "close";
-    };
+    // window.onbeforeunload = function(e) {
+    //   e = e || window.event;
+    //   if (e) {
+    //     e.returnValue = "close";
+    //   }
+    //   return "close";
+    // };
     await this.getColumnList();
     await this.getList();
   }
@@ -114,7 +43,7 @@ class DBTable extends Component {
   }
 
   async componentWillUnmount() {
-    window.onbeforeunload = undefined;
+    // window.onbeforeunload = undefined;
   }
   add(id, studentID, name) {
     this.state.data.push({ ID: id, studentID: studentID, name: name });
@@ -122,11 +51,11 @@ class DBTable extends Component {
   }
 
   edit(row) {
-    let rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
+    var rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
     if (rs) {
       this.state.data.filter((x, i) => {
         if (x === row) {
-          let data = this.state.data;
+          var data = this.state.data;
           data[i].name = x.name = 2;
           this.setState({ data: data });
           axios.post("dbCtrl/update", {
@@ -140,7 +69,7 @@ class DBTable extends Component {
   }
 
   delete(row) {
-    let rs = window.confirm("是否要刪除ID：" + row.ID + " ?");
+    var rs = window.confirm("是否要刪除ID：" + row.ID + " ?");
     if (rs) {
       axios.post("dbCtrl/delete", {
         table: this.state.table,
@@ -156,7 +85,7 @@ class DBTable extends Component {
     await axios
       .post("dbCtrl/ColumnList?table=" + this.state.table)
       .then(response => {
-        let columns = [];
+        var columns = [];
         Crypt.decrypt(response.data).forEach(element => {
           columns.push({
             dataField: element["COLUMN_NAME"],
@@ -205,8 +134,8 @@ class DBTable extends Component {
                   name="delete"
                   className="btn btn-warning btn-sm"
                   onClick={e => this.delete(row)}
-                  data-toggle="modal"
-                  data-target="#deleteModal"
+                  // data-toggle="modal"
+                  // data-target="#deleteModal"
                 >
                   刪除
                 </button>
@@ -374,29 +303,4 @@ class DBTable extends Component {
   }
 }
 
-class DB extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { table: "boarder" };
-  }
-
-  handleAdd(table) {
-    this.setState({ table: table });
-  }
-
-  render() {
-    return (
-      <div className="container-fluid">
-        <div className="row">
-          <DBDatabase
-            table={this.state.table}
-            handleAdd={table => this.handleAdd(table)}
-          />
-          <DBTable table={this.state.table} />
-        </div>
-      </div>
-    );
-  }
-}
-
-export default DB;
+export default DBTable;
