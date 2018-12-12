@@ -112,10 +112,7 @@ class DBTable extends Component {
             headerAlign: "center",
             align: "center",
             headerStyle: {
-              cursor: "pointer",
-              headerStyle: {
-                width: "140px"
-              }
+              cursor: "pointer"
             }
           });
         });
@@ -136,9 +133,6 @@ class DBTable extends Component {
                 </button>
               </div>
             );
-          },
-          headerStyle: {
-            width: "140px"
           },
           headerAlign: "center",
           align: "center",
@@ -217,10 +211,15 @@ class DBTable extends Component {
               <DBNav
                 navColumns={JSON.stringify(
                   this.state.columns.map((x, i) => {
-                    return { COLUMN_NAME: x.dataField, COLUMN_COMMENT: x.text };
+                    return {
+                      COLUMN_NAME: x.dataField,
+                      COLUMN_COMMENT: x.text
+                    };
                   })
                 )}
                 delete={this.state.delete}
+                beforeEdit={this.state.beforeEdit}
+                afterEdit={this.state.afterEdit}
               />
               <SearchBar {...props.searchProps} placeholder="搜尋。。。" />
               <BootstrapTable

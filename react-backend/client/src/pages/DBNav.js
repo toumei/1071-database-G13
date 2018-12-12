@@ -7,41 +7,66 @@ class DBNav extends Component {
   constructor(props) {
     super(props);
     var columns = [];
-    JSON.parse(props.navColumns).forEach(element => {
-      columns.push({
-        dataField: element["COLUMN_NAME"],
-        text: element["COLUMN_COMMENT"],
-        sort: true,
-        sortCaret: (order, column) => {
-          if (!order) return <span>&nbsp;&nbsp;↑↓</span>;
-          else if (order === "asc")
-            return (
-              <span>
-                &nbsp;&nbsp;<font color="red">↑</font>↓
-              </span>
-            );
-          else if (order === "desc")
-            return (
-              <span>
-                &nbsp;&nbsp;↑<font color="red">↓</font>
-              </span>
-            );
-          return null;
-        },
-        headerAlign: "center",
-        align: "center",
-        headerStyle: {
-          cursor: "pointer",
+    var navColumns = JSON.parse(props.navColumns);
+    navColumns.forEach((element, i) => {
+      if (i !== navColumns.length - 1) {
+        columns.push({
+          dataField: element["COLUMN_NAME"],
+          text: element["COLUMN_COMMENT"],
+          sort: true,
+          sortCaret: (order, column) => {
+            if (!order) return <span>&nbsp;&nbsp;↑↓</span>;
+            else if (order === "asc")
+              return (
+                <span>
+                  &nbsp;&nbsp;<font color="red">↑</font>↓
+                </span>
+              );
+            else if (order === "desc")
+              return (
+                <span>
+                  &nbsp;&nbsp;↑<font color="red">↓</font>
+                </span>
+              );
+            return null;
+          },
+          headerAlign: "center",
+          align: "center",
           headerStyle: {
-            width: "140px"
+            cursor: "pointer",
+            headerStyle: {
+              width: "140px"
+            }
           }
-        }
-      });
+        });
+      }
+    });
+
+    columns.push({
+      dataField: "action",
+      isDummyField: true,
+      text: "操作",
+      formatter: (cell, row) => {
+        return (
+          <div className="btn-group">
+            <button
+              type="button"
+              name="revert"
+              className="btn btn-warning btn-sm"
+            >
+              還原
+            </button>
+          </div>
+        );
+      },
+      headerAlign: "center",
+      align: "center",
+      editable: false
     });
     this.state = {
       navColumns: props.navColumns,
-      beforeEdit: [],
-      afterEdit: [],
+      beforeEdit: props.beforeEdit,
+      afterEdit: props.afterEdit,
       delete: props.delete,
       columns: columns
     };
@@ -49,10 +74,76 @@ class DBNav extends Component {
 
   async componentWillReceiveProps(nextProps) {
     if (nextProps.navColumns !== this.props.navColumns) {
-      this.setState({ navColumns: nextProps.navColumns });
+      var columns = [];
+      var navColumns = JSON.parse(nextProps.navColumns);
+      navColumns.forEach((element, i) => {
+        if (i !== navColumns.length - 1) {
+          columns.push({
+            dataField: element["COLUMN_NAME"],
+            text: element["COLUMN_COMMENT"],
+            sort: true,
+            sortCaret: (order, column) => {
+              if (!order) return <span>&nbsp;&nbsp;↑↓</span>;
+              else if (order === "asc")
+                return (
+                  <span>
+                    &nbsp;&nbsp;<font color="red">↑</font>↓
+                  </span>
+                );
+              else if (order === "desc")
+                return (
+                  <span>
+                    &nbsp;&nbsp;↑<font color="red">↓</font>
+                  </span>
+                );
+              return null;
+            },
+            headerAlign: "center",
+            align: "center",
+            headerStyle: {
+              cursor: "pointer",
+              headerStyle: {
+                width: "140px"
+              }
+            }
+          });
+        }
+      });
+
+      columns.push({
+        dataField: "action",
+        isDummyField: true,
+        text: "操作",
+        formatter: (cell, row) => {
+          return (
+            <div className="btn-group">
+              <button
+                type="button"
+                name="revert"
+                className="btn btn-warning btn-sm"
+              >
+                還原
+              </button>
+            </div>
+          );
+        },
+        headerAlign: "center",
+        align: "center",
+        editable: false
+      });
+      this.setState({
+        navColumns: nextProps.navColumns,
+        columns: columns
+      });
     }
     if (nextProps.delete !== this.props.delete) {
       this.setState({ delete: nextProps.delete });
+    }
+    if (nextProps.beforeEdit !== this.props.beforeEdit) {
+      this.setState({ beforeEdit: nextProps.beforeEdit });
+    }
+    if (nextProps.afterEdit !== this.props.afterEdit) {
+      this.setState({ afterEdit: nextProps.afterEdit });
     }
   }
 
@@ -105,7 +196,11 @@ class DBNav extends Component {
                 </button>
               </div>
               <div className="col-md-2">
-                <button className="btn btn-success text-light btn-block">
+                <button
+                  className="btn btn-success text-light btn-block"
+                  data-toggle="modal"
+                  data-target="#revertModal"
+                >
                   <i className="fas fa-plus" /> 還原紀錄
                 </button>
               </div>
@@ -126,6 +221,129 @@ class DBNav extends Component {
             </div>
           </div>
         </section>
+
+        <div
+          className="modal fade"
+          id="editModal"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="editModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="editModalLabel">
+                  編輯紀錄
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <ToolkitProvider
+                  keyField={"ID"}
+                  data={this.state.afterEdit}
+                  columns={this.state.columns}
+                  search
+                >
+                  {props => (
+                    <div>
+                      <SearchBar
+                        {...props.searchProps}
+                        placeholder="搜尋。。。"
+                      />
+                      <BootstrapTable
+                        {...props.baseProps}
+                        striped
+                        hover
+                        pagination={paginationFactory(this.options)}
+                        noDataIndication={"尚未有資料"}
+                        defaultSorted={[{ dataField: "ID", order: "asc" }]}
+                      />
+                    </div>
+                  )}
+                </ToolkitProvider>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          className="modal fade"
+          id="revertModal"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="revertModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="revertModalLabel">
+                  還原紀錄
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <ToolkitProvider
+                  keyField={"ID"}
+                  data={this.state.beforeEdit}
+                  columns={this.state.columns}
+                  search
+                >
+                  {props => (
+                    <div>
+                      <SearchBar
+                        {...props.searchProps}
+                        placeholder="搜尋。。。"
+                      />
+                      <BootstrapTable
+                        {...props.baseProps}
+                        striped
+                        hover
+                        pagination={paginationFactory(this.options)}
+                        noDataIndication={"尚未有資料"}
+                        defaultSorted={[{ dataField: "ID", order: "asc" }]}
+                      />
+                    </div>
+                  )}
+                </ToolkitProvider>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div
           className="modal fade"
           id="deleteModal"
