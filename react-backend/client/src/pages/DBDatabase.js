@@ -48,7 +48,7 @@ export default class DBDatabase extends Component {
     });
   }
 
-  render() {
+  database() {
     return (
       <div className="col-md-2" style={{ marginTop: 10 }}>
         <BootstrapTable
@@ -71,5 +71,9 @@ export default class DBDatabase extends Component {
         />
       </div>
     );
+  }
+
+  render() {
+    return this.database();
   }
 }

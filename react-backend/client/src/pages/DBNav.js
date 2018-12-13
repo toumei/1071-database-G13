@@ -136,7 +136,7 @@ export default class DBNav extends Component {
     ]
   };
 
-  render() {
+  nav() {
     const { SearchBar } = Search;
     return (
       <div>
@@ -363,5 +363,9 @@ export default class DBNav extends Component {
         </div>
       </div>
     );
+  }
+
+  render() {
+    return this.nav();
   }
 }

@@ -12,7 +12,7 @@ export default class DBCtrl extends Component {
     this.setState({ table: table });
   }
 
-  render() {
+  ctrl() {
     return (
       <div className="container-fluid">
         <div className="row">
@@ -24,5 +24,9 @@ export default class DBCtrl extends Component {
         </div>
       </div>
     );
+  }
+
+  render() {
+    return this.ctrl();
   }
 }

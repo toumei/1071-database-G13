@@ -202,7 +202,7 @@ export default class DBTable extends Component {
     return { async: true };
   }
 
-  render() {
+  table() {
     if (this.state.columns.length > 0) {
       const { SearchBar } = Search;
       const beforeSaveCell = this.beforeSaveCell;
@@ -248,5 +248,9 @@ export default class DBTable extends Component {
       );
     }
     return null;
+  }
+
+  render() {
+    return this.table();
   }
 }
