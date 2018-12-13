@@ -2,7 +2,7 @@ import React from "react";
 
 const customTotal = (from, to, size) => (
   <span className="react-bootstrap-table-pagination-total">
-    第 {from} 筆到 {to} 筆資料 (共 {size} 筆資料)
+    第 {from} 筆到第 {to} 筆資料 (共 {size} 筆資料)
   </span>
 );
 

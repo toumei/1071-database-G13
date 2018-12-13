@@ -48,7 +48,8 @@ export function getColumnList(db) {
         headerAlign: "center",
         align: "center",
         headerStyle: {
-          cursor: "pointer"
+          cursor: "pointer",
+          width: "100em"
         }
       });
     });

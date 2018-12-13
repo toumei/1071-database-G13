@@ -148,6 +148,9 @@ export default class DBTable extends Component {
                   mode: "click",
                   beforeSaveCell
                 })}
+                selectRow={{
+                  mode: "checkbox"
+                }}
               />
             </div>
           )}

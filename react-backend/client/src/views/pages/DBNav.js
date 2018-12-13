@@ -4,6 +4,8 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { options } from "../../models/bootstrap.model";
 
+const { SearchBar } = Search;
+
 export default class DBNav extends Component {
   constructor(props) {
     super(props);
@@ -76,9 +78,7 @@ export default class DBNav extends Component {
           align: "center",
           headerStyle: {
             cursor: "pointer",
-            headerStyle: {
-              width: "140px"
-            }
+            width: "100em"
           }
         });
       }
@@ -116,9 +116,8 @@ export default class DBNav extends Component {
   }
 
   add() {
-    const { SearchBar } = Search;
     return (
-      <div className="col-md-2">
+      <div className="col-4 col-md-2">
         <button
           className="btn btn-warning btn-block"
           data-toggle="modal"
@@ -190,29 +189,102 @@ export default class DBNav extends Component {
     );
   }
 
-  edit() {
-    const { SearchBar } = Search;
+  delete() {
     return (
-      <div className="col-md-2">
+      <div className="col-4 col-md-2">
         <button
-          className="btn btn-primary text-light btn-block"
+          className="btn btn-warning btn-block"
           data-toggle="modal"
-          data-target="#editModal"
+          data-target="#deleteModal"
         >
-          <i className="fas fa-plus" /> 編輯紀錄
+          <i className="fas fa-plus" /> 刪除
         </button>
         <div
           className="modal fade"
-          id="editModal"
+          id="deleteModal"
           tabIndex="-1"
           role="dialog"
-          aria-labelledby="editModalLabel"
+          aria-labelledby="deleteModalLabel"
           aria-hidden="true"
         >
           <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="editModalLabel">
+                <h5 className="modal-title" id="deleteModalLabel">
+                  刪除
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <ToolkitProvider
+                  keyField={"ID"}
+                  data={this.state.delete}
+                  columns={this.state.columns}
+                  search
+                >
+                  {props => (
+                    <div>
+                      <SearchBar
+                        {...props.searchProps}
+                        placeholder="搜尋。。。"
+                      />
+                      <BootstrapTable
+                        {...props.baseProps}
+                        striped
+                        hover
+                        pagination={paginationFactory(options)}
+                        noDataIndication={"尚未有資料"}
+                        defaultSorted={[{ dataField: "ID", order: "asc" }]}
+                      />
+                    </div>
+                  )}
+                </ToolkitProvider>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  editRecord() {
+    return (
+      <div className="col-4 col-md-2">
+        <button
+          className="btn btn-primary text-light btn-block"
+          data-toggle="modal"
+          data-target="#editRecordModal"
+        >
+          <i className="fas fa-plus" /> 編輯紀錄
+        </button>
+        <div
+          className="modal fade"
+          id="editRecordModal"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="editRecordModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="editRecordModalLabel">
                   編輯紀錄
                 </h5>
                 <button
@@ -265,29 +337,28 @@ export default class DBNav extends Component {
     );
   }
 
-  delete() {
-    const { SearchBar } = Search;
+  deleteRecord() {
     return (
-      <div className="col-md-2">
+      <div className="col-4 col-md-2">
         <button
           className="btn btn-warning btn-block"
           data-toggle="modal"
-          data-target="#deleteModal"
+          data-target="#deleteRecordModal"
         >
           <i className="fas fa-plus" /> 刪除紀錄
         </button>
         <div
           className="modal fade"
-          id="deleteModal"
+          id="deleteRecordModal"
           tabIndex="-1"
           role="dialog"
-          aria-labelledby="deleteModalLabel"
+          aria-labelledby="deleteRecordModalLabel"
           aria-hidden="true"
         >
           <div className="modal-dialog modal-lg" role="document">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title" id="deleteModalLabel">
+                <h5 className="modal-title" id="deleteRecordModalLabel">
                   刪除紀錄
                 </h5>
                 <button
@@ -342,10 +413,75 @@ export default class DBNav extends Component {
 
   update() {
     return (
-      <div className="col-md-2">
-        <button className="btn btn-warning btn-block">
-          <i className="fas fa-plus" /> 確認修改
+      <div className="col-4 col-md-2">
+        <button
+          className="btn btn-warning btn-block"
+          data-toggle="modal"
+          data-target="#updateModal"
+        >
+          <i className="fas fa-plus" /> 上傳
         </button>
+
+        <div
+          className="modal fade"
+          id="updateModal"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="updateModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="updateModalLabel">
+                  上傳
+                </h5>
+                <button
+                  type="button"
+                  className="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <ToolkitProvider
+                  keyField={"ID"}
+                  data={this.state.delete}
+                  columns={this.state.columns}
+                  search
+                >
+                  {props => (
+                    <div>
+                      <SearchBar
+                        {...props.searchProps}
+                        placeholder="搜尋。。。"
+                      />
+                      <BootstrapTable
+                        {...props.baseProps}
+                        striped
+                        hover
+                        pagination={paginationFactory(options)}
+                        noDataIndication={"尚未有資料"}
+                        defaultSorted={[{ dataField: "ID", order: "asc" }]}
+                      />
+                    </div>
+                  )}
+                </ToolkitProvider>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -354,13 +490,12 @@ export default class DBNav extends Component {
     return (
       <div>
         <section className="bg-light py-1">
-          <div className="container">
-            <div className="row">
-              {this.add()}
-              {this.edit()}
-              {this.delete()}
-              {this.update()}
-            </div>
+          <div className="row">
+            {this.add()}
+            {this.delete()}
+            {this.editRecord()}
+            {this.deleteRecord()}
+            {this.update()}
           </div>
         </section>
       </div>
