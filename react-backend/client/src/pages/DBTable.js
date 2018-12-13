@@ -21,6 +21,13 @@ class DBTable extends Component {
     };
   }
 
+  handleRevert(data) {
+    this.setState({
+      delete: this.state.delete.filter((x, i) => x !== data),
+      data: [...this.state.data, data]
+    });
+  }
+
   async componentDidMount() {
     // window.onbeforeunload = function(e) {
     //   e = e || window.event;
@@ -49,27 +56,28 @@ class DBTable extends Component {
   async componentWillUnmount() {
     // window.onbeforeunload = undefined;
   }
+
   add(id, studentID, name) {
     this.state.data.push({ ID: id, studentID: studentID, name: name });
     this.setState({ data: this.state.data });
   }
 
   edit(row) {
-    var rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
-    if (rs) {
-      this.state.data.filter((x, i) => {
-        if (x === row) {
-          var data = this.state.data;
-          data[i].name = x.name = 2;
-          this.setState({ data: data });
-          axios.post("dbCtrl/update", {
-            table: this.state.table,
-            data: x
-          });
-        }
-        return true;
-      });
-    }
+    // var rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
+    // if (rs) {
+    //   this.state.data.filter((x, i) => {
+    //     if (x === row) {
+    //       var data = this.state.data;
+    //       data[i].name = x.name = 2;
+    //       this.setState({ data: data });
+    //       axios.post("dbCtrl/update", {
+    //         table: this.state.table,
+    //         data: x
+    //       });
+    //     }
+    //     return true;
+    //   });
+    // }
   }
 
   delete(row) {
@@ -220,6 +228,7 @@ class DBTable extends Component {
                 delete={this.state.delete}
                 beforeEdit={this.state.beforeEdit}
                 afterEdit={this.state.afterEdit}
+                handleRevert={data => this.handleRevert(data)}
               />
               <SearchBar {...props.searchProps} placeholder="搜尋。。。" />
               <BootstrapTable

@@ -53,6 +53,7 @@ class DBNav extends Component {
               type="button"
               name="revert"
               className="btn btn-warning btn-sm"
+              onClick={e => this.revert(row)}
             >
               還原
             </button>
@@ -70,6 +71,13 @@ class DBNav extends Component {
       delete: props.delete,
       columns: columns
     };
+  }
+
+  revert(row) {
+    this.setState({
+      delete: this.state.delete.filter((x, i) => x !== row)
+    });
+    this.props.handleRevert(row);
   }
 
   async componentWillReceiveProps(nextProps) {
