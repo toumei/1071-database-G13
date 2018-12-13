@@ -3,9 +3,9 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import cellEditFactory from "react-bootstrap-table2-editor";
-import axios from "axios";
-import Crypt from "../models/crypt.model";
 import DBNav from "./DBNav";
+import { options } from "../models/bootstrap.model";
+import { getColumnList, getList } from "../models/axios.model";
 
 export default class DBTable extends Component {
   constructor(props) {
@@ -35,8 +35,8 @@ export default class DBTable extends Component {
     //   }
     //   return "close";
     // };
-    await this.getColumnList();
-    await this.getList();
+    await getColumnList(this);
+    await getList(this);
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -47,8 +47,8 @@ export default class DBTable extends Component {
 
   async componentDidUpdate(prevProps, prevState) {
     if (prevProps.table !== this.state.table) {
-      await this.getColumnList();
-      await this.getList();
+      await getColumnList(this);
+      await getList(this);
     }
   }
 
@@ -89,107 +89,6 @@ export default class DBTable extends Component {
       delete: [...this.state.delete, row]
     });
   }
-
-  async getColumnList() {
-    await axios
-      .post("dbCtrl/ColumnList?table=" + this.state.table)
-      .then(response => {
-        let columns = [];
-        Crypt.decrypt(response.data).forEach(element => {
-          columns.push({
-            dataField: element["COLUMN_NAME"],
-            text: element["COLUMN_COMMENT"],
-            sort: true,
-            sortCaret: (order, column) => {
-              if (!order) return <span>&nbsp;&nbsp;↑↓</span>;
-              else if (order === "asc")
-                return (
-                  <span>
-                    &nbsp;&nbsp;<font color="red">↑</font>↓
-                  </span>
-                );
-              else if (order === "desc")
-                return (
-                  <span>
-                    &nbsp;&nbsp;↑<font color="red">↓</font>
-                  </span>
-                );
-              return null;
-            },
-            headerAlign: "center",
-            align: "center",
-            headerStyle: {
-              cursor: "pointer"
-            }
-          });
-        });
-        columns.push({
-          dataField: "action",
-          isDummyField: true,
-          text: "操作",
-          formatter: (cell, row) => {
-            return (
-              <div className="btn-group">
-                <button
-                  type="button"
-                  name="delete"
-                  className="btn btn-warning btn-sm"
-                  onClick={e => this.delete(row)}
-                >
-                  刪除
-                </button>
-              </div>
-            );
-          },
-          headerAlign: "center",
-          align: "center",
-          editable: false
-        });
-        this.setState({
-          columns: columns
-        });
-      });
-  }
-
-  async getList() {
-    await axios.post("dbCtrl/List?table=" + this.state.table).then(response => {
-      this.setState({
-        data: Crypt.decrypt(response.data)
-      });
-    });
-  }
-
-  customTotal = (from, to, size) => (
-    <span className="react-bootstrap-table-pagination-total">
-      第 {from} 筆到 {to} 筆資料 (共 {size} 筆資料)
-    </span>
-  );
-
-  options = {
-    paginationSize: 10,
-    pageStartIndex: 1,
-    alwaysShowAllBtns: true,
-    hidePageListOnlyOnePage: true,
-    firstPageText: "<<",
-    prePageText: "<",
-    nextPageText: ">",
-    lastPageText: ">>",
-    nextPageTitle: "首頁",
-    prePageTitle: "上一頁",
-    firstPageTitle: "下一頁",
-    lastPageTitle: "尾頁",
-    showTotal: true,
-    paginationTotalRenderer: this.customTotal,
-    sizePerPageList: [
-      { text: "5", value: 5 },
-      { text: "10", value: 10 },
-      { text: "15", value: 15 },
-      { text: "20", value: 20 },
-      { text: "25", value: 25 },
-      { text: "50", value: 50 },
-      { text: "100", value: 100 }
-    ]
-  };
 
   beforeSaveCell(oldValue, newValue, row, column, done) {
     setTimeout(() => {
@@ -234,7 +133,7 @@ export default class DBTable extends Component {
                 {...props.baseProps}
                 striped
                 hover
-                pagination={paginationFactory(this.options)}
+                pagination={paginationFactory(options)}
                 noDataIndication={"尚未有資料"}
                 defaultSorted={[{ dataField: "ID", order: "asc" }]}
                 cellEdit={cellEditFactory({

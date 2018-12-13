@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
-import axios from "axios";
-import Crypt from "../models/crypt.model";
+import { getTableList } from "../models/axios.model";
 
 export default class DBDatabase extends Component {
   constructor(props) {
@@ -28,24 +27,7 @@ export default class DBDatabase extends Component {
   }
 
   async componentDidMount() {
-    await this.getTableList();
-  }
-
-  async getTableList() {
-    await axios.post("dbCtrl/TableList").then(response => {
-      const decryptedJSON = Crypt.decrypt(response.data);
-      let data = [];
-      decryptedJSON.forEach(element => {
-        data.push({
-          TABLE_COMMENT: element["TABLE_COMMENT"],
-          TABLE_NAME: element["TABLE_NAME"],
-          align: "center"
-        });
-      });
-      this.setState({
-        data: data
-      });
-    });
+    await getTableList(this);
   }
 
   database() {
