@@ -30,6 +30,10 @@ export default class DBDatabase extends Component {
     await getTableList(this);
   }
 
+  render() {
+    return this.database();
+  }
+
   database() {
     return (
       <div className="col-md-2" style={{ marginTop: 10 }}>
@@ -46,16 +50,14 @@ export default class DBDatabase extends Component {
             bgColor: "#c8e6c9",
             onSelect: (row, isSelect, rowIndex, e) => {
               this.props.handleAdd(row.TABLE_NAME);
-              this.setState({ selected: row.TABLE_NAME });
+              this.setState({
+                selected: row.TABLE_NAME
+              });
               return false;
             }
           }}
         />
       </div>
     );
-  }
-
-  render() {
-    return this.database();
   }
 }

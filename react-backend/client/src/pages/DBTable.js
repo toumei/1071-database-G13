@@ -20,13 +20,6 @@ export default class DBTable extends Component {
     };
   }
 
-  handleRevert(data) {
-    this.setState({
-      delete: this.state.delete.filter((x, i) => x !== data),
-      data: [...this.state.data, data]
-    });
-  }
-
   async componentDidMount() {
     // window.onbeforeunload = function(e) {
     //   e = e || window.event;
@@ -56,8 +49,23 @@ export default class DBTable extends Component {
     // window.onbeforeunload = undefined;
   }
 
+  render() {
+    return this.table();
+  }
+
+  handleRevert(data) {
+    this.setState({
+      delete: this.state.delete.filter((x, i) => x !== data),
+      data: [...this.state.data, data]
+    });
+  }
+
   add(id, studentID, name) {
-    this.state.data.push({ ID: id, studentID: studentID, name: name });
+    this.state.data.push({
+      ID: id,
+      studentID: studentID,
+      name: name
+    });
     this.setState({ data: this.state.data });
   }
 
@@ -147,9 +155,5 @@ export default class DBTable extends Component {
       );
     }
     return null;
-  }
-
-  render() {
-    return this.table();
   }
 }

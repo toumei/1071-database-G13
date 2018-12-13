@@ -18,6 +18,34 @@ export default class DBNav extends Component {
     };
   }
 
+  async componentWillReceiveProps(nextProps) {
+    if (nextProps.navColumns !== this.props.navColumns) {
+      let columns = [];
+      this.setNavColumns(nextProps, columns);
+      this.setState({
+        navColumns: nextProps.navColumns,
+        columns: columns
+      });
+    }
+    if (nextProps.delete !== this.props.delete) {
+      this.setState({ delete: nextProps.delete });
+    }
+    if (nextProps.beforeEdit !== this.props.beforeEdit) {
+      this.setState({
+        beforeEdit: nextProps.beforeEdit
+      });
+    }
+    if (nextProps.afterEdit !== this.props.afterEdit) {
+      this.setState({
+        afterEdit: nextProps.afterEdit
+      });
+    }
+  }
+
+  render() {
+    return this.nav();
+  }
+
   setNavColumns(props, columns) {
     const navColumns = JSON.parse(props.navColumns);
     navColumns.forEach((element, i) => {
@@ -31,13 +59,15 @@ export default class DBNav extends Component {
             else if (order === "asc")
               return (
                 <span>
-                  &nbsp;&nbsp;<font color="red">↑</font>↓
+                  &nbsp;&nbsp;
+                  <font color="red">↑</font>↓
                 </span>
               );
             else if (order === "desc")
               return (
                 <span>
-                  &nbsp;&nbsp;↑<font color="red">↓</font>
+                  &nbsp;&nbsp;↑
+                  <font color="red">↓</font>
                 </span>
               );
             return null;
@@ -83,26 +113,6 @@ export default class DBNav extends Component {
       delete: this.state.delete.filter((x, i) => x !== row)
     });
     this.props.handleRevert(row);
-  }
-
-  async componentWillReceiveProps(nextProps) {
-    if (nextProps.navColumns !== this.props.navColumns) {
-      let columns = [];
-      this.setNavColumns(nextProps, columns);
-      this.setState({
-        navColumns: nextProps.navColumns,
-        columns: columns
-      });
-    }
-    if (nextProps.delete !== this.props.delete) {
-      this.setState({ delete: nextProps.delete });
-    }
-    if (nextProps.beforeEdit !== this.props.beforeEdit) {
-      this.setState({ beforeEdit: nextProps.beforeEdit });
-    }
-    if (nextProps.afterEdit !== this.props.afterEdit) {
-      this.setState({ afterEdit: nextProps.afterEdit });
-    }
   }
 
   nav() {
@@ -332,9 +342,5 @@ export default class DBNav extends Component {
         </div>
       </div>
     );
-  }
-
-  render() {
-    return this.nav();
   }
 }

@@ -8,6 +8,9 @@ export default class DBCtrl extends Component {
     this.state = { table: "boarder" };
   }
 
+  render() {
+    return this.ctrl();
+  }
   handleAdd(table) {
     this.setState({ table: table });
   }
@@ -24,9 +27,5 @@ export default class DBCtrl extends Component {
         </div>
       </div>
     );
-  }
-
-  render() {
-    return this.ctrl();
   }
 }
