@@ -2,6 +2,7 @@
 # [寫 code & 上傳 github 注意事項](https://github.com/toumei/1071-database-G13/wiki/Advance-preparation)
 * **有任何參考資料請放上來，這樣比較好協助了解程式碼和報告**
 * **安裝擴充插件，以便於後續編程**
+* **請盡量用ES6語法，少用var(全域變數)改用let(區域變數)、const(常數變數)**
 ---
 ### 日程：
 * 2019年01月05日 (六) 繳交報告
