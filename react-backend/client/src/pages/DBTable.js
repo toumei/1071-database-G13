@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
@@ -8,7 +7,7 @@ import axios from "axios";
 import Crypt from "../models/crypt.model";
 import DBNav from "./DBNav";
 
-class DBTable extends Component {
+export default class DBTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,11 +62,11 @@ class DBTable extends Component {
   }
 
   edit(row) {
-    // var rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
+    // const rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
     // if (rs) {
     //   this.state.data.filter((x, i) => {
     //     if (x === row) {
-    //       var data = this.state.data;
+    //       const data = this.state.data;
     //       data[i].name = x.name = 2;
     //       this.setState({ data: data });
     //       axios.post("dbCtrl/update", {
@@ -95,7 +94,7 @@ class DBTable extends Component {
     await axios
       .post("dbCtrl/ColumnList?table=" + this.state.table)
       .then(response => {
-        var columns = [];
+        let columns = [];
         Crypt.decrypt(response.data).forEach(element => {
           columns.push({
             dataField: element["COLUMN_NAME"],
@@ -251,5 +250,3 @@ class DBTable extends Component {
     return null;
   }
 }
-
-export default DBTable;

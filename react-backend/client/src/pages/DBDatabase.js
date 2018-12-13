@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-// import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
 import axios from "axios";
 import Crypt from "../models/crypt.model";
 
-class DBDatabase extends Component {
+export default class DBDatabase extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,8 +33,8 @@ class DBDatabase extends Component {
 
   async getTableList() {
     await axios.post("dbCtrl/TableList").then(response => {
-      var decryptedJSON = Crypt.decrypt(response.data);
-      var data = [];
+      const decryptedJSON = Crypt.decrypt(response.data);
+      let data = [];
       decryptedJSON.forEach(element => {
         data.push({
           TABLE_COMMENT: element["TABLE_COMMENT"],
@@ -74,5 +73,3 @@ class DBDatabase extends Component {
     );
   }
 }
-
-export default DBDatabase;

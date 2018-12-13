@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import DBDatabase from "./DBDatabase";
 import DBTable from "./DBTable";
 
-class DBCtrl extends Component {
+export default class DBCtrl extends Component {
   constructor(props) {
     super(props);
     this.state = { table: "boarder" };
@@ -26,5 +26,3 @@ class DBCtrl extends Component {
     );
   }
 }
-
-export default DBCtrl;

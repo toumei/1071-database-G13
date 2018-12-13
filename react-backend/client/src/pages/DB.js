@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import DBCtrl from "./DBCtrl";
 import { Link } from "react-router-dom";
 
-class DB extends Component {
+export default class DB extends Component {
   render() {
     return (
       <div>
         <section className="bg-light">
           <ul className="nav nav-tabs justify-content-center">
             <li className="nav-item">
-              <Link className="nav-link" to="">
+              <Link className="nav-link" to="\analysis">
                 分析表
               </Link>
             </li>
@@ -30,5 +30,3 @@ class DB extends Component {
     );
   }
 }
-
-export default DB;

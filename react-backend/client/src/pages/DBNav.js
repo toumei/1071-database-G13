@@ -3,11 +3,22 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
-class DBNav extends Component {
+export default class DBNav extends Component {
   constructor(props) {
     super(props);
-    var columns = [];
-    var navColumns = JSON.parse(props.navColumns);
+    let columns = [];
+    this.setNavColumns(props, columns);
+    this.state = {
+      navColumns: props.navColumns,
+      beforeEdit: props.beforeEdit,
+      afterEdit: props.afterEdit,
+      delete: props.delete,
+      columns: columns
+    };
+  }
+
+  setNavColumns(props, columns) {
+    const navColumns = JSON.parse(props.navColumns);
     navColumns.forEach((element, i) => {
       if (i !== navColumns.length - 1) {
         columns.push({
@@ -64,13 +75,6 @@ class DBNav extends Component {
       align: "center",
       editable: false
     });
-    this.state = {
-      navColumns: props.navColumns,
-      beforeEdit: props.beforeEdit,
-      afterEdit: props.afterEdit,
-      delete: props.delete,
-      columns: columns
-    };
   }
 
   revert(row) {
@@ -82,63 +86,8 @@ class DBNav extends Component {
 
   async componentWillReceiveProps(nextProps) {
     if (nextProps.navColumns !== this.props.navColumns) {
-      var columns = [];
-      var navColumns = JSON.parse(nextProps.navColumns);
-      navColumns.forEach((element, i) => {
-        if (i !== navColumns.length - 1) {
-          columns.push({
-            dataField: element["COLUMN_NAME"],
-            text: element["COLUMN_COMMENT"],
-            sort: true,
-            sortCaret: (order, column) => {
-              if (!order) return <span>&nbsp;&nbsp;↑↓</span>;
-              else if (order === "asc")
-                return (
-                  <span>
-                    &nbsp;&nbsp;<font color="red">↑</font>↓
-                  </span>
-                );
-              else if (order === "desc")
-                return (
-                  <span>
-                    &nbsp;&nbsp;↑<font color="red">↓</font>
-                  </span>
-                );
-              return null;
-            },
-            headerAlign: "center",
-            align: "center",
-            headerStyle: {
-              cursor: "pointer",
-              headerStyle: {
-                width: "140px"
-              }
-            }
-          });
-        }
-      });
-
-      columns.push({
-        dataField: "action",
-        isDummyField: true,
-        text: "操作",
-        formatter: (cell, row) => {
-          return (
-            <div className="btn-group">
-              <button
-                type="button"
-                name="revert"
-                className="btn btn-warning btn-sm"
-              >
-                還原
-              </button>
-            </div>
-          );
-        },
-        headerAlign: "center",
-        align: "center",
-        editable: false
-      });
+      let columns = [];
+      this.setNavColumns(nextProps, columns);
       this.setState({
         navColumns: nextProps.navColumns,
         columns: columns
@@ -416,5 +365,3 @@ class DBNav extends Component {
     );
   }
 }
-
-export default DBNav;

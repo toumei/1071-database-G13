@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
@@ -15,7 +14,7 @@ function nameFormatter(column, colIndex, { sortElement, filterElement }) {
   );
 }
 
-class Products extends Component {
+export default class Products extends Component {
   state = {
     products: [],
     columns: [
@@ -88,5 +87,3 @@ class Products extends Component {
     );
   }
 }
-
-export default Products;
