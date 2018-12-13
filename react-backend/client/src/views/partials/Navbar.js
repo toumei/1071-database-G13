@@ -1,21 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Home = () => (
-  <div>
-    <Link className="navbar-brand" to="/">
-      首頁
-    </Link>
-    <button
-      className="navbar-toggler"
-      data-toggle="collapse"
-      data-target="#navbarNav"
-    >
-      <span className="navbar-toggler-icon" />
-    </button>
-  </div>
-);
-
 const NavItem = () => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
@@ -71,7 +56,16 @@ const NavItem = () => (
 export const Navbar = () => (
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
     <div className="container">
-      <Home />
+      <Link className="navbar-brand" to="/">
+        首頁
+      </Link>
+      <button
+        className="navbar-toggler"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
       <NavItem />
     </div>
   </nav>

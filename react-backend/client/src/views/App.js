@@ -24,7 +24,7 @@ export default class App extends Component {
   constructor() {
     super();
 
-    this.state = { endpoint: "http://localhost:3000" };
+    this.state = { endpoint: "http://192.168.42.212:3000" };
   }
 
   send = () => {

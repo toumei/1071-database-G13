@@ -4,8 +4,8 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import DBNav from "./DBNav";
-import { options } from "../models/bootstrap.model";
-import { getColumnList, getList } from "../models/axios.model";
+import { options } from "../../models/bootstrap.model";
+import { getColumnList, getList } from "../../models/axios.model";
 
 export default class DBTable extends Component {
   constructor(props) {
