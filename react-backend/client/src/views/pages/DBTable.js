@@ -5,7 +5,7 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import DBNav from "./DBNav";
 import { options } from "../../models/bootstrap.model";
-import { getColumnList, getList } from "../../models/axios.model";
+import { getColumnList, getList } from "../../controllers/axios.controller";
 
 export default class DBTable extends Component {
   constructor(props) {

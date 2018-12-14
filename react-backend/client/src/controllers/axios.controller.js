@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import Crypt from "./crypt.model";
+import Crypt from "../models/crypt.model";
 
 export default function() {}
 

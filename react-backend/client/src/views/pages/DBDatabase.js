@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import filterFactory from "react-bootstrap-table2-filter";
-import { getTableList } from "../../models/axios.model";
+import { getTableList } from "../../controllers/axios.controller";
 
 export default class DBDatabase extends Component {
   constructor(props) {
