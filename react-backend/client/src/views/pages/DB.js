@@ -7,12 +7,12 @@ export const DB = () => (
     <section className="bg-light">
       <ul className="nav nav-tabs justify-content-center">
         <li className="nav-item">
-          <Link className="nav-link" to="\analysis">
+          <Link className="nav-link" to="/analysis">
             分析表
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link active" to="\database">
+          <Link className="nav-link active" to="/database">
             表格編輯
           </Link>
         </li>

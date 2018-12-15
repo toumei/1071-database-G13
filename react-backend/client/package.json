@@ -15,9 +15,11 @@
     "react-bootstrap-table2-paginator": "^1.0.4",
     "react-bootstrap-table2-toolkit": "^1.1.1",
     "react-dom": "^16.6.3",
+    "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.1",
+    "redux": "^4.0.1",
     "socket.io-client": "^2.2.0"
   },
   "scripts": {
@@ -26,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://192.168.42.212:3000",
+  "proxy": "http://localhost:3000",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -37,6 +39,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "html-loader": "^0.5.5"
+    "html-loader": "^0.5.5",
+    "redux-devtools": "^3.4.2"
   }
 }

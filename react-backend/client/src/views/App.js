@@ -4,19 +4,17 @@ import { Header } from "./partials/Header";
 import { DB } from "./pages/DB";
 import Products from "./pages/Products";
 import { Login } from "./pages/Login";
-import { Switch, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 
 const index = () => <div />;
 
 const Main = () => (
   <main>
-    <Switch>
-      <Route exact path="/" component={index} />
-      <Route path="/database" component={DB} />
-      <Route path="/products" component={Products} />
-      <Route path="/login" component={Login} />
-    </Switch>
+    <Route path="/" component={index} />
+    <Route path="/database" component={DB} />
+    <Route path="/products" component={Products} />
+    <Route path="/login" component={Login} />
   </main>
 );
 

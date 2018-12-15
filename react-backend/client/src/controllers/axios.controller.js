@@ -29,27 +29,11 @@ export function getColumnList(db) {
         dataField: element["COLUMN_NAME"],
         text: element["COLUMN_COMMENT"],
         sort: true,
-        sortCaret: (order, column) => {
-          if (!order) return <span>&nbsp;&nbsp;↑↓</span>;
-          else if (order === "asc")
-            return (
-              <span>
-                &nbsp;&nbsp;<font color="red">↑</font>↓
-              </span>
-            );
-          else if (order === "desc")
-            return (
-              <span>
-                &nbsp;&nbsp;↑<font color="red">↓</font>
-              </span>
-            );
-          return null;
-        },
         headerAlign: "center",
         align: "center",
         headerStyle: {
           cursor: "pointer",
-          width: "100em"
+          width: element["COLUMN_NAME"] === "ID" ? "" : "100em"
         }
       });
     });
@@ -60,6 +44,20 @@ export function getColumnList(db) {
       formatter: (cell, row) => {
         return (
           <div className="btn-group">
+            <button
+              type="button"
+              name="view"
+              className="btn btn-warning btn-sm"
+            >
+              查看
+            </button>
+            <button
+              type="button"
+              name="edit"
+              className="btn btn-warning btn-sm"
+            >
+              編輯
+            </button>
             <button
               type="button"
               name="delete"

@@ -4,7 +4,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import DBNav from "./DBNav";
-import { options } from "../../models/bootstrap.model";
+import { noData, options } from "../../models/bootstrap.model";
 import { getColumnList, getList } from "../../controllers/axios.controller";
 
 export default class DBTable extends Component {
@@ -121,7 +121,7 @@ export default class DBTable extends Component {
           search
         >
           {props => (
-            <div className="col-md-10" style={{ marginTop: 10 }}>
+            <div id="a" className="col-md-10" style={{ marginTop: 10 }}>
               <DBNav
                 navColumns={JSON.stringify(
                   this.state.columns.map((x, i) => {
@@ -136,21 +136,22 @@ export default class DBTable extends Component {
                 afterEdit={this.state.afterEdit}
                 handleRevert={data => this.handleRevert(data)}
               />
-              <SearchBar {...props.searchProps} placeholder="搜尋。。。" />
+              <SearchBar
+                {...props.searchProps}
+                placeholder="搜尋關鍵字。。。"
+              />
               <BootstrapTable
                 {...props.baseProps}
                 striped
                 hover
                 pagination={paginationFactory(options)}
-                noDataIndication={"尚未有資料"}
+                noDataIndication={noData}
                 defaultSorted={[{ dataField: "ID", order: "asc" }]}
                 cellEdit={cellEditFactory({
                   mode: "click",
                   beforeSaveCell
                 })}
-                selectRow={{
-                  mode: "checkbox"
-                }}
+                selectRow={{ mode: "checkbox" }}
               />
             </div>
           )}

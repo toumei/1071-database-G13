@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import { options } from "../../models/bootstrap.model";
+import { options, noData } from "../../models/bootstrap.model";
 
 const { SearchBar } = Search;
 
@@ -78,7 +78,7 @@ export default class DBNav extends Component {
           align: "center",
           headerStyle: {
             cursor: "pointer",
-            width: "100em"
+            width: element["COLUMN_NAME"] === "ID" ? "" : "100em"
           }
         });
       }
@@ -166,7 +166,7 @@ export default class DBNav extends Component {
                         striped
                         hover
                         pagination={paginationFactory(options)}
-                        noDataIndication={"尚未有資料"}
+                        noDataIndication={noData}
                         defaultSorted={[{ dataField: "ID", order: "asc" }]}
                       />
                     </div>
@@ -240,7 +240,7 @@ export default class DBNav extends Component {
                         striped
                         hover
                         pagination={paginationFactory(options)}
-                        noDataIndication={"尚未有資料"}
+                        noDataIndication={noData}
                         defaultSorted={[{ dataField: "ID", order: "asc" }]}
                       />
                     </div>
@@ -314,7 +314,7 @@ export default class DBNav extends Component {
                         striped
                         hover
                         pagination={paginationFactory(options)}
-                        noDataIndication={"尚未有資料"}
+                        noDataIndication={noData}
                         defaultSorted={[{ dataField: "ID", order: "asc" }]}
                       />
                     </div>
@@ -388,7 +388,7 @@ export default class DBNav extends Component {
                         striped
                         hover
                         pagination={paginationFactory(options)}
-                        noDataIndication={"尚未有資料"}
+                        noDataIndication={noData}
                         defaultSorted={[{ dataField: "ID", order: "asc" }]}
                       />
                     </div>
@@ -463,7 +463,7 @@ export default class DBNav extends Component {
                         striped
                         hover
                         pagination={paginationFactory(options)}
-                        noDataIndication={"尚未有資料"}
+                        noDataIndication={noData}
                         defaultSorted={[{ dataField: "ID", order: "asc" }]}
                       />
                     </div>
