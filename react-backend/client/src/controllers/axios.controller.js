@@ -51,7 +51,8 @@ export function getColumnList(db) {
             cursor: "pointer",
             width: element["COLUMN_NAME"] === "ID" ? "" : "100rem",
             minWidth: element["COLUMN_NAME"] === "ID" ? "" : "10rem"
-          }
+          },
+          style: { cursor: "default" }
         });
       });
       columns.push({
@@ -60,14 +61,30 @@ export function getColumnList(db) {
         text: "操作",
         formatter: (cell, row) => {
           return (
-            <button
-              type="button"
-              name="delete"
-              className="btn btn-warning btn-sm"
-              onClick={e => db.delete(row)}
-            >
-              刪除
-            </button>
+            <div className="btn-group">
+              <button
+                type="button"
+                name="delete"
+                className="btn btn-warning btn-sm"
+              >
+                查看
+              </button>
+              <button
+                type="button"
+                name="delete"
+                className="btn btn-warning btn-sm"
+              >
+                編輯
+              </button>
+              <button
+                type="button"
+                name="delete"
+                className="btn btn-warning btn-sm"
+                onClick={e => db.delete(row)}
+              >
+                刪除
+              </button>
+            </div>
           );
         },
         headerAlign: "center",

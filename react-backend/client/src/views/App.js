@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Navbar } from "./partials/Navbar";
-import { Header } from "./partials/Header";
-import { DB } from "./pages/DB";
-import Products from "./pages/Products";
-import { Login } from "./pages/Login";
+import { Navbar } from "./Navbar";
+import { Header } from "./Header";
+import { DB } from "./database/DB";
+import Products from "./products/Products";
+import { Login } from "./login/Login";
 import { Route } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 

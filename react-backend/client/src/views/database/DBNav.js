@@ -289,7 +289,7 @@ export default class DBNav extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="editRecordModalLabel">
-                  編輯紀錄
+                  紀錄
                 </h5>
                 <button
                   type="button"
