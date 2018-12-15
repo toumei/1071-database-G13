@@ -26,8 +26,8 @@ export default class DBDatabase extends Component {
     };
   }
 
-  async componentDidMount() {
-    await getTableList(this);
+  componentDidMount() {
+    getTableList(this);
   }
 
   render() {

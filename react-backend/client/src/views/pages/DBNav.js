@@ -20,7 +20,7 @@ export default class DBNav extends Component {
     };
   }
 
-  async componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.navColumns !== this.props.navColumns) {
       let columns = [];
       this.setNavColumns(nextProps, columns);
@@ -78,7 +78,8 @@ export default class DBNav extends Component {
           align: "center",
           headerStyle: {
             cursor: "pointer",
-            width: element["COLUMN_NAME"] === "ID" ? "" : "100em"
+            width: element["COLUMN_NAME"] === "ID" ? "" : "100rem",
+            minWidth: element["COLUMN_NAME"] === "ID" ? "" : "10rem"
           }
         });
       }
@@ -104,7 +105,10 @@ export default class DBNav extends Component {
       },
       headerAlign: "center",
       align: "center",
-      editable: false
+      editable: false,
+      headerStyle: {
+        minWidth: "5rem"
+      }
     });
   }
 
@@ -419,7 +423,7 @@ export default class DBNav extends Component {
           data-toggle="modal"
           data-target="#updateModal"
         >
-          <i className="fas fa-plus" /> 上傳
+          <i className="fas fa-plus" /> 更新
         </button>
 
         <div
@@ -493,9 +497,9 @@ export default class DBNav extends Component {
           <div className="row">
             {this.add()}
             {this.delete()}
+            {this.update()}
             {this.editRecord()}
             {this.deleteRecord()}
-            {this.update()}
           </div>
         </section>
       </div>

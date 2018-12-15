@@ -18,9 +18,10 @@ export default class DBTable extends Component {
       afterEdit: [],
       delete: []
     };
+    getColumnList(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     // window.onbeforeunload = function(e) {
     //   e = e || window.event;
     //   if (e) {
@@ -28,24 +29,23 @@ export default class DBTable extends Component {
     //   }
     //   return "close";
     // };
-    await getColumnList(this);
-    await getList(this);
+    getList(this);
   }
 
-  async componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.table !== this.props.table) {
       this.setState({ table: nextProps.table });
     }
   }
 
-  async componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevProps.table !== this.state.table) {
-      await getColumnList(this);
-      await getList(this);
+      getColumnList(this);
+      getList(this);
     }
   }
 
-  async componentWillUnmount() {
+  componentWillUnmount() {
     // window.onbeforeunload = undefined;
   }
 
@@ -121,7 +121,7 @@ export default class DBTable extends Component {
           search
         >
           {props => (
-            <div id="a" className="col-md-10" style={{ marginTop: 10 }}>
+            <div className="col-md-10" style={{ marginTop: 10 }}>
               <DBNav
                 navColumns={JSON.stringify(
                   this.state.columns.map((x, i) => {

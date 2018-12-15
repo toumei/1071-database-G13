@@ -3,7 +3,7 @@ var aes = "aes-256-cbc";
 var pwd = "ResNetCMMSResNetCMMSResNetCMMS13";
 var iv = "107-database-G13";
 
-module.exports = class Crypto {
+module.exports = class {
   static encrypt(data) {
     var jsonStr = JSON.stringify(data);
     var cipher = crypto.createCipheriv(aes, pwd, iv);
