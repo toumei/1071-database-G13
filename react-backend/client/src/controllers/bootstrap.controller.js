@@ -1,5 +1,4 @@
-import paginationFactory from "react-bootstrap-table2-paginator";
-import { bootstrap, options } from "../models/bootstrap.model";
+import { bootstrap } from "../models/bootstrap.model";
 import cellEditFactory from "react-bootstrap-table2-editor";
 
 export const Bdatabase = db =>
@@ -9,7 +8,6 @@ export const Bdatabase = db =>
       data: db.state.data,
       columns: db.state.columns
     },
-    null,
     {
       selectRow: {
         mode: "radio",
@@ -28,28 +26,28 @@ export const Bdatabase = db =>
   );
 
 export const Bnav = db =>
-  bootstrap(
-    {
-      keyField: "ID",
-      data: db.state.delete,
-      columns: db.state.columns
-    },
-    paginationFactory(options),
-    null
-  );
-
-export const Btable = (baseProps, beforeSaveCell) =>
-  bootstrap(baseProps, paginationFactory(options), {
-    cellEdit: cellEditFactory({
-      mode: "click",
-      beforeSaveCell
-    }),
-    selectRow: { mode: "checkbox" }
+  bootstrap({
+    keyField: "ID",
+    data: db.state.delete,
+    columns: db.state.columns
   });
 
-export const BtableDelete = db =>
+export const Btable = (baseProps, beforeSaveCell) =>
   bootstrap(
-    { keyField: "ID", data: db.state.row, columns: db.state.deleteColumns },
-    null,
-    null
+    baseProps,
+    {
+      cellEdit: cellEditFactory({
+        mode: "click",
+        beforeSaveCell
+      }),
+      selectRow: { mode: "checkbox" }
+    },
+    true
   );
+
+export const BtableDelete = db =>
+  bootstrap({
+    keyField: "ID",
+    data: db.state.row,
+    columns: db.state.deleteColumns
+  });

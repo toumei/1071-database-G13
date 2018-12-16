@@ -1,19 +1,20 @@
 import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
 
-export const bootstrap = (base, pagination, option) => (
+export const bootstrap = (base, option = null, pagination = false) => (
   <BootstrapTable
     {...base}
     striped
     hover
     noDataIndication={noData}
     defaultSorted={[{ dataField: base.keyField, order: "asc" }]}
-    pagination={pagination}
+    pagination={pagination ? paginationFactory(options) : null}
     {...option}
   />
 );
 
-export const noData = () => <div className="text-center">尚未有資料</div>;
+const noData = () => <div className="text-center">尚未有資料</div>;
 
 // const customTotal = (from, to, size) => (
 //   <span className="react-bootstrap-table-pagination-total">

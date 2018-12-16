@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Bnav } from "../../controllers/bootstrap.controller";
+import { navColumns1, navColumns2 } from "../../controllers/state.controller";
 
 export default class DBNav extends Component {
   constructor(props) {
@@ -47,64 +48,11 @@ export default class DBNav extends Component {
     const navColumns = JSON.parse(props.navColumns);
     navColumns.forEach((element, i) => {
       if (i !== navColumns.length - 1) {
-        columns.push({
-          dataField: element["COLUMN_NAME"],
-          text: element["COLUMN_COMMENT"],
-          sort: true,
-          sortCaret: (order, column) => {
-            if (!order) return <span>&nbsp;&nbsp;↑↓</span>;
-            else if (order === "asc")
-              return (
-                <span>
-                  &nbsp;&nbsp;
-                  <font color="red">↑</font>↓
-                </span>
-              );
-            else if (order === "desc")
-              return (
-                <span>
-                  &nbsp;&nbsp;↑
-                  <font color="red">↓</font>
-                </span>
-              );
-            return null;
-          },
-          headerAlign: "center",
-          align: "center",
-          headerStyle: {
-            cursor: "pointer",
-            width: element["COLUMN_NAME"] === "ID" ? "" : "100rem",
-            minWidth: element["COLUMN_NAME"] === "ID" ? "" : "10rem"
-          }
-        });
+        columns.push(navColumns1(element)[0]);
       }
     });
 
-    columns.push({
-      dataField: "action",
-      isDummyField: true,
-      text: "操作",
-      formatter: (cell, row) => {
-        return (
-          <div className="btn-group">
-            <button
-              type="button"
-              name="revert"
-              className="btn btn-warning btn-sm"
-              onClick={e => this.revert(row)}
-            >
-              還原
-            </button>
-          </div>
-        );
-      },
-      headerAlign: "center",
-      align: "center",
-      editable: false,
-      headerStyle: {
-        minWidth: "5rem"
-      }
-    });
+    columns.push(navColumns2(this)[0]);
   }
 
   revert(row) {
