@@ -1,4 +1,17 @@
 import React from "react";
+import BootstrapTable from "react-bootstrap-table-next";
+
+export const bootstrap = (base, pagination, option) => (
+  <BootstrapTable
+    {...base}
+    striped
+    hover
+    noDataIndication={noData}
+    defaultSorted={[{ dataField: base.keyField, order: "asc" }]}
+    pagination={pagination}
+    {...option}
+  />
+);
 
 export const noData = () => <div className="text-center">尚未有資料</div>;
 
