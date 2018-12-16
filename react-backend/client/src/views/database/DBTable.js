@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import cellEditFactory from "react-bootstrap-table2-editor";
 import DBNav from "./DBNav";
-import { noData, options } from "../../models/bootstrap.model";
 import { getColumnList, getList } from "../../controllers/axios.controller";
+import { Btable, BtableDelete } from "../../controllers/bootstrap.controller";
 import axios from "axios";
 
 export default class DBTable extends Component {
@@ -147,19 +144,7 @@ export default class DBTable extends Component {
                 {...props.searchProps}
                 placeholder="搜尋關鍵字。。。"
               />
-              <BootstrapTable
-                {...props.baseProps}
-                striped
-                hover
-                pagination={paginationFactory(options)}
-                noDataIndication={noData}
-                defaultSorted={[{ dataField: "ID", order: "asc" }]}
-                cellEdit={cellEditFactory({
-                  mode: "click",
-                  beforeSaveCell
-                })}
-                selectRow={{ mode: "checkbox" }}
-              />
+              {Btable(props.baseProps, beforeSaveCell)}
               <div
                 className="modal fade"
                 id="delete1Modal"
@@ -183,13 +168,7 @@ export default class DBTable extends Component {
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div className="modal-body">
-                      <BootstrapTable
-                        keyField={"ID"}
-                        data={this.state.row}
-                        columns={this.state.deleteColumns}
-                      />
-                    </div>
+                    <div className="modal-body">{BtableDelete(this)}</div>
                     <div className="modal-footer">
                       <button
                         type="button"

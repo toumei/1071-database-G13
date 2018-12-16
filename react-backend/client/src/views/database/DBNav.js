@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import paginationFactory from "react-bootstrap-table2-paginator";
-import { options, noData } from "../../models/bootstrap.model";
+import { Bnav } from "../../controllers/bootstrap.controller";
 
 export default class DBNav extends Component {
   constructor(props) {
@@ -239,18 +237,7 @@ export default class DBNav extends Component {
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div className="modal-body">
-                <BootstrapTable
-                  keyField={"ID"}
-                  data={this.state.delete}
-                  columns={this.state.columns}
-                  striped
-                  hover
-                  pagination={paginationFactory(options)}
-                  noDataIndication={noData}
-                  defaultSorted={[{ dataField: "ID", order: "asc" }]}
-                />
-              </div>
+              <div className="modal-body">{Bnav(this)}</div>
               <div className="modal-footer">
                 <button
                   type="button"

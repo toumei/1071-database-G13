@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import filterFactory from "react-bootstrap-table2-filter";
 import { getTableList } from "../../controllers/axios.controller";
+import { Bdatabase } from "../../controllers/bootstrap.controller";
 
 export default class DBDatabase extends Component {
   constructor(props) {
@@ -37,26 +36,7 @@ export default class DBDatabase extends Component {
   database() {
     return (
       <div className="col-md-2" style={{ marginTop: 10 }}>
-        <BootstrapTable
-          hover
-          keyField="TABLE_COMMENT"
-          data={this.state.data}
-          columns={this.state.columns}
-          filter={filterFactory()}
-          selectRow={{
-            mode: "radio",
-            clickToSelect: true,
-            hideSelectColumn: true,
-            bgColor: "#c8e6c9",
-            onSelect: (row, isSelect, rowIndex, e) => {
-              this.props.handleAdd(row.TABLE_NAME);
-              this.setState({
-                selected: row.TABLE_NAME
-              });
-              return false;
-            }
-          }}
-        />
+        {Bdatabase(this)}
       </div>
     );
   }
