@@ -11,6 +11,7 @@ export default class DBCtrl extends Component {
   render() {
     return this.ctrl();
   }
+
   handleAdd(table) {
     this.setState({ table: table });
   }

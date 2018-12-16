@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import { options, noData } from "../../models/bootstrap.model";
-
-const { SearchBar } = Search;
 
 export default class DBNav extends Component {
   constructor(props) {
@@ -119,6 +116,36 @@ export default class DBNav extends Component {
     this.props.handleRevert(row);
   }
 
+  addOK() {
+    console.log("a");
+  }
+
+  addColumn() {
+    let column = [];
+    const navColumns = JSON.parse(this.state.navColumns);
+    for (let i = 0; i < navColumns.length - 1; i++) {
+      column.push(
+        <div key={i} className="form-group row">
+          <label
+            htmlFor={navColumns[i].COLUMN_NAME}
+            className="col-sm-2 col-form-label"
+          >
+            {navColumns[i].COLUMN_COMMENT}
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              readOnly={navColumns[i].COLUMN_NAME === "ID" ? "readonly" : ""}
+              className="form-control"
+              id={navColumns[i].COLUMN_NAME}
+            />
+          </div>
+        </div>
+      );
+    }
+    return column;
+  }
+
   add() {
     return (
       <div className="col-4 col-md-2">
@@ -141,7 +168,7 @@ export default class DBNav extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="addModalLabel">
-                  新增
+                  新增資料
                 </h5>
                 <button
                   type="button"
@@ -153,37 +180,23 @@ export default class DBNav extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <ToolkitProvider
-                  keyField={"ID"}
-                  data={this.state.delete}
-                  columns={this.state.columns}
-                  search
-                >
-                  {props => (
-                    <div>
-                      <SearchBar
-                        {...props.searchProps}
-                        placeholder="搜尋。。。"
-                      />
-                      <BootstrapTable
-                        {...props.baseProps}
-                        striped
-                        hover
-                        pagination={paginationFactory(options)}
-                        noDataIndication={noData}
-                        defaultSorted={[{ dataField: "ID", order: "asc" }]}
-                      />
-                    </div>
-                  )}
-                </ToolkitProvider>
+                <span>請輸入資料</span>
+                <form>{this.addColumn()}</form>
               </div>
               <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={e => this.addOK()}
+                >
+                  新增
+                </button>
                 <button
                   type="button"
                   className="btn btn-secondary"
                   data-dismiss="modal"
                 >
-                  Close
+                  返回
                 </button>
               </div>
             </div>
@@ -215,7 +228,7 @@ export default class DBNav extends Component {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title" id="deleteModalLabel">
-                  刪除
+                  確定刪除這些資料?
                 </h5>
                 <button
                   type="button"
@@ -227,252 +240,16 @@ export default class DBNav extends Component {
                 </button>
               </div>
               <div className="modal-body">
-                <ToolkitProvider
+                <BootstrapTable
                   keyField={"ID"}
                   data={this.state.delete}
                   columns={this.state.columns}
-                  search
-                >
-                  {props => (
-                    <div>
-                      <SearchBar
-                        {...props.searchProps}
-                        placeholder="搜尋。。。"
-                      />
-                      <BootstrapTable
-                        {...props.baseProps}
-                        striped
-                        hover
-                        pagination={paginationFactory(options)}
-                        noDataIndication={noData}
-                        defaultSorted={[{ dataField: "ID", order: "asc" }]}
-                      />
-                    </div>
-                  )}
-                </ToolkitProvider>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  editRecord() {
-    return (
-      <div className="col-4 col-md-2">
-        <button
-          className="btn btn-primary text-light btn-block"
-          data-toggle="modal"
-          data-target="#editRecordModal"
-        >
-          <i className="fas fa-plus" /> 編輯紀錄
-        </button>
-        <div
-          className="modal fade"
-          id="editRecordModal"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="editRecordModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-lg" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="editRecordModalLabel">
-                  紀錄
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <ToolkitProvider
-                  keyField={"ID"}
-                  data={this.state.afterEdit}
-                  columns={this.state.columns}
-                  search
-                >
-                  {props => (
-                    <div>
-                      <SearchBar
-                        {...props.searchProps}
-                        placeholder="搜尋。。。"
-                      />
-                      <BootstrapTable
-                        {...props.baseProps}
-                        striped
-                        hover
-                        pagination={paginationFactory(options)}
-                        noDataIndication={noData}
-                        defaultSorted={[{ dataField: "ID", order: "asc" }]}
-                      />
-                    </div>
-                  )}
-                </ToolkitProvider>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  deleteRecord() {
-    return (
-      <div className="col-4 col-md-2">
-        <button
-          className="btn btn-warning btn-block"
-          data-toggle="modal"
-          data-target="#deleteRecordModal"
-        >
-          <i className="fas fa-plus" /> 刪除紀錄
-        </button>
-        <div
-          className="modal fade"
-          id="deleteRecordModal"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="deleteRecordModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-lg" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="deleteRecordModalLabel">
-                  刪除紀錄
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <ToolkitProvider
-                  keyField={"ID"}
-                  data={this.state.delete}
-                  columns={this.state.columns}
-                  search
-                >
-                  {props => (
-                    <div>
-                      <SearchBar
-                        {...props.searchProps}
-                        placeholder="搜尋。。。"
-                      />
-                      <BootstrapTable
-                        {...props.baseProps}
-                        striped
-                        hover
-                        pagination={paginationFactory(options)}
-                        noDataIndication={noData}
-                        defaultSorted={[{ dataField: "ID", order: "asc" }]}
-                      />
-                    </div>
-                  )}
-                </ToolkitProvider>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  update() {
-    return (
-      <div className="col-4 col-md-2">
-        <button
-          className="btn btn-warning btn-block"
-          data-toggle="modal"
-          data-target="#updateModal"
-        >
-          <i className="fas fa-plus" /> 更新
-        </button>
-
-        <div
-          className="modal fade"
-          id="updateModal"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="updateModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-lg" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="updateModalLabel">
-                  上傳
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <ToolkitProvider
-                  keyField={"ID"}
-                  data={this.state.delete}
-                  columns={this.state.columns}
-                  search
-                >
-                  {props => (
-                    <div>
-                      <SearchBar
-                        {...props.searchProps}
-                        placeholder="搜尋。。。"
-                      />
-                      <BootstrapTable
-                        {...props.baseProps}
-                        striped
-                        hover
-                        pagination={paginationFactory(options)}
-                        noDataIndication={noData}
-                        defaultSorted={[{ dataField: "ID", order: "asc" }]}
-                      />
-                    </div>
-                  )}
-                </ToolkitProvider>
+                  striped
+                  hover
+                  pagination={paginationFactory(options)}
+                  noDataIndication={noData}
+                  defaultSorted={[{ dataField: "ID", order: "asc" }]}
+                />
               </div>
               <div className="modal-footer">
                 <button
@@ -497,9 +274,6 @@ export default class DBNav extends Component {
           <div className="row">
             {this.add()}
             {this.delete()}
-            {this.update()}
-            {this.editRecord()}
-            {this.deleteRecord()}
           </div>
         </section>
       </div>

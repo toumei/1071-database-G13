@@ -6,6 +6,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import DBNav from "./DBNav";
 import { noData, options } from "../../models/bootstrap.model";
 import { getColumnList, getList } from "../../controllers/axios.controller";
+import axios from "axios";
 
 export default class DBTable extends Component {
   constructor(props) {
@@ -16,7 +17,9 @@ export default class DBTable extends Component {
       columns: [],
       beforeEdit: [],
       afterEdit: [],
-      delete: []
+      delete: [],
+      row: [],
+      deleteColumns: []
     };
     getColumnList(this);
   }
@@ -87,11 +90,15 @@ export default class DBTable extends Component {
     // }
   }
 
+  handleRow(row) {
+    this.setState({ row: [row] });
+  }
+
   delete(row) {
-    // axios.post("dbCtrl/delete", {
-    //   table: this.state.table,
-    //   id: row.ID
-    // });
+    axios.post("dbCtrl/delete", {
+      table: this.state.table,
+      id: row.ID
+    });
     this.setState({
       data: this.state.data.filter((x, i) => x !== row),
       delete: [...this.state.delete, row]
@@ -153,6 +160,56 @@ export default class DBTable extends Component {
                 })}
                 selectRow={{ mode: "checkbox" }}
               />
+              <div
+                className="modal fade"
+                id="delete1Modal"
+                tabIndex="-1"
+                role="dialog"
+                aria-labelledby="delete1ModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog modal-lg" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" id="delete1ModalLabel">
+                        確定要刪除這筆資料？
+                      </h5>
+                      <button
+                        type="button"
+                        className="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div className="modal-body">
+                      <BootstrapTable
+                        keyField={"ID"}
+                        data={this.state.row}
+                        columns={this.state.deleteColumns}
+                      />
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        data-dismiss="modal"
+                        onClick={e => this.delete(this.state.row[0])}
+                      >
+                        確定
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        data-dismiss="modal"
+                      >
+                        取消
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </ToolkitProvider>
