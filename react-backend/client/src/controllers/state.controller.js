@@ -16,7 +16,7 @@ export const databaseColumns = db => [
 export const navColumns1 = element => [
   {
     ...stateColumns(element["COLUMN_NAME"], element["COLUMN_COMMENT"], true)[0],
-    headerStyle: stateHS(element)[0]
+    headerStyle: { cursor: "pointer", ...stateHS(element)[0] }
   }
 ];
 
@@ -54,7 +54,7 @@ export const tableColumns1 = element => [
 export const tableColumns2 = element => [
   {
     ...stateColumns(element["COLUMN_NAME"], element["COLUMN_COMMENT"], true)[0],
-    headerStyle: stateHS(element)[0],
+    headerStyle: { cursor: "pointer", ...stateHS(element)[0] },
     style: { cursor: "default" }
   }
 ];
@@ -95,5 +95,13 @@ export const tableColumns3 = db => [
     },
     editable: false,
     headerStyle: { cursor: "default", minWidth: "5rem" }
+  }
+];
+
+export const tableColumns4 = element => [
+  {
+    ...stateColumns(element["COLUMN_NAME"], element["COLUMN_COMMENT"])[0],
+    headerStyle: stateHS(element)[0],
+    style: { cursor: "default" }
   }
 ];

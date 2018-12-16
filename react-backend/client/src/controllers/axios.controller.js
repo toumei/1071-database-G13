@@ -3,7 +3,8 @@ import { decrypt } from "../models/crypt.model";
 import {
   tableColumns1,
   tableColumns2,
-  tableColumns3
+  tableColumns3,
+  tableColumns4
 } from "./state.controller";
 const Uip = "192.168.42.212";
 const ip = true ? Uip : "localhost";
@@ -27,17 +28,7 @@ export function getColumnList(db) {
       let deleteColumns = [];
       decrypt(response.data).forEach(element => {
         columns.push(tableColumns2(element)[0]);
-        deleteColumns.push({
-          dataField: element["COLUMN_NAME"],
-          text: element["COLUMN_COMMENT"],
-          headerAlign: "center",
-          align: "center",
-          headerStyle: {
-            width: element["COLUMN_NAME"] === "ID" ? "" : "100rem",
-            minWidth: element["COLUMN_NAME"] === "ID" ? "" : "10rem"
-          },
-          style: { cursor: "default" }
-        });
+        deleteColumns.push(tableColumns4(element)[0]);
       });
       columns.push(tableColumns3(db)[0]);
       db.setState({ columns: columns, deleteColumns: deleteColumns });

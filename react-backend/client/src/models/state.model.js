@@ -30,7 +30,6 @@ export const stateColumns = (data, text, sort = false) => [
 
 export const stateHS = element => [
   {
-    cursor: "pointer",
     width: element["COLUMN_NAME"] === "ID" ? "" : "100rem",
     minWidth: element["COLUMN_NAME"] === "ID" ? "" : "10rem"
   }
