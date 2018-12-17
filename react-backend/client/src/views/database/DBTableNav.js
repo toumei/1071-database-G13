@@ -11,10 +11,8 @@ export default class extends Component {
     this.setNavColumns(props, columns);
     this.state = {
       navColumns: props.navColumns,
-      beforeEdit: props.beforeEdit,
-      afterEdit: props.afterEdit,
-      delete: props.delete,
-      columns: columns
+      columns: columns,
+      deleteList: props.deleteList
     };
   }
 
@@ -27,18 +25,8 @@ export default class extends Component {
         columns: columns
       });
     }
-    if (nextProps.delete !== this.props.delete) {
-      this.setState({ delete: nextProps.delete });
-    }
-    if (nextProps.beforeEdit !== this.props.beforeEdit) {
-      this.setState({
-        beforeEdit: nextProps.beforeEdit
-      });
-    }
-    if (nextProps.afterEdit !== this.props.afterEdit) {
-      this.setState({
-        afterEdit: nextProps.afterEdit
-      });
+    if (nextProps.deleteList !== this.props.deleteList) {
+      this.setState({ deleteList: nextProps.deleteList });
     }
   }
 

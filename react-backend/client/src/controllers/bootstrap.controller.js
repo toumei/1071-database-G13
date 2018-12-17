@@ -29,7 +29,7 @@ export const BootstrapDatabase = bind =>
 export const Bnav = db =>
   setBaseBootstrap({
     keyField: "ID",
-    data: db.state.delete,
+    data: db.state.deleteList,
     columns: db.state.columns
   });
 

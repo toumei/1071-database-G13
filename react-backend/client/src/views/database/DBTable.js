@@ -4,7 +4,7 @@ import axios from "axios";
 // bootstrap
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
-import DBNav from "./DBNav";
+import DBTableNav from "./DBTableNav";
 
 // controller
 import { Btable } from "../../controllers/bootstrap.controller";
@@ -16,13 +16,11 @@ export default class extends Component {
     super(props);
     this.state = {
       table: props.table,
-      data: [],
       columns: [],
-      beforeEdit: [],
-      afterEdit: [],
-      delete: [],
+      data: [],
+      deleteColumns: [],
       row: [],
-      deleteColumns: []
+      deleteList: []
     };
     setColumnList(this);
   }
@@ -68,7 +66,7 @@ export default class extends Component {
         >
           {props => (
             <div className="col-md-10" style={{ marginTop: 10 }}>
-              <DBNav
+              <DBTableNav
                 navColumns={JSON.stringify(
                   this.state.columns.map((x, i) => {
                     return {
@@ -77,9 +75,7 @@ export default class extends Component {
                     };
                   })
                 )}
-                delete={this.state.delete}
-                beforeEdit={this.state.beforeEdit}
-                afterEdit={this.state.afterEdit}
+                deleteList={this.state.deleteList}
                 handleAdd={data => this.handleAdd(data)}
               />
               <SearchBar
@@ -107,8 +103,7 @@ export default class extends Component {
       id: row.ID
     });
     this.setState({
-      data: this.state.data.filter((x, i) => x !== row),
-      delete: [...this.state.delete, row]
+      data: this.state.data.filter((x, i) => x !== row)
     });
   }
 
