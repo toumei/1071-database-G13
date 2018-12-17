@@ -32,9 +32,10 @@ module.exports = {
 
   postSearch: (req, res, next) => {
     dbCtrlModel
-      .fetchById(req.query.id)
+      .fetchById(req.body.table, req.body.id)
       .then(([data]) => {
-        res.render(path + "products", { title: "Product Search", data: data });
+        console.log(data);
+        res.send(cryptModel.encrypt(data));
       })
       .catch(err => console.log(err));
   },
@@ -69,8 +70,8 @@ module.exports = {
   postAdd: (req, res, next) => {
     dbCtrlModel
       .insert(req.body.table, req.body.row)
-      .then(() => {
-        res.redirect("/products");
+      .then(([data]) => {
+        res.send({ id: data.insertId });
       })
       .catch(err => console.log(err));
   }

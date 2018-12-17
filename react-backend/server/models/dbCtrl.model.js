@@ -32,7 +32,7 @@ module.exports = class Product {
     return db.query($sql.fetchTableAll);
   }
 
-  static fetchById(id) {
-    return db.execute($sql.fetchById, [id]);
+  static fetchById(table, id) {
+    return db.execute("SELECT * FROM " + table + " WHERE ID = ?", [id]);
   }
 };

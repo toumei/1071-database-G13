@@ -108,10 +108,17 @@ export default class extends Component {
   }
 
   handleAdd(row) {
-    axios.post("dbCtrl/add", {
-      table: this.state.table,
-      row: row
-    });
+    axios
+      .post("dbCtrl/add", {
+        table: this.state.table,
+        row: row
+      })
+      .then(res => {
+        row["ID"] = res.data.id;
+        let data = this.state.data;
+        data.push(row);
+        this.setState({ data: data });
+      });
   }
 
   beforeSaveCell(oldValue, newValue, row, column, done) {

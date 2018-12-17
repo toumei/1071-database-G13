@@ -60,16 +60,18 @@ export default class extends Component {
     columns.push(setTableNavModeColumns(this)[0]);
   }
 
-  // handle
   addOK() {
     const navColumns = JSON.parse(this.state.navColumns);
     let row = {};
+    let count = true;
     for (let i = 1; i < navColumns.length - 1; i++) {
+      if (document.getElementById(navColumns[i].COLUMN_NAME).value === "")
+        count = false;
       row[navColumns[i].COLUMN_NAME] = document.getElementById(
         navColumns[i].COLUMN_NAME
       ).value;
     }
-    this.props.handleAdd(row);
+    if (count) this.props.handleAdd(row);
   }
 
   addColumn() {
