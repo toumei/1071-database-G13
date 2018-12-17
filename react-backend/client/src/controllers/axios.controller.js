@@ -6,9 +6,9 @@ import { decrypt } from "../models/crypt.model";
 // controller
 import {
   setTableData,
-  tableColumns2,
-  tableColumns3,
-  tableColumns4
+  setTableColumns,
+  setTableModeColumns,
+  setTableDeleteColumns
 } from "./state.controller";
 
 const ip = true ? "192.168.42.212" : "localhost";
@@ -30,10 +30,10 @@ export function setColumnList(bind) {
       let columns = [];
       let deleteColumns = [];
       decrypt(res.data).forEach(element => {
-        columns.push(tableColumns2(element)[0]);
-        deleteColumns.push(tableColumns4(element)[0]);
+        columns.push(setTableColumns(element)[0]);
+        deleteColumns.push(setTableDeleteColumns(element)[0]);
       });
-      columns.push(tableColumns3(bind)[0]);
+      columns.push(setTableModeColumns(bind)[0]);
       bind.setState({ columns: columns, deleteColumns: deleteColumns });
     });
 }

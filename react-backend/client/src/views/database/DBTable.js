@@ -7,8 +7,8 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import DBTableNav from "./DBTableNav";
 
 // controller
-import { Btable } from "../../controllers/bootstrap.controller";
-import { tableDelete } from "../../controllers/modal.controller";
+import { BootstrapTable } from "../../controllers/bootstrap.controller";
+import { TableDelete } from "../../controllers/modal.controller";
 import { setColumnList, setList } from "../../controllers/axios.controller";
 
 export default class extends Component {
@@ -82,8 +82,8 @@ export default class extends Component {
                 {...props.searchProps}
                 placeholder="搜尋關鍵字。。。"
               />
-              {Btable(props.baseProps, beforeSaveCell)}
-              {tableDelete(this)}
+              {BootstrapTable(props.baseProps, beforeSaveCell)}
+              {TableDelete(this)}
             </div>
           )}
         </ToolkitProvider>

@@ -33,7 +33,7 @@ export const Bnav = db =>
     columns: db.state.columns
   });
 
-export const Btable = (baseProps, beforeSaveCell) =>
+export const BootstrapTable = (baseProps, beforeSaveCell) =>
   setBaseBootstrap(
     baseProps,
     {

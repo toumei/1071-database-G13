@@ -3,7 +3,7 @@ import { Bnav } from "./bootstrap.controller";
 import { BootstrapTableDelete } from "./bootstrap.controller";
 import { modalModel } from "../models/modal.model";
 
-export const navAdd = bind =>
+export const TableNavAdd = bind =>
   modalModel(
     "addModal",
     <h5 className="modal-title">新增資料</h5>,
@@ -25,7 +25,7 @@ export const navAdd = bind =>
     </div>
   );
 
-export const navDelete = bind =>
+export const TableNavDelete = bind =>
   modalModel(
     "deleteListModal",
     <h5 className="modal-title">確定刪除這些資料?</h5>,
@@ -37,7 +37,7 @@ export const navDelete = bind =>
     </div>
   );
 
-export const tableDelete = bind =>
+export const TableDelete = bind =>
   modalModel(
     "deleteModal",
     <h5 className="modal-title">確定要刪除這筆資料？</h5>,

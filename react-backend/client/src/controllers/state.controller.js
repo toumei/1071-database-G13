@@ -13,7 +13,7 @@ export const setDatabaseColumns = bind => [
   }
 ];
 
-export const navColumns1 = element => [
+export const setTableNavColumns = element => [
   {
     ...setBaseColumns(
       element["COLUMN_NAME"],
@@ -24,7 +24,7 @@ export const navColumns1 = element => [
   }
 ];
 
-export const navColumns2 = bind => [
+export const setTableNavModeColumns = bind => [
   {
     ...setBaseColumns("action", "操作")[0],
     isDummyField: true,
@@ -55,7 +55,7 @@ export const setTableData = element => [
   }
 ];
 
-export const tableColumns2 = element => [
+export const setTableColumns = element => [
   {
     ...setBaseColumns(
       element["COLUMN_NAME"],
@@ -67,7 +67,7 @@ export const tableColumns2 = element => [
   }
 ];
 
-export const tableColumns3 = bind => [
+export const setTableModeColumns = bind => [
   {
     ...setBaseColumns("action", "操作")[0],
     isDummyField: true,
@@ -106,7 +106,7 @@ export const tableColumns3 = bind => [
   }
 ];
 
-export const tableColumns4 = element => [
+export const setTableDeleteColumns = element => [
   {
     ...setBaseColumns(element["COLUMN_NAME"], element["COLUMN_COMMENT"])[0],
     headerStyle: stateHS(element)[0],

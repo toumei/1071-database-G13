@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 
 // controller
-import { navAdd, navDelete } from "../../controllers/modal.controller";
-import { navColumns1, navColumns2 } from "../../controllers/state.controller";
+import {
+  TableNavAdd,
+  TableNavDelete
+} from "../../controllers/modal.controller";
+import {
+  setTableNavColumns,
+  setTableNavModeColumns
+} from "../../controllers/state.controller";
 
 export default class extends Component {
   constructor(props) {
@@ -43,18 +49,18 @@ export default class extends Component {
     );
   }
 
-  // handle
   setNavColumns(props, columns) {
     const navColumns = JSON.parse(props.navColumns);
     navColumns.forEach((element, i) => {
       if (i !== navColumns.length - 1) {
-        columns.push(navColumns1(element)[0]);
+        columns.push(setTableNavColumns(element)[0]);
       }
     });
 
-    columns.push(navColumns2(this)[0]);
+    columns.push(setTableNavModeColumns(this)[0]);
   }
 
+  // handle
   addOK() {
     const navColumns = JSON.parse(this.state.navColumns);
     let row = {};
@@ -102,7 +108,7 @@ export default class extends Component {
         >
           <i className="fas fa-plus" /> 新增
         </button>
-        {navAdd(this)}
+        {TableNavAdd(this)}
       </div>
     );
   }
@@ -117,7 +123,7 @@ export default class extends Component {
         >
           <i className="fas fa-plus" /> 刪除
         </button>
-        {navDelete(this)}
+        {TableNavDelete(this)}
       </div>
     );
   }
