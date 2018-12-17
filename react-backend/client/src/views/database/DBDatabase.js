@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // controller
-import { setTableList } from "../../controllers/axios.controller";
+import { postTableList } from "../../controllers/axios.controller";
 import { BootstrapDatabase } from "../../controllers/bootstrap.controller";
 import { setDatabaseColumns } from "../../controllers/state.controller";
 
@@ -17,7 +17,7 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    setTableList(this);
+    postTableList(this);
   }
 
   render() {

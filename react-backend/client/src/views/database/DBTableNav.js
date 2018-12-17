@@ -70,6 +70,7 @@ export default class extends Component {
       row[navColumns[i].COLUMN_NAME] = document.getElementById(
         navColumns[i].COLUMN_NAME
       ).value;
+      document.getElementById(navColumns[i].COLUMN_NAME).value = "";
     }
     if (count) this.props.handleAdd(row);
   }
@@ -122,6 +123,7 @@ export default class extends Component {
           className="btn btn-warning btn-block"
           data-toggle="modal"
           data-target="#deleteListModal"
+          onClick={e => this.props.handleIsSelectDeleteListener()}
         >
           <i className="fas fa-plus" /> 刪除
         </button>

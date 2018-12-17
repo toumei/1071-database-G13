@@ -35,7 +35,6 @@ export const setTableNavModeColumns = bind => [
             type="button"
             name="revert"
             className="btn btn-warning btn-sm"
-            onClick={e => bind.revert(row)}
           >
             還原
           </button>

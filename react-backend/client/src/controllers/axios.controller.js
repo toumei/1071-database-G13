@@ -13,7 +13,7 @@ import {
 
 const ip = true ? "192.168.42.212" : "localhost";
 
-export function setTableList(bind) {
+export function postTableList(bind) {
   axios.post("http://" + ip + ":3000/dbCtrl/TableList").then(res => {
     let data = [];
     decrypt(res.data).forEach(element => {
@@ -23,7 +23,7 @@ export function setTableList(bind) {
   });
 }
 
-export function setColumnList(bind) {
+export function postColumnList(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/ColumnList?table=" + bind.state.table)
     .then(res => {
@@ -34,14 +34,36 @@ export function setColumnList(bind) {
         deleteColumns.push(setTableDeleteColumns(element)[0]);
       });
       columns.push(setTableModeColumns(bind)[0]);
-      bind.setState({ columns: columns, deleteColumns: deleteColumns });
+      bind.setState({
+        columns: columns,
+        deleteColumns: deleteColumns
+      });
     });
 }
 
-export function setList(bind) {
+export function postList(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/List?table=" + bind.state.table)
     .then(res => {
       bind.setState({ data: decrypt(res.data) });
+    });
+}
+
+export function postDelete(bind, row) {
+  axios.post("http://" + ip + ":3000/dbCtrl/delete", {
+    table: bind.state.table,
+    id: row.ID
+  });
+}
+
+export function postAdd(bind, row) {
+  axios
+    .post("http://" + ip + ":3000/dbCtrl/add", {
+      table: bind.state.table,
+      row: row
+    })
+    .then(res => {
+      row["ID"] = res.data.id;
+      bind.setState({ data: [...bind.state.data, row] });
     });
 }

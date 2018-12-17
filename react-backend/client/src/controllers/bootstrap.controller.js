@@ -26,14 +26,14 @@ export const BootstrapDatabase = bind =>
     }
   );
 
-export const Bnav = db =>
+export const Bnav = bind =>
   setBaseBootstrap({
     keyField: "ID",
-    data: db.state.deleteList,
-    columns: db.state.columns
+    data: bind.state.deleteList,
+    columns: bind.state.columns
   });
 
-export const BootstrapTable = (baseProps, beforeSaveCell) =>
+export const BootstrapTable = (bind, baseProps, beforeSaveCell) =>
   setBaseBootstrap(
     baseProps,
     {
@@ -41,14 +41,32 @@ export const BootstrapTable = (baseProps, beforeSaveCell) =>
         mode: "click",
         beforeSaveCell
       }),
-      selectRow: { mode: "checkbox" }
+      selectRow: {
+        mode: "checkbox",
+        onSelect: (row, isSelect, rowIndex, e) => {
+          if (isSelect) {
+            bind.handleIsSelectDelete(row);
+          } else {
+            bind.handleIsNotSelectDelete(row);
+          }
+        },
+        onSelectAll: (isSelect, rows, e) => {
+          for (let i = 0; i < rows.length; i++) {
+            if (isSelect) {
+              bind.handleIsSelectDelete(rows[i]);
+            } else {
+              bind.handleIsNotSelectDelete(rows[i]);
+            }
+          }
+        }
+      }
     },
     true
   );
 
-export const BootstrapTableDelete = db =>
+export const BootstrapTableDelete = bind =>
   setBaseBootstrap({
     keyField: "ID",
-    data: db.state.deleteData,
-    columns: db.state.deleteColumns
+    data: bind.state.deleteData,
+    columns: bind.state.deleteColumns
   });

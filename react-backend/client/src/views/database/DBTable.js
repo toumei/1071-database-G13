@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 // bootstrap
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
@@ -9,7 +8,12 @@ import DBTableNav from "./DBTableNav";
 // controller
 import { BootstrapTable } from "../../controllers/bootstrap.controller";
 import { TableDelete } from "../../controllers/modal.controller";
-import { setColumnList, setList } from "../../controllers/axios.controller";
+import {
+  postColumnList,
+  postList,
+  postDelete,
+  postAdd
+} from "../../controllers/axios.controller";
 
 export default class extends Component {
   constructor(props) {
@@ -22,7 +26,7 @@ export default class extends Component {
       deleteData: [],
       deleteList: []
     };
-    setColumnList(this);
+    postColumnList(this);
   }
 
   componentDidMount() {
@@ -33,7 +37,7 @@ export default class extends Component {
     //   }
     //   return "close";
     // };
-    setList(this);
+    postList(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,8 +48,8 @@ export default class extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.table !== this.state.table) {
-      setColumnList(this);
-      setList(this);
+      postColumnList(this);
+      postList(this);
     }
   }
 
@@ -75,14 +79,17 @@ export default class extends Component {
                     };
                   })
                 )}
-                deleteList={this.state.deleteList}
+                deleteList={this.deleteList}
                 handleAdd={data => this.handleAdd(data)}
+                handleIsSelectDeleteListener={() =>
+                  this.handleIsSelectDeleteListener()
+                }
               />
               <SearchBar
                 {...props.searchProps}
                 placeholder="搜尋關鍵字。。。"
               />
-              {BootstrapTable(props.baseProps, beforeSaveCell)}
+              {BootstrapTable(this, props.baseProps, beforeSaveCell)}
               {TableDelete(this)}
             </div>
           )}
@@ -92,33 +99,34 @@ export default class extends Component {
     return null;
   }
 
+  deleteList = [];
+
   // handle
+  handleIsSelectDeleteListener() {
+    this.setState({ deleteList: this.deleteList });
+  }
+
+  handleIsSelectDelete(row) {
+    this.deleteList = [...this.deleteList, row];
+  }
+
+  handleIsNotSelectDelete(row) {
+    this.deleteList = this.deleteList.filter((x, i) => x !== row);
+  }
+
   handleDeleteListener(row) {
     this.setState({ deleteData: [row] });
   }
 
   handleDelete(row) {
-    axios.post("dbCtrl/delete", {
-      table: this.state.table,
-      id: row.ID
-    });
+    postDelete(this, row);
     this.setState({
       data: this.state.data.filter((x, i) => x !== row)
     });
   }
 
   handleAdd(row) {
-    axios
-      .post("dbCtrl/add", {
-        table: this.state.table,
-        row: row
-      })
-      .then(res => {
-        row["ID"] = res.data.id;
-        let data = this.state.data;
-        data.push(row);
-        this.setState({ data: data });
-      });
+    postAdd(this, row);
   }
 
   beforeSaveCell(oldValue, newValue, row, column, done) {
