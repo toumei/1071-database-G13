@@ -12,7 +12,7 @@ export default class DBCtrl extends Component {
     return this.ctrl();
   }
 
-  handleAdd(table) {
+  handleChangeTable(table) {
     this.setState({ table: table });
   }
 
@@ -22,7 +22,7 @@ export default class DBCtrl extends Component {
         <div className="row">
           <DBDatabase
             table={this.state.table}
-            handleAdd={table => this.handleAdd(table)}
+            handleChangeTable={table => this.handleChangeTable(table)}
           />
           <DBTable table={this.state.table} />
         </div>

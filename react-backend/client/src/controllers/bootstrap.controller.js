@@ -15,7 +15,7 @@ export const Bdatabase = bind =>
         hideSelectColumn: true,
         bgColor: "#c8e6c9",
         onSelect: (row, isSelect, rowIndex, e) => {
-          bind.props.handleAdd(row.TABLE_NAME);
+          bind.props.handleChangeTable(row.TABLE_NAME);
           bind.setState({ selected: row.TABLE_NAME });
           return false;
         }
