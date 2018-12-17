@@ -63,7 +63,14 @@ export default class DBNav extends Component {
   }
 
   addOK() {
-    console.log("a");
+    const navColumns = JSON.parse(this.state.navColumns);
+    let row = {};
+    for (let i = 1; i < navColumns.length - 1; i++) {
+      row[navColumns[i].COLUMN_NAME] = document.getElementById(
+        navColumns[i].COLUMN_NAME
+      ).value;
+    }
+    this.props.handleAdd(row);
   }
 
   addColumn() {

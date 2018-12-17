@@ -61,15 +61,6 @@ export default class DBTable extends Component {
     });
   }
 
-  add(id, studentID, name) {
-    this.state.data.push({
-      ID: id,
-      studentID: studentID,
-      name: name
-    });
-    this.setState({ data: this.state.data });
-  }
-
   edit(row) {
     // const rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
     // if (rs) {
@@ -100,6 +91,14 @@ export default class DBTable extends Component {
     this.setState({
       data: this.state.data.filter((x, i) => x !== row),
       delete: [...this.state.delete, row]
+    });
+  }
+
+  handleAdd(row) {
+    console.log(row);
+    axios.post("dbCtrl/add", {
+      table: this.state.table,
+      row: row
     });
   }
 
@@ -140,6 +139,7 @@ export default class DBTable extends Component {
                 beforeEdit={this.state.beforeEdit}
                 afterEdit={this.state.afterEdit}
                 handleRevert={data => this.handleRevert(data)}
+                handleAdd={data => this.handleAdd(data)}
               />
               <SearchBar
                 {...props.searchProps}

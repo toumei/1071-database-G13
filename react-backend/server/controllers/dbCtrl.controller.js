@@ -58,7 +58,6 @@ module.exports = {
   },
 
   postDelete: (req, res, next) => {
-    console.log(req.body);
     dbCtrlModel
       .delete(req.body.table, req.body.id)
       .then(res => {
@@ -72,12 +71,8 @@ module.exports = {
   },
 
   postAdd: (req, res, next) => {
-    var sqlData = {
-      name: req.body.name,
-      price: req.body.price
-    };
     dbCtrlModel
-      .insert(sqlData)
+      .insert(req.body.table, req.body.row)
       .then(() => {
         res.redirect("/products");
       })

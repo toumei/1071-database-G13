@@ -8,8 +8,8 @@ module.exports = class Product {
     this.price = price;
   }
 
-  static insert(sqlData) {
-    return db.query($sql.insert, sqlData);
+  static insert(table, sqlData) {
+    return db.query("INSERT INTO " + table + " SET ?", sqlData);
   }
   static update(table, sqlData, id) {
     return db.query("UPDATE " + table + $sql.update, [sqlData, id]);

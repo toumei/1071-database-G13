@@ -13,5 +13,6 @@ router.post("/TableList", dbCtrlController.getTableList);
 router.post("/ColumnList", dbCtrlController.getColumnList);
 router.post("/update", dbCtrlController.postUpdate);
 router.post("/delete", dbCtrlController.postDelete);
+router.post("/add", dbCtrlController.postAdd);
 
 module.exports = router;
