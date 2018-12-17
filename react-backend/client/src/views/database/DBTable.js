@@ -1,12 +1,17 @@
 import React, { Component } from "react";
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import DBNav from "./DBNav";
-import { getColumnList, getList } from "../../controllers/axios.controller";
-import { Btable } from "../../controllers/bootstrap.controller";
 import axios from "axios";
-import { tableDelete } from "../../controllers/modal.controller";
 
-export default class DBTable extends Component {
+// bootstrap
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+
+import DBNav from "./DBNav";
+
+// controller
+import { Btable } from "../../controllers/bootstrap.controller";
+import { tableDelete } from "../../controllers/modal.controller";
+import { setColumnList, setList } from "../../controllers/axios.controller";
+
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +24,7 @@ export default class DBTable extends Component {
       row: [],
       deleteColumns: []
     };
-    getColumnList(this);
+    setColumnList(this);
   }
 
   componentDidMount() {
@@ -30,7 +35,7 @@ export default class DBTable extends Component {
     //   }
     //   return "close";
     // };
-    getList(this);
+    setList(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,8 +46,8 @@ export default class DBTable extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.table !== this.state.table) {
-      getColumnList(this);
-      getList(this);
+      setColumnList(this);
+      setList(this);
     }
   }
 
@@ -51,69 +56,6 @@ export default class DBTable extends Component {
   }
 
   render() {
-    return this.table();
-  }
-
-  handleRevert(data) {
-    this.setState({
-      delete: this.state.delete.filter((x, i) => x !== data),
-      data: [...this.state.data, data]
-    });
-  }
-
-  edit(row) {
-    // const rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
-    // if (rs) {
-    //   this.state.data.filter((x, i) => {
-    //     if (x === row) {
-    //       const data = this.state.data;
-    //       data[i].name = x.name = 2;
-    //       this.setState({ data: data });
-    //       axios.post("dbCtrl/update", {
-    //         table: this.state.table,
-    //         data: x
-    //       });
-    //     }
-    //     return true;
-    //   });
-    // }
-  }
-
-  handleRow(row) {
-    this.setState({ row: [row] });
-  }
-
-  delete(row) {
-    axios.post("dbCtrl/delete", {
-      table: this.state.table,
-      id: row.ID
-    });
-    this.setState({
-      data: this.state.data.filter((x, i) => x !== row),
-      delete: [...this.state.delete, row]
-    });
-  }
-
-  handleAdd(row) {
-    console.log(row);
-    axios.post("dbCtrl/add", {
-      table: this.state.table,
-      row: row
-    });
-  }
-
-  beforeSaveCell(oldValue, newValue, row, column, done) {
-    setTimeout(() => {
-      if (window.confirm("確定改變新的值?")) {
-        done(true);
-      } else {
-        done(false);
-      }
-    }, 0);
-    return { async: true };
-  }
-
-  table() {
     if (this.state.columns.length > 0) {
       const { SearchBar } = Search;
       const beforeSaveCell = this.beforeSaveCell;
@@ -138,7 +80,6 @@ export default class DBTable extends Component {
                 delete={this.state.delete}
                 beforeEdit={this.state.beforeEdit}
                 afterEdit={this.state.afterEdit}
-                handleRevert={data => this.handleRevert(data)}
                 handleAdd={data => this.handleAdd(data)}
               />
               <SearchBar
@@ -153,5 +94,57 @@ export default class DBTable extends Component {
       );
     }
     return null;
+  }
+
+  // handle
+  handleDeleteListener(row) {
+    this.setState({ row: [row] });
+  }
+
+  handleDelete(row) {
+    axios.post("dbCtrl/delete", {
+      table: this.state.table,
+      id: row.ID
+    });
+    this.setState({
+      data: this.state.data.filter((x, i) => x !== row),
+      delete: [...this.state.delete, row]
+    });
+  }
+
+  handleAdd(row) {
+    axios.post("dbCtrl/add", {
+      table: this.state.table,
+      row: row
+    });
+  }
+
+  beforeSaveCell(oldValue, newValue, row, column, done) {
+    setTimeout(() => {
+      if (window.confirm("確定改變新的值?")) {
+        done(true);
+      } else {
+        done(false);
+      }
+    }, 0);
+    return { async: true };
+  }
+
+  handleEdit(row) {
+    // const rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
+    // if (rs) {
+    //   this.state.data.filter((x, i) => {
+    //     if (x === row) {
+    //       const data = this.state.data;
+    //       data[i].name = x.name = 2;
+    //       this.setState({ data: data });
+    //       axios.post("dbCtrl/update", {
+    //         table: this.state.table,
+    //         data: x
+    //       });
+    //     }
+    //     return true;
+    //   });
+    // }
   }
 }

@@ -23,7 +23,7 @@ export function setTableList(bind) {
   });
 }
 
-export function getColumnList(bind) {
+export function setColumnList(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/ColumnList?table=" + bind.state.table)
     .then(res => {
@@ -38,7 +38,7 @@ export function getColumnList(bind) {
     });
 }
 
-export function getList(bind) {
+export function setList(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/List?table=" + bind.state.table)
     .then(res => {

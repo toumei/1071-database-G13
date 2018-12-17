@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { navColumns1, navColumns2 } from "../../controllers/state.controller";
-import { navAdd, navDelete } from "../../controllers/modal.controller";
 
-export default class DBNav extends Component {
+// controller
+import { navAdd, navDelete } from "../../controllers/modal.controller";
+import { navColumns1, navColumns2 } from "../../controllers/state.controller";
+
+export default class extends Component {
   constructor(props) {
     super(props);
     let columns = [];
@@ -41,9 +43,19 @@ export default class DBNav extends Component {
   }
 
   render() {
-    return this.nav();
+    return (
+      <div>
+        <section className="bg-light py-1">
+          <div className="row">
+            {this.add()}
+            {this.delete()}
+          </div>
+        </section>
+      </div>
+    );
   }
 
+  // handle
   setNavColumns(props, columns) {
     const navColumns = JSON.parse(props.navColumns);
     navColumns.forEach((element, i) => {
@@ -53,13 +65,6 @@ export default class DBNav extends Component {
     });
 
     columns.push(navColumns2(this)[0]);
-  }
-
-  revert(row) {
-    this.setState({
-      delete: this.state.delete.filter((x, i) => x !== row)
-    });
-    this.props.handleRevert(row);
   }
 
   addOK() {
@@ -120,24 +125,11 @@ export default class DBNav extends Component {
         <button
           className="btn btn-warning btn-block"
           data-toggle="modal"
-          data-target="#deleteModal"
+          data-target="#deleteListModal"
         >
           <i className="fas fa-plus" /> 刪除
         </button>
         {navDelete(this)}
-      </div>
-    );
-  }
-
-  nav() {
-    return (
-      <div>
-        <section className="bg-light py-1">
-          <div className="row">
-            {this.add()}
-            {this.delete()}
-          </div>
-        </section>
       </div>
     );
   }
