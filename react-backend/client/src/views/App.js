@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client";
 import { Route, Link } from "react-router-dom";
 
 // router import
-import { DB } from "./database/DB";
+import DBCtrl from "./database/DBCtrl";
 import { Login } from "./login/Login";
 import Products from "./products/Products";
 
@@ -125,7 +125,7 @@ const Header = () => (
 const Main = () => (
   <main>
     <Route path="/" component={index} />
-    <Route path="/database" component={DB} />
+    <Route path="/database" component={DBCtrl} />
     <Route path="/products" component={Products} />
     <Route path="/login" component={Login} />
   </main>
