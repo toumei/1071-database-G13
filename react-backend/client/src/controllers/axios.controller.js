@@ -1,20 +1,23 @@
 import axios from "axios";
+
+// model
 import { decrypt } from "../models/crypt.model";
+
+// controller
 import {
-  tableColumns1,
+  setTableData,
   tableColumns2,
   tableColumns3,
   tableColumns4
 } from "./state.controller";
-const Uip = "192.168.42.212";
-const ip = true ? Uip : "localhost";
 
-export function getTableList(bind) {
-  axios.post("http://" + ip + ":3000/dbCtrl/TableList").then(response => {
-    const decryptedJSON = decrypt(response.data);
+const ip = true ? "192.168.42.212" : "localhost";
+
+export function setTableList(bind) {
+  axios.post("http://" + ip + ":3000/dbCtrl/TableList").then(res => {
     let data = [];
-    decryptedJSON.forEach(element => {
-      data.push(tableColumns1(element)[0]);
+    decrypt(res.data).forEach(element => {
+      data.push(setTableData(element)[0]);
     });
     bind.setState({ data: data });
   });
@@ -23,10 +26,10 @@ export function getTableList(bind) {
 export function getColumnList(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/ColumnList?table=" + bind.state.table)
-    .then(response => {
+    .then(res => {
       let columns = [];
       let deleteColumns = [];
-      decrypt(response.data).forEach(element => {
+      decrypt(res.data).forEach(element => {
         columns.push(tableColumns2(element)[0]);
         deleteColumns.push(tableColumns4(element)[0]);
       });
@@ -38,7 +41,7 @@ export function getColumnList(bind) {
 export function getList(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/List?table=" + bind.state.table)
-    .then(response => {
-      bind.setState({ data: decrypt(response.data) });
+    .then(res => {
+      bind.setState({ data: decrypt(res.data) });
     });
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const stateColumns = (data, text, sort = false) => [
+export const setBaseColumns = (data, text, sort = false) => [
   {
     dataField: data,
     text: text,

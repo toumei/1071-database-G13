@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import DBTable from "./DBTable";
 import DBDatabase from "./DBDatabase";
 
+// default program
 export default class extends Component {
   constructor(props) {
     super(props);

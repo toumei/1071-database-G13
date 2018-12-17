@@ -1,11 +1,11 @@
 import React from "react";
-import { stateColumns, stateHS } from "../models/state.model";
+import { setBaseColumns, stateHS } from "../models/state.model";
 
-export const databaseColumns = bind => [
+export const setDatabaseColumns = bind => [
   {
-    ...stateColumns("TABLE_COMMENT", "資料庫")[0],
+    ...setBaseColumns("TABLE_COMMENT", "資料庫")[0],
     style: (cell, row, rowIndex, colIndex) => {
-      if (row.TABLE_NAME === bind.state.selected) {
+      if (row.TABLE_NAME === bind.state.table) {
         return { cursor: "pointer", backgroundColor: "#81c784" };
       }
       return { cursor: "pointer", backgroundColor: "white" };
@@ -15,14 +15,18 @@ export const databaseColumns = bind => [
 
 export const navColumns1 = element => [
   {
-    ...stateColumns(element["COLUMN_NAME"], element["COLUMN_COMMENT"], true)[0],
+    ...setBaseColumns(
+      element["COLUMN_NAME"],
+      element["COLUMN_COMMENT"],
+      true
+    )[0],
     headerStyle: { cursor: "pointer", ...stateHS(element)[0] }
   }
 ];
 
 export const navColumns2 = bind => [
   {
-    ...stateColumns("action", "操作")[0],
+    ...setBaseColumns("action", "操作")[0],
     isDummyField: true,
     formatter: (cell, row) => {
       return (
@@ -43,7 +47,7 @@ export const navColumns2 = bind => [
   }
 ];
 
-export const tableColumns1 = element => [
+export const setTableData = element => [
   {
     TABLE_COMMENT: element["TABLE_COMMENT"],
     TABLE_NAME: element["TABLE_NAME"],
@@ -53,7 +57,11 @@ export const tableColumns1 = element => [
 
 export const tableColumns2 = element => [
   {
-    ...stateColumns(element["COLUMN_NAME"], element["COLUMN_COMMENT"], true)[0],
+    ...setBaseColumns(
+      element["COLUMN_NAME"],
+      element["COLUMN_COMMENT"],
+      true
+    )[0],
     headerStyle: { cursor: "pointer", ...stateHS(element)[0] },
     style: { cursor: "default" }
   }
@@ -61,7 +69,7 @@ export const tableColumns2 = element => [
 
 export const tableColumns3 = bind => [
   {
-    ...stateColumns("action", "操作")[0],
+    ...setBaseColumns("action", "操作")[0],
     isDummyField: true,
     formatter: (cell, row) => {
       return (
@@ -100,7 +108,7 @@ export const tableColumns3 = bind => [
 
 export const tableColumns4 = element => [
   {
-    ...stateColumns(element["COLUMN_NAME"], element["COLUMN_COMMENT"])[0],
+    ...setBaseColumns(element["COLUMN_NAME"], element["COLUMN_COMMENT"])[0],
     headerStyle: stateHS(element)[0],
     style: { cursor: "default" }
   }

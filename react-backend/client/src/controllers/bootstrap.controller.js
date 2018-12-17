@@ -1,8 +1,11 @@
-import { bootstrap } from "../models/bootstrap.model";
+// bootstrap
 import cellEditFactory from "react-bootstrap-table2-editor";
 
-export const Bdatabase = bind =>
-  bootstrap(
+// model
+import { setBaseBootstrap } from "../models/bootstrap.model";
+
+export const BootstrapDatabase = bind =>
+  setBaseBootstrap(
     {
       keyField: "TABLE_COMMENT",
       data: bind.state.data,
@@ -16,7 +19,7 @@ export const Bdatabase = bind =>
         bgColor: "#c8e6c9",
         onSelect: (row, isSelect, rowIndex, e) => {
           bind.props.handleChangeTable(row.TABLE_NAME);
-          bind.setState({ selected: row.TABLE_NAME });
+          bind.setState({ table: row.TABLE_NAME });
           return false;
         }
       }
@@ -24,14 +27,14 @@ export const Bdatabase = bind =>
   );
 
 export const Bnav = db =>
-  bootstrap({
+  setBaseBootstrap({
     keyField: "ID",
     data: db.state.delete,
     columns: db.state.columns
   });
 
 export const Btable = (baseProps, beforeSaveCell) =>
-  bootstrap(
+  setBaseBootstrap(
     baseProps,
     {
       cellEdit: cellEditFactory({
@@ -44,7 +47,7 @@ export const Btable = (baseProps, beforeSaveCell) =>
   );
 
 export const BtableDelete = db =>
-  bootstrap({
+  setBaseBootstrap({
     keyField: "ID",
     data: db.state.row,
     columns: db.state.deleteColumns
