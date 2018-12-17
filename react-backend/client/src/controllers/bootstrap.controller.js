@@ -1,12 +1,12 @@
 import { bootstrap } from "../models/bootstrap.model";
 import cellEditFactory from "react-bootstrap-table2-editor";
 
-export const Bdatabase = db =>
+export const Bdatabase = bind =>
   bootstrap(
     {
       keyField: "TABLE_COMMENT",
-      data: db.state.data,
-      columns: db.state.columns
+      data: bind.state.data,
+      columns: bind.state.columns
     },
     {
       selectRow: {
@@ -15,10 +15,8 @@ export const Bdatabase = db =>
         hideSelectColumn: true,
         bgColor: "#c8e6c9",
         onSelect: (row, isSelect, rowIndex, e) => {
-          db.props.handleAdd(row.TABLE_NAME);
-          db.setState({
-            selected: row.TABLE_NAME
-          });
+          bind.props.handleAdd(row.TABLE_NAME);
+          bind.setState({ selected: row.TABLE_NAME });
           return false;
         }
       }

@@ -1,11 +1,11 @@
 import React from "react";
 import { stateColumns, stateHS } from "../models/state.model";
 
-export const databaseColumns = db => [
+export const databaseColumns = bind => [
   {
     ...stateColumns("TABLE_COMMENT", "資料庫")[0],
     style: (cell, row, rowIndex, colIndex) => {
-      if (row.TABLE_NAME === db.state.selected) {
+      if (row.TABLE_NAME === bind.state.selected) {
         return { cursor: "pointer", backgroundColor: "#81c784" };
       }
       return { cursor: "pointer", backgroundColor: "white" };
@@ -20,7 +20,7 @@ export const navColumns1 = element => [
   }
 ];
 
-export const navColumns2 = db => [
+export const navColumns2 = bind => [
   {
     ...stateColumns("action", "操作")[0],
     isDummyField: true,
@@ -31,7 +31,7 @@ export const navColumns2 = db => [
             type="button"
             name="revert"
             className="btn btn-warning btn-sm"
-            onClick={e => db.revert(row)}
+            onClick={e => bind.revert(row)}
           >
             還原
           </button>
@@ -59,7 +59,7 @@ export const tableColumns2 = element => [
   }
 ];
 
-export const tableColumns3 = db => [
+export const tableColumns3 = bind => [
   {
     ...stateColumns("action", "操作")[0],
     isDummyField: true,
@@ -86,7 +86,7 @@ export const tableColumns3 = db => [
             className="btn btn-warning btn-sm"
             data-toggle="modal"
             data-target={"#delete1Modal"}
-            onClick={e => db.handleRow(row)}
+            onClick={e => bind.handleRow(row)}
           >
             刪除
           </button>

@@ -3,7 +3,7 @@ const cryptModel = require("../models/crypt.model");
 var path = "database/productTable/";
 
 module.exports = {
-  getList: (req, res, next) => {
+  postList: (req, res, next) => {
     dbCtrlModel
       .fetchAll(req.query.table)
       .then(([data]) => {
@@ -12,7 +12,7 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
-  getTableList: (req, res, next) => {
+  postTableList: (req, res, next) => {
     dbCtrlModel
       .fetchTableAll()
       .then(([data]) => {
@@ -21,7 +21,7 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
-  getColumnList: (req, res, next) => {
+  postColumnList: (req, res, next) => {
     dbCtrlModel
       .fetchColumnAll(req.query.table)
       .then(([data]) => {
@@ -30,7 +30,7 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
-  getSearch: (req, res, next) => {
+  postSearch: (req, res, next) => {
     dbCtrlModel
       .fetchById(req.query.id)
       .then(([data]) => {
@@ -39,7 +39,7 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
-  getEdit: (req, res, next) => {
+  postEdit: (req, res, next) => {
     dbCtrlModel
       .fetchById(req.query.id)
       .then(([data]) => {
@@ -64,10 +64,6 @@ module.exports = {
         console.log(res);
       })
       .catch(err => console.log(err));
-  },
-
-  getAdd: (req, res, next) => {
-    res.render(path + "productAdd", { title: "Add Product", msg: "" });
   },
 
   postAdd: (req, res, next) => {

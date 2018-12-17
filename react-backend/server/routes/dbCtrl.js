@@ -8,9 +8,9 @@ router.get("/", function(req, res, next) {
   res.render("dbCtrl", { title: "資料庫" });
 });
 
-router.post("/List", dbCtrlController.getList);
-router.post("/TableList", dbCtrlController.getTableList);
-router.post("/ColumnList", dbCtrlController.getColumnList);
+router.post("/List", dbCtrlController.postList);
+router.post("/TableList", dbCtrlController.postTableList);
+router.post("/ColumnList", dbCtrlController.postColumnList);
 router.post("/update", dbCtrlController.postUpdate);
 router.post("/delete", dbCtrlController.postDelete);
 router.post("/add", dbCtrlController.postAdd);
