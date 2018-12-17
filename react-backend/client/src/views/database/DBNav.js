@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Bnav } from "../../controllers/bootstrap.controller";
 import { navColumns1, navColumns2 } from "../../controllers/state.controller";
+import { navAdd, navDelete } from "../../controllers/modal.controller";
 
 export default class DBNav extends Component {
   constructor(props) {
@@ -102,52 +102,7 @@ export default class DBNav extends Component {
         >
           <i className="fas fa-plus" /> 新增
         </button>
-        <div
-          className="modal fade"
-          id="addModal"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="addModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-lg" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="addModalLabel">
-                  新增資料
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <span>請輸入資料</span>
-                <form>{this.addColumn()}</form>
-              </div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={e => this.addOK()}
-                >
-                  新增
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  返回
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        {navAdd(this)}
       </div>
     );
   }
@@ -162,42 +117,7 @@ export default class DBNav extends Component {
         >
           <i className="fas fa-plus" /> 刪除
         </button>
-        <div
-          className="modal fade"
-          id="deleteModal"
-          tabIndex="-1"
-          role="dialog"
-          aria-labelledby="deleteModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-lg" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="deleteModalLabel">
-                  確定刪除這些資料?
-                </h5>
-                <button
-                  type="button"
-                  className="close"
-                  data-dismiss="modal"
-                  aria-label="Close"
-                >
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">{Bnav(this)}</div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        {navDelete(this)}
       </div>
     );
   }

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import DBNav from "./DBNav";
 import { getColumnList, getList } from "../../controllers/axios.controller";
-import { Btable, BtableDelete } from "../../controllers/bootstrap.controller";
+import { Btable } from "../../controllers/bootstrap.controller";
 import axios from "axios";
+import { tableDelete } from "../../controllers/modal.controller";
 
 export default class DBTable extends Component {
   constructor(props) {
@@ -145,50 +146,7 @@ export default class DBTable extends Component {
                 placeholder="搜尋關鍵字。。。"
               />
               {Btable(props.baseProps, beforeSaveCell)}
-              <div
-                className="modal fade"
-                id="delete1Modal"
-                tabIndex="-1"
-                role="dialog"
-                aria-labelledby="delete1ModalLabel"
-                aria-hidden="true"
-              >
-                <div className="modal-dialog modal-lg" role="document">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h5 className="modal-title" id="delete1ModalLabel">
-                        確定要刪除這筆資料？
-                      </h5>
-                      <button
-                        type="button"
-                        className="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div className="modal-body">{BtableDelete(this)}</div>
-                    <div className="modal-footer">
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        data-dismiss="modal"
-                        onClick={e => this.delete(this.state.row[0])}
-                      >
-                        確定
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-secondary"
-                        data-dismiss="modal"
-                      >
-                        取消
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {tableDelete(this)}
             </div>
           )}
         </ToolkitProvider>
