@@ -26,6 +26,7 @@ export default class extends Component {
       deleteData: [],
       deleteList: []
     };
+    this.deleteList = [];
     postColumnList(this);
   }
 
@@ -98,8 +99,6 @@ export default class extends Component {
     }
     return null;
   }
-
-  deleteList = [];
 
   // handle
   handleIsSelectDeleteListener() {

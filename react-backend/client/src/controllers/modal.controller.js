@@ -31,8 +31,11 @@ export const TableNavDelete = bind =>
     <h5 className="modal-title">確定刪除這些資料?</h5>,
     <div className="modal-body">{Bnav(bind)}</div>,
     <div className="modal-footer">
+      <button type="button" className="btn btn-primary">
+        確定
+      </button>
       <button type="button" className="btn btn-secondary" data-dismiss="modal">
-        Close
+        返回
       </button>
     </div>
   );

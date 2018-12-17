@@ -36,7 +36,7 @@ export const setTableNavModeColumns = bind => [
             name="revert"
             className="btn btn-warning btn-sm"
           >
-            還原
+            取消
           </button>
         </div>
       );
@@ -73,13 +73,6 @@ export const setTableModeColumns = bind => [
     formatter: (cell, row) => {
       return (
         <div className="btn-group">
-          <button
-            type="button"
-            name="delete"
-            className="btn btn-warning btn-sm"
-          >
-            查看
-          </button>
           <button
             type="button"
             name="delete"

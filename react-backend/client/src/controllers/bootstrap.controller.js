@@ -27,11 +27,15 @@ export const BootstrapDatabase = bind =>
   );
 
 export const Bnav = bind =>
-  setBaseBootstrap({
-    keyField: "ID",
-    data: bind.state.deleteList,
-    columns: bind.state.columns
-  });
+  setBaseBootstrap(
+    {
+      keyField: "ID",
+      data: bind.state.deleteList,
+      columns: bind.state.columns
+    },
+    null,
+    true
+  );
 
 export const BootstrapTable = (bind, baseProps, beforeSaveCell) =>
   setBaseBootstrap(
