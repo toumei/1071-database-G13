@@ -1,9 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./views/App";
-import { Error } from "./views/Error";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+// router
+import App from "./views/App";
+import { Error } from "./Error";
+
+// css
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 ReactDOM.render(

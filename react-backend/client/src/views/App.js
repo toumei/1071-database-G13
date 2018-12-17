@@ -8,7 +8,7 @@ import { Login } from "./login/Login";
 import Products from "./products/Products";
 
 // default program
-export default class App extends Component {
+export default class extends Component {
   constructor() {
     super();
 
