@@ -49,6 +49,6 @@ export const Btable = (baseProps, beforeSaveCell) =>
 export const BootstrapTableDelete = db =>
   setBaseBootstrap({
     keyField: "ID",
-    data: db.state.row,
+    data: db.state.deleteData,
     columns: db.state.deleteColumns
   });

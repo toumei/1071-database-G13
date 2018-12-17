@@ -19,7 +19,7 @@ export default class extends Component {
       columns: [],
       data: [],
       deleteColumns: [],
-      row: [],
+      deleteData: [],
       deleteList: []
     };
     setColumnList(this);
@@ -94,7 +94,7 @@ export default class extends Component {
 
   // handle
   handleDeleteListener(row) {
-    this.setState({ row: [row] });
+    this.setState({ deleteData: [row] });
   }
 
   handleDelete(row) {
