@@ -59,7 +59,7 @@ const NavItem = () => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
       <li className="nav-item">
-        <Link className="nav-link" to="/database">
+        <Link className="nav-link" to="/database/ctrl">
           資料庫
         </Link>
       </li>
@@ -125,11 +125,23 @@ const Header = () => (
 const Main = () => (
   <main>
     <Route exact path="/" component={index} />
-    <Route path="/database" component={DBCtrl} />
+    <Route path="/database/ctrl" component={DBCtrl} />
     <Route path="/products" component={Products} />
+    <Route path="/malfunction" component={malfunction} />
+    <Route path="/processing" component={processing} />
+    <Route path="/profile" component={profile} />
+    <Route path="/Settings" component={Settings} />
     <Route path="/login" component={Login} />
   </main>
 );
 
 // main
-const index = () => <div>123456789</div>;
+const index = () => <div>main</div>;
+// main
+const malfunction = () => <div>malfunction</div>;
+// main
+const processing = () => <div>processing</div>;
+// main
+const profile = () => <div>profile</div>;
+// main
+const Settings = () => <div>Settings</div>;

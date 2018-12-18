@@ -18,11 +18,15 @@ export default class extends Component {
 
 const Main = () => (
   <main>
-    <Route exact path="/database" component={DB} />
-    <Route path="/database/analysis" component={index} />
+    <Route exact path="/database/ctrl" component={DB} />
+    <Route path="/database/analysis" component={analysis} />
+    <Route path="/database/csv" component={csv} />
   </main>
 );
-const index = () => <div>123456789</div>;
+
+const analysis = () => <div>analysis</div>;
+
+const csv = () => <div>csv</div>;
 
 class DB extends Component {
   constructor(props) {
@@ -60,12 +64,12 @@ const Navbar = () => (
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link active" to="/database">
+        <Link className="nav-link active" to="/database/ctrl">
           表格編輯
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="">
+        <Link className="nav-link" to="/database/csv">
           匯出csv
         </Link>
       </li>
