@@ -6,13 +6,13 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import DBTableNav from "./DBTableNav";
 
 // controller
-import { BootstrapTable } from "../../controllers/react-bootstrap.controller";
-import { TableDelete } from "../../controllers/bootstrap.controller";
+import { BootstrapTableC } from "../../controllers/react-bootstrap.controller";
+import { TableDeleteC } from "../../controllers/bootstrap.controller";
 import {
-  postColumnList,
-  postList,
-  postDelete,
-  postAdd
+  postColumnListC,
+  postListC,
+  postDeleteC,
+  postAddC
 } from "../../controllers/axios.controller";
 
 export default class extends Component {
@@ -27,7 +27,7 @@ export default class extends Component {
       deleteList: []
     };
     this.deleteList = [];
-    postColumnList(this);
+    postColumnListC(this);
   }
 
   componentDidMount() {
@@ -38,7 +38,7 @@ export default class extends Component {
     //   }
     //   return "close";
     // };
-    postList(this);
+    postListC(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -49,8 +49,8 @@ export default class extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.table !== this.state.table) {
-      postColumnList(this);
-      postList(this);
+      postColumnListC(this);
+      postListC(this);
     }
   }
 
@@ -93,8 +93,8 @@ export default class extends Component {
                 {...props.searchProps}
                 placeholder="搜尋關鍵字。。。"
               />
-              {BootstrapTable(this, props.baseProps, beforeSaveCell)}
-              {TableDelete(this)}
+              {BootstrapTableC(this, props.baseProps, beforeSaveCell)}
+              {TableDeleteC(this)}
             </div>
           )}
         </ToolkitProvider>
@@ -133,14 +133,14 @@ export default class extends Component {
   }
 
   handleDelete(row) {
-    postDelete(this, row);
+    postDeleteC(this, row);
     this.setState({
       data: this.state.data.filter((x, i) => x !== row)
     });
   }
 
   handleAdd(row) {
-    postAdd(this, row);
+    postAddC(this, row);
   }
 
   beforeSaveCell(oldValue, newValue, row, column, done) {

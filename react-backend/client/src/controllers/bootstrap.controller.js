@@ -1,9 +1,16 @@
 import React from "react";
-import { BootstrapTableDelete, Bnav } from "./react-bootstrap.controller";
-import { modalModel } from "../models/bootstrap.model";
 
-export const TableNavAdd = bind =>
-  modalModel(
+// controller
+import {
+  BootstrapTableDeleteC,
+  BootstrapTableNavC
+} from "./react-bootstrap.controller";
+
+// model
+import { modalM } from "../models/bootstrap.model";
+
+export const TableNavAddC = bind =>
+  modalM(
     "addModal",
     <h5 className="modal-title">新增資料</h5>,
     <div className="modal-body">
@@ -24,11 +31,11 @@ export const TableNavAdd = bind =>
     </div>
   );
 
-export const TableNavDelete = bind =>
-  modalModel(
+export const TableNavDeleteC = bind =>
+  modalM(
     "deleteListModal",
     <h5 className="modal-title">確定刪除這些資料?</h5>,
-    <div className="modal-body">{Bnav(bind)}</div>,
+    <div className="modal-body">{BootstrapTableNavC(bind)}</div>,
     <div className="modal-footer">
       <button type="button" className="btn btn-primary">
         確定
@@ -39,11 +46,11 @@ export const TableNavDelete = bind =>
     </div>
   );
 
-export const TableDelete = bind =>
-  modalModel(
+export const TableDeleteC = bind =>
+  modalM(
     "deleteModal",
     <h5 className="modal-title">確定要刪除這筆資料？</h5>,
-    <div className="modal-body">{BootstrapTableDelete(bind)}</div>,
+    <div className="modal-body">{BootstrapTableDeleteC(bind)}</div>,
     <div className="modal-footer">
       <button
         type="button"

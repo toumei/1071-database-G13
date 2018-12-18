@@ -2,12 +2,12 @@ import React, { Component } from "react";
 
 // controller
 import {
-  TableNavAdd,
-  TableNavDelete
+  TableNavAddC,
+  TableNavDeleteC
 } from "../../controllers/bootstrap.controller";
 import {
-  setTableNavColumns,
-  setTableNavModeColumns
+  TableNavColumnsC,
+  TableNavModeColumnsC
 } from "../../controllers/state.controller";
 
 export default class extends Component {
@@ -53,11 +53,11 @@ export default class extends Component {
     const navColumns = JSON.parse(props.navColumns);
     navColumns.forEach((element, i) => {
       if (i !== navColumns.length - 1) {
-        columns.push(setTableNavColumns(element)[0]);
+        columns.push(TableNavColumnsC(element)[0]);
       }
     });
 
-    columns.push(setTableNavModeColumns(this)[0]);
+    columns.push(TableNavModeColumnsC(this)[0]);
   }
 
   cancelDelete(row) {
@@ -117,7 +117,7 @@ export default class extends Component {
         >
           <i className="fas fa-plus" /> 新增
         </button>
-        {TableNavAdd(this)}
+        {TableNavAddC(this)}
       </div>
     );
   }
@@ -133,7 +133,7 @@ export default class extends Component {
         >
           <i className="fas fa-plus" /> 刪除
         </button>
-        {TableNavDelete(this)}
+        {TableNavDeleteC(this)}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 
-export const modalModel = (id, title, body, footer) => (
+export const modalM = (id, title, body, footer) => (
   <div
     className="modal fade"
     id={id}

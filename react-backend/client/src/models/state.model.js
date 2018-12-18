@@ -1,6 +1,6 @@
 import React from "react";
 
-export const setBaseColumns = (data, text, sort = false) => [
+export const customColumnM = (data, text, sort = false) => [
   {
     dataField: data,
     text: text,
@@ -28,7 +28,7 @@ export const setBaseColumns = (data, text, sort = false) => [
   }
 ];
 
-export const stateHS = element => [
+export const columnWidthM = element => [
   {
     width: element["COLUMN_NAME"] === "ID" ? "" : "100rem",
     minWidth: element["COLUMN_NAME"] === "ID" ? "" : "10rem"

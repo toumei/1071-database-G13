@@ -1,9 +1,11 @@
 import React from "react";
-import { setBaseColumns, stateHS } from "../models/state.model";
 
-export const setDatabaseColumns = bind => [
+// model
+import { customColumnM, columnWidthM } from "../models/state.model";
+
+export const DatabaseColumnsC = bind => [
   {
-    ...setBaseColumns("TABLE_COMMENT", "資料庫")[0],
+    ...customColumnM("TABLE_COMMENT", "資料庫")[0],
     style: (cell, row, rowIndex, colIndex) => {
       if (row.TABLE_NAME === bind.state.table) {
         return { cursor: "pointer", backgroundColor: "#81c784" };
@@ -13,20 +15,20 @@ export const setDatabaseColumns = bind => [
   }
 ];
 
-export const setTableNavColumns = element => [
+export const TableNavColumnsC = element => [
   {
-    ...setBaseColumns(
+    ...customColumnM(
       element["COLUMN_NAME"],
       element["COLUMN_COMMENT"],
       true
     )[0],
-    headerStyle: { cursor: "pointer", ...stateHS(element)[0] }
+    headerStyle: { cursor: "pointer", ...columnWidthM(element)[0] }
   }
 ];
 
-export const setTableNavModeColumns = bind => [
+export const TableNavModeColumnsC = bind => [
   {
-    ...setBaseColumns("action", "操作")[0],
+    ...customColumnM("action", "操作")[0],
     isDummyField: true,
     formatter: (cell, row) => {
       return (
@@ -47,7 +49,7 @@ export const setTableNavModeColumns = bind => [
   }
 ];
 
-export const setTableData = element => [
+export const TableDataC = element => [
   {
     TABLE_COMMENT: element["TABLE_COMMENT"],
     TABLE_NAME: element["TABLE_NAME"],
@@ -55,9 +57,9 @@ export const setTableData = element => [
   }
 ];
 
-export const setTableSelect = bind => [
+export const TableSelectC = bind => [
   {
-    ...setBaseColumns("isSelect", "")[0],
+    ...customColumnM("isSelect", "")[0],
     formatter: (cellContent, row) => (
       <div className="checkbox">
         <input
@@ -78,21 +80,21 @@ export const setTableSelect = bind => [
   }
 ];
 
-export const setTableColumns = element => [
+export const TableColumnsC = element => [
   {
-    ...setBaseColumns(
+    ...customColumnM(
       element["COLUMN_NAME"],
       element["COLUMN_COMMENT"],
       true
     )[0],
-    headerStyle: { cursor: "pointer", ...stateHS(element)[0] },
+    headerStyle: { cursor: "pointer", ...columnWidthM(element)[0] },
     style: { cursor: "default" }
   }
 ];
 
-export const setTableModeColumns = bind => [
+export const TableModeColumnsC = bind => [
   {
-    ...setBaseColumns("action", "操作")[0],
+    ...customColumnM("action", "操作")[0],
     isDummyField: true,
     formatter: (cell, row) => {
       return (
@@ -122,10 +124,10 @@ export const setTableModeColumns = bind => [
   }
 ];
 
-export const setTableDeleteColumns = element => [
+export const TableDeleteColumnsC = element => [
   {
-    ...setBaseColumns(element["COLUMN_NAME"], element["COLUMN_COMMENT"])[0],
-    headerStyle: stateHS(element)[0],
+    ...customColumnM(element["COLUMN_NAME"], element["COLUMN_COMMENT"])[0],
+    headerStyle: columnWidthM(element)[0],
     style: { cursor: "default" }
   }
 ];

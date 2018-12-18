@@ -1,41 +1,41 @@
 import axios from "axios";
 
 // model
-import { decrypt } from "../models/crypt.model";
+import { decryptM } from "../models/crypt.model";
 
 // controller
 import {
-  setTableData,
-  setTableColumns,
-  setTableModeColumns,
-  setTableDeleteColumns,
-  setTableSelect
+  TableDataC,
+  TableColumnsC,
+  TableModeColumnsC,
+  TableDeleteColumnsC,
+  TableSelectC
 } from "./state.controller";
 
 const ip = true ? "192.168.42.212" : "localhost";
 
-export function postTableList(bind) {
+export function postTableListC(bind) {
   axios.post("http://" + ip + ":3000/dbCtrl/TableList").then(res => {
     let data = [];
-    decrypt(res.data).forEach(element => {
-      data.push(setTableData(element)[0]);
+    decryptM(res.data).forEach(element => {
+      data.push(TableDataC(element)[0]);
     });
     bind.setState({ data: data });
   });
 }
 
-export function postColumnList(bind) {
+export function postColumnListC(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/ColumnList?table=" + bind.state.table)
     .then(res => {
       let columns = [];
       let deleteColumns = [];
-      columns.push(setTableSelect(bind)[0]);
-      decrypt(res.data).forEach(element => {
-        columns.push(setTableColumns(element)[0]);
-        deleteColumns.push(setTableDeleteColumns(element)[0]);
+      columns.push(TableSelectC(bind)[0]);
+      decryptM(res.data).forEach(element => {
+        columns.push(TableColumnsC(element)[0]);
+        deleteColumns.push(TableDeleteColumnsC(element)[0]);
       });
-      columns.push(setTableModeColumns(bind)[0]);
+      columns.push(TableModeColumnsC(bind)[0]);
       bind.setState({
         columns: columns,
         deleteColumns: deleteColumns
@@ -43,11 +43,11 @@ export function postColumnList(bind) {
     });
 }
 
-export function postList(bind) {
+export function postListC(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/List?table=" + bind.state.table)
     .then(res => {
-      let data = [...decrypt(res.data)];
+      let data = [...decryptM(res.data)];
       data = data.map(row => {
         return { ...row, isSelect: false };
       });
@@ -55,14 +55,14 @@ export function postList(bind) {
     });
 }
 
-export function postDelete(bind, row) {
+export function postDeleteC(bind, row) {
   axios.post("http://" + ip + ":3000/dbCtrl/delete", {
     table: bind.state.table,
     id: row.ID
   });
 }
 
-export function postAdd(bind, row) {
+export function postAddC(bind, row) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/add", {
       table: bind.state.table,
