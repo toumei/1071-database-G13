@@ -57,14 +57,19 @@ export const setTableData = element => [
 
 export const setTableSelect = bind => [
   {
-    ...setBaseColumns("isCheck", "")[0],
+    ...setBaseColumns("isSelect", "")[0],
     formatter: (cellContent, row) => (
       <div className="checkbox">
         <input
           type="checkbox"
-          checked={row.isCheck}
-          onClick={e => {
-            console.log(row);
+          defaultChecked={row.isSelect}
+          onChange={e => {
+            row.isSelect = !row.isSelect;
+            if (row.isSelect) {
+              bind.handleIsSelectDelete([row]);
+            } else {
+              bind.handleIsNotSelectDelete(row);
+            }
           }}
         />
       </div>

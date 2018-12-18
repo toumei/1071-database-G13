@@ -47,7 +47,11 @@ export function postList(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/List?table=" + bind.state.table)
     .then(res => {
-      bind.setState({ data: decrypt(res.data) });
+      let data = [...decrypt(res.data)];
+      data = data.map(row => {
+        return { ...row, isSelect: false };
+      });
+      bind.setState({ data: data });
     });
 }
 

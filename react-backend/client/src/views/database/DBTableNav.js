@@ -64,6 +64,7 @@ export default class extends Component {
     this.setState({
       deleteList: this.state.deleteList.filter((x, i) => x !== row)
     });
+    this.props.handleCancelDelete(row);
   }
 
   addOK() {
@@ -96,7 +97,6 @@ export default class extends Component {
           <div className="col-sm-10">
             <input
               type="text"
-              readOnly={navColumns[i].COLUMN_NAME === "ID" ? "readonly" : ""}
               className="form-control"
               id={navColumns[i].COLUMN_NAME}
             />

@@ -87,6 +87,7 @@ export default class extends Component {
                 handleIsSelectDeleteListener={() =>
                   this.handleIsSelectDeleteListener()
                 }
+                handleCancelDelete={data => this.handleCancelDelete(data)}
               />
               <SearchBar
                 {...props.searchProps}
@@ -103,6 +104,18 @@ export default class extends Component {
   }
 
   // handle
+  handleCancelDelete(row) {
+    this.deleteList = this.deleteList.filter((x, i) => x !== row);
+    this.state.data.filter((x, i) => {
+      if (x === row) {
+        let data = this.state.data;
+        data[i].isSelect = !data[i].isSelect;
+        this.setState({ data: data });
+      }
+      return true;
+    });
+  }
+
   handleIsSelectDeleteListener() {
     this.setState({ deleteList: this.deleteList });
   }
