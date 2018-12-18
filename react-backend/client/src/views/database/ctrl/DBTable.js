@@ -6,14 +6,14 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import DBTableNav from "./DBTableNav";
 
 // controller
-import { BootstrapTableC } from "../../controllers/react-bootstrap.controller";
-import { TableDeleteC } from "../../controllers/bootstrap.controller";
+import { BootstrapTableC } from "../../../controllers/react-bootstrap.controller";
+import { TableDeleteC } from "../../../controllers/bootstrap.controller";
 import {
   postColumnListC,
   postListC,
   postDeleteC,
   postAddC
-} from "../../controllers/axios.controller";
+} from "../../../controllers/axios.controller";
 
 export default class extends Component {
   constructor(props) {

@@ -4,11 +4,11 @@ import React, { Component } from "react";
 import {
   TableNavAddC,
   TableNavDeleteC
-} from "../../controllers/bootstrap.controller";
+} from "../../../controllers/bootstrap.controller";
 import {
   TableNavColumnsC,
   TableNavModeColumnsC
-} from "../../controllers/state.controller";
+} from "../../../controllers/state.controller";
 
 export default class extends Component {
   constructor(props) {

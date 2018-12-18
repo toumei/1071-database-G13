@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Route, Link } from "react-router-dom";
 
-import DBTable from "./DBTable";
-import DBDatabase from "./DBDatabase";
+import DBTable from "./ctrl/DBTable";
+import DBDatabase from "./ctrl/DBDatabase";
 
 // default program
 export default class extends Component {

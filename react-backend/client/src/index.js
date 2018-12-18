@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { unregister } from "./serviceWorker";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+// service
+import { unregister } from "./serviceWorker";
 
 // router
 import App from "./views/App";

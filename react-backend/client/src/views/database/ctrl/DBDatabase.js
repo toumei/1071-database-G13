@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 // controller
-import { postTableListC } from "../../controllers/axios.controller";
-import { BootstrapDatabaseC } from "../../controllers/react-bootstrap.controller";
-import { DatabaseColumnsC } from "../../controllers/state.controller";
+import { postTableListC } from "../../../controllers/axios.controller";
+import { BootstrapDatabaseC } from "../../../controllers/react-bootstrap.controller";
+import { DatabaseColumnsC } from "../../../controllers/state.controller";
 
 // default program
 export default class extends Component {

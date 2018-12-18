@@ -135,13 +135,17 @@ const Main = () => (
   </main>
 );
 
-// main
+// index
 const index = () => <div>main</div>;
-// main
+
+// malfunction
 const malfunction = () => <div>malfunction</div>;
-// main
+
+// processing
 const processing = () => <div>processing</div>;
-// main
+
+// profile
 const profile = () => <div>profile</div>;
-// main
+
+// Settings
 const Settings = () => <div>Settings</div>;
