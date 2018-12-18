@@ -6,6 +6,17 @@ import DBDatabase from "./DBDatabase";
 
 // default program
 export default class extends Component {
+  render() {
+    return (
+      <div>
+        <Navbar />
+        <DB />
+      </div>
+    );
+  }
+}
+
+class DB extends Component {
   constructor(props) {
     super(props);
     this.state = { table: "boarder" };
@@ -13,16 +24,13 @@ export default class extends Component {
 
   render() {
     return (
-      <div>
-        <Navbar />
-        <div className="container-fluid">
-          <div className="row">
-            <DBDatabase
-              table={this.state.table}
-              handleChangeTable={table => this.handleChangeTable(table)}
-            />
-            <DBTable table={this.state.table} />
-          </div>
+      <div className="container-fluid">
+        <div className="row">
+          <DBDatabase
+            table={this.state.table}
+            handleChangeTable={table => this.handleChangeTable(table)}
+          />
+          <DBTable table={this.state.table} />
         </div>
       </div>
     );
@@ -39,7 +47,7 @@ const Navbar = () => (
   <section className="bg-light">
     <ul className="nav nav-tabs justify-content-center">
       <li className="nav-item">
-        <Link className="nav-link" to="/analysis">
+        <Link className="nav-link" to="/database/analysis">
           分析表
         </Link>
       </li>

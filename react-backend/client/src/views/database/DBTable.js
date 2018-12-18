@@ -21,6 +21,7 @@ export default class extends Component {
     this.state = {
       table: props.table,
       columns: [],
+      select: [],
       data: [],
       deleteColumns: [],
       deleteData: [],
@@ -43,6 +44,8 @@ export default class extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.table !== this.props.table) {
+      this.deleteList = [];
+      this.node.selectionContext.state.selected = [];
       this.setState({ table: nextProps.table });
     }
   }
@@ -73,14 +76,12 @@ export default class extends Component {
             <div className="col-md-10" style={{ marginTop: 10 }}>
               <DBTableNav
                 navColumns={JSON.stringify(
-                  this.state.columns
-                    .map((x, i) => {
-                      return {
-                        COLUMN_NAME: x.dataField,
-                        COLUMN_COMMENT: x.text
-                      };
-                    })
-                    .filter((x, i) => i !== 0)
+                  this.state.columns.map((x, i) => {
+                    return {
+                      COLUMN_NAME: x.dataField,
+                      COLUMN_COMMENT: x.text
+                    };
+                  })
                 )}
                 deleteList={this.deleteList}
                 handleAdd={data => this.handleAdd(data)}
@@ -106,14 +107,10 @@ export default class extends Component {
   // handle
   handleCancelDelete(row) {
     this.deleteList = this.deleteList.filter((x, i) => x !== row);
-    this.state.data.filter((x, i) => {
-      if (x === row) {
-        let data = this.state.data;
-        data[i].isSelect = !data[i].isSelect;
-        this.setState({ data: data });
-      }
-      return true;
-    });
+    this.node.selectionContext.state.selected = this.node.selectionContext.state.selected.filter(
+      (x, i) => x !== row.ID
+    );
+    this.setState({ select: this.node.selectionContext.state.selected });
   }
 
   handleIsSelectDeleteListener() {

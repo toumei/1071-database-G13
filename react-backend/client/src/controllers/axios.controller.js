@@ -8,8 +8,7 @@ import {
   TableDataC,
   TableColumnsC,
   TableModeColumnsC,
-  TableDeleteColumnsC,
-  TableSelectC
+  TableDeleteColumnsC
 } from "./state.controller";
 
 const ip = true ? "192.168.42.212" : "localhost";
@@ -30,7 +29,6 @@ export function postColumnListC(bind) {
     .then(res => {
       let columns = [];
       let deleteColumns = [];
-      columns.push(TableSelectC(bind)[0]);
       decryptM(res.data).forEach(element => {
         columns.push(TableColumnsC(element)[0]);
         deleteColumns.push(TableDeleteColumnsC(element)[0]);
@@ -47,11 +45,7 @@ export function postListC(bind) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/List?table=" + bind.state.table)
     .then(res => {
-      let data = [...decryptM(res.data)];
-      data = data.map(row => {
-        return { ...row, isSelect: false };
-      });
-      bind.setState({ data: data });
+      bind.setState({ data: decryptM(res.data) });
     });
 }
 

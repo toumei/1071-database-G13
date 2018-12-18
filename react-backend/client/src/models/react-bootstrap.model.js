@@ -23,12 +23,6 @@ export const customBootstrapTableM = (
 // no data
 const noData = () => <div className="text-center">尚未有資料</div>;
 
-// const customTotal = (from, to, size) => (
-//   <span className="react-bootstrap-table-pagination-total">
-//     第 {from} 筆到第 {to} 筆資料 (共 {size} 筆資料)
-//   </span>
-// );
-
 // page option
 const pageOptions = {
   paginationSize: 10,
@@ -50,19 +44,5 @@ const pageOptions = {
   firstPageTitle: "首頁",
   nextPageTitle: "下一頁",
   prePageTitle: "上一頁",
-  lastPageTitle: "尾頁",
-  showTotal: true,
-  paginationTotalRenderer: (from, to, size) => {
-    // console.log(from);
-    // console.log(to);
-    // console.log(size);
-  },
-  onPageChange: (page, sizePerPage) => {
-    // console.log(page);
-    // console.log(sizePerPage);
-  },
-  onSizePerPageChange: (sizePerPage, page) => {
-    // console.log(sizePerPage);
-    // console.log(page);
-  }
+  lastPageTitle: "尾頁"
 };

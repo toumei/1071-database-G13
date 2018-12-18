@@ -44,29 +44,30 @@ export const BootstrapTableC = (bind, baseProps, beforeSaveCell) =>
       cellEdit: cellEditFactory({
         mode: "click",
         beforeSaveCell
-      })
+      }),
+      selectRow: {
+        mode: "checkbox",
+        onSelect: (row, isSelect, rowIndex, e) => {
+          if (isSelect) {
+            bind.handleIsSelectDelete([row]);
+          } else {
+            bind.handleIsNotSelectDelete(row);
+          }
+        },
+        onSelectAll: (isSelect, rows, e) => {
+          if (isSelect) {
+            bind.handleIsSelectDelete(rows);
+          } else {
+            for (let i = 0; i < rows.length; i++) {
+              bind.handleIsNotSelectDelete(rows[i]);
+            }
+          }
+        }
+      },
+      ref: n => (bind.node = n)
     },
     true
   );
-// selectRow: {
-//   mode: "checkbox",
-//   onSelect: (row, isSelect, rowIndex, e) => {
-//     if (isSelect) {
-//       bind.handleIsSelectDelete([row]);
-//     } else {
-//       bind.handleIsNotSelectDelete(row);
-//     }
-//   },
-//   onSelectAll: (isSelect, rows, e) => {
-//     if (isSelect) {
-//       bind.handleIsSelectDelete(rows);
-//     } else {
-//       for (let i = 0; i < rows.length; i++) {
-//         bind.handleIsNotSelectDelete(rows[i]);
-//       }
-//     }
-//   }
-// }
 
 export const BootstrapTableDeleteC = bind =>
   customBootstrapTableM({

@@ -57,29 +57,6 @@ export const TableDataC = element => [
   }
 ];
 
-export const TableSelectC = bind => [
-  {
-    ...customColumnM("isSelect", "")[0],
-    formatter: (cellContent, row) => (
-      <div className="checkbox">
-        <input
-          type="checkbox"
-          defaultChecked={row.isSelect}
-          onChange={e => {
-            row.isSelect = !row.isSelect;
-            if (row.isSelect) {
-              bind.handleIsSelectDelete([row]);
-            } else {
-              bind.handleIsNotSelectDelete(row);
-            }
-          }}
-        />
-      </div>
-    ),
-    editable: false
-  }
-];
-
 export const TableColumnsC = element => [
   {
     ...customColumnM(
