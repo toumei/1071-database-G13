@@ -12,6 +12,7 @@ import { Error } from "./Error";
 // css
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
+// 主要router進入點
 ReactDOM.render(
   <BrowserRouter>
     <Switch>

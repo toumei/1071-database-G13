@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client";
 import { Route, Link } from "react-router-dom";
 
 // router import
-import DBCtrl from "./database/DBCtrl";
+import DB from "./database/DB";
 import { Login } from "./login/Login";
 import Products from "./products/Products";
 
@@ -25,7 +25,7 @@ export default class extends Component {
       <div>
         <Navbar />
         <Header />
-        <Main />
+        <Router />
       </div>
     );
   }
@@ -122,17 +122,17 @@ const Header = () => (
 );
 
 // router
-const Main = () => (
-  <main>
+const Router = () => (
+  <div>
     <Route exact path="/" component={index} />
-    <Route path="/database/ctrl" component={DBCtrl} />
+    <Route path="/database" component={DB} />
     <Route path="/products" component={Products} />
     <Route path="/malfunction" component={malfunction} />
     <Route path="/processing" component={processing} />
     <Route path="/profile" component={profile} />
     <Route path="/Settings" component={Settings} />
     <Route path="/login" component={Login} />
-  </main>
+  </div>
 );
 
 // index

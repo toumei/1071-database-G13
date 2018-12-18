@@ -9,26 +9,26 @@ export default class extends Component {
   render() {
     return (
       <div>
-        <Navbar />
-        <Main />
+        <DBnavbar />
+        <Router />
       </div>
     );
   }
 }
 
-const Main = () => (
-  <main>
-    <Route exact path="/database/ctrl" component={DB} />
+const Router = () => (
+  <div>
+    <Route exact path="/database/ctrl" component={DBCtrl} />
     <Route path="/database/analysis" component={analysis} />
     <Route path="/database/csv" component={csv} />
-  </main>
+  </div>
 );
 
 const analysis = () => <div>analysis</div>;
 
 const csv = () => <div>csv</div>;
 
-class DB extends Component {
+class DBCtrl extends Component {
   constructor(props) {
     super(props);
     this.state = { table: "boarder" };
@@ -55,7 +55,7 @@ class DB extends Component {
 }
 
 // navbar
-const Navbar = () => (
+const DBnavbar = () => (
   <section className="bg-light">
     <ul className="nav nav-tabs justify-content-center">
       <li className="nav-item">
