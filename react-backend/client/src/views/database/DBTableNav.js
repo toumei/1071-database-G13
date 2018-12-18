@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import {
   TableNavAdd,
   TableNavDelete
-} from "../../controllers/modal.controller";
+} from "../../controllers/bootstrap.controller";
 import {
   setTableNavColumns,
   setTableNavModeColumns

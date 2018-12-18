@@ -6,8 +6,8 @@ import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import DBTableNav from "./DBTableNav";
 
 // controller
-import { BootstrapTable } from "../../controllers/bootstrap.controller";
-import { TableDelete } from "../../controllers/modal.controller";
+import { BootstrapTable } from "../../controllers/react-bootstrap.controller";
+import { TableDelete } from "../../controllers/bootstrap.controller";
 import {
   postColumnList,
   postList,

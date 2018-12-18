@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 // controller
 import { postTableList } from "../../controllers/axios.controller";
-import { BootstrapDatabase } from "../../controllers/bootstrap.controller";
+import { BootstrapDatabase } from "../../controllers/react-bootstrap.controller";
 import { setDatabaseColumns } from "../../controllers/state.controller";
 
 // default program

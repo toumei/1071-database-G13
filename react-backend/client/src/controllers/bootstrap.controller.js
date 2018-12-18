@@ -1,76 +1,60 @@
-// bootstrap
-import cellEditFactory from "react-bootstrap-table2-editor";
+import React from "react";
+import { BootstrapTableDelete, Bnav } from "./react-bootstrap.controller";
+import { modalModel } from "../models/bootstrap.model";
 
-// model
-import { setBaseBootstrap } from "../models/bootstrap.model";
-
-export const BootstrapDatabase = bind =>
-  setBaseBootstrap(
-    {
-      keyField: "TABLE_COMMENT",
-      data: bind.state.data,
-      columns: bind.state.columns
-    },
-    {
-      selectRow: {
-        mode: "radio",
-        clickToSelect: true,
-        hideSelectColumn: true,
-        bgColor: "#c8e6c9",
-        onSelect: (row, isSelect, rowIndex, e) => {
-          bind.props.handleChangeTable(row.TABLE_NAME);
-          bind.setState({ table: row.TABLE_NAME });
-          return false;
-        }
-      }
-    }
+export const TableNavAdd = bind =>
+  modalModel(
+    "addModal",
+    <h5 className="modal-title">新增資料</h5>,
+    <div className="modal-body">
+      <span>請輸入資料</span>
+      <form>{bind.addColumn()}</form>
+    </div>,
+    <div className="modal-footer">
+      <button
+        type="button"
+        className="btn btn-primary"
+        onClick={e => bind.addOK()}
+      >
+        新增
+      </button>
+      <button type="button" className="btn btn-secondary" data-dismiss="modal">
+        返回
+      </button>
+    </div>
   );
 
-export const Bnav = bind =>
-  setBaseBootstrap(
-    {
-      keyField: "ID",
-      data: bind.state.deleteList,
-      columns: bind.state.columns
-    },
-    null,
-    true
+export const TableNavDelete = bind =>
+  modalModel(
+    "deleteListModal",
+    <h5 className="modal-title">確定刪除這些資料?</h5>,
+    <div className="modal-body">{Bnav(bind)}</div>,
+    <div className="modal-footer">
+      <button type="button" className="btn btn-primary">
+        確定
+      </button>
+      <button type="button" className="btn btn-secondary" data-dismiss="modal">
+        返回
+      </button>
+    </div>
   );
 
-export const BootstrapTable = (bind, baseProps, beforeSaveCell) =>
-  setBaseBootstrap(
-    baseProps,
-    {
-      cellEdit: cellEditFactory({
-        mode: "click",
-        beforeSaveCell
-      })
-      // selectRow: {
-      //   mode: "checkbox",
-      //   onSelect: (row, isSelect, rowIndex, e) => {
-      //     if (isSelect) {
-      //       bind.handleIsSelectDelete([row]);
-      //     } else {
-      //       bind.handleIsNotSelectDelete(row);
-      //     }
-      //   },
-      //   onSelectAll: (isSelect, rows, e) => {
-      //     if (isSelect) {
-      //       bind.handleIsSelectDelete(rows);
-      //     } else {
-      //       for (let i = 0; i < rows.length; i++) {
-      //         bind.handleIsNotSelectDelete(rows[i]);
-      //       }
-      //     }
-      //   }
-      // }
-    },
-    true
+export const TableDelete = bind =>
+  modalModel(
+    "deleteModal",
+    <h5 className="modal-title">確定要刪除這筆資料？</h5>,
+    <div className="modal-body">{BootstrapTableDelete(bind)}</div>,
+    <div className="modal-footer">
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-dismiss="modal"
+        onClick={e => bind.handleDelete(bind.state.deleteData[0])}
+      >
+        確定
+      </button>
+      <button type="button" className="btn btn-secondary" data-dismiss="modal">
+        取消
+      </button>
+    </div>
   );
-
-export const BootstrapTableDelete = bind =>
-  setBaseBootstrap({
-    keyField: "ID",
-    data: bind.state.deleteData,
-    columns: bind.state.deleteColumns
-  });
