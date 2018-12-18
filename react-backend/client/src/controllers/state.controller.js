@@ -33,8 +33,9 @@ export const setTableNavModeColumns = bind => [
         <div className="btn-group">
           <button
             type="button"
-            name="revert"
+            name="cancel"
             className="btn btn-warning btn-sm"
+            onClick={e => bind.cancelDelete(row)}
           >
             取消
           </button>
@@ -51,6 +52,24 @@ export const setTableData = element => [
     TABLE_COMMENT: element["TABLE_COMMENT"],
     TABLE_NAME: element["TABLE_NAME"],
     align: "center"
+  }
+];
+
+export const setTableSelect = bind => [
+  {
+    ...setBaseColumns("isCheck", "")[0],
+    formatter: (cellContent, row) => (
+      <div className="checkbox">
+        <input
+          type="checkbox"
+          checked={row.isCheck}
+          onClick={e => {
+            console.log(row);
+          }}
+        />
+      </div>
+    ),
+    editable: false
   }
 ];
 

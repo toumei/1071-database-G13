@@ -73,12 +73,14 @@ export default class extends Component {
             <div className="col-md-10" style={{ marginTop: 10 }}>
               <DBTableNav
                 navColumns={JSON.stringify(
-                  this.state.columns.map((x, i) => {
-                    return {
-                      COLUMN_NAME: x.dataField,
-                      COLUMN_COMMENT: x.text
-                    };
-                  })
+                  this.state.columns
+                    .map((x, i) => {
+                      return {
+                        COLUMN_NAME: x.dataField,
+                        COLUMN_COMMENT: x.text
+                      };
+                    })
+                    .filter((x, i) => i !== 0)
                 )}
                 deleteList={this.deleteList}
                 handleAdd={data => this.handleAdd(data)}
@@ -106,7 +108,7 @@ export default class extends Component {
   }
 
   handleIsSelectDelete(row) {
-    this.deleteList = [...this.deleteList, row];
+    this.deleteList = [...this.deleteList, ...row];
   }
 
   handleIsNotSelectDelete(row) {

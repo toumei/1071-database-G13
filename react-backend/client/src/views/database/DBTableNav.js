@@ -60,6 +60,12 @@ export default class extends Component {
     columns.push(setTableNavModeColumns(this)[0]);
   }
 
+  cancelDelete(row) {
+    this.setState({
+      deleteList: this.state.deleteList.filter((x, i) => x !== row)
+    });
+  }
+
   addOK() {
     const navColumns = JSON.parse(this.state.navColumns);
     let row = {};
@@ -78,7 +84,7 @@ export default class extends Component {
   addColumn() {
     let column = [];
     const navColumns = JSON.parse(this.state.navColumns);
-    for (let i = 0; i < navColumns.length - 1; i++) {
+    for (let i = 1; i < navColumns.length - 1; i++) {
       column.push(
         <div key={i} className="form-group row">
           <label

@@ -8,7 +8,8 @@ import {
   setTableData,
   setTableColumns,
   setTableModeColumns,
-  setTableDeleteColumns
+  setTableDeleteColumns,
+  setTableSelect
 } from "./state.controller";
 
 const ip = true ? "192.168.42.212" : "localhost";
@@ -29,6 +30,7 @@ export function postColumnList(bind) {
     .then(res => {
       let columns = [];
       let deleteColumns = [];
+      columns.push(setTableSelect(bind)[0]);
       decrypt(res.data).forEach(element => {
         columns.push(setTableColumns(element)[0]);
         deleteColumns.push(setTableDeleteColumns(element)[0]);

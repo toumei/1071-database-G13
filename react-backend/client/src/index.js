@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import * as serviceWorker from "./serviceWorker";
+import { unregister } from "./serviceWorker";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // router
@@ -23,4 +23,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-serviceWorker.unregister();
+unregister();
