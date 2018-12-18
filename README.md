@@ -58,8 +58,13 @@
 
 ### 正在做的部分：
 * sever
-  * 帳戶權限：ACL、RBAC
+  * epilogue：可快速架構具有 RESTful 風的 CRUD API server，但不支援 ACL，需另外編寫
+  * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發
+    * 將資料庫的內容映射為物件，讓程式開發人員可以用操作物件的方式對資料庫進行操作，而不直接使用SQL語法對資料庫進行操作。
+    * 例如： TableName.findAll().then(data => res.json(data))
+  * 帳戶權限系統：acl、node_acl、rbac
     * 登入時判斷身份為 一般使用者 、 工作人員 、 DB管理員，切換至不同的使用頁面。
+    * ![account database design](https://i.stack.imgur.com/JVE4x.png)
 
 * client (express)
 
