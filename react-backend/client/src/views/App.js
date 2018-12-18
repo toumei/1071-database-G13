@@ -124,7 +124,7 @@ const Header = () => (
 // router
 const Main = () => (
   <main>
-    <Route path="/" component={index} />
+    <Route exact path="/" component={index} />
     <Route path="/database" component={DBCtrl} />
     <Route path="/products" component={Products} />
     <Route path="/login" component={Login} />
@@ -132,4 +132,4 @@ const Main = () => (
 );
 
 // main
-const index = () => <div />;
+const index = () => <div>123456789</div>;

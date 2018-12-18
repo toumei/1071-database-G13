@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
 import DBTable from "./DBTable";
 import DBDatabase from "./DBDatabase";
@@ -10,11 +10,19 @@ export default class extends Component {
     return (
       <div>
         <Navbar />
-        <DB />
+        <Main />
       </div>
     );
   }
 }
+
+const Main = () => (
+  <main>
+    <Route exact path="/database" component={DB} />
+    <Route path="/database/analysis" component={index} />
+  </main>
+);
+const index = () => <div>123456789</div>;
 
 class DB extends Component {
   constructor(props) {

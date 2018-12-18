@@ -15,6 +15,7 @@ ReactDOM.render(
     <Switch>
       <Route exact path="/" component={App} />
       <Route exact path="/database" component={App} />
+      <Route exact path="/database/analysis" component={App} />
       <Route exact path="/products" component={App} />
       <Route exact path="/login" component={App} />
       <Route component={Error} />
