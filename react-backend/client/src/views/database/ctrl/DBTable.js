@@ -9,8 +9,8 @@ import DBTableNav from "./DBTableNav";
 import { BootstrapTableC } from "../../../controllers/react-bootstrap.controller";
 import { TableDeleteC } from "../../../controllers/bootstrap.controller";
 import {
-  postColumnListC,
-  postListC,
+  postTableColumnsDataC,
+  postTableDataC,
   postDeleteC,
   postAddC
 } from "../../../controllers/axios.controller";
@@ -21,17 +21,17 @@ export default class extends Component {
     this.state = {
       table: props.table,
       columns: [],
-      select: [],
       data: [],
+      select: [],
       deleteColumns: [],
       deleteData: [],
       deleteList: []
     };
     this.deleteList = [];
-    postColumnListC(this);
   }
 
   componentDidMount() {
+    // 當你離開此頁面時，跳出視窗警告你
     // window.onbeforeunload = function(e) {
     //   e = e || window.event;
     //   if (e) {
@@ -39,7 +39,8 @@ export default class extends Component {
     //   }
     //   return "close";
     // };
-    postListC(this);
+    postTableColumnsDataC(this);
+    postTableDataC(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -52,8 +53,8 @@ export default class extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.table !== this.state.table) {
-      postColumnListC(this);
-      postListC(this);
+      postTableColumnsDataC(this);
+      postTableDataC(this);
     }
   }
 
@@ -64,47 +65,30 @@ export default class extends Component {
   render() {
     if (this.state.columns.length > 0) {
       const { SearchBar } = Search;
-      const beforeSaveCell = this.beforeSaveCell;
-      return (
-        <ToolkitProvider
-          keyField={"ID"}
-          data={this.state.data}
-          columns={this.state.columns}
-          search
-        >
-          {props => (
-            <div className="col-md-10" style={{ marginTop: 10 }}>
-              <DBTableNav
-                navColumns={JSON.stringify(
-                  this.state.columns.map((x, i) => {
-                    return {
-                      COLUMN_NAME: x.dataField,
-                      COLUMN_COMMENT: x.text
-                    };
-                  })
-                )}
-                deleteList={this.deleteList}
-                handleAdd={data => this.handleAdd(data)}
-                handleIsSelectDeleteListener={() =>
-                  this.handleIsSelectDeleteListener()
-                }
-                handleCancelDelete={data => this.handleCancelDelete(data)}
-              />
-              <SearchBar
-                {...props.searchProps}
-                placeholder="搜尋關鍵字。。。"
-              />
-              {BootstrapTableC(this, props.baseProps, beforeSaveCell)}
+      return <ToolkitProvider keyField={"ID"} data={this.state.data} columns={this.state.columns} search>
+          {props => <div className="col-md-10" style={{ marginTop: 10 }}>
+              <DBTableNav columns={JSON.stringify(this.state.columns.map(
+                    (x, i) => {
+                      return {
+                        COLUMN_NAME: x.dataField,
+                        COLUMN_COMMENT: x.text
+                      };
+                    }
+                  ))} handleAddItem={(bindTableNav, data) => this.handleAddItem(bindTableNav, data)} deleteList={this.deleteList} handleIsSelectDeleteListener={() => this.handleIsSelectDeleteListener()} handleCancelDelete={data => this.handleCancelDelete(data)} />
+              <SearchBar {...props.searchProps} placeholder="搜尋關鍵字。。。" />
+              {BootstrapTableC(this, props.baseProps, this.beforeSaveCell)}
               {TableDeleteC(this)}
-            </div>
-          )}
-        </ToolkitProvider>
-      );
+            </div>}
+        </ToolkitProvider>;
     }
     return null;
   }
 
   // handle
+  handleAddItem(bindTableNav, row) {
+    postAddC(this, bindTableNav, row);
+  }
+
   handleCancelDelete(row) {
     this.deleteList = this.deleteList.filter((x, i) => x !== row);
     this.node.selectionContext.state.selected = this.node.selectionContext.state.selected.filter(
@@ -134,10 +118,6 @@ export default class extends Component {
     this.setState({
       data: this.state.data.filter((x, i) => x !== row)
     });
-  }
-
-  handleAdd(row) {
-    postAddC(this, row);
   }
 
   beforeSaveCell(oldValue, newValue, row, column, done) {

@@ -13,23 +13,16 @@ import {
 export default class extends Component {
   constructor(props) {
     super(props);
-    let columns = [];
-    this.setNavColumns(props, columns);
     this.state = {
-      navColumns: props.navColumns,
-      columns: columns,
-      deleteList: props.deleteList
+      columns: this.NavColumns(props),
+      deleteList: props.deleteList,
+      addInfo: ""
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.navColumns !== this.props.navColumns) {
-      let columns = [];
-      this.setNavColumns(nextProps, columns);
-      this.setState({
-        navColumns: nextProps.navColumns,
-        columns: columns
-      });
+    if (nextProps.columns !== this.props.columns) {
+      this.setState({ columns: this.NavColumns(nextProps) });
     }
     if (nextProps.deleteList !== this.props.deleteList) {
       this.setState({ deleteList: nextProps.deleteList });
@@ -49,62 +42,17 @@ export default class extends Component {
     );
   }
 
-  setNavColumns(props, columns) {
-    const navColumns = JSON.parse(props.navColumns);
-    navColumns.forEach((element, i) => {
-      if (i !== navColumns.length - 1) {
+  NavColumns(props) {
+    let columns = [];
+    const newColumns = JSON.parse(props.columns);
+    newColumns.forEach((element, i) => {
+      if (i !== newColumns.length - 1) {
         columns.push(TableNavColumnsC(element)[0]);
       }
     });
 
     columns.push(TableNavModeColumnsC(this)[0]);
-  }
-
-  cancelDelete(row) {
-    this.setState({
-      deleteList: this.state.deleteList.filter((x, i) => x !== row)
-    });
-    this.props.handleCancelDelete(row);
-  }
-
-  addOK() {
-    const navColumns = JSON.parse(this.state.navColumns);
-    let row = {};
-    let count = true;
-    for (let i = 1; i < navColumns.length - 1; i++) {
-      if (document.getElementById(navColumns[i].COLUMN_NAME).value === "")
-        count = false;
-      row[navColumns[i].COLUMN_NAME] = document.getElementById(
-        navColumns[i].COLUMN_NAME
-      ).value;
-      document.getElementById(navColumns[i].COLUMN_NAME).value = "";
-    }
-    if (count) this.props.handleAdd(row);
-  }
-
-  addColumn() {
-    let column = [];
-    const navColumns = JSON.parse(this.state.navColumns);
-    for (let i = 1; i < navColumns.length - 1; i++) {
-      column.push(
-        <div key={i} className="form-group row">
-          <label
-            htmlFor={navColumns[i].COLUMN_NAME}
-            className="col-sm-2 col-form-label"
-          >
-            {navColumns[i].COLUMN_COMMENT}
-          </label>
-          <div className="col-sm-10">
-            <input
-              type="text"
-              className="form-control"
-              id={navColumns[i].COLUMN_NAME}
-            />
-          </div>
-        </div>
-      );
-    }
-    return column;
+    return columns;
   }
 
   add() {
@@ -122,11 +70,59 @@ export default class extends Component {
     );
   }
 
+  addColumn() {
+    let columns = [];
+    const newColumns = JSON.parse(this.props.columns);
+    for (let i = 1; i < newColumns.length - 1; i++) {
+      columns.push(
+        <div key={i} className="form-group row">
+          <label
+            htmlFor={newColumns[i].COLUMN_NAME}
+            className="col-sm-2 col-form-label"
+          >
+            {newColumns[i].COLUMN_COMMENT}
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              className="form-control"
+              id={newColumns[i].COLUMN_NAME}
+            />
+          </div>
+        </div>
+      );
+    }
+    return columns;
+  }
+
+  addItem() {
+    const newColumns = JSON.parse(this.props.columns);
+    let row = {};
+    let isNull = false;
+    for (let i = 1; i < newColumns.length - 1; i++) {
+      if (document.getElementById(newColumns[i].COLUMN_NAME).value === "") {
+        isNull = !isNull;
+        break;
+      }
+      row[newColumns[i].COLUMN_NAME] = document.getElementById(
+        newColumns[i].COLUMN_NAME
+      ).value;
+    }
+    if (!isNull) {
+      this.props.handleAddItem(this, row);
+      for (let i = 1; i < newColumns.length - 1; i++) {
+        document.getElementById(newColumns[i].COLUMN_NAME).value = "";
+      }
+    } else {
+      this.setState({ addInfo: "新增失敗" });
+    }
+  }
+
   delete() {
     return (
       <div className="col-4 col-md-2">
         <button
-          className="btn btn-warning btn-block"
+          className="btn btn-danger btn-block"
           data-toggle="modal"
           data-target="#deleteListModal"
           onClick={e => this.props.handleIsSelectDeleteListener()}
@@ -136,5 +132,12 @@ export default class extends Component {
         {TableNavDeleteC(this)}
       </div>
     );
+  }
+
+  cancelDelete(row) {
+    this.setState({
+      deleteList: this.state.deleteList.filter((x, i) => x !== row)
+    });
+    this.props.handleCancelDelete(row);
   }
 }

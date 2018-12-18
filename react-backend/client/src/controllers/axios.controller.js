@@ -13,57 +13,62 @@ import {
 
 const ip = true ? "192.168.42.212" : "localhost";
 
-export function postTableListC(bind) {
+export function postDatabaseDataC(bindDatabase) {
   axios.post("http://" + ip + ":3000/dbCtrl/TableList").then(res => {
     let data = [];
-    decryptM(res.data).forEach(element => {
-      data.push(TableDataC(element)[0]);
+    decryptM(res.data).forEach(elm => {
+      data.push(TableDataC(elm)[0]);
     });
-    bind.setState({ data: data });
+    bindDatabase.setState({ data: data });
   });
 }
 
-export function postColumnListC(bind) {
+export function postTableColumnsDataC(bindTable) {
   axios
-    .post("http://" + ip + ":3000/dbCtrl/ColumnList?table=" + bind.state.table)
+    .post(
+      "http://" + ip + ":3000/dbCtrl/ColumnList?table=" + bindTable.state.table
+    )
     .then(res => {
       let columns = [];
       let deleteColumns = [];
-      decryptM(res.data).forEach(element => {
-        columns.push(TableColumnsC(element)[0]);
-        deleteColumns.push(TableDeleteColumnsC(element)[0]);
+      decryptM(res.data).forEach(elm => {
+        columns.push(TableColumnsC(elm)[0]);
+        deleteColumns.push(TableDeleteColumnsC(elm)[0]);
       });
-      columns.push(TableModeColumnsC(bind)[0]);
-      bind.setState({
+      columns.push(TableModeColumnsC(bindTable)[0]);
+      bindTable.setState({
         columns: columns,
         deleteColumns: deleteColumns
       });
     });
 }
 
-export function postListC(bind) {
+export function postTableDataC(bindTable) {
   axios
-    .post("http://" + ip + ":3000/dbCtrl/List?table=" + bind.state.table)
+    .post("http://" + ip + ":3000/dbCtrl/List?table=" + bindTable.state.table)
     .then(res => {
-      bind.setState({ data: decryptM(res.data) });
+      bindTable.setState({ data: decryptM(res.data) });
     });
 }
 
-export function postDeleteC(bind, row) {
+export function postDeleteC(bindTable, row) {
   axios.post("http://" + ip + ":3000/dbCtrl/delete", {
-    table: bind.state.table,
+    table: bindTable.state.table,
     id: row.ID
   });
 }
 
-export function postAddC(bind, row) {
+export function postAddC(bindTable, bindTableNav, row) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/add", {
-      table: bind.state.table,
+      table: bindTable.state.table,
       row: row
     })
     .then(res => {
       row["ID"] = res.data.id;
-      bind.setState({ data: [...bind.state.data, row] });
+      bindTable.setState({
+        data: [...bindTable.state.data, row]
+      });
+      bindTableNav.setState({ addInfo: "新增成功" });
     });
 }

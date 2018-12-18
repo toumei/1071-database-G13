@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // controller
-import { postTableListC } from "../../../controllers/axios.controller";
+import { postDatabaseDataC } from "../../../controllers/axios.controller";
 import { BootstrapDatabaseC } from "../../../controllers/react-bootstrap.controller";
 import { DatabaseColumnsC } from "../../../controllers/state.controller";
 
@@ -17,7 +17,7 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    postTableListC(this);
+    postDatabaseDataC(this);
   }
 
   render() {

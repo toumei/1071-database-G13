@@ -4,12 +4,12 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 // model
 import { customBootstrapTableM } from "../models/react-bootstrap.model";
 
-export const BootstrapDatabaseC = bind =>
+export const BootstrapDatabaseC = bindDatabase =>
   customBootstrapTableM(
     {
       keyField: "TABLE_COMMENT",
-      data: bind.state.data,
-      columns: bind.state.columns
+      data: bindDatabase.state.data,
+      columns: bindDatabase.state.columns
     },
     {
       selectRow: {
@@ -18,26 +18,26 @@ export const BootstrapDatabaseC = bind =>
         hideSelectColumn: true,
         bgColor: "#c8e6c9",
         onSelect: (row, isSelect, rowIndex, e) => {
-          bind.props.handleChangeTable(row.TABLE_NAME);
-          bind.setState({ table: row.TABLE_NAME });
+          bindDatabase.props.handleChangeTable(row.TABLE_NAME);
+          bindDatabase.setState({ table: row.TABLE_NAME });
           return false;
         }
       }
     }
   );
 
-export const BootstrapTableNavC = bind =>
+export const BootstrapTableNavC = bindTableNav =>
   customBootstrapTableM(
     {
       keyField: "ID",
-      data: bind.state.deleteList,
-      columns: bind.state.columns
+      data: bindTableNav.state.deleteList,
+      columns: bindTableNav.state.columns
     },
     null,
     true
   );
 
-export const BootstrapTableC = (bind, baseProps, beforeSaveCell) =>
+export const BootstrapTableC = (bindTable, baseProps, beforeSaveCell) =>
   customBootstrapTableM(
     baseProps,
     {
@@ -49,29 +49,29 @@ export const BootstrapTableC = (bind, baseProps, beforeSaveCell) =>
         mode: "checkbox",
         onSelect: (row, isSelect, rowIndex, e) => {
           if (isSelect) {
-            bind.handleIsSelectDelete([row]);
+            bindTable.handleIsSelectDelete([row]);
           } else {
-            bind.handleIsNotSelectDelete(row);
+            bindTable.handleIsNotSelectDelete(row);
           }
         },
         onSelectAll: (isSelect, rows, e) => {
           if (isSelect) {
-            bind.handleIsSelectDelete(rows);
+            bindTable.handleIsSelectDelete(rows);
           } else {
             for (let i = 0; i < rows.length; i++) {
-              bind.handleIsNotSelectDelete(rows[i]);
+              bindTable.handleIsNotSelectDelete(rows[i]);
             }
           }
         }
       },
-      ref: n => (bind.node = n)
+      ref: n => (bindTable.node = n)
     },
     true
   );
 
-export const BootstrapTableDeleteC = bind =>
+export const BootstrapTableDeleteC = bindTable =>
   customBootstrapTableM({
     keyField: "ID",
-    data: bind.state.deleteData,
-    columns: bind.state.deleteColumns
+    data: bindTable.state.deleteData,
+    columns: bindTable.state.deleteColumns
   });

@@ -3,11 +3,11 @@ import React from "react";
 // model
 import { customColumnM, columnWidthM } from "../models/state.model";
 
-export const DatabaseColumnsC = bind => [
+export const DatabaseColumnsC = bindDatabase => [
   {
     ...customColumnM("TABLE_COMMENT", "資料庫")[0],
     style: (cell, row, rowIndex, colIndex) => {
-      if (row.TABLE_NAME === bind.state.table) {
+      if (row.TABLE_NAME === bindDatabase.state.table) {
         return { cursor: "pointer", backgroundColor: "#81c784" };
       }
       return { cursor: "pointer", backgroundColor: "white" };
@@ -26,7 +26,7 @@ export const TableNavColumnsC = element => [
   }
 ];
 
-export const TableNavModeColumnsC = bind => [
+export const TableNavModeColumnsC = bindTableNav => [
   {
     ...customColumnM("action", "操作")[0],
     isDummyField: true,
@@ -37,7 +37,7 @@ export const TableNavModeColumnsC = bind => [
             type="button"
             name="cancel"
             className="btn btn-warning btn-sm"
-            onClick={e => bind.cancelDelete(row)}
+            onClick={e => bindTableNav.cancelDelete(row)}
           >
             取消
           </button>
@@ -69,7 +69,7 @@ export const TableColumnsC = element => [
   }
 ];
 
-export const TableModeColumnsC = bind => [
+export const TableModeColumnsC = bindTable => [
   {
     ...customColumnM("action", "操作")[0],
     isDummyField: true,
@@ -89,7 +89,7 @@ export const TableModeColumnsC = bind => [
             className="btn btn-warning btn-sm"
             data-toggle="modal"
             data-target={"#deleteModal"}
-            onClick={e => bind.handleDeleteListener(row)}
+            onClick={e => bindTable.handleDeleteListener(row)}
           >
             刪除
           </button>

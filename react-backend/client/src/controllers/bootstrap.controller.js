@@ -9,33 +9,44 @@ import {
 // model
 import { modalM } from "../models/bootstrap.model";
 
-export const TableNavAddC = bind =>
+export const TableNavAddC = bindTableNav =>
   modalM(
     "addModal",
-    <h5 className="modal-title">新增資料</h5>,
+    <h5 className="modal-title">新增一筆資料</h5>,
     <div className="modal-body">
-      <span>請輸入資料</span>
-      <form>{bind.addColumn()}</form>
+      <form>{bindTableNav.addColumn()}</form>
+      <p className="text-center">{bindTableNav.state.addInfo}</p>
     </div>,
     <div className="modal-footer">
       <button
         type="button"
         className="btn btn-primary"
-        onClick={e => bind.addOK()}
+        onClick={e => bindTableNav.addItem()}
       >
         新增
       </button>
-      <button type="button" className="btn btn-secondary" data-dismiss="modal">
-        返回
+      <button
+        type="button"
+        className="btn btn-secondary"
+        data-dismiss="modal"
+        onClick={e => {
+          const newColumns = JSON.parse(bindTableNav.props.columns);
+          for (let i = 1; i < newColumns.length - 1; i++) {
+            document.getElementById(newColumns[i].COLUMN_NAME).value = "";
+          }
+          bindTableNav.setState({ addInfo: "" });
+        }}
+      >
+        取消
       </button>
     </div>
   );
 
-export const TableNavDeleteC = bind =>
+export const TableNavDeleteC = bindTableNav =>
   modalM(
     "deleteListModal",
     <h5 className="modal-title">確定刪除這些資料?</h5>,
-    <div className="modal-body">{BootstrapTableNavC(bind)}</div>,
+    <div className="modal-body">{BootstrapTableNavC(bindTableNav)}</div>,
     <div className="modal-footer">
       <button type="button" className="btn btn-primary">
         確定
@@ -46,17 +57,17 @@ export const TableNavDeleteC = bind =>
     </div>
   );
 
-export const TableDeleteC = bind =>
+export const TableDeleteC = bindTable =>
   modalM(
     "deleteModal",
     <h5 className="modal-title">確定要刪除這筆資料？</h5>,
-    <div className="modal-body">{BootstrapTableDeleteC(bind)}</div>,
+    <div className="modal-body">{BootstrapTableDeleteC(bindTable)}</div>,
     <div className="modal-footer">
       <button
         type="button"
         className="btn btn-primary"
         data-dismiss="modal"
-        onClick={e => bind.handleDelete(bind.state.deleteData[0])}
+        onClick={e => bindTable.handleDelete(bindTable.state.deleteData[0])}
       >
         確定
       </button>
