@@ -2,9 +2,10 @@
 # [寫 code & 上傳 github 注意事項](https://github.com/toumei/1071-database-G13/wiki/Advance-preparation)
 * **有任何參考資料請放上來，這樣比較好協助了解程式碼和報告**
 * **安裝擴充插件，以便於後續編程**
-* **請盡量用ES6語法，少用var(型態可變，值可變)改用let(型態不可變，值可變)、const(型態不可變，值不可變)**
+* **express用ES5語法，react用ES6語法，少用var(型態可變，值可變)改用let(型態不可變，值可變)、const(型態不可變，值不可變)**
 ---
 ### 日程：
+* 2019年12月22日 (六) 第一次分組討論 (暫定)
 * 2019年01月05日 (六) 繳交報告
 * 2019年01月07日 (一) 口頭報告
 ---
@@ -29,6 +30,7 @@
 * 登入後會將token記錄在本地端 Local Storage
 * 使用http攔截器，攔截請求，若header無token，則setHeader(Local Storage的token資料)
 * [react練習/測試檔](https://github.com/toumei/107-01-database-4B/tree/master/example-create-react-app-express) - 12/10
+* router 已全部配置完成 - 10/19
 ---
 
 ### WIKI：
@@ -52,7 +54,7 @@
   * Ajax 紀錄回傳token
   * Axios攔截器尚未測試(server端無法跑)，若token失效則重新導向login
 * client (react)
-  * router 規劃與設計
+  * router 配置完成 (不包含之後新增)
   * server-client 資料加解密
   * 基本 CRUD 完成
 
@@ -69,7 +71,7 @@
 * client (express)
 
 * client (react)
-  * db 介面操作與接收資料
+  * db 新增(可以顯示新增成功)、編輯(有選單可以選擇)、刪除(群體刪除)、部分bug
 
 ### 尚未做的部分：
 * server
@@ -81,7 +83,6 @@
 * client (react)
   * malfunction (express->react)
   * processing (express->react)
-  * db CRUD
   * db 分析
 ---
 
@@ -99,9 +100,7 @@
   * 顯示CRUD的操作
  
 * client (react)
-  * MVC (能實現的話)
   * https server (配合server)
-  * Axios (配合server)
   * ACL、RBAC (配合server)
   * 即時顯示新資訊 (學生填報修單通知工作人員，工作人員報修完畢通知學生)
   * 多國語言
