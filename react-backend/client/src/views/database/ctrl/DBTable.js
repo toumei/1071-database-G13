@@ -80,12 +80,15 @@ export default class extends Component {
                     };
                   })
                 )}
-                handleAddItem={(bindTableNav, data) =>
-                  this.handleAddItem(bindTableNav, data)
+                handleAddItem={(bindTableNav, row) =>
+                  this.handleAddItem(bindTableNav, row)
                 }
                 select={this.select}
+                handleDeleteItem={(bindTableNav, row) =>
+                  this.handleDeleteItem(bindTableNav, row)
+                }
                 handleGetSelect={() => this.handleGetSelect()}
-                handleCancelDelete={data => this.handleCancelDelete(data)}
+                handleCancelDelete={row => this.handleCancelDelete(row)}
               />
               <SearchBar
                 {...props.searchProps}
@@ -103,7 +106,8 @@ export default class extends Component {
 
   // table nav add
   handleAddItem(bindTableNav, row) {
-    postAddC(this, bindTableNav, row);
+    postAddC(this, row);
+    bindTableNav.setState({ addInfo: "新增成功" });
   }
 
   // table select
@@ -126,6 +130,23 @@ export default class extends Component {
     //   (x, i) => x !== row.ID
     // );
     // this.setState({});
+  }
+
+  // table nav delete
+  handleDeleteItem(row, isBottom) {
+    if (isBottom) {
+      let newData = this.state.data;
+      let newSelect = this.select;
+      row.filter((x, i) => {
+        newData = newData.filter((xx, i) => x !== xx);
+        newSelect = newSelect.filter((xx, i) => x !== xx);
+        return false;
+      });
+      this.select = newSelect;
+      this.setState({ data: newData });
+    } else {
+      postDeleteC(this, row);
+    }
   }
 
   // table delete

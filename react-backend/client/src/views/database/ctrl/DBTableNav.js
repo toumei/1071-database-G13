@@ -137,6 +137,12 @@ export default class extends Component {
     );
   }
 
+  deleteItem() {
+    const deleteList = this.state.deleteList;
+    deleteList.filter((x, i) => this.props.handleDeleteItem(x, false));
+    this.props.handleDeleteItem(deleteList, true);
+  }
+
   cancelDelete(row) {
     this.setState({
       deleteList: this.state.deleteList.filter((x, i) => x !== row)

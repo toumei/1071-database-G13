@@ -58,7 +58,7 @@ export function postDeleteC(bindTable, row) {
   });
 }
 
-export function postAddC(bindTable, bindTableNav, row) {
+export function postAddC(bindTable, row) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/add", {
       table: bindTable.state.table,
@@ -69,6 +69,5 @@ export function postAddC(bindTable, bindTableNav, row) {
       bindTable.setState({
         data: [...bindTable.state.data, row]
       });
-      bindTableNav.setState({ addInfo: "新增成功" });
     });
 }
