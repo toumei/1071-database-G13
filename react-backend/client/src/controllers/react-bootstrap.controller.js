@@ -49,17 +49,17 @@ export const BootstrapTableC = (bindTable, baseProps, beforeSaveCell) =>
         mode: "checkbox",
         onSelect: (row, isSelect, rowIndex, e) => {
           if (isSelect) {
-            bindTable.handleIsSelectDelete([row]);
+            bindTable.isSelect([row]);
           } else {
-            bindTable.handleIsNotSelectDelete(row);
+            bindTable.isNotSelect(row);
           }
         },
         onSelectAll: (isSelect, rows, e) => {
           if (isSelect) {
-            bindTable.handleIsSelectDelete(rows);
+            bindTable.isSelect(rows);
           } else {
             for (let i = 0; i < rows.length; i++) {
-              bindTable.handleIsNotSelectDelete(rows[i]);
+              bindTable.isNotSelect(rows[i]);
             }
           }
         }

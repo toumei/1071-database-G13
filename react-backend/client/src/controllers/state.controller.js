@@ -89,7 +89,7 @@ export const TableModeColumnsC = bindTable => [
             className="btn btn-warning btn-sm"
             data-toggle="modal"
             data-target={"#deleteModal"}
-            onClick={e => bindTable.handleDeleteListener(row)}
+            onClick={e => bindTable.getDeleteItem(row)}
           >
             刪除
           </button>

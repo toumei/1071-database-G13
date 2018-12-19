@@ -15,7 +15,7 @@ export default class extends Component {
     super(props);
     this.state = {
       columns: this.NavColumns(props),
-      deleteList: props.deleteList,
+      deleteList: props.select,
       addInfo: ""
     };
   }
@@ -24,8 +24,8 @@ export default class extends Component {
     if (nextProps.columns !== this.props.columns) {
       this.setState({ columns: this.NavColumns(nextProps) });
     }
-    if (nextProps.deleteList !== this.props.deleteList) {
-      this.setState({ deleteList: nextProps.deleteList });
+    if (nextProps.select !== this.props.select) {
+      this.setState({ deleteList: nextProps.select });
     }
   }
 
@@ -125,7 +125,10 @@ export default class extends Component {
           className="btn btn-danger btn-block"
           data-toggle="modal"
           data-target="#deleteListModal"
-          onClick={e => this.props.handleIsSelectDeleteListener()}
+          onClick={e => {
+            this.props.handleGetSelect();
+            this.setState({ deleteList: this.props.select });
+          }}
         >
           <i className="fas fa-plus" /> 刪除
         </button>
@@ -138,6 +141,5 @@ export default class extends Component {
     this.setState({
       deleteList: this.state.deleteList.filter((x, i) => x !== row)
     });
-    this.props.handleCancelDelete(row);
   }
 }

@@ -22,12 +22,9 @@ export default class extends Component {
       table: props.table,
       columns: [],
       data: [],
-      select: [],
-      deleteColumns: [],
-      deleteData: [],
-      deleteList: []
+      deleteData: []
     };
-    this.deleteList = [];
+    this.select = [];
   }
 
   componentDidMount() {
@@ -45,7 +42,7 @@ export default class extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.table !== this.props.table) {
-      this.deleteList = [];
+      this.select = [];
       this.node.selectionContext.state.selected = [];
       this.setState({ table: nextProps.table });
     }
@@ -65,61 +62,85 @@ export default class extends Component {
   render() {
     if (this.state.columns.length > 0) {
       const { SearchBar } = Search;
-      return <ToolkitProvider keyField={"ID"} data={this.state.data} columns={this.state.columns} search>
-          {props => <div className="col-md-10" style={{ marginTop: 10 }}>
-              <DBTableNav columns={JSON.stringify(this.state.columns.map(
-                    (x, i) => {
-                      return {
-                        COLUMN_NAME: x.dataField,
-                        COLUMN_COMMENT: x.text
-                      };
-                    }
-                  ))} handleAddItem={(bindTableNav, data) => this.handleAddItem(bindTableNav, data)} deleteList={this.deleteList} handleIsSelectDeleteListener={() => this.handleIsSelectDeleteListener()} handleCancelDelete={data => this.handleCancelDelete(data)} />
-              <SearchBar {...props.searchProps} placeholder="搜尋關鍵字。。。" />
+      return (
+        <ToolkitProvider
+          keyField={"ID"}
+          data={this.state.data}
+          columns={this.state.columns}
+          search
+        >
+          {props => (
+            <div className="col-md-10" style={{ marginTop: 10 }}>
+              <DBTableNav
+                columns={JSON.stringify(
+                  this.state.columns.map((x, i) => {
+                    return {
+                      COLUMN_NAME: x.dataField,
+                      COLUMN_COMMENT: x.text
+                    };
+                  })
+                )}
+                handleAddItem={(bindTableNav, data) =>
+                  this.handleAddItem(bindTableNav, data)
+                }
+                select={this.select}
+                handleGetSelect={() => this.handleGetSelect()}
+                handleCancelDelete={data => this.handleCancelDelete(data)}
+              />
+              <SearchBar
+                {...props.searchProps}
+                placeholder="搜尋關鍵字。。。"
+              />
               {BootstrapTableC(this, props.baseProps, this.beforeSaveCell)}
               {TableDeleteC(this)}
-            </div>}
-        </ToolkitProvider>;
+            </div>
+          )}
+        </ToolkitProvider>
+      );
     }
     return null;
   }
 
-  // handle
+  // table nav add
   handleAddItem(bindTableNav, row) {
     postAddC(this, bindTableNav, row);
   }
 
+  // table select
+  isSelect(row) {
+    this.select = [...this.select, ...row];
+  }
+
+  isNotSelect(row) {
+    this.select = this.select.filter((x, i) => x !== row);
+  }
+
+  // table nav select
+  handleGetSelect() {
+    this.setState({});
+  }
+
   handleCancelDelete(row) {
-    this.deleteList = this.deleteList.filter((x, i) => x !== row);
-    this.node.selectionContext.state.selected = this.node.selectionContext.state.selected.filter(
-      (x, i) => x !== row.ID
-    );
-    this.setState({ select: this.node.selectionContext.state.selected });
+    // this.select = this.select.filter((x, i) => x !== row);
+    // this.node.selectionContext.state.selected = this.node.selectionContext.state.selected.filter(
+    //   (x, i) => x !== row.ID
+    // );
+    // this.setState({});
   }
 
-  handleIsSelectDeleteListener() {
-    this.setState({ deleteList: this.deleteList });
-  }
-
-  handleIsSelectDelete(row) {
-    this.deleteList = [...this.deleteList, ...row];
-  }
-
-  handleIsNotSelectDelete(row) {
-    this.deleteList = this.deleteList.filter((x, i) => x !== row);
-  }
-
-  handleDeleteListener(row) {
+  // table delete
+  getDeleteItem(row) {
     this.setState({ deleteData: [row] });
   }
 
-  handleDelete(row) {
+  deleteItem(row) {
     postDeleteC(this, row);
     this.setState({
       data: this.state.data.filter((x, i) => x !== row)
     });
   }
 
+  // table edit
   beforeSaveCell(oldValue, newValue, row, column, done) {
     setTimeout(() => {
       if (window.confirm("確定改變新的值?")) {

@@ -67,7 +67,7 @@ export const TableDeleteC = bindTable =>
         type="button"
         className="btn btn-primary"
         data-dismiss="modal"
-        onClick={e => bindTable.handleDelete(bindTable.state.deleteData[0])}
+        onClick={e => bindTable.deleteItem(bindTable.state.deleteData[0])}
       >
         確定
       </button>
