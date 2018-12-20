@@ -59,7 +59,7 @@ export default class extends Component {
     return (
       <div className="col-4 col-md-2">
         <button
-          className="btn btn-warning btn-block"
+          className="btn btn-success btn-block"
           data-toggle="modal"
           data-target="#addModal"
         >
@@ -126,7 +126,7 @@ export default class extends Component {
     return (
       <div className="col-4 col-md-2">
         <button
-          className="btn btn-danger btn-block"
+          className="btn btn-warning btn-block"
           data-toggle="modal"
           data-target="#deleteListModal"
           onClick={e => {

@@ -76,7 +76,7 @@ export const TableModeColumnsC = bindTable => [
         <button
           type="button"
           name="delete"
-          className="btn btn-warning btn-sm"
+          className="btn btn-primary btn-sm"
           data-toggle="modal"
           data-target={"#editModal"}
           onClick={e => bindTable.getItem(row)}
@@ -86,7 +86,7 @@ export const TableModeColumnsC = bindTable => [
         <button
           type="button"
           name="delete"
-          className="btn btn-warning btn-sm"
+          className="btn btn-danger btn-sm"
           data-toggle="modal"
           data-target={"#deleteModal"}
           onClick={e => bindTable.getItem(row)}
