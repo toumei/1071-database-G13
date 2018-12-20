@@ -105,6 +105,7 @@
   * 多國語言
   * 支援手機排版 (全部非部分)
   * bootstrap table 改成 remote 模式
+  * edit 有選擇模式
 
 ### 前端可操作之Table：
 * product (課本教材，以此為基礎修改，兼功能測試用)
