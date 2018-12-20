@@ -9,7 +9,8 @@ import DBTableNav from "./DBTableNav";
 import { BootstrapTableC } from "../../../controllers/react-bootstrap.controller";
 import {
   TableEditC,
-  TableDeleteC
+  TableDeleteC,
+  TableInfoC
 } from "../../../controllers/bootstrap.controller";
 import {
   postTableColumnsDataC,
@@ -29,7 +30,8 @@ export default class extends Component {
       editColumns: [],
       deleteColumns: [],
       itemData: [],
-      editItem: ""
+      editItem: "",
+      info: [{ title: "1", content: "2" }]
     };
     this.select = [];
   }
@@ -104,6 +106,13 @@ export default class extends Component {
               {BootstrapTableC(this, props.baseProps)}
               {TableEditC(this)}
               {TableDeleteC(this)}
+              {TableInfoC(this)}
+              <button
+                id="infoBtn"
+                data-toggle="modal"
+                data-target="#infoModal"
+                // style={{ display: "none" }}
+              />
             </div>
           )}
         </ToolkitProvider>
@@ -115,7 +124,7 @@ export default class extends Component {
   // table nav add
   handleAddItem(bindTableNav, row) {
     postAddC(this, row);
-    bindTableNav.setState({ addInfo: "新增成功" });
+    bindTableNav.setState({ info: "新增成功" });
   }
 
   // table select
@@ -249,7 +258,7 @@ export default class extends Component {
       }
       return false;
     });
-    this.setState({ editInfo: "編輯成功" });
+    this.setState({ info: "編輯成功" });
   }
 
   // table edit

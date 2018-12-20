@@ -15,7 +15,6 @@ export const TableNavAddC = bindTableNav =>
     <h5 className="modal-title">新增一筆資料</h5>,
     <div className="modal-body">
       <form>{bindTableNav.addColumn()}</form>
-      <p className="text-center">{bindTableNav.state.addInfo}</p>
     </div>,
     <div className="modal-footer">
       <button
@@ -32,9 +31,10 @@ export const TableNavAddC = bindTableNav =>
         onClick={e => {
           const newColumns = JSON.parse(bindTableNav.props.columns);
           for (let i = 1; i < newColumns.length - 1; i++) {
-            document.getElementById(newColumns[i].COLUMN_NAME).value = "";
+            document.getElementById(
+              newColumns[i].COLUMN_NAME + "Delete"
+            ).value = "";
           }
-          bindTableNav.setState({ addInfo: "" });
         }}
       >
         取消
@@ -97,6 +97,21 @@ export const TableDeleteC = bindTable =>
         data-dismiss="modal"
         onClick={e => bindTable.deleteItem(bindTable.state.itemData[0])}
       >
+        確定
+      </button>
+      <button type="button" className="btn btn-secondary" data-dismiss="modal">
+        取消
+      </button>
+    </div>
+  );
+
+export const TableInfoC = bindTable =>
+  modalM(
+    "infoModal",
+    <h5 className="modal-title">{bindTable.state.info[0].title}</h5>,
+    <div className="modal-body">{bindTable.state.info[0].content}</div>,
+    <div className="modal-footer">
+      <button type="button" className="btn btn-primary" data-dismiss="modal">
         確定
       </button>
       <button type="button" className="btn btn-secondary" data-dismiss="modal">

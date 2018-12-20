@@ -16,7 +16,7 @@ export default class extends Component {
     this.state = {
       columns: this.NavColumns(props),
       deleteList: props.select,
-      addInfo: ""
+      info: ""
     };
   }
 
@@ -118,7 +118,7 @@ export default class extends Component {
           "";
       }
     } else {
-      this.setState({ addInfo: "請勿留白" });
+      this.setState({ info: "請勿留白" });
     }
   }
 
