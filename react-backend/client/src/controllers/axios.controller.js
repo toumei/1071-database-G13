@@ -11,7 +11,7 @@ import {
   TableDeleteColumnsC
 } from "./state.controller";
 
-const ip = true ? "192.168.42.212" : "localhost";
+const ip = false ? "192.168.42.212" : "localhost";
 
 export function postDatabaseDataC(bindDatabase) {
   axios.post("http://" + ip + ":3000/dbCtrl/TableList").then(res => {

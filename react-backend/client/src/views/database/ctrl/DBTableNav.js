@@ -34,8 +34,8 @@ export default class extends Component {
       <div>
         <section className="bg-light py-1">
           <div className="row">
-            {this.add()}
-            {this.delete()}
+            {this.addBtn()}
+            {this.deleteBtn()}
           </div>
         </section>
       </div>
@@ -55,7 +55,7 @@ export default class extends Component {
     return columns;
   }
 
-  add() {
+  addBtn() {
     return (
       <div className="col-4 col-md-2">
         <button
@@ -114,11 +114,11 @@ export default class extends Component {
         document.getElementById(newColumns[i].COLUMN_NAME).value = "";
       }
     } else {
-      this.setState({ addInfo: "新增失敗" });
+      this.setState({ addInfo: "請勿留白" });
     }
   }
 
-  delete() {
+  deleteBtn() {
     return (
       <div className="col-4 col-md-2">
         <button

@@ -62,6 +62,24 @@ export const TableNavDeleteC = bindTableNav =>
     </div>
   );
 
+export const TableEditC = bindTable =>
+  modalM(
+    "editModal",
+    <h5 className="modal-title">編輯資料</h5>,
+    <div className="modal-body">
+      <form>{bindTable.editColumn()}</form>
+      <p className="text-center">...</p>
+    </div>,
+    <div className="modal-footer">
+      <button type="button" className="btn btn-primary" data-dismiss="modal">
+        確定
+      </button>
+      <button type="button" className="btn btn-secondary" data-dismiss="modal">
+        取消
+      </button>
+    </div>
+  );
+
 export const TableDeleteC = bindTable =>
   modalM(
     "deleteModal",
@@ -72,7 +90,7 @@ export const TableDeleteC = bindTable =>
         type="button"
         className="btn btn-primary"
         data-dismiss="modal"
-        onClick={e => bindTable.deleteItem(bindTable.state.deleteData[0])}
+        onClick={e => bindTable.deleteItem(bindTable.state.itemData[0])}
       >
         確定
       </button>

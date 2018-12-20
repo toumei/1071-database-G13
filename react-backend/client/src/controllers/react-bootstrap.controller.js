@@ -72,6 +72,7 @@ export const BootstrapTableC = (bindTable, baseProps, beforeSaveCell) =>
 export const BootstrapTableDeleteC = bindTable =>
   customBootstrapTableM({
     keyField: "ID",
-    data: bindTable.state.deleteData,
+    // 由於二次質無法更新，暫時由此代替 data: bindTable.state.itemData,
+    data: JSON.parse(JSON.stringify(bindTable.state.itemData)),
     columns: bindTable.state.deleteColumns
   });

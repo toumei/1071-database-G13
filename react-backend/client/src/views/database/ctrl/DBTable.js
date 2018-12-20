@@ -7,7 +7,10 @@ import DBTableNav from "./DBTableNav";
 
 // controller
 import { BootstrapTableC } from "../../../controllers/react-bootstrap.controller";
-import { TableDeleteC } from "../../../controllers/bootstrap.controller";
+import {
+  TableEditC,
+  TableDeleteC
+} from "../../../controllers/bootstrap.controller";
 import {
   postTableColumnsDataC,
   postTableDataC,
@@ -22,7 +25,9 @@ export default class extends Component {
       table: props.table,
       columns: [],
       data: [],
-      deleteData: []
+      editColumns: [],
+      deleteColumns: [],
+      itemData: []
     };
     this.select = [];
   }
@@ -95,6 +100,7 @@ export default class extends Component {
                 placeholder="搜尋關鍵字。。。"
               />
               {BootstrapTableC(this, props.baseProps, this.beforeSaveCell)}
+              {TableEditC(this)}
               {TableDeleteC(this)}
             </div>
           )}
@@ -149,9 +155,9 @@ export default class extends Component {
     }
   }
 
-  // table delete
-  getDeleteItem(row) {
-    this.setState({ deleteData: [row] });
+  // table edit or delete
+  getItem(row) {
+    this.setState({ itemData: [row] });
   }
 
   deleteItem(row) {
@@ -160,6 +166,46 @@ export default class extends Component {
       data: this.state.data.filter((x, i) => x !== row)
     });
   }
+
+  editColumn() {
+    if (this.state.itemData[0] !== undefined) {
+      let columns = [];
+      const newColumns = JSON.parse(
+        JSON.stringify(
+          this.state.columns.map((x, i) => {
+            return {
+              COLUMN_NAME: x.dataField,
+              COLUMN_COMMENT: x.text
+            };
+          })
+        )
+      );
+      for (let i = 1; i < newColumns.length - 1; i++) {
+        columns.push(
+          <div key={i} className="form-group row">
+            <label
+              htmlFor={newColumns[i].COLUMN_NAME}
+              className="col-sm-2 col-form-label"
+            >
+              {newColumns[i].COLUMN_COMMENT}
+            </label>
+            <div className="col-sm-10">
+              <input
+                type="text"
+                className="form-control"
+                id={newColumns[i].COLUMN_NAME}
+                value={this.state.itemData[0][newColumns[i].COLUMN_NAME]}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+        );
+      }
+      return columns;
+    }
+  }
+
+  handleChange(event) {}
 
   // table edit
   beforeSaveCell(oldValue, newValue, row, column, done) {

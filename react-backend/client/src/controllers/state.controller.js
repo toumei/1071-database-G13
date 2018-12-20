@@ -30,20 +30,18 @@ export const TableNavModeColumnsC = bindTableNav => [
   {
     ...customColumnM("action", "操作")[0],
     isDummyField: true,
-    formatter: (cell, row) => {
-      return (
-        <div className="btn-group">
-          <button
-            type="button"
-            name="cancel"
-            className="btn btn-warning btn-sm"
-            onClick={e => bindTableNav.cancelDelete(row)}
-          >
-            取消
-          </button>
-        </div>
-      );
-    },
+    formatter: (cell, row) => (
+      <div className="btn-group">
+        <button
+          type="button"
+          name="cancel"
+          className="btn btn-warning btn-sm"
+          onClick={e => bindTableNav.cancelDelete(row)}
+        >
+          取消
+        </button>
+      </div>
+    ),
     editable: false,
     headerStyle: { minWidth: "5rem" }
   }
@@ -73,29 +71,30 @@ export const TableModeColumnsC = bindTable => [
   {
     ...customColumnM("action", "操作")[0],
     isDummyField: true,
-    formatter: (cell, row) => {
-      return (
-        <div className="btn-group">
-          <button
-            type="button"
-            name="delete"
-            className="btn btn-warning btn-sm"
-          >
-            編輯
-          </button>
-          <button
-            type="button"
-            name="delete"
-            className="btn btn-warning btn-sm"
-            data-toggle="modal"
-            data-target={"#deleteModal"}
-            onClick={e => bindTable.getDeleteItem(row)}
-          >
-            刪除
-          </button>
-        </div>
-      );
-    },
+    formatter: (cell, row) => (
+      <div className="btn-group">
+        <button
+          type="button"
+          name="delete"
+          className="btn btn-warning btn-sm"
+          data-toggle="modal"
+          data-target={"#editModal"}
+          onClick={e => bindTable.getItem(row)}
+        >
+          編輯
+        </button>
+        <button
+          type="button"
+          name="delete"
+          className="btn btn-warning btn-sm"
+          data-toggle="modal"
+          data-target={"#deleteModal"}
+          onClick={e => bindTable.getItem(row)}
+        >
+          刪除
+        </button>
+      </div>
+    ),
     editable: false,
     headerStyle: { cursor: "default", minWidth: "5rem" }
   }
