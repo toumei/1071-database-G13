@@ -56,7 +56,7 @@
 * client (react)
   * router 配置完成 (不包含之後新增)
   * server-client 資料加解密
-  * 基本 CRUD 完成
+  * CRUD 大致完成
 
 ### 正在做的部分：
 * sever
@@ -71,7 +71,7 @@
 * client (express)
 
 * client (react)
-  * db 新增(可以顯示新增成功)、編輯(有選單可以選擇)、刪除(群體刪除)、部分bug
+  * db 分析
 
 ### 尚未做的部分：
 * server
@@ -83,7 +83,6 @@
 * client (react)
   * malfunction (express->react)
   * processing (express->react)
-  * db 分析
 ---
 
 ### 預期做的部分：
@@ -105,6 +104,7 @@
   * 即時顯示新資訊 (學生填報修單通知工作人員，工作人員報修完畢通知學生)
   * 多國語言
   * 支援手機排版 (全部非部分)
+  * bootstrap table 改成 remote 模式
 
 ### 前端可操作之Table：
 * product (課本教材，以此為基礎修改，兼功能測試用)
