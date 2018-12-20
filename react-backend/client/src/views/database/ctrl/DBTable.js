@@ -16,7 +16,7 @@ import {
   postTableDataC,
   postDeleteC,
   postAddC,
-  posteditC
+  postEditC
 } from "../../../controllers/axios.controller";
 
 export default class extends Component {
@@ -101,7 +101,7 @@ export default class extends Component {
                 {...props.searchProps}
                 placeholder="搜尋關鍵字。。。"
               />
-              {BootstrapTableC(this, props.baseProps, this.beforeSaveCell)}
+              {BootstrapTableC(this, props.baseProps)}
               {TableEditC(this)}
               {TableDeleteC(this)}
             </div>
@@ -239,7 +239,7 @@ export default class extends Component {
 
   // table edit
   editItem(row) {
-    posteditC(this, row);
+    postEditC(this, row);
     this.state.data.filter((x, i) => {
       if (x === this.state.itemData[0]) {
         const data = this.state.data;
@@ -253,7 +253,7 @@ export default class extends Component {
   }
 
   // table edit
-  beforeSaveCell(oldValue, newValue, row, column, done) {
+  beforeSaveCell(done) {
     setTimeout(() => {
       if (window.confirm("確定改變新的值?")) {
         done(true);
@@ -264,21 +264,7 @@ export default class extends Component {
     return { async: true };
   }
 
-  handleEdit(row) {
-    // const rs = window.confirm("是否要編輯ID：" + row.ID + " ?");
-    // if (rs) {
-    //   this.state.data.filter((x, i) => {
-    //     if (x === row) {
-    //       const data = this.state.data;
-    //       data[i].name = x.name = 2;
-    //       this.setState({ data: data });
-    //       axios.post("dbCtrl/update", {
-    //         table: this.state.table,
-    //         data: x
-    //       });
-    //     }
-    //     return true;
-    //   });
-    // }
+  afterSaveCell(row) {
+    postEditC(this, row);
   }
 }

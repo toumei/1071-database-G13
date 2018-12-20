@@ -72,7 +72,7 @@ export function postAddC(bindTable, row) {
     });
 }
 
-export function posteditC(bindTable, row) {
+export function postEditC(bindTable, row) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/update", {
       table: bindTable.state.table,

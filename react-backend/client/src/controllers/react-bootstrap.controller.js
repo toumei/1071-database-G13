@@ -37,13 +37,18 @@ export const BootstrapTableNavC = bindTableNav =>
     true
   );
 
-export const BootstrapTableC = (bindTable, baseProps, beforeSaveCell) =>
+export const BootstrapTableC = (bindTable, baseProps) =>
   customBootstrapTableM(
     baseProps,
     {
       cellEdit: cellEditFactory({
         mode: "click",
-        beforeSaveCell
+        beforeSaveCell: (oldValue, newValue, row, column, done) => {
+          bindTable.beforeSaveCell(done);
+        },
+        afterSaveCell: (oldValue, newValue, row, column) => {
+          bindTable.afterSaveCell(row);
+        }
       }),
       selectRow: {
         mode: "checkbox",

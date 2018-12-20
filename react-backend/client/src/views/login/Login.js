@@ -7,11 +7,11 @@ export const Login = () => (
       name="addform"
       action="/login"
       method="post"
-      accept-charset="utf-8"
+      acceptCharset="utf-8"
       onSubmit="return Check();"
     >
       <div className="form-group">
-        <label for="emailInput">Email</label>
+        <label htmlFor="emailInput">Email</label>
         <input
           type="text"
           className="form-control"
@@ -22,7 +22,7 @@ export const Login = () => (
         />
       </div>
       <div className="form-group">
-        <label for="passwordInput">Password</label>
+        <label htmlFor="passwordInput">Password</label>
         <input
           type="text"
           className="form-control"

@@ -46,15 +46,15 @@ export default class Products extends Component {
                 type="button"
                 name="edit"
                 value="Edit"
-                class="btn btn-success btn-sm"
-                onclick="Edit('<%= CRUDpath %>', '<%= data[i].id  %>');"
+                className="btn btn-success btn-sm"
+                // onClick="Edit('<%= CRUDpath %>', '<%= data[i].id  %>');"
               />
               <input
                 type="button"
                 name="delete"
                 value="Del"
-                class="btn btn-warning btn-sm"
-                onclick="Delete('<%= CRUDpath %>', '<%= data[i].id  %>');"
+                className="btn btn-warning btn-sm"
+                // onClick="Delete('<%= CRUDpath %>', '<%= data[i].id  %>');"
               />
             </div>
           );
