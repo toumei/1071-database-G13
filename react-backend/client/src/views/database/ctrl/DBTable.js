@@ -15,7 +15,8 @@ import {
   postTableColumnsDataC,
   postTableDataC,
   postDeleteC,
-  postAddC
+  postAddC,
+  posteditC
 } from "../../../controllers/axios.controller";
 
 export default class extends Component {
@@ -27,7 +28,8 @@ export default class extends Component {
       data: [],
       editColumns: [],
       deleteColumns: [],
-      itemData: []
+      itemData: [],
+      editItem: ""
     };
     this.select = [];
   }
@@ -184,7 +186,7 @@ export default class extends Component {
         columns.push(
           <div key={i} className="form-group row">
             <label
-              htmlFor={newColumns[i].COLUMN_NAME}
+              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
               className="col-sm-2 col-form-label"
             >
               {newColumns[i].COLUMN_COMMENT}
@@ -193,9 +195,8 @@ export default class extends Component {
               <input
                 type="text"
                 className="form-control"
-                id={newColumns[i].COLUMN_NAME}
-                value={this.state.itemData[0][newColumns[i].COLUMN_NAME]}
-                onChange={this.handleChange}
+                id={newColumns[i].COLUMN_NAME + "Edit"}
+                placeholder={this.state.itemData[0][newColumns[i].COLUMN_NAME]}
               />
             </div>
           </div>
@@ -205,7 +206,51 @@ export default class extends Component {
     }
   }
 
-  handleChange(event) {}
+  editForm() {
+    const newColumns = JSON.parse(
+      JSON.stringify(
+        this.state.columns.map((x, i) => {
+          return {
+            COLUMN_NAME: x.dataField,
+            COLUMN_COMMENT: x.text
+          };
+        })
+      )
+    );
+    let row = { ID: this.state.itemData[0].ID };
+    for (let i = 1; i < newColumns.length - 1; i++) {
+      if (
+        document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value !== ""
+      ) {
+        row[newColumns[i].COLUMN_NAME] = document.getElementById(
+          newColumns[i].COLUMN_NAME + "Edit"
+        ).value;
+      } else {
+        row[newColumns[i].COLUMN_NAME] = document.getElementById(
+          newColumns[i].COLUMN_NAME + "Edit"
+        ).placeholder;
+      }
+    }
+    this.editItem(row);
+    for (let i = 1; i < newColumns.length - 1; i++) {
+      document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value = "";
+    }
+  }
+
+  // table edit
+  editItem(row) {
+    posteditC(this, row);
+    this.state.data.filter((x, i) => {
+      if (x === this.state.itemData[0]) {
+        const data = this.state.data;
+        data[i] = row;
+        this.setState({ data: data });
+        return true;
+      }
+      return false;
+    });
+    this.setState({ editInfo: "編輯成功" });
+  }
 
   // table edit
   beforeSaveCell(oldValue, newValue, row, column, done) {

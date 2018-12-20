@@ -77,7 +77,7 @@ export default class extends Component {
       columns.push(
         <div key={i} className="form-group row">
           <label
-            htmlFor={newColumns[i].COLUMN_NAME}
+            htmlFor={newColumns[i].COLUMN_NAME + "Delete"}
             className="col-sm-2 col-form-label"
           >
             {newColumns[i].COLUMN_COMMENT}
@@ -86,7 +86,7 @@ export default class extends Component {
             <input
               type="text"
               className="form-control"
-              id={newColumns[i].COLUMN_NAME}
+              id={newColumns[i].COLUMN_NAME + "Delete"}
             />
           </div>
         </div>
@@ -100,18 +100,22 @@ export default class extends Component {
     let row = {};
     let isNull = false;
     for (let i = 1; i < newColumns.length - 1; i++) {
-      if (document.getElementById(newColumns[i].COLUMN_NAME).value === "") {
+      if (
+        document.getElementById(newColumns[i].COLUMN_NAME + "Delete").value ===
+        ""
+      ) {
         isNull = !isNull;
         break;
       }
       row[newColumns[i].COLUMN_NAME] = document.getElementById(
-        newColumns[i].COLUMN_NAME
+        newColumns[i].COLUMN_NAME + "Delete"
       ).value;
     }
     if (!isNull) {
       this.props.handleAddItem(this, row);
       for (let i = 1; i < newColumns.length - 1; i++) {
-        document.getElementById(newColumns[i].COLUMN_NAME).value = "";
+        document.getElementById(newColumns[i].COLUMN_NAME + "Delete").value =
+          "";
       }
     } else {
       this.setState({ addInfo: "請勿留白" });
@@ -137,7 +141,7 @@ export default class extends Component {
     );
   }
 
-  deleteItem() {
+  deleteForm() {
     const deleteList = this.state.deleteList;
     deleteList.filter((x, i) => this.props.handleDeleteItem(x, false));
     this.props.handleDeleteItem(deleteList, true);

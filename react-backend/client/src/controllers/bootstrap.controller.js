@@ -51,7 +51,7 @@ export const TableNavDeleteC = bindTableNav =>
       <button
         type="button"
         className="btn btn-primary"
-        onClick={e => bindTableNav.deleteItem()}
+        onClick={e => bindTableNav.deleteForm()}
         data-dismiss="modal"
       >
         確定
@@ -71,7 +71,12 @@ export const TableEditC = bindTable =>
       <p className="text-center">...</p>
     </div>,
     <div className="modal-footer">
-      <button type="button" className="btn btn-primary" data-dismiss="modal">
+      <button
+        type="button"
+        className="btn btn-primary"
+        data-dismiss="modal"
+        onClick={e => bindTable.editForm()}
+      >
         確定
       </button>
       <button type="button" className="btn btn-secondary" data-dismiss="modal">

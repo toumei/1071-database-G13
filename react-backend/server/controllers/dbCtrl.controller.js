@@ -51,7 +51,7 @@ module.exports = {
 
   postUpdate: (req, res, next) => {
     dbCtrlModel
-      .update(req.body.table, req.body.data, req.body.data.ID)
+      .update(req.body.table, req.body.row, req.body.row.ID)
       .then(res => {
         console.log(res);
       })
