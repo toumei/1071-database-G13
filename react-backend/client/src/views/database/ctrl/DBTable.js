@@ -31,7 +31,7 @@ export default class extends Component {
       deleteColumns: [],
       itemData: [],
       editItem: "",
-      editable: false,
+      editable: true,
       info: [{ title: "", content: "", cancel: false }]
     };
     this.select = [];
