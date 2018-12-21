@@ -31,6 +31,7 @@ export default class extends Component {
       deleteColumns: [],
       itemData: [],
       editItem: "",
+      editable: false,
       info: [{ title: "", content: "", cancel: false }]
     };
     this.select = [];
@@ -89,16 +90,15 @@ export default class extends Component {
                     };
                   })
                 )}
-                handleAddItem={(bindTableNav, row) =>
-                  this.handleAddItem(bindTableNav, row)
-                }
+                handleAddItem={row => this.handleAddItem(row)}
                 select={this.select}
-                handleDeleteItem={(bindTableNav, row) =>
-                  this.handleDeleteItem(bindTableNav, row)
+                handleDeleteItem={(bindTableNav, row, info) =>
+                  this.handleDeleteItem(bindTableNav, row, info)
                 }
                 handleGetSelect={() => this.handleGetSelect()}
                 handleCancelDelete={row => this.handleCancelDelete(row)}
                 handleInfo={info => this.handleInfo(info)}
+                handleEditable={() => this.handleEditable()}
               />
               <SearchBar
                 {...props.searchProps}
@@ -117,13 +117,8 @@ export default class extends Component {
   }
 
   // table nav add
-  handleAddItem(bindTableNav, row) {
+  handleAddItem(row) {
     postAddC(this, row);
-    bindTableNav.props.handleInfo({
-      title: "警告",
-      content: "新增成功",
-      cancel: false
-    });
   }
 
   // table select
@@ -149,7 +144,7 @@ export default class extends Component {
   }
 
   // table nav delete
-  handleDeleteItem(row, isBottom) {
+  handleDeleteItem(row, isBottom, info) {
     if (isBottom) {
       let newData = this.state.data;
       let newSelect = this.select;
@@ -161,7 +156,8 @@ export default class extends Component {
       this.select = newSelect;
       this.setState({ data: newData });
     } else {
-      postDeleteC(this, row);
+      info += "成功刪除ID:" + row.ID + "<br />";
+      postDeleteC(this, row, info);
     }
   }
 
@@ -257,17 +253,17 @@ export default class extends Component {
       }
       return false;
     });
-    this.setState({ info: "編輯成功" });
-  }
-
-  infoReturn(info) {
-    this.setState({ info: [info] });
-    document.getElementById("info").click();
   }
 
   // handle info
   handleInfo(info) {
     this.setState({ info: [info] });
     document.getElementById("info").click();
+  }
+
+  handleEditable() {
+    this.setState({ editable: !this.state.editable });
+    postTableColumnsDataC(this);
+    return !this.state.editable;
   }
 }

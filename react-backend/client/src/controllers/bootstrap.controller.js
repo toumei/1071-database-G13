@@ -70,7 +70,6 @@ export const TableEditC = bindTable =>
     <h5 className="modal-title">編輯資料</h5>,
     <div className="modal-body">
       <form>{bindTable.editColumn()}</form>
-      <p className="text-center">...</p>
     </div>,
     <div className="modal-footer">
       <button
@@ -143,5 +142,6 @@ export const TableInfoC = bindTable =>
       >
         取消
       </button>
-    </div>
+    </div>,
+    ""
   );

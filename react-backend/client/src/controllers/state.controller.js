@@ -55,13 +55,14 @@ export const TableDataC = element => [
   }
 ];
 
-export const TableColumnsC = element => [
+export const TableColumnsC = (bindTable, element) => [
   {
     ...customColumnM(
       element["COLUMN_NAME"],
       element["COLUMN_COMMENT"],
       true
     )[0],
+    editable: bindTable.state.editable,
     headerStyle: { cursor: "pointer", ...columnWidthM(element)[0] },
     style: { cursor: "default" }
   }

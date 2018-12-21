@@ -32,7 +32,7 @@ export function postTableColumnsDataC(bindTable) {
       let columns = [];
       let deleteColumns = [];
       decryptM(res.data).forEach(elm => {
-        columns.push(TableColumnsC(elm)[0]);
+        columns.push(TableColumnsC(bindTable, elm)[0]);
         deleteColumns.push(TableDeleteColumnsC(elm)[0]);
       });
       columns.push(TableModeColumnsC(bindTable)[0]);
@@ -51,11 +51,12 @@ export function postTableDataC(bindTable) {
     });
 }
 
-export function postDeleteC(bindTable, row) {
+export function postDeleteC(bindTable, row, info) {
   axios.post("http://" + ip + ":3000/dbCtrl/delete", {
     table: bindTable.state.table,
     id: row.ID
   });
+  bindTable.handleInfo({ title: "警告", content: info, cancel: false });
 }
 
 export function postAddC(bindTable, row) {
@@ -70,6 +71,11 @@ export function postAddC(bindTable, row) {
         data: [...bindTable.state.data, row]
       });
     });
+  bindTable.handleInfo({
+    title: "警告",
+    content: "新增成功",
+    cancel: false
+  });
 }
 
 export function postEditC(bindTable, row) {
@@ -78,10 +84,5 @@ export function postEditC(bindTable, row) {
       table: bindTable.state.table,
       row: row
     })
-    .then(res => {
-      // row["ID"] = res.data.id;
-      // bindTable.setState({
-      //   data: [...bindTable.state.data, row]
-      // });
-    });
+    .then(res => {});
 }

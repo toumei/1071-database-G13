@@ -17,6 +17,7 @@ export default class extends Component {
       columns: this.NavColumns(props),
       deleteList: props.select
     };
+    this.editable = false;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -33,6 +34,7 @@ export default class extends Component {
       <div>
         <section className="bg-light py-1">
           <div className="row">
+            {this.fastEditBtn()}
             {this.addBtn()}
             {this.deleteBtn()}
           </div>
@@ -112,7 +114,7 @@ export default class extends Component {
       }
     }
     if (!isNull) {
-      this.props.handleAddItem(this, row);
+      this.props.handleAddItem(row);
       for (let i = 1; i < newColumns.length - 1; i++) {
         document.getElementById(newColumns[i].COLUMN_NAME + "Add").value = "";
       }
@@ -145,14 +147,33 @@ export default class extends Component {
   }
 
   deleteForm() {
+    let info = "";
     const deleteList = this.state.deleteList;
-    deleteList.filter((x, i) => this.props.handleDeleteItem(x, false));
-    this.props.handleDeleteItem(deleteList, true);
+    deleteList.filter((x, i) => {
+      this.props.handleDeleteItem(x, false, info);
+      info += "成功刪除ID:" + x.ID + "<br />";
+      return false;
+    });
+    this.props.handleDeleteItem(deleteList, true, info);
   }
 
   cancelDelete(row) {
     this.setState({
       deleteList: this.state.deleteList.filter((x, i) => x !== row)
     });
+  }
+
+  fastEditBtn() {
+    return (
+      <div className="col-4 col-md-2">
+        <button
+          className="btn btn-secondary btn-block"
+          onClick={e => (this.editable = this.props.handleEditable())}
+        >
+          <i className="fas fa-plus" /> {this.editable ? "關閉" : "開啟"}
+          快速編輯
+        </button>
+      </div>
+    );
   }
 }
