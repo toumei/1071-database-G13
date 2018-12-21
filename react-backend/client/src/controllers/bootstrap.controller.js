@@ -31,9 +31,8 @@ export const TableNavAddC = bindTableNav =>
         onClick={e => {
           const newColumns = JSON.parse(bindTableNav.props.columns);
           for (let i = 1; i < newColumns.length - 1; i++) {
-            document.getElementById(
-              newColumns[i].COLUMN_NAME + "Delete"
-            ).value = "";
+            document.getElementById(newColumns[i].COLUMN_NAME + "Add").value =
+              "";
           }
         }}
       >
@@ -53,6 +52,9 @@ export const TableNavDeleteC = bindTableNav =>
         className="btn btn-primary"
         onClick={e => bindTableNav.deleteForm()}
         data-dismiss="modal"
+        style={{
+          display: bindTableNav.state.deleteList.length === 0 ? "none" : "block"
+        }}
       >
         確定
       </button>
@@ -105,16 +107,40 @@ export const TableDeleteC = bindTable =>
     </div>
   );
 
+// 暫時未找到可以開啟modal的方法，以此來代替
 export const TableInfoC = bindTable =>
   modalM(
     "infoModal",
-    <h5 className="modal-title">{bindTable.state.info[0].title}</h5>,
-    <div className="modal-body">{bindTable.state.info[0].content}</div>,
+    <h5
+      className="modal-title"
+      id="info"
+      data-toggle="modal"
+      data-target="#infoModal"
+    >
+      {bindTable.state.info[0].title}
+    </h5>,
+    <div
+      className="modal-body"
+      dangerouslySetInnerHTML={{ __html: bindTable.state.info[0].content }}
+    />,
     <div className="modal-footer">
-      <button type="button" className="btn btn-primary" data-dismiss="modal">
+      <button
+        id="infoTrue"
+        type="button"
+        className="btn btn-primary"
+        data-dismiss="modal"
+      >
         確定
       </button>
-      <button type="button" className="btn btn-secondary" data-dismiss="modal">
+      <button
+        id="infoFalse"
+        type="button"
+        className="btn btn-secondary"
+        data-dismiss="modal"
+        style={{
+          display: bindTable.state.info[0].cancel === true ? "block" : "none"
+        }}
+      >
         取消
       </button>
     </div>

@@ -4,6 +4,8 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 // model
 import { customBootstrapTableM } from "../models/react-bootstrap.model";
 
+import { postEditC } from "./axios.controller";
+
 export const BootstrapDatabaseC = bindDatabase =>
   customBootstrapTableM(
     {
@@ -44,10 +46,29 @@ export const BootstrapTableC = (bindTable, baseProps) =>
       cellEdit: cellEditFactory({
         mode: "click",
         beforeSaveCell: (oldValue, newValue, row, column, done) => {
-          bindTable.beforeSaveCell(done);
+          bindTable.infoReturn({
+            title: "123",
+            content: "123",
+            cancel: true
+          });
+          new Promise((resolve, reject) => {
+            document
+              .getElementById("infoTrue")
+              .addEventListener("click", function() {
+                resolve(true);
+              });
+            document
+              .getElementById("infoFalse")
+              .addEventListener("click", function() {
+                resolve(false);
+              });
+          }).then(msg => {
+            done(msg);
+          });
+          return { async: true };
         },
         afterSaveCell: (oldValue, newValue, row, column) => {
-          bindTable.afterSaveCell(row);
+          postEditC(bindTable, row);
         }
       }),
       selectRow: {

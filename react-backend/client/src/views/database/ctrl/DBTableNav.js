@@ -15,8 +15,7 @@ export default class extends Component {
     super(props);
     this.state = {
       columns: this.NavColumns(props),
-      deleteList: props.select,
-      info: ""
+      deleteList: props.select
     };
   }
 
@@ -77,7 +76,7 @@ export default class extends Component {
       columns.push(
         <div key={i} className="form-group row">
           <label
-            htmlFor={newColumns[i].COLUMN_NAME + "Delete"}
+            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
             className="col-sm-2 col-form-label"
           >
             {newColumns[i].COLUMN_COMMENT}
@@ -86,7 +85,7 @@ export default class extends Component {
             <input
               type="text"
               className="form-control"
-              id={newColumns[i].COLUMN_NAME + "Delete"}
+              id={newColumns[i].COLUMN_NAME + "Add"}
             />
           </div>
         </div>
@@ -99,26 +98,30 @@ export default class extends Component {
     const newColumns = JSON.parse(this.props.columns);
     let row = {};
     let isNull = false;
+    let info = "";
     for (let i = 1; i < newColumns.length - 1; i++) {
       if (
-        document.getElementById(newColumns[i].COLUMN_NAME + "Delete").value ===
-        ""
+        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value === ""
       ) {
-        isNull = !isNull;
-        break;
+        isNull = true;
+        info += newColumns[i].COLUMN_COMMENT + "請勿留白<br />";
+      } else {
+        row[newColumns[i].COLUMN_NAME] = document.getElementById(
+          newColumns[i].COLUMN_NAME + "Add"
+        ).value;
       }
-      row[newColumns[i].COLUMN_NAME] = document.getElementById(
-        newColumns[i].COLUMN_NAME + "Delete"
-      ).value;
     }
     if (!isNull) {
       this.props.handleAddItem(this, row);
       for (let i = 1; i < newColumns.length - 1; i++) {
-        document.getElementById(newColumns[i].COLUMN_NAME + "Delete").value =
-          "";
+        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value = "";
       }
     } else {
-      this.setState({ info: "請勿留白" });
+      this.props.handleInfo({
+        title: "警告",
+        content: info,
+        cancel: false
+      });
     }
   }
 

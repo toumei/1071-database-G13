@@ -31,7 +31,7 @@ export default class extends Component {
       deleteColumns: [],
       itemData: [],
       editItem: "",
-      info: [{ title: "1", content: "2" }]
+      info: [{ title: "", content: "", cancel: false }]
     };
     this.select = [];
   }
@@ -98,6 +98,7 @@ export default class extends Component {
                 }
                 handleGetSelect={() => this.handleGetSelect()}
                 handleCancelDelete={row => this.handleCancelDelete(row)}
+                handleInfo={info => this.handleInfo(info)}
               />
               <SearchBar
                 {...props.searchProps}
@@ -107,12 +108,6 @@ export default class extends Component {
               {TableEditC(this)}
               {TableDeleteC(this)}
               {TableInfoC(this)}
-              <button
-                id="infoBtn"
-                data-toggle="modal"
-                data-target="#infoModal"
-                // style={{ display: "none" }}
-              />
             </div>
           )}
         </ToolkitProvider>
@@ -124,7 +119,11 @@ export default class extends Component {
   // table nav add
   handleAddItem(bindTableNav, row) {
     postAddC(this, row);
-    bindTableNav.setState({ info: "新增成功" });
+    bindTableNav.props.handleInfo({
+      title: "警告",
+      content: "新增成功",
+      cancel: false
+    });
   }
 
   // table select
@@ -261,19 +260,14 @@ export default class extends Component {
     this.setState({ info: "編輯成功" });
   }
 
-  // table edit
-  beforeSaveCell(done) {
-    setTimeout(() => {
-      if (window.confirm("確定改變新的值?")) {
-        done(true);
-      } else {
-        done(false);
-      }
-    }, 0);
-    return { async: true };
+  infoReturn(info) {
+    this.setState({ info: [info] });
+    document.getElementById("info").click();
   }
 
-  afterSaveCell(row) {
-    postEditC(this, row);
+  // handle info
+  handleInfo(info) {
+    this.setState({ info: [info] });
+    document.getElementById("info").click();
   }
 }
