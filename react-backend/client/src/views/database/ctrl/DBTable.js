@@ -99,6 +99,7 @@ export default class extends Component {
                 handleCancelDelete={row => this.handleCancelDelete(row)}
                 handleInfo={info => this.handleInfo(info)}
                 handleEditable={() => this.handleEditable()}
+                editable={this.state.editable}
               />
               <SearchBar
                 {...props.searchProps}
@@ -167,7 +168,7 @@ export default class extends Component {
   }
 
   deleteItem(row) {
-    postDeleteC(this, row);
+    postDeleteC(this, row, "成功刪除ID:" + row.ID);
     this.setState({
       data: this.state.data.filter((x, i) => x !== row)
     });
@@ -243,7 +244,7 @@ export default class extends Component {
 
   // table edit
   editItem(row) {
-    postEditC(this, row);
+    postEditC(this, row, "成功編輯ID:" + row.ID);
     this.state.data.filter((x, i) => {
       if (x === this.state.itemData[0]) {
         const data = this.state.data;
@@ -262,8 +263,29 @@ export default class extends Component {
   }
 
   handleEditable() {
-    this.setState({ editable: !this.state.editable });
-    postTableColumnsDataC(this);
-    return !this.state.editable;
+    new Promise((resolve, reject) => {
+      this.setState({
+        info: [
+          {
+            title: "警告",
+            content:
+              "確定要" + (this.state.editable ? "關閉" : "開啟") + "快速編輯",
+            cancel: true
+          }
+        ]
+      });
+      document.getElementById("info").click();
+      document.getElementById("infoTrue").addEventListener("click", () => {
+        resolve(true);
+      });
+      document.getElementById("infoFalse").addEventListener("click", () => {
+        resolve(false);
+      });
+    }).then(res => {
+      if (res) {
+        this.setState({ editable: !this.state.editable });
+        postTableColumnsDataC(this);
+      }
+    });
   }
 }

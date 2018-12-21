@@ -15,9 +15,9 @@ export default class extends Component {
     super(props);
     this.state = {
       columns: this.NavColumns(props),
-      deleteList: props.select
+      deleteList: props.select,
+      editable: props.editable
     };
-    this.editable = false;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,6 +26,9 @@ export default class extends Component {
     }
     if (nextProps.select !== this.props.select) {
       this.setState({ deleteList: nextProps.select });
+    }
+    if (nextProps.editable !== this.props.editable) {
+      this.setState({ editable: nextProps.editable });
     }
   }
 
@@ -168,9 +171,9 @@ export default class extends Component {
       <div className="col-4 col-md-2">
         <button
           className="btn btn-secondary btn-block"
-          onClick={e => (this.editable = this.props.handleEditable())}
+          onClick={e => this.props.handleEditable()}
         >
-          <i className="fas fa-plus" /> {this.editable ? "關閉" : "開啟"}
+          <i className="fas fa-plus" /> {this.state.editable ? "關閉" : "開啟"}
           快速編輯
         </button>
       </div>

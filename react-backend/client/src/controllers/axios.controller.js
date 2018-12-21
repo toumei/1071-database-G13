@@ -78,11 +78,13 @@ export function postAddC(bindTable, row) {
   });
 }
 
-export function postEditC(bindTable, row) {
+export function postEditC(bindTable, row, info = "") {
   axios
     .post("http://" + ip + ":3000/dbCtrl/update", {
       table: bindTable.state.table,
       row: row
     })
     .then(res => {});
+  if (info !== "")
+    bindTable.handleInfo({ title: "警告", content: info, cancel: false });
 }
