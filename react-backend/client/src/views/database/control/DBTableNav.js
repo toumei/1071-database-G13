@@ -2,13 +2,13 @@ import React, { Component } from "react";
 
 // controller
 import {
-  TableNavAddC,
-  TableNavDeleteC
-} from "../../../controllers/bootstrap.controller";
-import {
   TableNavColumnsC,
   TableNavModeColumnsC
 } from "../../../controllers/state.controller";
+
+import { Modal } from "../../../models/bootstrap.model";
+
+import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 export default class extends Component {
   constructor(props) {
@@ -69,7 +69,37 @@ export default class extends Component {
         >
           <i className="fas fa-plus" /> 新增
         </button>
-        {TableNavAddC(this)}
+        <Modal
+          id="addModal"
+          title="新增一筆資料"
+          body={<form>{this.addColumn()}</form>}
+          footer={
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={e => this.addItem()}
+              >
+                新增
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+                onClick={e => {
+                  const newColumns = JSON.parse(this.props.columns);
+                  for (let i = 1; i < newColumns.length - 1; i++) {
+                    document.getElementById(
+                      newColumns[i].COLUMN_NAME + "Add"
+                    ).value = "";
+                  }
+                }}
+              >
+                取消
+              </button>
+            </div>
+          }
+        />
       </div>
     );
   }
@@ -144,7 +174,42 @@ export default class extends Component {
         >
           <i className="fas fa-plus" /> 刪除
         </button>
-        {TableNavDeleteC(this)}
+        <Modal
+          id="deleteListModal"
+          title="確定刪除這些資料?"
+          body={
+            <CustomBootstrap
+              base={{
+                keyField: "ID",
+                data: this.state.deleteList,
+                columns: this.state.columns
+              }}
+              pagination={true}
+            />
+          }
+          footer={
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={e => this.deleteForm()}
+                data-dismiss="modal"
+                style={{
+                  display: this.state.deleteList.length === 0 ? "none" : "block"
+                }}
+              >
+                確定
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                取消
+              </button>
+            </div>
+          }
+        />
       </div>
     );
   }

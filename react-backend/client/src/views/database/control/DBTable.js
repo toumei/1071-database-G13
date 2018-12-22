@@ -8,11 +8,6 @@ import DBTableNav from "./DBTableNav";
 
 // controller
 import {
-  TableEditC,
-  TableDeleteC,
-  TableInfoC
-} from "../../../controllers/bootstrap.controller";
-import {
   postTableColumnsDataC,
   postTableDataC,
   postDeleteC,
@@ -22,6 +17,7 @@ import {
 
 // model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
+import { Modal } from "../../../models/bootstrap.model";
 
 export default class extends Component {
   constructor(props) {
@@ -139,9 +135,104 @@ export default class extends Component {
                 refs={n => (this.node = n)}
                 pagination={true}
               />
-              {TableEditC(this)}
-              {TableDeleteC(this)}
-              {TableInfoC(this)}
+              <Modal
+                id="editModal"
+                title="編輯資料"
+                body={<form>{this.editColumn()}</form>}
+                footer={
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-dismiss="modal"
+                      onClick={e => this.editForm()}
+                    >
+                      確定
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      取消
+                    </button>
+                  </div>
+                }
+              />
+              <Modal
+                id="deleteModal"
+                title="確定要刪除這筆資料？"
+                body={
+                  <CustomBootstrap
+                    base={
+                      {
+                        keyField: "ID",
+                        data: JSON.parse(JSON.stringify(this.state.itemData)),
+                        columns: this.state.deleteColumns
+                      } // 由於二次值無法更新，暫時由此代替 data: bindTable.state.itemData
+                    }
+                  />
+                }
+                footer={
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      data-dismiss="modal"
+                      onClick={e => this.deleteItem(this.state.itemData[0])}
+                    >
+                      確定
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      取消
+                    </button>
+                  </div>
+                }
+              />
+              {/* 暫時未找到可以開啟modal的方法，以此來代替 */}
+              <Modal
+                id="infoModal"
+                titleAttr={{
+                  id: "info",
+                  "data-toggle": "modal",
+                  "data-target": "#infoModal"
+                }}
+                title={this.state.info[0].title}
+                bodyAttr={{
+                  dangerouslySetInnerHTML: {
+                    __html: this.state.info[0].content
+                  }
+                }}
+                footer={
+                  <div className="modal-footer">
+                    <button
+                      id="infoTrue"
+                      type="button"
+                      className="btn btn-primary"
+                      data-dismiss="modal"
+                    >
+                      確定
+                    </button>
+                    <button
+                      id="infoFalse"
+                      type="button"
+                      className="btn btn-secondary"
+                      data-dismiss="modal"
+                      style={{
+                        display:
+                          this.state.info[0].cancel === true ? "block" : "none"
+                      }}
+                    >
+                      取消
+                    </button>
+                  </div>
+                }
+                modalStyle=""
+              />
             </div>
           )}
         </ToolkitProvider>

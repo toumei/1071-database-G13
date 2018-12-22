@@ -1,12 +1,14 @@
 import React from "react";
 
-export const modalM = (
+export const Modal = ({
   id,
+  titleAttr,
   title,
+  bodyAttr,
   body,
   footer,
   modalStyle = "modal-dialog-centered modal-lg"
-) => (
+}) => (
   <div
     className="modal fade"
     id={id}
@@ -17,7 +19,9 @@ export const modalM = (
     <div className={"modal-dialog " + modalStyle} role="document">
       <div className="modal-content">
         <div className="modal-header">
-          {title}
+          <h5 className="modal-title" {...titleAttr}>
+            {title}
+          </h5>
           <button
             type="button"
             className="close"
@@ -27,7 +31,9 @@ export const modalM = (
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        {body}
+        <div className="modal-body" {...bodyAttr}>
+          {body}
+        </div>
         {footer}
       </div>
     </div>
