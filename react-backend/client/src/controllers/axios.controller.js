@@ -5,6 +5,7 @@ import { decrypt } from "../models/crypt.model";
 import {
   TableColumns,
   TableDeleteColumns,
+  TableFormColumns,
   TableModeColumns
 } from "../models/DBTable.model";
 import { TableMenuData } from "../models/DBTableMenu.model";
@@ -29,14 +30,17 @@ export function postTableColumns(bind) {
   axios.post(url + "dbCtrl/ColumnList?table=" + bind.state.table).then(res => {
     let columns = [];
     let deleteColumns = [];
+    let formColumns = [];
     decrypt(res.data).forEach(elm => {
       columns.push(TableColumns(bind, elm)[0]);
       deleteColumns.push(TableDeleteColumns(elm)[0]);
+      formColumns.push(TableFormColumns(elm)[0]);
     });
     columns.push(TableModeColumns(bind)[0]);
     bind.setState({
       columns: columns,
-      deleteColumns: deleteColumns
+      deleteColumns: deleteColumns,
+      formColumns: formColumns
     });
   });
 }

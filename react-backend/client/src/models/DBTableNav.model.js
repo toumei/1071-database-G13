@@ -6,9 +6,9 @@ import { cancelDelete } from "../controllers/DBTableNav.controller";
 
 export function TableNavColumns(bind, props) {
   let columns = [];
-  const newColumns = JSON.parse(props.columns);
+  const newColumns = props.columns;
   newColumns.forEach((elm, i) => {
-    if (i !== newColumns.length - 1) {
+    if (i !== newColumns.length) {
       columns.push({
         ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
         headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] }

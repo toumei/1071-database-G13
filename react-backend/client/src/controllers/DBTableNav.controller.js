@@ -1,9 +1,9 @@
 export function addItem(bind) {
-  const newColumns = JSON.parse(bind.props.columns);
+  const newColumns = bind.props.columns;
   let row = {};
   let isNull = false;
   let info = "";
-  for (let i = 1; i < newColumns.length - 1; i++) {
+  for (let i = 1; i < newColumns.length; i++) {
     if (
       document.getElementById(newColumns[i].COLUMN_NAME + "Add").value === ""
     ) {
@@ -17,7 +17,7 @@ export function addItem(bind) {
   }
   if (!isNull) {
     bind.props.handleAddItem(row);
-    for (let i = 1; i < newColumns.length - 1; i++) {
+    for (let i = 1; i < newColumns.length; i++) {
       document.getElementById(newColumns[i].COLUMN_NAME + "Add").value = "";
     }
   } else {

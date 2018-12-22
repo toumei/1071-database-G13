@@ -56,3 +56,7 @@ export const TableDeleteColumns = elm => [
     style: { cursor: "default" }
   }
 ];
+
+export const TableFormColumns = elm => [
+  { COLUMN_NAME: elm["COLUMN_NAME"], COLUMN_COMMENT: elm["COLUMN_COMMENT"] }
+];

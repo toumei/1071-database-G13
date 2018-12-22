@@ -36,6 +36,7 @@ export default class extends Component {
       table: props.table,
       columns: [],
       data: [],
+      formColumns: [],
       editColumns: [],
       deleteColumns: [],
       itemData: [],
@@ -90,14 +91,7 @@ export default class extends Component {
           {props => (
             <div className="col-md-10" style={{ marginTop: 10 }}>
               <DBTableNav
-                columns={JSON.stringify(
-                  this.state.columns.map((x, i) => {
-                    return {
-                      COLUMN_NAME: x.dataField,
-                      COLUMN_COMMENT: x.text
-                    };
-                  })
-                )}
+                columns={this.state.formColumns}
                 editable={this.state.editable}
                 handleAddItem={row => handleAddItem(this, row)}
                 handleDeleteItem={(bindTableNav, row, info) =>
@@ -257,17 +251,8 @@ export default class extends Component {
 const EditForm = ({ bind }) => {
   if (bind.state.itemData[0] !== undefined) {
     let columns = [];
-    const newColumns = JSON.parse(
-      JSON.stringify(
-        bind.state.columns.map((x, i) => {
-          return {
-            COLUMN_NAME: x.dataField,
-            COLUMN_COMMENT: x.text
-          };
-        })
-      )
-    );
-    for (let i = 1; i < newColumns.length - 1; i++) {
+    const newColumns = bind.state.formColumns;
+    for (let i = 1; i < newColumns.length; i++) {
       columns.push(
         <div key={i} className="form-group row">
           <label

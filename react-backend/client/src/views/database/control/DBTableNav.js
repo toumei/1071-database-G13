@@ -91,8 +91,8 @@ const AddBtn = ({ bind }) => (
             className="btn btn-secondary"
             data-dismiss="modal"
             onClick={e => {
-              const newColumns = JSON.parse(bind.props.columns);
-              for (let i = 1; i < newColumns.length - 1; i++) {
+              const newColumns = bind.props.columns;
+              for (let i = 1; i < newColumns.length; i++) {
                 document.getElementById(
                   newColumns[i].COLUMN_NAME + "Add"
                 ).value = "";
@@ -109,8 +109,8 @@ const AddBtn = ({ bind }) => (
 
 const AddForm = ({ bind }) => {
   let columns = [];
-  const newColumns = JSON.parse(bind.props.columns);
-  for (let i = 1; i < newColumns.length - 1; i++) {
+  const newColumns = bind.props.columns;
+  for (let i = 1; i < newColumns.length; i++) {
     columns.push(
       <div key={i} className="form-group row">
         <label
