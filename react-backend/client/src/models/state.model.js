@@ -1,6 +1,6 @@
 import React from "react";
 
-export const customColumnM = (data, text, sort = false) => [
+export const customColumn = (data, text, sort = false) => [
   {
     dataField: data,
     text: text,
@@ -28,7 +28,7 @@ export const customColumnM = (data, text, sort = false) => [
   }
 ];
 
-export const columnWidthM = elm => [
+export const columnWidth = elm => [
   {
     width: elm["COLUMN_NAME"] === "ID" ? "" : "100rem",
     minWidth: elm["COLUMN_NAME"] === "ID" ? "" : "10rem"

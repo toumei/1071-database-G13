@@ -3,14 +3,14 @@ import React from "react";
 import { Type } from "react-bootstrap-table2-editor";
 
 // model
-import { customColumnM, columnWidthM } from "../models/state.model";
+import { customColumn, columnWidth } from "../models/state.model";
 
 import { getItem } from "./DBTable.controller";
 import { cancelDelete } from "./DBTableNav.controller";
 
-export const DatabaseColumnsC = bindDatabase => [
+export const DatabaseColumns = bindDatabase => [
   {
-    ...customColumnM("TABLE_COMMENT", "資料庫")[0],
+    ...customColumn("TABLE_COMMENT", "資料庫")[0],
     style: (cell, row, rowIndex, colIndex) => {
       if (row.TABLE_NAME === bindDatabase.state.table) {
         return { cursor: "pointer", backgroundColor: "#81c784" };
@@ -20,16 +20,16 @@ export const DatabaseColumnsC = bindDatabase => [
   }
 ];
 
-export const TableNavColumnsC = elm => [
+export const TableNavColumns = elm => [
   {
-    ...customColumnM(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
-    headerStyle: { cursor: "pointer", ...columnWidthM(elm)[0] }
+    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
+    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] }
   }
 ];
 
-export const TableNavModeColumnsC = bindTableNav => [
+export const TableNavModeColumns = bindTableNav => [
   {
-    ...customColumnM("action", "操作")[0],
+    ...customColumn("action", "操作")[0],
     isDummyField: true,
     formatter: (cell, row) => (
       <div className="btn-group">
@@ -48,7 +48,7 @@ export const TableNavModeColumnsC = bindTableNav => [
   }
 ];
 
-export const TableDataC = elm => [
+export const TableData = elm => [
   {
     TABLE_COMMENT: elm["TABLE_COMMENT"],
     TABLE_NAME: elm["TABLE_NAME"],
@@ -56,19 +56,19 @@ export const TableDataC = elm => [
   }
 ];
 
-export const TableColumnsC = (bindTable, elm) => [
+export const TableColumns = (bindTable, elm) => [
   {
-    ...customColumnM(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
+    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
     editable: bindTable.state.editable,
-    headerStyle: { cursor: "pointer", ...columnWidthM(elm)[0] },
+    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
     style: { cursor: "default" },
     editor: { type: Type.TEXT }
   }
 ];
 
-export const TableModeColumnsC = bindTable => [
+export const TableModeColumns = bindTable => [
   {
-    ...customColumnM("action", "操作")[0],
+    ...customColumn("action", "操作")[0],
     isDummyField: true,
     formatter: (cell, row) => (
       <div className="btn-group">
@@ -99,10 +99,10 @@ export const TableModeColumnsC = bindTable => [
   }
 ];
 
-export const TableDeleteColumnsC = elm => [
+export const TableDeleteColumns = elm => [
   {
-    ...customColumnM(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"])[0],
-    headerStyle: columnWidthM(elm)[0],
+    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"])[0],
+    headerStyle: columnWidth(elm)[0],
     style: { cursor: "default" }
   }
 ];

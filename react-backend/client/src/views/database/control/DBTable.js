@@ -8,9 +8,9 @@ import DBTableNav from "./DBTableNav";
 
 // controller
 import {
-  postTableColumnsDataC,
-  postTableDataC,
-  postEditC
+  postTableColumnsData,
+  postTableData,
+  postEdit
 } from "../../../controllers/axios.controller";
 import {
   handleAddItem,
@@ -26,7 +26,7 @@ import {
 
 // model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
-import { Modal } from "../../../models/bootstrap.model";
+import { CustonModal } from "../../../models/bootstrap.model";
 
 export default class extends Component {
   constructor(props) {
@@ -54,8 +54,8 @@ export default class extends Component {
     //   }
     //   return "close";
     // };
-    postTableColumnsDataC(this);
-    postTableDataC(this);
+    postTableColumnsData(this);
+    postTableData(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,8 +68,8 @@ export default class extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.table !== this.state.table) {
-      postTableColumnsDataC(this);
-      postTableDataC(this);
+      postTableColumnsData(this);
+      postTableData(this);
     }
   }
 
@@ -118,7 +118,7 @@ export default class extends Component {
                   mode: "click",
                   blurToSave: true,
                   afterSaveCell: (oldValue, newValue, row, column) => {
-                    postEditC(this, row);
+                    postEdit(this, row);
                   }
                 })}
                 selectRow={{
@@ -143,7 +143,7 @@ export default class extends Component {
                 refs={n => (this.node = n)}
                 pagination={true}
               />
-              <Modal
+              <CustonModal
                 id="editModal"
                 title="編輯資料"
                 body={<form>{this.editColumn()}</form>}
@@ -167,7 +167,7 @@ export default class extends Component {
                   </div>
                 }
               />
-              <Modal
+              <CustonModal
                 id="deleteModal"
                 title="確定要刪除這筆資料？"
                 body={
@@ -202,7 +202,7 @@ export default class extends Component {
                 }
               />
               {/* 暫時未找到可以開啟modal的方法，以此來代替 */}
-              <Modal
+              <CustonModal
                 id="infoModal"
                 titleAttr={{
                   id: "info",

@@ -1,31 +1,31 @@
 import axios from "axios";
 
 // model
-import { decryptM } from "../models/crypt.model";
+import { decrypt } from "../models/crypt.model";
 
 // controller
 import {
-  TableDataC,
-  TableColumnsC,
-  TableModeColumnsC,
-  TableDeleteColumnsC
+  TableData,
+  TableColumns,
+  TableModeColumns,
+  TableDeleteColumns
 } from "./state.controller";
 import { handleInfo } from "./DBTable.controller";
 
 const ip = false ? "192.168.42.212" : "localhost";
 
-export function postDatabaseDataC(bindDatabase) {
+export function postDatabaseData(bindDatabase) {
   axios.post("http://" + ip + ":3000/dbCtrl/TableList").then(res => {
     let data = [];
-    decryptM(res.data).forEach(elm => {
+    decrypt(res.data).forEach(elm => {
       // if (elm["TABLE_NAME"][0] !== "_")
-      data.push(TableDataC(elm)[0]);
+      data.push(TableData(elm)[0]);
     });
     bindDatabase.setState({ data: data });
   });
 }
 
-export function postTableColumnsDataC(bindTable) {
+export function postTableColumnsData(bindTable) {
   axios
     .post(
       "http://" + ip + ":3000/dbCtrl/ColumnList?table=" + bindTable.state.table
@@ -33,11 +33,11 @@ export function postTableColumnsDataC(bindTable) {
     .then(res => {
       let columns = [];
       let deleteColumns = [];
-      decryptM(res.data).forEach(elm => {
-        columns.push(TableColumnsC(bindTable, elm)[0]);
-        deleteColumns.push(TableDeleteColumnsC(elm)[0]);
+      decrypt(res.data).forEach(elm => {
+        columns.push(TableColumns(bindTable, elm)[0]);
+        deleteColumns.push(TableDeleteColumns(elm)[0]);
       });
-      columns.push(TableModeColumnsC(bindTable)[0]);
+      columns.push(TableModeColumns(bindTable)[0]);
       bindTable.setState({
         columns: columns,
         deleteColumns: deleteColumns
@@ -45,15 +45,15 @@ export function postTableColumnsDataC(bindTable) {
     });
 }
 
-export function postTableDataC(bindTable) {
+export function postTableData(bindTable) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/List?table=" + bindTable.state.table)
     .then(res => {
-      bindTable.setState({ data: decryptM(res.data) });
+      bindTable.setState({ data: decrypt(res.data) });
     });
 }
 
-export function postDeleteC(bindTable, row, info) {
+export function postDelete(bindTable, row, info) {
   axios.post("http://" + ip + ":3000/dbCtrl/delete", {
     table: bindTable.state.table,
     id: row.ID
@@ -61,7 +61,7 @@ export function postDeleteC(bindTable, row, info) {
   handleInfo(bindTable, { title: "警告", content: info, cancel: false });
 }
 
-export function postAddC(bindTable, row) {
+export function postAdd(bindTable, row) {
   axios
     .post("http://" + ip + ":3000/dbCtrl/add", {
       table: bindTable.state.table,
@@ -80,7 +80,7 @@ export function postAddC(bindTable, row) {
   });
 }
 
-export function postEditC(bindTable, row, info = "") {
+export function postEdit(bindTable, row, info = "") {
   axios
     .post("http://" + ip + ":3000/dbCtrl/update", {
       table: bindTable.state.table,

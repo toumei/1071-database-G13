@@ -2,15 +2,15 @@ import React, { Component } from "react";
 
 // controller
 import {
-  TableNavColumnsC,
-  TableNavModeColumnsC
+  TableNavColumns,
+  TableNavModeColumns
 } from "../../../controllers/state.controller";
 import {
   addItem,
   deleteForm
 } from "../../../controllers/DBTableNav.controller";
 
-import { Modal } from "../../../models/bootstrap.model";
+import { CustonModal } from "../../../models/bootstrap.model";
 
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
@@ -55,11 +55,11 @@ export default class extends Component {
     const newColumns = JSON.parse(props.columns);
     newColumns.forEach((element, i) => {
       if (i !== newColumns.length - 1) {
-        columns.push(TableNavColumnsC(element)[0]);
+        columns.push(TableNavColumns(element)[0]);
       }
     });
 
-    columns.push(TableNavModeColumnsC(this)[0]);
+    columns.push(TableNavModeColumns(this)[0]);
     return columns;
   }
 
@@ -73,7 +73,7 @@ export default class extends Component {
         >
           <i className="fas fa-plus" /> 新增
         </button>
-        <Modal
+        <CustonModal
           id="addModal"
           title="新增一筆資料"
           body={<form>{this.addColumn()}</form>}
@@ -147,7 +147,7 @@ export default class extends Component {
         >
           <i className="fas fa-plus" /> 刪除
         </button>
-        <Modal
+        <CustonModal
           id="deleteListModal"
           title="確定刪除這些資料?"
           body={

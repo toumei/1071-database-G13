@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 // controller
-import { postDatabaseDataC } from "../../../controllers/axios.controller";
-import { DatabaseColumnsC } from "../../../controllers/state.controller";
+import { postDatabaseData } from "../../../controllers/axios.controller";
+import { DatabaseColumns } from "../../../controllers/state.controller";
 
 // model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
@@ -12,13 +12,13 @@ export default class extends Component {
     super(props);
     this.state = {
       table: this.props.table,
-      columns: DatabaseColumnsC(this),
+      columns: DatabaseColumns(this),
       data: []
     };
   }
 
   componentDidMount() {
-    postDatabaseDataC(this);
+    postDatabaseData(this);
   }
 
   render() {

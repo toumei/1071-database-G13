@@ -5,7 +5,7 @@ const iv = "107-database-G13";
 const coding = "utf8";
 const binaryCoding = "hex";
 
-export function encryptM(data) {
+export function encrypt(data) {
   const jsonStr = JSON.stringify(data);
   const cipher = crypto.createCipheriv(aes, pwd, iv);
   let encrypted = cipher.update(jsonStr, coding, binaryCoding);
@@ -14,7 +14,7 @@ export function encryptM(data) {
   return encrypted;
 }
 
-export function decryptM(data) {
+export function decrypt(data) {
   const decipher = crypto.createDecipheriv(aes, pwd, iv);
   let decrypted = decipher.update(data, binaryCoding, coding);
   decrypted += decipher.final(coding);

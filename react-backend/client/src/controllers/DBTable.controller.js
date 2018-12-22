@@ -1,14 +1,14 @@
 // controller
 import {
-  postTableColumnsDataC,
-  postDeleteC,
-  postAddC,
-  postEditC
+  postTableColumnsData,
+  postDelete,
+  postAdd,
+  postEdit
 } from "./axios.controller";
 
 // table nav add
 export function handleAddItem(bind, row) {
-  postAddC(bind, row);
+  postAdd(bind, row);
 }
 
 // table select
@@ -39,7 +39,7 @@ export function handleDeleteItem(bind, row, isBottom, info) {
     bind.setState({ data: newData });
   } else {
     info += "成功刪除ID:" + row.ID + "<br />";
-    postDeleteC(bind, row, info);
+    postDelete(bind, row, info);
   }
 }
 
@@ -49,13 +49,13 @@ export function getItem(bind, row) {
 }
 
 export function deleteItem(bind, row) {
-  postDeleteC(bind, row, "成功刪除ID:" + row.ID);
+  postDelete(bind, row, "成功刪除ID:" + row.ID);
   bind.setState({ data: bind.state.data.filter((x, i) => x !== row) });
 }
 
 // table edit
 export function editItem(bind, row) {
-  postEditC(bind, row, "成功編輯ID:" + row.ID);
+  postEdit(bind, row, "成功編輯ID:" + row.ID);
   bind.state.data.filter((x, i) => {
     if (x === bind.state.itemData[0]) {
       const data = bind.state.data;
@@ -95,7 +95,7 @@ export function handleEditable(bind) {
   }).then(res => {
     if (res) {
       bind.setState({ editable: !bind.state.editable });
-      postTableColumnsDataC(bind);
+      postTableColumnsData(bind);
     }
   });
 }
