@@ -4,14 +4,23 @@ import { customColumn, columnWidth } from "./state.model";
 
 import { cancelDelete } from "../controllers/DBTableNav.controller";
 
-export const TableNavColumns = elm => [
-  {
-    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
-    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] }
-  }
-];
+export function TableNavColumns(bind, props) {
+  let columns = [];
+  const newColumns = JSON.parse(props.columns);
+  newColumns.forEach((elm, i) => {
+    if (i !== newColumns.length - 1) {
+      columns.push({
+        ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
+        headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] }
+      });
+    }
+  });
 
-export const TableNavModeColumns = bindTableNav => [
+  columns.push(TableNavModeColumns(bind)[0]);
+  return columns;
+}
+
+export const TableNavModeColumns = bind => [
   {
     ...customColumn("action", "操作")[0],
     isDummyField: true,
@@ -21,7 +30,7 @@ export const TableNavModeColumns = bindTableNav => [
           type="button"
           name="cancel"
           className="btn btn-warning btn-sm"
-          onClick={e => cancelDelete(bindTableNav, row)}
+          onClick={e => cancelDelete(bind, row)}
         >
           取消
         </button>

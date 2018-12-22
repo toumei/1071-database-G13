@@ -25,7 +25,7 @@ export function postTableMenuData(bind) {
   });
 }
 
-export function postTableColumnsData(bind) {
+export function postTableColumns(bind) {
   axios.post(url + "dbCtrl/ColumnList?table=" + bind.state.table).then(res => {
     let columns = [];
     let deleteColumns = [];

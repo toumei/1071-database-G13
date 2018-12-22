@@ -1,10 +1,5 @@
 // controller
-import {
-  postTableColumnsData,
-  postDelete,
-  postAdd,
-  postEdit
-} from "./axios.controller";
+import { postAdd, postDelete, postEdit } from "./axios.controller";
 
 // table nav add
 export function handleAddItem(bind, row) {
@@ -95,7 +90,42 @@ export function handleEditable(bind) {
   }).then(res => {
     if (res) {
       bind.setState({ editable: !bind.state.editable });
-      postTableColumnsData(bind);
+      const newColumns = bind.state.columns;
+      for (let i = 0; i < newColumns.length; i++) {
+        newColumns[i].editable = bind.state.editable;
+      }
+      bind.setState({ columns: newColumns });
     }
   });
+}
+
+export function editForm(bind) {
+  const newColumns = JSON.parse(
+    JSON.stringify(
+      bind.state.columns.map((x, i) => {
+        return {
+          COLUMN_NAME: x.dataField,
+          COLUMN_COMMENT: x.text
+        };
+      })
+    )
+  );
+  let row = { ID: bind.state.itemData[0].ID };
+  for (let i = 1; i < newColumns.length - 1; i++) {
+    if (
+      document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value !== ""
+    ) {
+      row[newColumns[i].COLUMN_NAME] = document.getElementById(
+        newColumns[i].COLUMN_NAME + "Edit"
+      ).value;
+    } else {
+      row[newColumns[i].COLUMN_NAME] = document.getElementById(
+        newColumns[i].COLUMN_NAME + "Edit"
+      ).placeholder;
+    }
+  }
+  editItem(bind, row);
+  for (let i = 1; i < newColumns.length - 1; i++) {
+    document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value = "";
+  }
 }

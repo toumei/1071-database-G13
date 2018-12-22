@@ -14,14 +14,14 @@ import DBTableNav from "./DBTableNav";
 // controller
 import {
   postEdit,
-  postTableColumnsData,
+  postTableColumns,
   postTableData
 } from "../../../controllers/axios.controller";
 import {
   addSelect,
   deleteItem,
   deleteSelect,
-  editItem,
+  editForm,
   handleAddItem,
   handleDeleteItem,
   handleEditable,
@@ -40,7 +40,7 @@ export default class extends Component {
       deleteColumns: [],
       itemData: [],
       editItem: "",
-      editable: true,
+      editable: false,
       info: [{ title: "", content: "", cancel: false }]
     };
     this.select = [];
@@ -55,21 +55,20 @@ export default class extends Component {
     //   }
     //   return "close";
     // };
-    postTableColumnsData(this);
+    postTableColumns(this);
     postTableData(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.table !== this.props.table) {
-      this.select = [];
-      this.node.selectionContext.state.selected = [];
+      this.select = this.node.selectionContext.state.selected = [];
       this.setState({ table: nextProps.table });
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.table !== this.state.table) {
-      postTableColumnsData(this);
+      postTableColumns(this);
       postTableData(this);
     }
   }
@@ -84,8 +83,8 @@ export default class extends Component {
       return (
         <ToolkitProvider
           keyField={"ID"}
-          data={this.state.data}
           columns={this.state.columns}
+          data={this.state.data}
           search
         >
           {props => (
@@ -99,15 +98,15 @@ export default class extends Component {
                     };
                   })
                 )}
+                editable={this.state.editable}
                 handleAddItem={row => handleAddItem(this, row)}
-                select={this.select}
                 handleDeleteItem={(bindTableNav, row, info) =>
                   handleDeleteItem(this, bindTableNav, row, info)
                 }
+                handleEditable={() => handleEditable(this)}
                 handleGetSelect={() => handleGetSelect(this)}
                 handleInfo={info => handleInfo(this, info)}
-                handleEditable={() => handleEditable(this)}
-                editable={this.state.editable}
+                select={this.select}
               />
               <SearchBar
                 {...props.searchProps}
@@ -147,14 +146,18 @@ export default class extends Component {
               <CustonModal
                 id="editModal"
                 title="編輯資料"
-                body={<form>{this.editColumn()}</form>}
+                body={
+                  <form>
+                    <EditForm bind={this} />
+                  </form>
+                }
                 footer={
                   <div className="modal-footer">
                     <button
                       type="button"
                       className="btn btn-primary"
                       data-dismiss="modal"
-                      onClick={e => this.editForm()}
+                      onClick={e => editForm(this)}
                     >
                       確定
                     </button>
@@ -249,48 +252,14 @@ export default class extends Component {
     }
     return null;
   }
+}
 
-  editColumn() {
-    if (this.state.itemData[0] !== undefined) {
-      let columns = [];
-      const newColumns = JSON.parse(
-        JSON.stringify(
-          this.state.columns.map((x, i) => {
-            return {
-              COLUMN_NAME: x.dataField,
-              COLUMN_COMMENT: x.text
-            };
-          })
-        )
-      );
-      for (let i = 1; i < newColumns.length - 1; i++) {
-        columns.push(
-          <div key={i} className="form-group row">
-            <label
-              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
-              className="col-sm-2 col-form-label"
-            >
-              {newColumns[i].COLUMN_COMMENT}
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id={newColumns[i].COLUMN_NAME + "Edit"}
-                placeholder={this.state.itemData[0][newColumns[i].COLUMN_NAME]}
-              />
-            </div>
-          </div>
-        );
-      }
-      return columns;
-    }
-  }
-
-  editForm() {
+const EditForm = ({ bind }) => {
+  if (bind.state.itemData[0] !== undefined) {
+    let columns = [];
     const newColumns = JSON.parse(
       JSON.stringify(
-        this.state.columns.map((x, i) => {
+        bind.state.columns.map((x, i) => {
           return {
             COLUMN_NAME: x.dataField,
             COLUMN_COMMENT: x.text
@@ -298,23 +267,27 @@ export default class extends Component {
         })
       )
     );
-    let row = { ID: this.state.itemData[0].ID };
     for (let i = 1; i < newColumns.length - 1; i++) {
-      if (
-        document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value !== ""
-      ) {
-        row[newColumns[i].COLUMN_NAME] = document.getElementById(
-          newColumns[i].COLUMN_NAME + "Edit"
-        ).value;
-      } else {
-        row[newColumns[i].COLUMN_NAME] = document.getElementById(
-          newColumns[i].COLUMN_NAME + "Edit"
-        ).placeholder;
-      }
+      columns.push(
+        <div key={i} className="form-group row">
+          <label
+            htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+            className="col-sm-2 col-form-label"
+          >
+            {newColumns[i].COLUMN_COMMENT}
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              className="form-control"
+              id={newColumns[i].COLUMN_NAME + "Edit"}
+              placeholder={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
+            />
+          </div>
+        </div>
+      );
     }
-    editItem(this, row);
-    for (let i = 1; i < newColumns.length - 1; i++) {
-      document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value = "";
-    }
+    return columns;
   }
-}
+  return null;
+};
