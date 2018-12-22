@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import { unregister } from "./serviceWorker";
-import { Root } from "./router";
+import { Router } from "./router";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 // 主程式進入點
-ReactDOM.render(<Root />, document.getElementById("root"));
+ReactDOM.render(<Router />, document.getElementById("root"));
 
 unregister();

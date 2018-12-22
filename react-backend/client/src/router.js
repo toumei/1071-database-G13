@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import App from "./views/App";
-import { Error } from "./views/Error";
+import Error from "./views/Error";
 
 import Index from "./views/index/Index";
 
@@ -20,9 +20,9 @@ import Products from "./views/products/Products";
 import Profile from "./views/profile/Profile";
 import Settings from "./views/settings/Settings";
 
-import { Login } from "./views/login/Login";
+import Login from "./views/login/Login";
 
-export const Root = () => (
+export const Router = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />

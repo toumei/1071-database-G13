@@ -8,7 +8,7 @@ export default class extends Component {
     return (
       <div>
         <Navbar />
-        <Header />
+        <Header location={this.props.location.pathname} />
         <Main />
       </div>
     );
@@ -85,13 +85,13 @@ const NavItem = () => (
   </div>
 );
 
-const Header = () => (
+const Header = props => (
   <header className="bg-primary text-light ">
     <div className="container">
       <div className="row">
         <h1 className="col-md-6">
           <i className="fas fa-cog" />
-          title
+          {props.location}
         </h1>
       </div>
     </div>

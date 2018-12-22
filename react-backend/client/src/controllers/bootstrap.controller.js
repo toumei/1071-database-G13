@@ -1,13 +1,8 @@
 import React from "react";
 
-// controller
-import {
-  BootstrapTableDeleteC,
-  BootstrapTableNavC
-} from "./react-bootstrap.controller";
-
 // model
 import { modalM } from "../models/bootstrap.model";
+import { CustomBootstrap } from "../models/react-bootstrap.model";
 
 export const TableNavAddC = bindTableNav =>
   modalM(
@@ -45,7 +40,16 @@ export const TableNavDeleteC = bindTableNav =>
   modalM(
     "deleteListModal",
     <h5 className="modal-title">確定刪除這些資料?</h5>,
-    <div className="modal-body">{BootstrapTableNavC(bindTableNav)}</div>,
+    <div className="modal-body">
+      <CustomBootstrap
+        base={{
+          keyField: "ID",
+          data: bindTableNav.state.deleteList,
+          columns: bindTableNav.state.columns
+        }}
+        pagination={true}
+      />
+    </div>,
     <div className="modal-footer">
       <button
         type="button"
@@ -90,7 +94,15 @@ export const TableDeleteC = bindTable =>
   modalM(
     "deleteModal",
     <h5 className="modal-title">確定要刪除這筆資料？</h5>,
-    <div className="modal-body">{BootstrapTableDeleteC(bindTable)}</div>,
+    <div className="modal-body">
+      <CustomBootstrap
+        base={{
+          keyField: "ID",
+          data: JSON.parse(JSON.stringify(bindTable.state.itemData)), // 由於二次值無法更新，暫時由此代替 data: bindTable.state.itemData
+          columns: bindTable.state.deleteColumns
+        }}
+      />
+    </div>,
     <div className="modal-footer">
       <button
         type="button"

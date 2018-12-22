@@ -2,10 +2,11 @@ import React, { Component } from "react";
 
 // controller
 import { postDatabaseDataC } from "../../../controllers/axios.controller";
-import { BootstrapDatabaseC } from "../../../controllers/react-bootstrap.controller";
 import { DatabaseColumnsC } from "../../../controllers/state.controller";
 
-// default program
+// model
+import { CustomBootstrap } from "../../../models/react-bootstrap.model";
+
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,24 @@ export default class extends Component {
   render() {
     return (
       <div className="col-md-2" style={{ marginTop: 10 }}>
-        {BootstrapDatabaseC(this)}
+        <CustomBootstrap
+          base={{
+            keyField: "TABLE_COMMENT",
+            data: this.state.data,
+            columns: this.state.columns
+          }}
+          selectRow={{
+            mode: "radio",
+            clickToSelect: true,
+            hideSelectColumn: true,
+            bgColor: "#c8e6c9",
+            onSelect: (row, isSelect, rowIndex, e) => {
+              this.props.handleChangeTable(row.TABLE_NAME);
+              this.setState({ table: row.TABLE_NAME });
+              return false;
+            }
+          }}
+        />
       </div>
     );
   }

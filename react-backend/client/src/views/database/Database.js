@@ -8,7 +8,7 @@ export default class extends Component {
   render() {
     return (
       <div>
-        <DBnavbar />
+        <DBNavbar />
         <DBMain />
       </div>
     );
@@ -16,7 +16,7 @@ export default class extends Component {
 }
 
 // navbar
-const DBnavbar = () => (
+const DBNavbar = () => (
   <section className="bg-light">
     <ul className="nav nav-tabs justify-content-center">
       <li className="nav-item">

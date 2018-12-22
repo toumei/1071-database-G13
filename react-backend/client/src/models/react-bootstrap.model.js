@@ -4,26 +4,31 @@ import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 
-export const customBootstrapTableM = (
+// 客製化Bootstrap套版
+export const CustomBootstrap = ({
   base,
-  option = null,
-  pagination = false
-) => (
+  pagination,
+  cellEdit,
+  selectRow,
+  refs
+}) => (
   <BootstrapTable
     {...base}
     striped
     hover
-    noDataIndication={noData}
+    noDataIndication={NoData}
     defaultSorted={[{ dataField: base.keyField, order: "asc" }]}
     pagination={pagination ? paginationFactory(pageOptions) : null}
-    {...option}
+    cellEdit={cellEdit}
+    selectRow={selectRow}
+    ref={refs}
   />
 );
 
 // no data
-const noData = () => <div className="text-center">尚未有資料</div>;
+const NoData = () => <div className="text-center">尚未有資料</div>;
 
-// page option
+// page進階設定
 const pageOptions = {
   paginationSize: 10,
   sizePerPageList: [

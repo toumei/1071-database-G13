@@ -2,11 +2,11 @@ import React, { Component } from "react";
 
 // bootstrap
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
+import cellEditFactory from "react-bootstrap-table2-editor";
 
 import DBTableNav from "./DBTableNav";
 
 // controller
-import { BootstrapTableC } from "../../../controllers/react-bootstrap.controller";
 import {
   TableEditC,
   TableDeleteC,
@@ -19,6 +19,9 @@ import {
   postAddC,
   postEditC
 } from "../../../controllers/axios.controller";
+
+// model
+import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 export default class extends Component {
   constructor(props) {
@@ -105,7 +108,37 @@ export default class extends Component {
                 {...props.searchProps}
                 placeholder="搜尋關鍵字。。。"
               />
-              {BootstrapTableC(this, props.baseProps)}
+              <CustomBootstrap
+                base={{ ...props.baseProps }}
+                cellEdit={cellEditFactory({
+                  mode: "click",
+                  blurToSave: true,
+                  afterSaveCell: (oldValue, newValue, row, column) => {
+                    postEditC(this, row);
+                  }
+                })}
+                selectRow={{
+                  mode: "checkbox",
+                  onSelect: (row, isSelect, rowIndex, e) => {
+                    if (isSelect) {
+                      this.isSelect([row]);
+                    } else {
+                      this.isNotSelect(row);
+                    }
+                  },
+                  onSelectAll: (isSelect, rows, e) => {
+                    if (isSelect) {
+                      this.isSelect(rows);
+                    } else {
+                      for (let i = 0; i < rows.length; i++) {
+                        this.isNotSelect(rows[i]);
+                      }
+                    }
+                  }
+                }}
+                refs={n => (this.node = n)}
+                pagination={true}
+              />
               {TableEditC(this)}
               {TableDeleteC(this)}
               {TableInfoC(this)}
