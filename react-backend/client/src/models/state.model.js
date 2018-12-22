@@ -28,9 +28,9 @@ export const customColumnM = (data, text, sort = false) => [
   }
 ];
 
-export const columnWidthM = element => [
+export const columnWidthM = elm => [
   {
-    width: element["COLUMN_NAME"] === "ID" ? "" : "100rem",
-    minWidth: element["COLUMN_NAME"] === "ID" ? "" : "10rem"
+    width: elm["COLUMN_NAME"] === "ID" ? "" : "100rem",
+    minWidth: elm["COLUMN_NAME"] === "ID" ? "" : "10rem"
   }
 ];

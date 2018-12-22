@@ -17,6 +17,7 @@ export function postDatabaseDataC(bindDatabase) {
   axios.post("http://" + ip + ":3000/dbCtrl/TableList").then(res => {
     let data = [];
     decryptM(res.data).forEach(elm => {
+      // if (elm["TABLE_NAME"][0] !== "_")
       data.push(TableDataC(elm)[0]);
     });
     bindDatabase.setState({ data: data });

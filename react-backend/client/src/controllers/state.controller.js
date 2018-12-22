@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Type } from "react-bootstrap-table2-editor";
+
 // model
 import { customColumnM, columnWidthM } from "../models/state.model";
 
@@ -15,14 +17,10 @@ export const DatabaseColumnsC = bindDatabase => [
   }
 ];
 
-export const TableNavColumnsC = element => [
+export const TableNavColumnsC = elm => [
   {
-    ...customColumnM(
-      element["COLUMN_NAME"],
-      element["COLUMN_COMMENT"],
-      true
-    )[0],
-    headerStyle: { cursor: "pointer", ...columnWidthM(element)[0] }
+    ...customColumnM(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
+    headerStyle: { cursor: "pointer", ...columnWidthM(elm)[0] }
   }
 ];
 
@@ -47,24 +45,21 @@ export const TableNavModeColumnsC = bindTableNav => [
   }
 ];
 
-export const TableDataC = element => [
+export const TableDataC = elm => [
   {
-    TABLE_COMMENT: element["TABLE_COMMENT"],
-    TABLE_NAME: element["TABLE_NAME"],
+    TABLE_COMMENT: elm["TABLE_COMMENT"],
+    TABLE_NAME: elm["TABLE_NAME"],
     align: "center"
   }
 ];
 
-export const TableColumnsC = (bindTable, element) => [
+export const TableColumnsC = (bindTable, elm) => [
   {
-    ...customColumnM(
-      element["COLUMN_NAME"],
-      element["COLUMN_COMMENT"],
-      true
-    )[0],
+    ...customColumnM(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
     editable: bindTable.state.editable,
-    headerStyle: { cursor: "pointer", ...columnWidthM(element)[0] },
-    style: { cursor: "default" }
+    headerStyle: { cursor: "pointer", ...columnWidthM(elm)[0] },
+    style: { cursor: "default" },
+    editor: { type: Type.TEXT }
   }
 ];
 
@@ -101,10 +96,10 @@ export const TableModeColumnsC = bindTable => [
   }
 ];
 
-export const TableDeleteColumnsC = element => [
+export const TableDeleteColumnsC = elm => [
   {
-    ...customColumnM(element["COLUMN_NAME"], element["COLUMN_COMMENT"])[0],
-    headerStyle: columnWidthM(element)[0],
+    ...customColumnM(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"])[0],
+    headerStyle: columnWidthM(elm)[0],
     style: { cursor: "default" }
   }
 ];
