@@ -57,6 +57,7 @@
   * router 配置完成 (不包含之後新增)
   * server-client 資料加解密
   * CRUD 大致完成
+  * MVC 配置大致完成
 
 ### 正在做的部分：
 * sever
@@ -72,6 +73,7 @@
 
 * client (react)
   * db 分析
+  * handleEditable更新columns的editable有時會有問題 (尚未找到問題，待解決)
 
 ### 尚未做的部分：
 * server
