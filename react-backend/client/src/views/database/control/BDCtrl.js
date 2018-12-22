@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 
-import DBTable from "./DBTable";
+// view
 import DBDatabase from "./DBDatabase";
+import DBTable from "./DBTable";
 
+// controller
 import { handleChangeTable } from "../../../controllers/DBCtrl.controller";
 
 export default class extends Component {

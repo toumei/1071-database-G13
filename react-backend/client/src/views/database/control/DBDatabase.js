@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
-// controller
-import { postDatabaseData } from "../../../controllers/axios.controller";
-import { DatabaseColumns } from "../../../controllers/state.controller";
-
 // model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
+import { DatabaseColumns } from "../../../models/DBDatabase.model";
+
+// controller
+import { postDatabaseData } from "../../../controllers/axios.controller";
 
 export default class extends Component {
   constructor(props) {
@@ -27,8 +27,8 @@ export default class extends Component {
         <CustomBootstrap
           base={{
             keyField: "TABLE_COMMENT",
-            data: this.state.data,
-            columns: this.state.columns
+            columns: this.state.columns,
+            data: this.state.data
           }}
           selectRow={{
             mode: "radio",

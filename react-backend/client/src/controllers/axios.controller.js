@@ -2,14 +2,14 @@ import axios from "axios";
 
 // model
 import { decrypt } from "../models/crypt.model";
-
-// controller
 import {
   TableData,
   TableColumns,
   TableModeColumns,
   TableDeleteColumns
-} from "./state.controller";
+} from "../models/DBTable.model";
+
+// controller
 import { handleInfo } from "./DBTable.controller";
 
 const ip = false ? "192.168.42.212" : "localhost";

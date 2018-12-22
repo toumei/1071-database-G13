@@ -1,32 +1,33 @@
 import React, { Component } from "react";
 
 // bootstrap
-import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 import cellEditFactory from "react-bootstrap-table2-editor";
+import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
+// model
+import { CustonModal } from "../../../models/bootstrap.model";
+import { CustomBootstrap } from "../../../models/react-bootstrap.model";
+
+// view
 import DBTableNav from "./DBTableNav";
 
 // controller
 import {
+  postEdit,
   postTableColumnsData,
-  postTableData,
-  postEdit
+  postTableData
 } from "../../../controllers/axios.controller";
 import {
-  handleAddItem,
   addSelect,
-  deleteSelect,
-  handleGetSelect,
-  handleDeleteItem,
   deleteItem,
+  deleteSelect,
   editItem,
-  handleInfo,
-  handleEditable
+  handleAddItem,
+  handleDeleteItem,
+  handleEditable,
+  handleGetSelect,
+  handleInfo
 } from "../../../controllers/DBTable.controller";
-
-// model
-import { CustomBootstrap } from "../../../models/react-bootstrap.model";
-import { CustonModal } from "../../../models/bootstrap.model";
 
 export default class extends Component {
   constructor(props) {

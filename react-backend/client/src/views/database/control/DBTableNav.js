@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
-// controller
+// model
 import {
   TableNavColumns,
   TableNavModeColumns
-} from "../../../controllers/state.controller";
+} from "../../../models/DBTableNav.model";
+
+// controller
 import {
   addItem,
   deleteForm
