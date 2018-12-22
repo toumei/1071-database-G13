@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import DBTable from "./DBTable";
 import DBDatabase from "./DBDatabase";
 
+import { handleChangeTable } from "../../../controllers/DBCtrl.controller";
+
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -15,16 +17,11 @@ export default class extends Component {
         <div className="row">
           <DBDatabase
             table={this.state.table}
-            handleChangeTable={table => this.handleChangeTable(table)}
+            handleChangeTable={table => handleChangeTable(this, table)}
           />
           <DBTable table={this.state.table} />
         </div>
       </div>
     );
-  }
-
-  // handle
-  handleChangeTable(table) {
-    this.setState({ table: table });
   }
 }

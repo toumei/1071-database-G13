@@ -10,10 +10,19 @@ import DBTableNav from "./DBTableNav";
 import {
   postTableColumnsDataC,
   postTableDataC,
-  postDeleteC,
-  postAddC,
   postEditC
 } from "../../../controllers/axios.controller";
+import {
+  handleAddItem,
+  addSelect,
+  deleteSelect,
+  handleGetSelect,
+  handleDeleteItem,
+  deleteItem,
+  editItem,
+  handleInfo,
+  handleEditable
+} from "../../../controllers/DBTable.controller";
 
 // model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
@@ -89,15 +98,14 @@ export default class extends Component {
                     };
                   })
                 )}
-                handleAddItem={row => this.handleAddItem(row)}
+                handleAddItem={row => handleAddItem(this, row)}
                 select={this.select}
                 handleDeleteItem={(bindTableNav, row, info) =>
-                  this.handleDeleteItem(bindTableNav, row, info)
+                  handleDeleteItem(this, bindTableNav, row, info)
                 }
-                handleGetSelect={() => this.handleGetSelect()}
-                handleCancelDelete={row => this.handleCancelDelete(row)}
-                handleInfo={info => this.handleInfo(info)}
-                handleEditable={() => this.handleEditable()}
+                handleGetSelect={() => handleGetSelect(this)}
+                handleInfo={info => handleInfo(this, info)}
+                handleEditable={() => handleEditable(this)}
                 editable={this.state.editable}
               />
               <SearchBar
@@ -117,17 +125,17 @@ export default class extends Component {
                   mode: "checkbox",
                   onSelect: (row, isSelect, rowIndex, e) => {
                     if (isSelect) {
-                      this.isSelect([row]);
+                      addSelect(this, [row]);
                     } else {
-                      this.isNotSelect(row);
+                      deleteSelect(this, row);
                     }
                   },
                   onSelectAll: (isSelect, rows, e) => {
                     if (isSelect) {
-                      this.isSelect(rows);
+                      addSelect(this, rows);
                     } else {
                       for (let i = 0; i < rows.length; i++) {
-                        this.isNotSelect(rows[i]);
+                        deleteSelect(this, rows[i]);
                       }
                     }
                   }
@@ -179,7 +187,7 @@ export default class extends Component {
                       type="button"
                       className="btn btn-primary"
                       data-dismiss="modal"
-                      onClick={e => this.deleteItem(this.state.itemData[0])}
+                      onClick={e => deleteItem(this, this.state.itemData[0])}
                     >
                       確定
                     </button>
@@ -239,63 +247,6 @@ export default class extends Component {
       );
     }
     return null;
-  }
-
-  // table nav add
-  handleAddItem(row) {
-    postAddC(this, row);
-  }
-
-  // table select
-  isSelect(row) {
-    this.select = [...this.select, ...row];
-  }
-
-  isNotSelect(row) {
-    this.select = this.select.filter((x, i) => x !== row);
-  }
-
-  // table nav select
-  handleGetSelect() {
-    this.setState({});
-  }
-
-  handleCancelDelete(row) {
-    // this.select = this.select.filter((x, i) => x !== row);
-    // this.node.selectionContext.state.selected = this.node.selectionContext.state.selected.filter(
-    //   (x, i) => x !== row.ID
-    // );
-    // this.setState({});
-  }
-
-  // table nav delete
-  handleDeleteItem(row, isBottom, info) {
-    if (isBottom) {
-      let newData = this.state.data;
-      let newSelect = this.select;
-      row.filter((x, i) => {
-        newData = newData.filter((xx, i) => x !== xx);
-        newSelect = newSelect.filter((xx, i) => x !== xx);
-        return false;
-      });
-      this.select = newSelect;
-      this.setState({ data: newData });
-    } else {
-      info += "成功刪除ID:" + row.ID + "<br />";
-      postDeleteC(this, row, info);
-    }
-  }
-
-  // table edit or delete
-  getItem(row) {
-    this.setState({ itemData: [row] });
-  }
-
-  deleteItem(row) {
-    postDeleteC(this, row, "成功刪除ID:" + row.ID);
-    this.setState({
-      data: this.state.data.filter((x, i) => x !== row)
-    });
   }
 
   editColumn() {
@@ -360,56 +311,9 @@ export default class extends Component {
         ).placeholder;
       }
     }
-    this.editItem(row);
+    editItem(this, row);
     for (let i = 1; i < newColumns.length - 1; i++) {
       document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value = "";
     }
-  }
-
-  // table edit
-  editItem(row) {
-    postEditC(this, row, "成功編輯ID:" + row.ID);
-    this.state.data.filter((x, i) => {
-      if (x === this.state.itemData[0]) {
-        const data = this.state.data;
-        data[i] = row;
-        this.setState({ data: data });
-        return true;
-      }
-      return false;
-    });
-  }
-
-  // handle info
-  handleInfo(info) {
-    this.setState({ info: [info] });
-    document.getElementById("info").click();
-  }
-
-  handleEditable() {
-    new Promise((resolve, reject) => {
-      this.setState({
-        info: [
-          {
-            title: "警告",
-            content:
-              "確定要" + (this.state.editable ? "關閉" : "開啟") + "快速編輯",
-            cancel: true
-          }
-        ]
-      });
-      document.getElementById("info").click();
-      document.getElementById("infoTrue").addEventListener("click", () => {
-        resolve(true);
-      });
-      document.getElementById("infoFalse").addEventListener("click", () => {
-        resolve(false);
-      });
-    }).then(res => {
-      if (res) {
-        this.setState({ editable: !this.state.editable });
-        postTableColumnsDataC(this);
-      }
-    });
   }
 }

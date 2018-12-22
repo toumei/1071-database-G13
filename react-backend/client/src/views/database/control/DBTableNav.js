@@ -5,6 +5,10 @@ import {
   TableNavColumnsC,
   TableNavModeColumnsC
 } from "../../../controllers/state.controller";
+import {
+  addItem,
+  deleteForm
+} from "../../../controllers/DBTableNav.controller";
 
 import { Modal } from "../../../models/bootstrap.model";
 
@@ -78,7 +82,7 @@ export default class extends Component {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={e => this.addItem()}
+                onClick={e => addItem(this)}
               >
                 新增
               </button>
@@ -129,37 +133,6 @@ export default class extends Component {
     return columns;
   }
 
-  addItem() {
-    const newColumns = JSON.parse(this.props.columns);
-    let row = {};
-    let isNull = false;
-    let info = "";
-    for (let i = 1; i < newColumns.length - 1; i++) {
-      if (
-        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value === ""
-      ) {
-        isNull = true;
-        info += newColumns[i].COLUMN_COMMENT + "請勿留白<br />";
-      } else {
-        row[newColumns[i].COLUMN_NAME] = document.getElementById(
-          newColumns[i].COLUMN_NAME + "Add"
-        ).value;
-      }
-    }
-    if (!isNull) {
-      this.props.handleAddItem(row);
-      for (let i = 1; i < newColumns.length - 1; i++) {
-        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value = "";
-      }
-    } else {
-      this.props.handleInfo({
-        title: "警告",
-        content: info,
-        cancel: false
-      });
-    }
-  }
-
   deleteBtn() {
     return (
       <div className="col-4 col-md-2">
@@ -192,7 +165,7 @@ export default class extends Component {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={e => this.deleteForm()}
+                onClick={e => deleteForm(this)}
                 data-dismiss="modal"
                 style={{
                   display: this.state.deleteList.length === 0 ? "none" : "block"
@@ -212,23 +185,6 @@ export default class extends Component {
         />
       </div>
     );
-  }
-
-  deleteForm() {
-    let info = "";
-    const deleteList = this.state.deleteList;
-    deleteList.filter((x, i) => {
-      this.props.handleDeleteItem(x, false, info);
-      info += "成功刪除ID:" + x.ID + "<br />";
-      return false;
-    });
-    this.props.handleDeleteItem(deleteList, true, info);
-  }
-
-  cancelDelete(row) {
-    this.setState({
-      deleteList: this.state.deleteList.filter((x, i) => x !== row)
-    });
   }
 
   fastEditBtn() {

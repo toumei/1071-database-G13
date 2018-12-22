@@ -10,6 +10,7 @@ import {
   TableModeColumnsC,
   TableDeleteColumnsC
 } from "./state.controller";
+import { handleInfo } from "./DBTable.controller";
 
 const ip = false ? "192.168.42.212" : "localhost";
 
@@ -57,7 +58,7 @@ export function postDeleteC(bindTable, row, info) {
     table: bindTable.state.table,
     id: row.ID
   });
-  bindTable.handleInfo({ title: "警告", content: info, cancel: false });
+  handleInfo(bindTable, { title: "警告", content: info, cancel: false });
 }
 
 export function postAddC(bindTable, row) {
@@ -72,7 +73,7 @@ export function postAddC(bindTable, row) {
         data: [...bindTable.state.data, row]
       });
     });
-  bindTable.handleInfo({
+  handleInfo(bindTable, {
     title: "警告",
     content: "新增成功",
     cancel: false
@@ -87,5 +88,5 @@ export function postEditC(bindTable, row, info = "") {
     })
     .then(res => {});
   if (info !== "")
-    bindTable.handleInfo({ title: "警告", content: info, cancel: false });
+    handleInfo(bindTable, { title: "警告", content: info, cancel: false });
 }

@@ -5,6 +5,9 @@ import { Type } from "react-bootstrap-table2-editor";
 // model
 import { customColumnM, columnWidthM } from "../models/state.model";
 
+import { getItem } from "./DBTable.controller";
+import { cancelDelete } from "./DBTableNav.controller";
+
 export const DatabaseColumnsC = bindDatabase => [
   {
     ...customColumnM("TABLE_COMMENT", "資料庫")[0],
@@ -34,7 +37,7 @@ export const TableNavModeColumnsC = bindTableNav => [
           type="button"
           name="cancel"
           className="btn btn-warning btn-sm"
-          onClick={e => bindTableNav.cancelDelete(row)}
+          onClick={e => cancelDelete(bindTableNav, row)}
         >
           取消
         </button>
@@ -75,7 +78,7 @@ export const TableModeColumnsC = bindTable => [
           className="btn btn-primary btn-sm"
           data-toggle="modal"
           data-target={"#editModal"}
-          onClick={e => bindTable.getItem(row)}
+          onClick={e => getItem(bindTable, row)}
         >
           編輯
         </button>
@@ -85,7 +88,7 @@ export const TableModeColumnsC = bindTable => [
           className="btn btn-danger btn-sm"
           data-toggle="modal"
           data-target={"#deleteModal"}
-          onClick={e => bindTable.getItem(row)}
+          onClick={e => getItem(bindTable, row)}
         >
           刪除
         </button>
