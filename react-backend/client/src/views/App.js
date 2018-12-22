@@ -4,11 +4,26 @@ import { Link } from "react-router-dom";
 import { Main } from "../router";
 
 export default class extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { title: "" };
+  }
+
+  componentDidMount() {
+    this.setState({ title: document.title });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.title !== document.title) {
+      this.setState({ title: document.title });
+    }
+  }
+
   render() {
     return (
       <div>
         <Navbar />
-        <Header location={this.props.location.pathname} />
+        <Header title={this.state.title} />
         <Main />
       </div>
     );
@@ -53,7 +68,7 @@ const NavItem = () => (
       </li>
       <li className="nav-item">
         <Link className="nav-link" to="/products">
-          products
+          產品
         </Link>
       </li>
     </ul>
@@ -65,33 +80,33 @@ const NavItem = () => (
           data-toggle="dropdown"
           to="/user"
         >
-          <i className="fas fa-user" /> Welcome Brad
+          <i className="fas fa-user" /> 歡迎 Brad
         </Link>
         <div className="dropdown-menu">
           <Link className="dropdown-item" to="/profile">
-            <i className="fas fa-user-circle" /> Profile
+            <i className="fas fa-user-circle" /> 個人資料
           </Link>
           <Link className="dropdown-item" to="/settings">
-            <i className="fas fa-cog" /> Settings
+            <i className="fas fa-cog" /> 設定
           </Link>
         </div>
       </li>
       <li className="nav-item">
         <Link className="nav-link" to="/login">
-          <i className="fas fa-user-times" /> Logout
+          <i className="fas fa-user-times" /> 登出
         </Link>
       </li>
     </ul>
   </div>
 );
 
-const Header = props => (
+const Header = ({ title }) => (
   <header className="bg-primary text-light ">
     <div className="container">
       <div className="row">
         <h1 className="col-md-6">
           <i className="fas fa-cog" />
-          {props.location}
+          {title}
         </h1>
       </div>
     </div>

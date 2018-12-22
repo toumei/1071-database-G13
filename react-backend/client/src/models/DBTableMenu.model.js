@@ -11,3 +11,11 @@ export const TableMenuColumns = bind => [
     }
   }
 ];
+
+export const TableMenuData = elm => [
+  {
+    TABLE_COMMENT: elm["TABLE_COMMENT"],
+    TABLE_NAME: elm["TABLE_NAME"],
+    align: "center"
+  }
+];

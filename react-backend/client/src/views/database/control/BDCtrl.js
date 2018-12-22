@@ -11,6 +11,7 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.state = { table: "boarder" };
+    document.title = "資料庫";
   }
 
   render() {

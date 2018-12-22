@@ -6,14 +6,6 @@ import { customColumn, columnWidth } from "./state.model";
 
 import { getItem } from "../controllers/DBTable.controller";
 
-export const TableData = elm => [
-  {
-    TABLE_COMMENT: elm["TABLE_COMMENT"],
-    TABLE_NAME: elm["TABLE_NAME"],
-    align: "center"
-  }
-];
-
 export const TableColumns = (bindTable, elm) => [
   {
     ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],

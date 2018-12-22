@@ -15,6 +15,11 @@ function nameFormatter(column, colIndex, { sortElement, filterElement }) {
 }
 
 export default class Products extends Component {
+  constructor(props) {
+    super(props);
+    document.title = "產品";
+  }
+
   state = {
     products: [],
     columns: [
