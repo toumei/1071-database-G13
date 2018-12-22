@@ -1,24 +1,10 @@
 import React, { Component } from "react";
-import socketIOClient from "socket.io-client";
 import { Link } from "react-router-dom";
 
-// router import
 import { Main } from "../router";
 
-// default program
 export default class extends Component {
-  constructor() {
-    super();
-
-    this.state = { endpoint: "http://localhost:3000" };
-  }
-
   render() {
-    const socket = socketIOClient(this.state.endpoint);
-    socket.on("change color", color => {
-      document.body.style.backgroundColor = color;
-    });
-
     return (
       <div>
         <Navbar />
@@ -27,14 +13,8 @@ export default class extends Component {
       </div>
     );
   }
-
-  send = () => {
-    const socket = socketIOClient(this.state.endpoint);
-    socket.emit("change color", "red");
-  };
 }
 
-// navbar
 const Navbar = () => (
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
     <div className="container">
@@ -57,7 +37,7 @@ const NavItem = () => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
       <li className="nav-item">
-        <Link className="nav-link" to="/database/ctrl">
+        <Link className="nav-link" to="/database/control">
           資料庫
         </Link>
       </li>
@@ -105,7 +85,6 @@ const NavItem = () => (
   </div>
 );
 
-// header
 const Header = () => (
   <header className="bg-primary text-light ">
     <div className="container">

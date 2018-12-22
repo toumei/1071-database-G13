@@ -25,7 +25,7 @@ const DBnavbar = () => (
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link active" to="/database/ctrl">
+        <Link className="nav-link active" to="/database/control">
           表格編輯
         </Link>
       </li>
