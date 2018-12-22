@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // view
-import DBDatabase from "./DBDatabase";
+import DBTableMenu from "./DBTableMenu";
 import DBTable from "./DBTable";
 
 // controller
@@ -17,7 +17,7 @@ export default class extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <DBDatabase
+          <DBTableMenu
             table={this.state.table}
             handleChangeTable={table => handleChangeTable(this, table)}
           />

@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 
 // model
+import { TableMenuColumns } from "../../../models/DBTableMenu.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
-import { DatabaseColumns } from "../../../models/DBDatabase.model";
 
 // controller
-import { postDatabaseData } from "../../../controllers/axios.controller";
+import { postTableMenuData } from "../../../controllers/axios.controller";
 
 export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
       table: this.props.table,
-      columns: DatabaseColumns(this),
+      columns: TableMenuColumns(this),
       data: []
     };
   }
 
   componentDidMount() {
-    postDatabaseData(this);
+    postTableMenuData(this);
   }
 
   render() {
