@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import socketIOClient from "socket.io-client";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // router import
-import DB from "./database/DB";
-import { Login } from "./login/Login";
-import Products from "./products/Products";
+import { Main } from "../router";
 
 // default program
 export default class extends Component {
@@ -25,7 +23,7 @@ export default class extends Component {
       <div>
         <Navbar />
         <Header />
-        <Router />
+        <Main />
       </div>
     );
   }
@@ -120,32 +118,3 @@ const Header = () => (
     </div>
   </header>
 );
-
-// router
-const Router = () => (
-  <div>
-    <Route exact path="/" component={index} />
-    <Route path="/database" component={DB} />
-    <Route path="/products" component={Products} />
-    <Route path="/malfunction" component={malfunction} />
-    <Route path="/processing" component={processing} />
-    <Route path="/profile" component={profile} />
-    <Route path="/Settings" component={Settings} />
-    <Route path="/login" component={Login} />
-  </div>
-);
-
-// index
-const index = () => <div>main</div>;
-
-// malfunction
-const malfunction = () => <div>malfunction</div>;
-
-// processing
-const processing = () => <div>processing</div>;
-
-// profile
-const profile = () => <div>profile</div>;
-
-// Settings
-const Settings = () => <div>Settings</div>;
