@@ -17,10 +17,9 @@ import Processing from "./views/processing/Processing";
 
 import Products from "./views/products/Products";
 
-import Profile from "./views/profile/Profile";
-import Settings from "./views/settings/Settings";
-
-import Login from "./views/login/Login";
+import Profile from "./views/user/Profile";
+import Settings from "./views/user/Settings";
+import Login from "./views/user/Login";
 
 export const Router = () => (
   <BrowserRouter>
@@ -32,9 +31,9 @@ export const Router = () => (
       <Route exact path="/malfunction" component={App} />
       <Route exact path="/processing" component={App} />
       <Route exact path="/products" component={App} />
-      <Route exact path="/profile" component={App} />
-      <Route exact path="/settings" component={App} />
-      <Route exact path="/login" component={App} />
+      <Route exact path="/user/profile" component={App} />
+      <Route exact path="/user/settings" component={App} />
+      <Route exact path="/user/login" component={App} />
       <Route component={Error} />
     </Switch>
   </BrowserRouter>
@@ -48,9 +47,9 @@ export const Main = () => (
     <Route path="/products" component={Products} />
     <Route path="/malfunction" component={Malfunction} />
     <Route path="/processing" component={Processing} />
-    <Route path="/profile" component={Profile} />
-    <Route path="/settings" component={Settings} />
-    <Route path="/login" component={Login} />
+    <Route path="/user/profile" component={Profile} />
+    <Route path="/user/settings" component={Settings} />
+    <Route path="/user/login" component={Login} />
   </div>
 );
 

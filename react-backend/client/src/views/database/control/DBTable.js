@@ -135,7 +135,7 @@ export default class extends Component {
                   }
                 }}
                 refs={n => (this.node = n)}
-                pagination={true}
+                pagination={this.state.data.length === 0 ? false : true}
               />
               <CustonModal
                 id="editModal"

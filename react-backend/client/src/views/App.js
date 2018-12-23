@@ -83,16 +83,16 @@ const NavItem = () => (
           <i className="fas fa-user" /> 歡迎 Brad
         </Link>
         <div className="dropdown-menu">
-          <Link className="dropdown-item" to="/profile">
+          <Link className="dropdown-item" to="/user/profile">
             <i className="fas fa-user-circle" /> 個人資料
           </Link>
-          <Link className="dropdown-item" to="/settings">
+          <Link className="dropdown-item" to="/user/settings">
             <i className="fas fa-cog" /> 設定
           </Link>
         </div>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/login">
+        <Link className="nav-link" to="/user/login">
           <i className="fas fa-user-times" /> 登出
         </Link>
       </li>
