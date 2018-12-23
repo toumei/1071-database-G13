@@ -24,7 +24,30 @@ export const TableColumns = (bindTable, elm) => [
       type: type[elm["type"]],
       value: elm["type"] === 4 ? elm["value"] : undefined,
       options: elm["type"] === 2 ? elm["value"] : undefined
-    }
+    },
+    editorRenderer:
+      elm["type"] > 5
+        ? (editorProps, value, row, column, rowIndex, columnIndex) => {
+            const date = new Date();
+            const today = `${date.getFullYear()}-${(
+              "0" +
+              (date.getMonth() + 1)
+            ).slice(-2)}-${("0" + date.getDate()).slice(-2)}T${(
+              "0" + date.getHours()
+            ).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${(
+              "0" + date.getSeconds()
+            ).slice(-2)}`;
+            return (
+              <input
+                className="form-control"
+                type="datetime-local"
+                id="datetime"
+                defaultValue={today}
+                autoFocus
+              />
+            );
+          }
+        : undefined
   }
 ];
 
