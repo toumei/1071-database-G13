@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 
 import { DBMain } from "../../router";
+
+import { CustomLink } from "../../models/bootstrap.model";
 
 // default program
 export default class extends Component {
@@ -20,30 +21,13 @@ const DBNavbar = ({ path }) => (
   <section className="bg-light">
     <ul className="nav nav-tabs justify-content-center">
       <li className="nav-item">
-        <Link
-          className={"nav-link " + (path === "/database" ? "active" : "")}
-          to="/database"
-        >
-          分析表
-        </Link>
+        <CustomLink path={path} to="/database" content="分析表" />
       </li>
       <li className="nav-item">
-        <Link
-          className={
-            "nav-link " + (path === "/database/control" ? "active" : "")
-          }
-          to="/database/control"
-        >
-          表格編輯
-        </Link>
+        <CustomLink path={path} to="/database/control" content="表格編輯" />
       </li>
       <li className="nav-item">
-        <Link
-          className={"nav-link " + (path === "/database/csv" ? "active" : "")}
-          to="/database/csv"
-        >
-          匯出csv
-        </Link>
+        <CustomLink path={path} to="/database/csv" content="匯出csv" />
       </li>
     </ul>
   </section>

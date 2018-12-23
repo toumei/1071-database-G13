@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // model
-import { CustonModal } from "../../../models/bootstrap.model";
+import { CustoModal } from "../../../models/bootstrap.model";
 import { TableNavColumns } from "../../../models/DBTableNav.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
@@ -69,7 +69,7 @@ const AddBtn = ({ bind }) => (
     >
       <i className="fas fa-plus" /> 新增
     </button>
-    <CustonModal
+    <CustoModal
       id="addModal"
       title="新增一筆資料"
       body={
@@ -145,7 +145,7 @@ const DeleteBtn = ({ bind }) => (
     >
       <i className="fas fa-plus" /> 刪除
     </button>
-    <CustonModal
+    <CustoModal
       id="deleteListModal"
       title="確定刪除這些資料?"
       body={

@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export const CustonModal = ({
+export const CustoModal = ({
   id,
   titleAttr,
   title,
@@ -38,4 +39,18 @@ export const CustonModal = ({
       </div>
     </div>
   </div>
+);
+
+export const CustomLink = ({ path, to, content }) => (
+  <Link
+    className={"nav-link " + (path === to ? "active" : "")}
+    to={to}
+    onClick={e => {
+      const navbarBtn = document.getElementById("navbarBtn");
+      if (navbarBtn.getAttribute("class") === "navbar-toggler")
+        navbarBtn.click();
+    }}
+  >
+    {content}
+  </Link>
 );

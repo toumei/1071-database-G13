@@ -5,7 +5,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 // model
-import { CustonModal } from "../../../models/bootstrap.model";
+import { CustoModal } from "../../../models/bootstrap.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 // view
@@ -137,7 +137,7 @@ export default class extends Component {
                 refs={n => (this.node = n)}
                 pagination={this.state.data.length === 0 ? false : true}
               />
-              <CustonModal
+              <CustoModal
                 id="editModal"
                 title="編輯資料"
                 body={
@@ -165,7 +165,7 @@ export default class extends Component {
                   </div>
                 }
               />
-              <CustonModal
+              <CustoModal
                 id="deleteModal"
                 title="確定要刪除這筆資料？"
                 body={
@@ -200,7 +200,7 @@ export default class extends Component {
                 }
               />
               {/* 暫時未找到可以開啟modal的方法，以此來代替 */}
-              <CustonModal
+              <CustoModal
                 id="infoModal"
                 titleAttr={{
                   id: "info",
