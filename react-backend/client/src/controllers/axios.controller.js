@@ -13,7 +13,7 @@ import { TableMenuData } from "../models/DBTableMenu.model";
 // controller
 import { handleInfo } from "./DBTable.controller";
 
-const url = "http://" + (false ? "192.168.42.212" : "localhost") + ":3000/";
+const url = "http://" + (true ? "192.168.42.212" : "localhost") + ":3000/";
 
 export function postTableMenuData(bind) {
   axios.post(url + "dbCtrl/TableList").then(res => {

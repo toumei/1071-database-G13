@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import { Main } from "../router";
 
+import logo from "../logo.svg";
+
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ export default class extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        <Navbar title={this.state.title} />
         <Header title={this.state.title} />
         <Main />
       </div>
@@ -30,12 +32,16 @@ export default class extends Component {
   }
 }
 
-const Navbar = () => (
+const Navbar = ({ title }) => (
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
     <div className="container">
-      <Link className="navbar-brand" to="/">
-        首頁
-      </Link>
+      <div className="navbar-brand" style={{ margin: "-0.5em" }}>
+        <img src={logo} width="55em" height="55em" alt={"logo"} />
+      </div>
+      <h1 className="navbar-toggler">
+        <i className="fas fa-cog" />
+        {title}
+      </h1>
       <button
         className="navbar-toggler"
         data-toggle="collapse"
@@ -52,17 +58,22 @@ const NavItem = () => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
       <li className="nav-item">
-        <Link className="nav-link" to="/database/control">
+        <Link className="nav-link" to="/">
+          首頁
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link className="nav-link" to="/database">
           資料庫
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/malfunction">
+        <Link className="nav-link" to="/repair/malfunction">
           報修單
         </Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/processing">
+        <Link className="nav-link" to="/repair/processing">
           維修單
         </Link>
       </li>

@@ -11,9 +11,8 @@ import Analysis from "./views/database/analysis/Analysis";
 import DBCtrl from "./views/database/control/BDCtrl";
 import CSV from "./views/database/csv/CSV";
 
-import Malfunction from "./views/malfunction/Malfunction";
-
-import Processing from "./views/processing/Processing";
+import Malfunction from "./views/repair/Malfunction";
+import Processing from "./views/repair/Processing";
 
 import Products from "./views/products/Products";
 
@@ -21,15 +20,16 @@ import Profile from "./views/user/Profile";
 import Settings from "./views/user/Settings";
 import Login from "./views/user/Login";
 
+// 全部router都要在此先註冊
 export const Router = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />
+      <Route exact path="/database" component={App} />
       <Route exact path="/database/control" component={App} />
-      <Route exact path="/database/analysis" component={App} />
       <Route exact path="/database/csv" component={App} />
-      <Route exact path="/malfunction" component={App} />
-      <Route exact path="/processing" component={App} />
+      <Route exact path="/repair/malfunction" component={App} />
+      <Route exact path="/repair/processing" component={App} />
       <Route exact path="/products" component={App} />
       <Route exact path="/user/profile" component={App} />
       <Route exact path="/user/settings" component={App} />
@@ -44,9 +44,9 @@ export const Main = () => (
   <div>
     <Route exact path="/" component={Index} />
     <Route path="/database" component={Database} />
+    <Route path="/repair/malfunction" component={Malfunction} />
+    <Route path="/repair/processing" component={Processing} />
     <Route path="/products" component={Products} />
-    <Route path="/malfunction" component={Malfunction} />
-    <Route path="/processing" component={Processing} />
     <Route path="/user/profile" component={Profile} />
     <Route path="/user/settings" component={Settings} />
     <Route path="/user/login" component={Login} />
@@ -56,8 +56,8 @@ export const Main = () => (
 // Database Router
 export const DBMain = () => (
   <div>
+    <Route exact path="/database" component={Analysis} />
     <Route path="/database/control" component={DBCtrl} />
-    <Route path="/database/analysis" component={Analysis} />
     <Route path="/database/csv" component={CSV} />
   </div>
 );
