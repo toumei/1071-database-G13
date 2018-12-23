@@ -11,7 +11,7 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      table: this.props.table,
+      table: props.table,
       columns: TableMenuColumns(this),
       data: []
     };

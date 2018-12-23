@@ -22,7 +22,7 @@ module.exports = {
     delete: " WHERE ID = ?;",
     fetchById: "SELECT * FROM product WHERE ID = ?;",
     fetchColumnAll:
-      'select column_name, column_comment from information_schema.columns where table_schema = "res_net_cmms" and table_name = ?  order by ordinal_position;',
+      'select i.column_name, i.column_comment, o.type, o.value from information_schema.columns i, _coloption o where i.table_schema = "res_net_cmms" and i.table_name = ? and i.column_name = o.name order by i.ordinal_position;',
     fetchTableAll:
       'select table_name, table_comment from information_schema.tables where table_schema = "res_net_cmms";',
     fetchAll: "SELECT * FROM "

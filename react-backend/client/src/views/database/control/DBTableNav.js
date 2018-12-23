@@ -49,25 +49,25 @@ export default class extends Component {
 }
 
 const FastEditBtn = ({ bind }) => (
-  <div className="col-4 col-md-2">
+  <div className="col-4">
     <button
       className="btn btn-secondary btn-block"
       onClick={e => bind.props.handleEditable()}
     >
-      <i className="fas fa-plus" /> {bind.state.editable ? "關閉" : "開啟"}
+      <i className="fas fa-edit" /> {bind.state.editable ? "關閉" : "開啟"}
       快速編輯
     </button>
   </div>
 );
 
 const AddBtn = ({ bind }) => (
-  <div className="col-4 col-md-2">
+  <div className="col-4">
     <button
       className="btn btn-success btn-block"
       data-toggle="modal"
       data-target="#addModal"
     >
-      <i className="fas fa-plus" /> 新增
+      <i className="fas fa-plus-circle" /> 新增
     </button>
     <CustoModal
       id="addModal"
@@ -133,7 +133,7 @@ const AddForm = ({ bind }) => {
 };
 
 const DeleteBtn = ({ bind }) => (
-  <div className="col-4 col-md-2">
+  <div className="col-4">
     <button
       className="btn btn-warning btn-block"
       data-toggle="modal"
@@ -143,7 +143,7 @@ const DeleteBtn = ({ bind }) => (
         bind.setState({ deleteList: bind.props.select });
       }}
     >
-      <i className="fas fa-plus" /> 刪除
+      <i className="fas fa-trash-alt" /> 刪除
     </button>
     <CustoModal
       id="deleteListModal"

@@ -19,8 +19,7 @@ export function postTableMenuData(bind) {
   axios.post(url + "dbCtrl/TableList").then(res => {
     let data = [];
     decrypt(res.data).forEach(elm => {
-      // if (elm["TABLE_NAME"][0] !== "_")
-      data.push(TableMenuData(elm)[0]);
+      if (elm["TABLE_NAME"][0] !== "_") data.push(TableMenuData(elm)[0]);
     });
     bind.setState({ data: data });
   });

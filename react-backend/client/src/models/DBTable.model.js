@@ -6,13 +6,25 @@ import { customColumn, columnWidth } from "./state.model";
 
 import { getItem } from "../controllers/DBTable.controller";
 
+const type = {
+  1: Type.TEXT,
+  2: Type.SELECT,
+  3: Type.TEXTAREA,
+  4: Type.CHECKBOX,
+  5: Type.DATE
+};
+
 export const TableColumns = (bindTable, elm) => [
   {
     ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
     editable: bindTable.state.editable,
     headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
     style: { cursor: "default" },
-    editor: { type: Type.TEXT }
+    editor: {
+      type: type[elm["type"]],
+      value: elm["type"] === 4 ? elm["value"] : undefined,
+      options: elm["type"] === 2 ? elm["value"] : undefined
+    }
   }
 ];
 
