@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import cellEditFactory from "react-bootstrap-table2-editor";
 
 import {
   postCtrlTableColumns,
-  postCtrlTableData
+  postCtrlTableData,
+  postCtrlEdit
 } from "../../../controllers/axios.controller";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
@@ -24,8 +26,8 @@ export default class extends Component {
   render() {
     if (this.state.columns.length > 0) {
       return (
-        <div class="container-fluid">
-          <div class="row justify-content-md-center">
+        <div className="container-fluid">
+          <div className="row justify-content-md-center">
             <div className="col-md-10" style={{ marginTop: 10 }}>
               <CustomBootstrap
                 base={{
@@ -33,6 +35,14 @@ export default class extends Component {
                   columns: this.state.columns,
                   data: this.state.data
                 }}
+                cellEdit={cellEditFactory({
+                  mode: "click",
+                  blurToSave: true,
+                  afterSaveCell: (oldValue, newValue, row, column) => {
+                    if (oldValue !== newValue) postCtrlEdit(row);
+                  }
+                })}
+                pagination={this.state.data.length === 0 ? false : true}
               />
             </div>
           </div>

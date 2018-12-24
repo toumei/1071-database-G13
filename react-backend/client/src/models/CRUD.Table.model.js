@@ -35,12 +35,12 @@ class DateTime extends Component {
 }
 
 const type = {
-  1: Type.TEXT,
-  2: Type.SELECT,
-  3: Type.TEXTAREA,
-  4: Type.CHECKBOX,
-  5: Type.DATE,
-  6: (editorProps, value, row, column, rowIndex, columnIndex) => (
+  TEXT: Type.TEXT,
+  SELECT: Type.SELECT,
+  TEXTAREA: Type.TEXTAREA,
+  CHECKBOX: Type.CHECKBOX,
+  DATE: Type.DATE,
+  DATETIME: (editorProps, value, row, column, rowIndex, columnIndex) => (
     <DateTime {...editorProps} value={value} />
   )
 };
@@ -52,35 +52,31 @@ export const CrudTableColumns = (bindTable, elm) => [
     headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
     style: { cursor: "default" },
     editor: {
-      type: elm["type"] < 6 ? type[elm["type"]] : undefined,
-      value: elm["type"] === 4 ? elm["value"] : undefined,
-      options: elm["type"] === 2 ? elm["value"] : undefined
+      type: elm["type"] !== "DATETIME" ? type[elm["type"]] : undefined,
+      value: elm["type"] === "CHECKBOX" ? elm["value"] : undefined,
+      options: elm["type"] === "SELECT" ? elm["value"] : undefined
     },
-    editorRenderer: elm["type"] > 5 ? type[elm["type"]] : undefined
+    editorRenderer: elm["type"] === "DATETIME" ? type[elm["type"]] : undefined
   }
 ];
 
-export const CtrlableColumns = (bindTable, elm) => [
+export const CtrlTableColumns = (
+  bindTable,
+  elm,
+  editable,
+  editorType,
+  editorValue
+) => [
   {
     ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
-    editable: bindTable.state.editable,
-    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
-    style: { cursor: "default" }
-  }
-];
-
-export const CtrlTableColumns = (bindTable, elm) => [
-  {
-    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
-    editable: bindTable.state.editable,
+    editable: editable,
     headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
     style: { cursor: "default" },
     editor: {
-      type: elm["type"] < 6 ? type[elm["type"]] : undefined,
-      value: elm["type"] === 4 ? elm["value"] : undefined,
-      options: elm["type"] === 2 ? elm["value"] : undefined
-    },
-    editorRenderer: elm["type"] > 5 ? type[elm["type"]] : undefined
+      type: editorType !== "DATETIME" ? type[editorType] : undefined,
+      value: editorType === "CHECKBOX" ? editorValue : undefined,
+      options: editorType === "SELECT" ? editorValue : undefined
+    }
   }
 ];
 
