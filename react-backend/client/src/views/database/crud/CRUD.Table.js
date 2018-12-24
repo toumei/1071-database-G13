@@ -13,9 +13,9 @@ import CrudTableNav from "./CRUD.TableNav";
 
 // controller
 import {
-  postEdit,
-  postTableColumns,
-  postTableData
+  postCrudEdit,
+  postCrudTableColumns,
+  postCrudTableData
 } from "../../../controllers/axios.controller";
 import {
   addSelect,
@@ -56,8 +56,8 @@ export default class extends Component {
     //   }
     //   return "close";
     // };
-    postTableColumns(this);
-    postTableData(this);
+    postCrudTableColumns(this);
+    postCrudTableData(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -69,8 +69,8 @@ export default class extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.table !== this.state.table) {
-      postTableColumns(this);
-      postTableData(this);
+      postCrudTableColumns(this);
+      postCrudTableData(this);
     }
   }
 
@@ -112,7 +112,7 @@ export default class extends Component {
                   mode: "click",
                   blurToSave: true,
                   afterSaveCell: (oldValue, newValue, row, column) => {
-                    if (oldValue !== newValue) postEdit(this, row);
+                    if (oldValue !== newValue) postCrudEdit(this, row);
                   }
                 })}
                 selectRow={{

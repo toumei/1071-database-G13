@@ -1,24 +1,24 @@
 import React, { Component } from "react";
 
 // model
-import { TableMenuColumns } from "../../../models/CRUD.TableMenu.model";
+import { CrudTableMenuColumns } from "../../../models/CRUD.TableMenu.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 // controller
-import { postTableMenuData } from "../../../controllers/axios.controller";
+import { postCrudTableMenuData } from "../../../controllers/axios.controller";
 
 export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
       table: props.table,
-      columns: TableMenuColumns(this),
+      columns: CrudTableMenuColumns(this),
       data: []
     };
   }
 
   componentDidMount() {
-    postTableMenuData(this);
+    postCrudTableMenuData(this);
   }
 
   render() {

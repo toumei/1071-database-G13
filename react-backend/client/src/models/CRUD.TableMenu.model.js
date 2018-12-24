@@ -1,6 +1,6 @@
 import { customColumn } from "./state.model";
 
-export const TableMenuColumns = bind => [
+export const CrudTableMenuColumns = bind => [
   {
     ...customColumn("TABLE_COMMENT", "表格")[0],
     style: (cell, row, rowIndex, colIndex) => {
@@ -12,7 +12,7 @@ export const TableMenuColumns = bind => [
   }
 ];
 
-export const TableMenuData = elm => [
+export const CrudTableMenuData = elm => [
   {
     TABLE_COMMENT: elm["TABLE_COMMENT"],
     TABLE_NAME: elm["TABLE_NAME"],

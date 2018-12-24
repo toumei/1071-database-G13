@@ -45,7 +45,7 @@ const type = {
   )
 };
 
-export const TableColumns = (bindTable, elm) => [
+export const CrudTableColumns = (bindTable, elm) => [
   {
     ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
     editable: bindTable.state.editable,
@@ -60,7 +60,31 @@ export const TableColumns = (bindTable, elm) => [
   }
 ];
 
-export const TableModeColumns = bindTable => [
+export const CtrlableColumns = (bindTable, elm) => [
+  {
+    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
+    editable: bindTable.state.editable,
+    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
+    style: { cursor: "default" }
+  }
+];
+
+export const CtrlTableColumns = (bindTable, elm) => [
+  {
+    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
+    editable: bindTable.state.editable,
+    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
+    style: { cursor: "default" },
+    editor: {
+      type: elm["type"] < 6 ? type[elm["type"]] : undefined,
+      value: elm["type"] === 4 ? elm["value"] : undefined,
+      options: elm["type"] === 2 ? elm["value"] : undefined
+    },
+    editorRenderer: elm["type"] > 5 ? type[elm["type"]] : undefined
+  }
+];
+
+export const CrudTableModeColumns = bindTable => [
   {
     ...customColumn("action", "操作")[0],
     isDummyField: true,
@@ -93,7 +117,7 @@ export const TableModeColumns = bindTable => [
   }
 ];
 
-export const TableDeleteColumns = elm => [
+export const CrudTableDeleteColumns = elm => [
   {
     ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"])[0],
     headerStyle: columnWidth(elm)[0],
@@ -101,6 +125,6 @@ export const TableDeleteColumns = elm => [
   }
 ];
 
-export const TableFormColumns = elm => [
+export const CrudTableFormColumns = elm => [
   { COLUMN_NAME: elm["COLUMN_NAME"], COLUMN_COMMENT: elm["COLUMN_COMMENT"] }
 ];

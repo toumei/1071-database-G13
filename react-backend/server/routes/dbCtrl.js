@@ -11,6 +11,7 @@ router.get("/", function(req, res, next) {
 router.post("/List", dbCtrlController.postList);
 router.post("/TableList", dbCtrlController.postTableList);
 router.post("/ColumnList", dbCtrlController.postColumnList);
+router.post("/CtrlList", dbCtrlController.postCtrlList);
 router.post("/update", dbCtrlController.postUpdate);
 router.post("/delete", dbCtrlController.postDelete);
 router.post("/add", dbCtrlController.postAdd);

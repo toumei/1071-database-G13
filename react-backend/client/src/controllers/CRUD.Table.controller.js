@@ -1,9 +1,9 @@
 // controller
-import { postAdd, postDelete, postEdit } from "./axios.controller";
+import { postCrudAdd, postCrudDelete, postCrudEdit } from "./axios.controller";
 
 // table nav add
 export function handleAddItem(bind, row) {
-  postAdd(bind, row);
+  postCrudAdd(bind, row);
 }
 
 // table select
@@ -34,7 +34,7 @@ export function handleDeleteItem(bind, row, isBottom, info) {
     bind.setState({ data: newData });
   } else {
     info += "成功刪除ID:" + row.ID + "<br />";
-    postDelete(bind, row, info);
+    postCrudDelete(bind, row, info);
   }
 }
 
@@ -44,13 +44,13 @@ export function getItem(bind, row) {
 }
 
 export function deleteItem(bind, row) {
-  postDelete(bind, row, "成功刪除ID:" + row.ID);
+  postCrudDelete(bind, row, "成功刪除ID:" + row.ID);
   bind.setState({ data: bind.state.data.filter((x, i) => x !== row) });
 }
 
 // table edit
 export function editItem(bind, row) {
-  postEdit(bind, row, "成功編輯ID:" + row.ID);
+  postCrudEdit(bind, row, "成功編輯ID:" + row.ID);
   bind.state.data.filter((x, i) => {
     if (x === bind.state.itemData[0]) {
       const data = bind.state.data;

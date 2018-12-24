@@ -30,6 +30,15 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
+  postCtrlList: (req, res, next) => {
+    dbCtrlModel
+      .fetchCtrlAll(req.query.table)
+      .then(([data]) => {
+        res.send(cryptModel.encrypt(data));
+      })
+      .catch(err => console.log(err));
+  },
+
   postSearch: (req, res, next) => {
     dbCtrlModel
       .fetchById(req.body.table, req.body.id)

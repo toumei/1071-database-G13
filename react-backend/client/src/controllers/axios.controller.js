@@ -3,39 +3,40 @@ import axios from "axios";
 // model
 import { decrypt } from "../models/crypt.model";
 import {
-  TableColumns,
-  TableDeleteColumns,
-  TableFormColumns,
-  TableModeColumns
+  CrudTableColumns,
+  CrudTableDeleteColumns,
+  CrudTableFormColumns,
+  CrudTableModeColumns,
+  CtrlTableColumns
 } from "../models/CRUD.Table.model";
-import { TableMenuData } from "../models/CRUD.TableMenu.model";
+import { CrudTableMenuData } from "../models/CRUD.TableMenu.model";
 
 // controller
 import { handleInfo } from "./CRUD.Table.controller";
 
 const url = "http://" + (true ? "192.168.42.212" : "localhost") + ":3000/";
 
-export function postTableMenuData(bind) {
+export function postCrudTableMenuData(bind) {
   axios.post(url + "dbCtrl/TableList").then(res => {
     let data = [];
     decrypt(res.data).forEach(elm => {
-      if (elm["TABLE_NAME"][0] !== "_") data.push(TableMenuData(elm)[0]);
+      if (elm["TABLE_NAME"][0] !== "_") data.push(CrudTableMenuData(elm)[0]);
     });
     bind.setState({ data: data });
   });
 }
 
-export function postTableColumns(bind) {
+export function postCrudTableColumns(bind) {
   axios.post(url + "dbCtrl/ColumnList?table=" + bind.state.table).then(res => {
     let columns = [];
     let deleteColumns = [];
     let formColumns = [];
     decrypt(res.data).forEach(elm => {
-      columns.push(TableColumns(bind, elm)[0]);
-      deleteColumns.push(TableDeleteColumns(elm)[0]);
-      formColumns.push(TableFormColumns(elm)[0]);
+      columns.push(CrudTableColumns(bind, elm)[0]);
+      deleteColumns.push(CrudTableDeleteColumns(elm)[0]);
+      formColumns.push(CrudTableFormColumns(elm)[0]);
     });
-    columns.push(TableModeColumns(bind)[0]);
+    columns.push(CrudTableModeColumns(bind)[0]);
     bind.setState({
       columns: columns,
       deleteColumns: deleteColumns,
@@ -44,14 +45,35 @@ export function postTableColumns(bind) {
   });
 }
 
-export function postTableData(bind) {
+export function postCtrlTableColumns(bind) {
+  axios.post(url + "dbCtrl/CtrlList?table=_coloption").then(res => {
+    let columns = [];
+    decrypt(res.data).forEach(elm => {
+      columns.push(CtrlTableColumns(bind, elm)[0]);
+    });
+    bind.setState({
+      columns: columns
+    });
+  });
+}
+
+export function postCrudTableData(bind) {
   axios.post(url + "dbCtrl/List?table=" + bind.state.table).then(res => {
     bind.setState({ data: decrypt(res.data) });
   });
 }
 
-export function postDelete(bind, row, info) {
-  axios.post(url + "dbCtrl/delete", { table: bind.state.table, id: row.ID });
+export function postCtrlTableData(bind) {
+  axios.post(url + "dbCtrl/List?table=_coloption").then(res => {
+    bind.setState({ data: decrypt(res.data) });
+  });
+}
+
+export function postCrudDelete(bind, row, info) {
+  axios.post(url + "dbCtrl/delete", {
+    table: bind.state.table,
+    id: row.ID
+  });
   handleInfo(bind, {
     title: "警告",
     content: info,
@@ -59,9 +81,12 @@ export function postDelete(bind, row, info) {
   });
 }
 
-export function postAdd(bind, row) {
+export function postCrudAdd(bind, row) {
   axios
-    .post(url + "dbCtrl/add", { table: bind.state.table, row: row })
+    .post(url + "dbCtrl/add", {
+      table: bind.state.table,
+      row: row
+    })
     .then(res => {
       row["ID"] = res.data.id;
       bind.setState({ data: [...bind.state.data, row] });
@@ -73,9 +98,12 @@ export function postAdd(bind, row) {
   });
 }
 
-export function postEdit(bind, row, info = "") {
+export function postCrudEdit(bind, row, info = "") {
   axios
-    .post(url + "dbCtrl/update", { table: bind.state.table, row: row })
+    .post(url + "dbCtrl/update", {
+      table: bind.state.table,
+      row: row
+    })
     .then(res => {});
   if (info !== "")
     handleInfo(bind, {
