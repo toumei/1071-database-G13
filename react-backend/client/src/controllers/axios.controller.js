@@ -88,6 +88,8 @@ export function postCtrlTableColumns(bind) {
               }
             ])[0]
           );
+        } else if (elm["COLUMN_NAME"] === "value") {
+          columns.push(CtrlTableColumns(bind, elm, true, "TEXTAREA")[0]);
         } else {
           columns.push(CtrlTableColumns(bind, elm, true, "TEXT")[0]);
         }

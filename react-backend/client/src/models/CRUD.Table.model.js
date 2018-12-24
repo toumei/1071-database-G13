@@ -7,7 +7,7 @@ import { customColumn, columnWidth } from "./state.model";
 import { getItem } from "../controllers/CRUD.Table.controller";
 class DateTime extends Component {
   getValue() {
-    return this.node.value;
+    return this.node.value + ".000Z";
   }
 
   render() {

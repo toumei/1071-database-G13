@@ -112,7 +112,8 @@ export default class extends Component {
                   mode: "click",
                   blurToSave: true,
                   afterSaveCell: (oldValue, newValue, row, column) => {
-                    if (oldValue !== newValue) postCrudEdit(this, row);
+                    if (String(oldValue) !== String(newValue))
+                      postCrudEdit(this, row);
                   }
                 })}
                 selectRow={{
