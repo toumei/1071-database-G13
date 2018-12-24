@@ -9,7 +9,7 @@ import { CustoModal } from "../../../models/bootstrap.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 // view
-import DBTableNav from "./DBTableNav";
+import CrudTableNav from "./CRUD.TableNav";
 
 // controller
 import {
@@ -27,7 +27,7 @@ import {
   handleEditable,
   handleGetSelect,
   handleInfo
-} from "../../../controllers/DBTable.controller";
+} from "../../../controllers/CRUD.Table.controller";
 
 export default class extends Component {
   constructor(props) {
@@ -90,7 +90,7 @@ export default class extends Component {
         >
           {props => (
             <div className="col-md-10" style={{ marginTop: 10 }}>
-              <DBTableNav
+              <CrudTableNav
                 columns={this.state.formColumns}
                 editable={this.state.editable}
                 handleAddItem={row => handleAddItem(this, row)}
@@ -112,7 +112,7 @@ export default class extends Component {
                   mode: "click",
                   blurToSave: true,
                   afterSaveCell: (oldValue, newValue, row, column) => {
-                    postEdit(this, row);
+                    if (oldValue !== newValue) postEdit(this, row);
                   }
                 })}
                 selectRow={{

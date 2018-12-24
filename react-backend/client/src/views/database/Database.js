@@ -24,10 +24,13 @@ const DBNavbar = ({ path }) => (
         <CustomLink path={path} to="/database" content="分析表" />
       </li>
       <li className="nav-item">
-        <CustomLink path={path} to="/database/control" content="表格編輯" />
+        <CustomLink path={path} to="/database/crud" content="表格編輯" />
       </li>
       <li className="nav-item">
         <CustomLink path={path} to="/database/csv" content="匯出csv" />
+      </li>
+      <li className="nav-item">
+        <CustomLink path={path} to="/database/control" content="欄位控制" />
       </li>
     </ul>
   </section>

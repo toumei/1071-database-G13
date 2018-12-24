@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 // model
-import { TableMenuColumns } from "../../../models/DBTableMenu.model";
+import { TableMenuColumns } from "../../../models/CRUD.TableMenu.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 // controller

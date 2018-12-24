@@ -4,10 +4,13 @@ import { Type } from "react-bootstrap-table2-editor";
 
 import { customColumn, columnWidth } from "./state.model";
 
-import { getItem } from "../controllers/DBTable.controller";
+import { getItem } from "../controllers/CRUD.Table.controller";
 class DateTime extends Component {
-  constructor(props) {
-    super(props);
+  getValue() {
+    return this.node.value;
+  }
+
+  render() {
     const date = new Date();
     this.today = `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(
       -2
@@ -16,13 +19,6 @@ class DateTime extends Component {
     )}:${("0" + date.getMinutes()).slice(-2)}:${("0" + date.getSeconds()).slice(
       -2
     )}`;
-  }
-
-  getValue() {
-    return this.node.value;
-  }
-
-  render() {
     const { value, ...rest } = this.props;
     return (
       <input

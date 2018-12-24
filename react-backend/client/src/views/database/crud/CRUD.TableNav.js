@@ -2,14 +2,14 @@ import React, { Component } from "react";
 
 // model
 import { CustoModal } from "../../../models/bootstrap.model";
-import { TableNavColumns } from "../../../models/DBTableNav.model";
+import { TableNavColumns } from "../../../models/CRUD.TableNav.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 // controller
 import {
   addItem,
   deleteForm
-} from "../../../controllers/DBTableNav.controller";
+} from "../../../controllers/CRUD.TableNav.controller";
 
 export default class extends Component {
   constructor(props) {

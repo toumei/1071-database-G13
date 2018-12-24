@@ -2,7 +2,7 @@ import React from "react";
 
 import { customColumn, columnWidth } from "./state.model";
 
-import { cancelDelete } from "../controllers/DBTableNav.controller";
+import { cancelDelete } from "../controllers/CRUD.TableNav.controller";
 
 export function TableNavColumns(bind, props) {
   let columns = [];

@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 
 // view
-import DBTableMenu from "./DBTableMenu";
-import DBTable from "./DBTable";
+import CrudTableMenu from "./CRUD.TableMenu";
+import CrudTable from "./CRUD.Table";
 
 // controller
-import { handleChangeTable } from "../../../controllers/DBCtrl.controller";
+import { handleChangeTable } from "../../../controllers/CRUD.controller";
 
 export default class extends Component {
   constructor(props) {
@@ -18,11 +18,11 @@ export default class extends Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <DBTableMenu
+          <CrudTableMenu
             table={this.state.table}
             handleChangeTable={table => handleChangeTable(this, table)}
           />
-          <DBTable table={this.state.table} />
+          <CrudTable table={this.state.table} />
         </div>
       </div>
     );

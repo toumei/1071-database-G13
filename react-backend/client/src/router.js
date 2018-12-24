@@ -8,8 +8,9 @@ import Index from "./views/index/Index";
 
 import Database from "./views/database/Database";
 import Analysis from "./views/database/analysis/Analysis";
-import DBCtrl from "./views/database/control/BDCtrl";
+import CRUD from "./views/database/crud/CRUD";
 import CSV from "./views/database/csv/CSV";
+import Control from "./views/database/control/Control";
 
 import Malfunction from "./views/repair/Malfunction";
 import Processing from "./views/repair/Processing";
@@ -26,8 +27,9 @@ export const Router = () => (
     <Switch>
       <Route exact path="/" component={App} />
       <Route exact path="/database" component={App} />
-      <Route exact path="/database/control" component={App} />
+      <Route exact path="/database/crud" component={App} />
       <Route exact path="/database/csv" component={App} />
+      <Route exact path="/database/control" component={App} />
       <Route exact path="/repair/malfunction" component={App} />
       <Route exact path="/repair/processing" component={App} />
       <Route exact path="/products" component={App} />
@@ -57,7 +59,8 @@ export const Main = () => (
 export const DBMain = () => (
   <div>
     <Route exact path="/database" component={Analysis} />
-    <Route path="/database/control" component={DBCtrl} />
+    <Route path="/database/crud" component={CRUD} />
     <Route path="/database/csv" component={CSV} />
+    <Route path="/database/control" component={Control} />
   </div>
 );

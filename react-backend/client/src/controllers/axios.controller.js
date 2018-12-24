@@ -7,11 +7,11 @@ import {
   TableDeleteColumns,
   TableFormColumns,
   TableModeColumns
-} from "../models/DBTable.model";
-import { TableMenuData } from "../models/DBTableMenu.model";
+} from "../models/CRUD.Table.model";
+import { TableMenuData } from "../models/CRUD.TableMenu.model";
 
 // controller
-import { handleInfo } from "./DBTable.controller";
+import { handleInfo } from "./CRUD.Table.controller";
 
 const url = "http://" + (true ? "192.168.42.212" : "localhost") + ":3000/";
 
