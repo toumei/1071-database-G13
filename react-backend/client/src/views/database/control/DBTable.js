@@ -151,7 +151,7 @@ export default class extends Component {
                       type="button"
                       className="btn btn-primary"
                       data-dismiss="modal"
-                      onClick={e => editForm(this)}
+                      onClick={() => editForm(this)}
                     >
                       確定
                     </button>
@@ -185,7 +185,7 @@ export default class extends Component {
                       type="button"
                       className="btn btn-primary"
                       data-dismiss="modal"
-                      onClick={e => deleteItem(this, this.state.itemData[0])}
+                      onClick={() => deleteItem(this, this.state.itemData[0])}
                     >
                       確定
                     </button>

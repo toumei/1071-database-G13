@@ -52,7 +52,7 @@ const FastEditBtn = ({ bind }) => (
   <div className="col-4">
     <button
       className="btn btn-secondary btn-block"
-      onClick={e => bind.props.handleEditable()}
+      onClick={() => bind.props.handleEditable()}
     >
       <i className="fas fa-edit" /> {bind.state.editable ? "關閉" : "開啟"}
       快速編輯
@@ -82,7 +82,7 @@ const AddBtn = ({ bind }) => (
           <button
             type="button"
             className="btn btn-primary"
-            onClick={e => addItem(bind)}
+            onClick={() => addItem(bind)}
           >
             新增
           </button>
@@ -90,7 +90,7 @@ const AddBtn = ({ bind }) => (
             type="button"
             className="btn btn-secondary"
             data-dismiss="modal"
-            onClick={e => {
+            onClick={() => {
               const newColumns = bind.props.columns;
               for (let i = 1; i < newColumns.length; i++) {
                 document.getElementById(
@@ -138,7 +138,7 @@ const DeleteBtn = ({ bind }) => (
       className="btn btn-warning btn-block"
       data-toggle="modal"
       data-target="#deleteListModal"
-      onClick={e => {
+      onClick={() => {
         bind.props.handleGetSelect();
         bind.setState({ deleteList: bind.props.select });
       }}
@@ -163,7 +163,7 @@ const DeleteBtn = ({ bind }) => (
           <button
             type="button"
             className="btn btn-primary"
-            onClick={e => deleteForm(bind)}
+            onClick={() => deleteForm(bind)}
             data-dismiss="modal"
             style={{
               display: bind.state.deleteList.length === 0 ? "none" : "block"

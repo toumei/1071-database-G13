@@ -40,7 +40,7 @@ const Navbar = ({ title, path }) => (
         className="navbar-brand"
         style={{ margin: "-0.5em" }}
         to="/"
-        onClick={e => {
+        onClick={() => {
           const navbarBtn = document.getElementById("navbarBtn");
           if (navbarBtn.getAttribute("class") === "navbar-toggler")
             navbarBtn.click();
@@ -101,7 +101,7 @@ const NavItem = ({ path }) => (
             className="dropdown-item"
             style={{ borderRadius: "0.5em" }}
             to="/user/profile"
-            onClick={e => {
+            onClick={() => {
               const navbarBtn = document.getElementById("navbarBtn");
               if (navbarBtn.getAttribute("class") === "navbar-toggler")
                 navbarBtn.click();
@@ -113,7 +113,7 @@ const NavItem = ({ path }) => (
             className="dropdown-item"
             style={{ borderRadius: "0.5em" }}
             to="/user/settings"
-            onClick={e => {
+            onClick={() => {
               const navbarBtn = document.getElementById("navbarBtn");
               if (navbarBtn.getAttribute("class") === "navbar-toggler")
                 navbarBtn.click();

@@ -45,7 +45,7 @@ export const CustomLink = ({ path, to, content }) => (
   <Link
     className={"nav-link " + (path === to ? "active" : "")}
     to={to}
-    onClick={e => {
+    onClick={() => {
       const navbarBtn = document.getElementById("navbarBtn");
       if (navbarBtn.getAttribute("class") === "navbar-toggler")
         navbarBtn.click();

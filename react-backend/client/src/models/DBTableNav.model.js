@@ -30,7 +30,7 @@ export const TableNavModeColumns = bind => [
           type="button"
           name="cancel"
           className="btn btn-warning btn-sm"
-          onClick={e => cancelDelete(bind, row)}
+          onClick={() => cancelDelete(bind, row)}
         >
           取消
         </button>
