@@ -46,9 +46,148 @@ const type = {
   )
 };
 
-// const valid = {
-//   PK: 1
-// };
+const valid = {
+  PK: (bind, newValue, row, column, done) => {
+    setTimeout(async () => {
+      if (String(newValue) !== String(row[column.dataField])) {
+        let isValid;
+        if (isNaN(newValue) || newValue.length === 0) {
+          return done({ valid: false, message: "請輸入數字" });
+        }
+        await postCrudSearch(bind, column.dataField, newValue, res => {
+          if (res.length !== 0) {
+            isValid = false;
+          } else {
+            isValid = true;
+          }
+        });
+        return done({ valid: isValid, message: "此ID已被占用" });
+      } else {
+        return done();
+      }
+    }, 0);
+  },
+  IDCARD: (bind, newValue, row, column, done) => {
+    setTimeout(() => {
+      if (String(newValue) !== String(row[column.dataField])) {
+        const tab = "ABCDEFGHJKLMNPQRSTUVXYWZIO";
+        const A1 = [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          2,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ];
+        const A2 = [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ];
+        const Mx = [9, 8, 7, 6, 5, 4, 3, 2, 1, 1];
+        let isValid;
+        if (newValue.length !== 10) {
+          return done({
+            valid: false,
+            message: "身分證字號長度不對"
+          });
+        }
+        let i = tab.indexOf(newValue.charAt(0));
+        if (i === -1) {
+          isValid = false;
+        }
+        let sum = A1[i] + A2[i] * 9;
+
+        for (i = 1; i < 10; i++) {
+          const v = parseInt(newValue.charAt(i));
+          if (isNaN(v)) {
+            isValid = false;
+          }
+          sum = sum + v * Mx[i];
+        }
+        if (sum % 10 !== 0) {
+          isValid = false;
+        }
+        return done({ valid: isValid, message: "錯誤的身分證字號" });
+      } else {
+        return done();
+      }
+    }, 0);
+  },
+  EMAIL: (bind, newValue, row, column, done) => {
+    setTimeout(() => {
+      if (String(newValue) !== String(row[column.dataField])) {
+        const emailRule = /^\w+((-\w+)|(\.\w+))*@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+        if (newValue.search(emailRule) === -1 && newValue.length !== 0) {
+          return done({ valid: false, message: "請輸入正確的信箱格式" });
+        }
+        return done();
+      } else {
+        return done();
+      }
+    }, 0);
+  },
+  TEL: (bind, newValue, row, column, done) => {
+    setTimeout(() => {
+      if (String(newValue) !== String(row[column.dataField])) {
+        if (
+          newValue.length !== 0 &&
+          newValue.length !== 7 &&
+          newValue.length !== 9 &&
+          newValue.length !== 10
+        ) {
+          return done({ valid: false, message: "電話號碼輸入有誤！" });
+        }
+        return done();
+      } else {
+        return done();
+      }
+    }, 0);
+  }
+};
 
 export const CrudTableColumns = (bind, elm) => [
   {
@@ -62,25 +201,15 @@ export const CrudTableColumns = (bind, elm) => [
       options: elm["type"] === "SELECT" ? elm["value"] : undefined
     },
     editorRenderer: elm["type"] === "DATETIME" ? type[elm["type"]] : undefined,
-    validator: (newValue, row, column, done) => {
-      setTimeout(async () => {
-        let isValid;
-        if (isNaN(newValue)) {
-          return done({ valid: false, message: "請輸入數字" });
-        }
-        await postCrudSearch(bind, column.dataField, newValue, res => {
-          if (res.length !== 0) {
-            isValid = false;
-          } else {
-            isValid = true;
+    validator:
+      elm["valid"] !== "NONE"
+        ? (newValue, row, column, done) => {
+            valid[elm["valid"]](bind, newValue, row, column, done);
+            return {
+              async: true
+            };
           }
-        });
-        return done({ valid: isValid, message: "此ID已被占用" });
-      }, 0);
-      return {
-        async: true
-      };
-    }
+        : undefined
   }
 ];
 
