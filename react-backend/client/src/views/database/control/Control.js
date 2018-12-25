@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import cellEditFactory from "react-bootstrap-table2-editor";
 
 import {
@@ -8,7 +8,7 @@ import {
 } from "../../../controllers/axios.controller";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
-export default class extends Component {
+export default class extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +39,8 @@ export default class extends Component {
                   mode: "click",
                   blurToSave: true,
                   afterSaveCell: (oldValue, newValue, row, column) => {
-                    if (oldValue !== newValue) postCtrlEdit(row);
+                    if (String(oldValue) !== String(newValue))
+                      postCtrlEdit(row);
                   }
                 })}
                 pagination={this.state.data.length === 0 ? false : true}

@@ -39,4 +39,10 @@ module.exports = class Product {
   static fetchById(table, id) {
     return db.execute("SELECT * FROM " + table + " WHERE ID = ?", [id]);
   }
+
+  static fetchByColumnId(table, search, id) {
+    return db.execute("SELECT * FROM " + table + " WHERE " + search + " = ?", [
+      id
+    ]);
+  }
 };

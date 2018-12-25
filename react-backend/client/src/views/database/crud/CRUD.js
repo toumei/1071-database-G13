@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 // view
 import CrudTableMenu from "./CRUD.TableMenu";
@@ -7,7 +7,7 @@ import CrudTable from "./CRUD.Table";
 // controller
 import { handleChangeTable } from "../../../controllers/CRUD.controller";
 
-export default class extends Component {
+export default class extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { table: "boarder" };

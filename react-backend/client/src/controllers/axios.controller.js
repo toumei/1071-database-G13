@@ -112,7 +112,9 @@ export function postCtrlTableData(bind) {
   axios
     .post(url + "dbCtrl/List?table=_coloption")
     .then(res => {
-      bind.setState({ data: decrypt(res.data) });
+      bind.setState({
+        data: decrypt(res.data).filter((x, i) => x.name !== "ID")
+      });
     })
     .catch();
 }
@@ -163,5 +165,18 @@ export function postCtrlEdit(row) {
   axios
     .post(url + "dbCtrl/update", { table: "_coloption", row: row })
     .then(res => {})
+    .catch();
+}
+
+export async function postCrudSearch(bind, search, id, callback) {
+  await axios
+    .post(url + "dbCtrl/searchColumnID", {
+      table: bind.state.table,
+      search: search,
+      id: id
+    })
+    .then(res => {
+      callback(decrypt(res.data));
+    })
     .catch();
 }

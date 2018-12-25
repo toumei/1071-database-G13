@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
 
 import { Main } from "../router";
@@ -6,7 +6,7 @@ import { Main } from "../router";
 import logo from "../logo.svg";
 import { CustomLink } from "../models/bootstrap.model";
 
-export default class extends Component {
+export default class extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { title: "" };

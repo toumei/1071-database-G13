@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 // router路徑匹配失敗時，所顯示的網頁
-export default class extends Component {
+export default class extends PureComponent {
   render() {
     return (
       <div>

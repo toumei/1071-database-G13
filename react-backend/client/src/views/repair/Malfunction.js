@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
-export default class extends Component {
+export default class extends PureComponent {
   constructor(props) {
     super(props);
     document.title = "報修單";

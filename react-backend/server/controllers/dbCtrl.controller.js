@@ -49,6 +49,17 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
+  postSearchColumnID: (req, res, next) => {
+    dbCtrlModel
+      .fetchByColumnId(req.body.table, req.body.search, req.body.id)
+      .then(([data]) => {
+        console.log("data");
+        console.log(data);
+        res.send(cryptModel.encrypt(data));
+      })
+      .catch(err => console.log(err));
+  },
+
   postEdit: (req, res, next) => {
     dbCtrlModel
       .fetchById(req.query.id)

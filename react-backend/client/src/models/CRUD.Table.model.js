@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import { Type } from "react-bootstrap-table2-editor";
 
 import { customColumn, columnWidth } from "./state.model";
 
 import { getItem } from "../controllers/CRUD.Table.controller";
-class DateTime extends Component {
+import { postCrudSearch } from "../controllers/axios.controller";
+class DateTime extends PureComponent {
   getValue() {
     return this.node.value + ".000Z";
   }
@@ -45,10 +46,14 @@ const type = {
   )
 };
 
-export const CrudTableColumns = (bindTable, elm) => [
+// const valid = {
+//   PK: 1
+// };
+
+export const CrudTableColumns = (bind, elm) => [
   {
     ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
-    editable: bindTable.state.editable,
+    editable: bind.state.editable,
     headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
     style: { cursor: "default" },
     editor: {
@@ -56,12 +61,31 @@ export const CrudTableColumns = (bindTable, elm) => [
       value: elm["type"] === "CHECKBOX" ? elm["value"] : undefined,
       options: elm["type"] === "SELECT" ? elm["value"] : undefined
     },
-    editorRenderer: elm["type"] === "DATETIME" ? type[elm["type"]] : undefined
+    editorRenderer: elm["type"] === "DATETIME" ? type[elm["type"]] : undefined,
+    validator: (newValue, row, column, done) => {
+      setTimeout(async () => {
+        let isValid;
+        if (isNaN(newValue)) {
+          return done({ valid: false, message: "請輸入數字" });
+        }
+        await postCrudSearch(bind, column.dataField, newValue, res => {
+          if (res.length !== 0) {
+            isValid = false;
+          } else {
+            isValid = true;
+          }
+        });
+        return done({ valid: isValid, message: "此ID已被占用" });
+      }, 0);
+      return {
+        async: true
+      };
+    }
   }
 ];
 
 export const CtrlTableColumns = (
-  bindTable,
+  bind,
   elm,
   editable,
   editorType,
@@ -80,7 +104,7 @@ export const CtrlTableColumns = (
   }
 ];
 
-export const CrudTableModeColumns = bindTable => [
+export const CrudTableModeColumns = bind => [
   {
     ...customColumn("action", "操作")[0],
     isDummyField: true,
@@ -92,7 +116,7 @@ export const CrudTableModeColumns = bindTable => [
           className="btn btn-primary btn-sm"
           data-toggle="modal"
           data-target={"#editModal"}
-          onClick={() => getItem(bindTable, row)}
+          onClick={() => getItem(bind, row)}
         >
           編輯
         </button>
@@ -102,7 +126,7 @@ export const CrudTableModeColumns = bindTable => [
           className="btn btn-danger btn-sm"
           data-toggle="modal"
           data-target={"#deleteModal"}
-          onClick={() => getItem(bindTable, row)}
+          onClick={() => getItem(bind, row)}
         >
           刪除
         </button>

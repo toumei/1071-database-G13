@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import { DBMain } from "../../router";
 
 import { CustomLink } from "../../models/bootstrap.model";
 
 // default program
-export default class extends Component {
+export default class extends PureComponent {
   render() {
     return (
       <div>
