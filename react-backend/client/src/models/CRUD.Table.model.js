@@ -6,6 +6,7 @@ import { customColumn, columnWidth } from "./state.model";
 
 import { getItem } from "../controllers/CRUD.Table.controller";
 import { postCrudSearch } from "../controllers/axios.controller";
+
 class DateTime extends PureComponent {
   getValue() {
     return this.node.value + ".000Z";
@@ -202,16 +203,76 @@ export const CrudTableColumns = (bind, elm) => [
     },
     editorRenderer: elm["type"] === "DATETIME" ? type[elm["type"]] : undefined,
     validator:
-      elm["valid"] !== "NONE"
+      elm["value"] !== "NONE" && elm["type"] === "TEXT"
         ? (newValue, row, column, done) => {
-            valid[elm["valid"]](bind, newValue, row, column, done);
-            return {
-              async: true
-            };
+            valid[elm["value"]](bind, newValue, row, column, done);
+            return { async: true };
           }
         : undefined
   }
 ];
+
+class CheckBoxValue extends PureComponent {
+  getValue() {
+    return this.node1.value + ":" + this.node2.value;
+  }
+
+  render() {
+    const { value, onBlur, ...rest } = this.props;
+    const checkValue = value !== "NONE" ? value.split(":") : "";
+    this.isMouse = false;
+    return (
+      <div
+        className="container-fluid"
+        onBlur={() => {
+          if (this.isMouse) {
+            onBlur();
+          }
+        }}
+        onMouseOver={() => {
+          this.isMouse = false;
+        }}
+        onMouseOut={() => {
+          this.isMouse = true;
+        }}
+      >
+        <div className="row">
+          <label htmlFor="checkbox1" className="col-form-label col-md-2">
+            是：
+          </label>
+          <input
+            {...rest}
+            key="checkbox1"
+            id="checkbox1"
+            className="form-control col-md-4"
+            type="text"
+            defaultValue={checkValue[0]}
+            ref={n => (this.node1 = n)}
+            autoFocus
+            onMouseOver={() => {
+              this.isMouse = true;
+            }}
+          />
+          <label htmlFor="checkbox2" className="col-form-label col-md-2">
+            否：
+          </label>
+          <input
+            {...rest}
+            key="checkbox2"
+            id="checkbox2"
+            className="form-control col-md-4"
+            type="text"
+            defaultValue={checkValue[1]}
+            ref={n => (this.node2 = n)}
+            onMouseOver={() => {
+              this.isMouse = true;
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+}
 
 export const CtrlTableColumns = (
   bind,
@@ -221,7 +282,7 @@ export const CtrlTableColumns = (
   editorValue
 ) => [
   {
-    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
+    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"])[0],
     editable: editable,
     headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
     style: { cursor: "default" },
@@ -229,7 +290,22 @@ export const CtrlTableColumns = (
       type: editorType !== "DATETIME" ? type[editorType] : undefined,
       value: editorType === "CHECKBOX" ? editorValue : undefined,
       options: editorType === "SELECT" ? editorValue : undefined
-    }
+    },
+    editorRenderer:
+      elm["COLUMN_NAME"] === "value"
+        ? (editorProps, value, row, column, rowIndex, columnIndex) => {
+            // if (row.type === "CHECKBOX")
+            return <CheckBoxValue {...editorProps} value={value} />;
+          }
+        : undefined
+  }
+];
+
+export const CSVTableColumns = (bind, elm) => [
+  {
+    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
+    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
+    style: { cursor: "default" }
   }
 ];
 

@@ -36,6 +36,10 @@ module.exports = class Product {
     return db.query($sql.fetchTableAll);
   }
 
+  static fetchCSVAll() {
+    return db.query($sql.fetchCSVAll);
+  }
+
   static fetchById(table, id) {
     return db.execute("SELECT * FROM " + table + " WHERE ID = ?", [id]);
   }

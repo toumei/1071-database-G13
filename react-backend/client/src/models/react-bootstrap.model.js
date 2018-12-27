@@ -32,7 +32,6 @@ const NoData = () => <div className="text-center">尚未有資料</div>;
 const pageOptions = {
   paginationSize: 10,
   sizePerPageList: [
-    { text: "5", value: 5 },
     { text: "10", value: 10 },
     { text: "15", value: 15 },
     { text: "20", value: 20 },

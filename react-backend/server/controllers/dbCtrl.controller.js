@@ -21,6 +21,15 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
+  postCSVList: (req, res, next) => {
+    dbCtrlModel
+      .fetchCSVAll()
+      .then(([data]) => {
+        res.send(cryptModel.encrypt(data));
+      })
+      .catch(err => console.log(err));
+  },
+
   postColumnList: (req, res, next) => {
     dbCtrlModel
       .fetchColumnAll(req.query.table)

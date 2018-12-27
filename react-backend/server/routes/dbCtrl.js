@@ -10,6 +10,7 @@ router.get("/", function(req, res, next) {
 
 router.post("/List", dbCtrlController.postList);
 router.post("/TableList", dbCtrlController.postTableList);
+router.post("/CSVList", dbCtrlController.postCSVList);
 router.post("/ColumnList", dbCtrlController.postColumnList);
 router.post("/CtrlList", dbCtrlController.postCtrlList);
 router.post("/update", dbCtrlController.postUpdate);
