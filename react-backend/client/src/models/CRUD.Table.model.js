@@ -274,6 +274,69 @@ class CheckBoxValue extends PureComponent {
   }
 }
 
+class AddOptiontValue extends PureComponent {
+  getValue() {
+    return "NONE";
+  }
+
+  render() {
+    const { value, ...rest } = this.props;
+    return (
+      <input
+        {...rest}
+        className="form-control"
+        type="text"
+        autoFocus
+        readOnly
+      />
+    );
+  }
+}
+
+class SelectValue extends PureComponent {
+  getValue() {
+    return this.node.value;
+  }
+
+  render() {
+    const { value, ...rest } = this.props;
+    return (
+      <select
+        {...rest}
+        defaultValue={value}
+        className="form-control"
+        ref={n => (this.node = n)}
+        autoFocus
+      >
+        <option value="NONE">NONE</option>
+        <option value="PK">PK</option>
+        <option value="IDCARD">IDCARD</option>
+        <option value="EMAIL">EMAIL</option>
+        <option value="TEL">TEL</option>
+      </select>
+    );
+  }
+}
+
+class InputValue extends PureComponent {
+  getValue() {
+    return "NONE";
+  }
+
+  render() {
+    const { value, ...rest } = this.props;
+    return (
+      <input
+        {...rest}
+        className="form-control"
+        type="text"
+        autoFocus
+        readOnly
+      />
+    );
+  }
+}
+
 export const CtrlTableColumns = (
   bind,
   elm,
@@ -294,8 +357,15 @@ export const CtrlTableColumns = (
     editorRenderer:
       elm["COLUMN_NAME"] === "value"
         ? (editorProps, value, row, column, rowIndex, columnIndex) => {
-            // if (row.type === "CHECKBOX")
-            return <CheckBoxValue {...editorProps} value={value} />;
+            if (row.type === "CHECKBOX") {
+              return <CheckBoxValue {...editorProps} value={value} />;
+            } else if (row.type === "SELECT") {
+              return <AddOptiontValue {...editorProps} value={value} />;
+            } else if (row.type === "TEXT") {
+              return <SelectValue {...editorProps} value={value} />;
+            } else {
+              return <InputValue {...editorProps} value={value} />;
+            }
           }
         : undefined
   }

@@ -14,6 +14,7 @@ router.post("/CSVList", dbCtrlController.postCSVList);
 router.post("/ColumnList", dbCtrlController.postColumnList);
 router.post("/CtrlList", dbCtrlController.postCtrlList);
 router.post("/update", dbCtrlController.postUpdate);
+router.post("/CtrlUpdate", dbCtrlController.postCtrlUpdate);
 router.post("/delete", dbCtrlController.postDelete);
 router.post("/add", dbCtrlController.postAdd);
 router.post("/search", dbCtrlController.postSearch);

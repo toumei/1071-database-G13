@@ -204,7 +204,7 @@ export function postCrudEdit(bind, row, info = "") {
 
 export function postCtrlEdit(row) {
   axios
-    .post(url + "dbCtrl/update", { table: "_coloption", row: row })
+    .post(url + "dbCtrl/CtrlUpdate", { row: row })
     .then(res => {})
     .catch();
 }

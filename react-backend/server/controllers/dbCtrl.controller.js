@@ -87,6 +87,16 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
+  postCtrlUpdate: (req, res, next) => {
+    req.body.row.value = JSON.stringify(req.body.row.value);
+    dbCtrlModel
+      .update("_coloption", req.body.row, req.body.row.ID)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  },
+
   postDelete: (req, res, next) => {
     dbCtrlModel
       .delete(req.body.table, req.body.id)
