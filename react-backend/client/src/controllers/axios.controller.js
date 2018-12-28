@@ -137,7 +137,12 @@ export function postCtrlTableData(bind) {
     .post(url + "dbCtrl/List?table=_coloption")
     .then(res => {
       bind.setState({
-        data: decrypt(res.data).filter((x, i) => x.name !== "ID")
+        data: decrypt(res.data).filter((x, i) => {
+          if (x.type === "SELECT") {
+            x.value = JSON.stringify(x.value);
+          }
+          return x.name !== "ID";
+        })
       });
     })
     .catch();
@@ -204,7 +209,9 @@ export function postCrudEdit(bind, row, info = "") {
 
 export function postCtrlEdit(row) {
   axios
-    .post(url + "dbCtrl/CtrlUpdate", { row: row })
+    .post(url + "dbCtrl/CtrlUpdate", {
+      row: row
+    })
     .then(res => {})
     .catch();
 }
