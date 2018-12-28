@@ -39,8 +39,18 @@ export default class extends PureComponent {
                   mode: "click",
                   blurToSave: true,
                   afterSaveCell: (oldValue, newValue, row, column) => {
-                    if (String(oldValue) !== String(newValue))
+                    if (String(oldValue) !== String(newValue)) {
+                      if (newValue === row.type) {
+                        if (row.type === "SELECT") {
+                          row.value = JSON.stringify([]);
+                        } else if (row.type === "CHECKBOX") {
+                          row.value = ":";
+                        } else {
+                          row.value = "NONE";
+                        }
+                      }
                       postCtrlEdit(row);
+                    }
                   }
                 })}
                 pagination={this.state.data.length === 0 ? false : true}

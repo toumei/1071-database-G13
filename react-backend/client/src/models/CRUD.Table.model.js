@@ -509,7 +509,6 @@ export const CtrlTableColumns = (
     style: { cursor: "default" },
     editor: {
       type: editorType !== "DATETIME" ? type[editorType] : undefined,
-      value: editorType === "CHECKBOX" ? editorValue : undefined,
       options: editorType === "SELECT" ? editorValue : undefined
     },
     editorRenderer:
