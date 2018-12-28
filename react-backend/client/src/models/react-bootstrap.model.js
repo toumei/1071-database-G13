@@ -1,4 +1,6 @@
-import React from "react";
+import React, { PureComponent } from "react";
+
+import { Type } from "react-bootstrap-table2-editor";
 
 // bootstrap
 import BootstrapTable from "react-bootstrap-table-next";
@@ -49,4 +51,44 @@ const pageOptions = {
   nextPageTitle: "下一頁",
   prePageTitle: "上一頁",
   lastPageTitle: "尾頁"
+};
+
+class DateTime extends PureComponent {
+  getValue() {
+    return this.node.value + ".000Z";
+  }
+
+  render() {
+    const date = new Date();
+    this.today = `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(
+      -2
+    )}-${("0" + date.getDate()).slice(-2)}T${("0" + date.getHours()).slice(
+      -2
+    )}:${("0" + date.getMinutes()).slice(-2)}:${("0" + date.getSeconds()).slice(
+      -2
+    )}`;
+    const { value, ...rest } = this.props;
+    return (
+      <input
+        {...rest}
+        key="datetime-local"
+        className="form-control"
+        type="datetime-local"
+        defaultValue={value === undefined ? this.today : value.split(".")[0]}
+        ref={n => (this.node = n)}
+        autoFocus
+      />
+    );
+  }
+}
+
+export const type = {
+  TEXT: Type.TEXT,
+  SELECT: Type.SELECT,
+  TEXTAREA: Type.TEXTAREA,
+  CHECKBOX: Type.CHECKBOX,
+  DATE: Type.DATE,
+  DATETIME: (editorProps, value, row, column, rowIndex, columnIndex) => (
+    <DateTime {...editorProps} value={value} />
+  )
 };

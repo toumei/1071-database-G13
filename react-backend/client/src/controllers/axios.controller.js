@@ -7,9 +7,9 @@ import {
   CrudTableDeleteColumns,
   CrudTableFormColumns,
   CrudTableModeColumns,
-  CtrlTableColumns,
   CSVTableColumns
 } from "../models/CRUD.Table.model";
+import { CtrlTableColumns } from "../models/Control.model";
 import { CrudTableMenuData } from "../models/CRUD.TableMenu.model";
 
 // controller
