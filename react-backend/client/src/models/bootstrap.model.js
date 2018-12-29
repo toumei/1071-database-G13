@@ -41,9 +41,14 @@ export const CustoModal = ({
   </div>
 );
 
-export const CustomLink = ({ path, to, content }) => (
+export const CustomLink = ({ path, title, titleOption = "", to, content }) => (
   <Link
-    className={"nav-link " + (path === to ? "active" : "")}
+    className={
+      "nav-link " +
+      (title === content || title === titleOption || path === to
+        ? "active show"
+        : "")
+    }
     to={to}
     onClick={() => {
       const navbarBtn = document.getElementById("navbarBtn");

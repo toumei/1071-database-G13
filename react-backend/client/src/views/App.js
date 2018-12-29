@@ -25,7 +25,7 @@ export default class extends PureComponent {
   render() {
     return (
       <div>
-        <Navbar title={this.state.title} path={this.props.location.pathname} />
+        <Navbar title={this.state.title} />
         <Header title={this.state.title} />
         <Main />
       </div>
@@ -33,7 +33,7 @@ export default class extends PureComponent {
   }
 }
 
-const Navbar = ({ title, path }) => (
+const Navbar = ({ title }) => (
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
     <div className="container">
       <Link
@@ -57,28 +57,33 @@ const Navbar = ({ title, path }) => (
       >
         <span className="navbar-toggler-icon" />
       </button>
-      <NavItem path={path} />
+      <NavItem title={title} />
     </div>
   </nav>
 );
 
-const NavItem = ({ path }) => (
+const NavItem = ({ title }) => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
       <li className="nav-item">
-        <CustomLink path={path} to="/" content="首頁" />
+        <CustomLink
+          title={title}
+          titleOption="ResNetCMMS"
+          to="/"
+          content="首頁"
+        />
       </li>
       <li className="nav-item">
-        <CustomLink path={path} to="/database" content="資料庫" />
+        <CustomLink title={title} to="/database" content="資料庫" />
       </li>
       <li className="nav-item">
-        <CustomLink path={path} to="/repair/malfunction" content="報修單" />
+        <CustomLink title={title} to="/repair/malfunction" content="報修單" />
       </li>
       <li className="nav-item">
-        <CustomLink path={path} to="/repair/processing" content="維修單" />
+        <CustomLink title={title} to="/repair/processing" content="維修單" />
       </li>
       <li className="nav-item">
-        <CustomLink path={path} to="/products" content="產品" />
+        <CustomLink title={title} to="/products" content="產品" />
       </li>
     </ul>
 
@@ -87,7 +92,7 @@ const NavItem = ({ path }) => (
         <Link
           className={
             "nav-link dropdown-toggle " +
-            (path === "/user/profile" || path === "/user/settings"
+            (document.title === "個人資料" || document.title === "設定"
               ? "active"
               : "")
           }
@@ -125,9 +130,10 @@ const NavItem = ({ path }) => (
       </li>
       <li className="nav-item">
         <CustomLink
-          path={path}
+          title={title}
+          titleOption="登入"
           to="/user/login"
-          content={<i className="fas fa-user-times"> 登出</i>}
+          content={<i className="fas fa-user-times">登出</i>}
         />
       </li>
     </ul>

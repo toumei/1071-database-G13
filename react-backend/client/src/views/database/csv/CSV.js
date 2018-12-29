@@ -42,9 +42,13 @@ export default class extends PureComponent {
                 {props => (
                   <div>
                     <div className="row justify-content-md-center">
-                      <AllExportCSV {...props.csvProps} bind={this} />
-                      <div className="col-md-1" />
-                      <SelectExportCSV {...props.csvProps} />
+                      <div className="col-5 col-md-1">
+                        <AllExportCSV {...props.csvProps} bind={this} />
+                      </div>
+                      <div className="col-1 col-md-1" />
+                      <div className="col-5 col-md-1">
+                        <SelectExportCSV {...props.csvProps} />
+                      </div>
                     </div>
                     <hr />
                     <CustomBootstrap
