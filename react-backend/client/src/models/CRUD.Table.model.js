@@ -171,15 +171,6 @@ export const CrudTableColumns = (bind, elm) => [
   }
 ];
 
-export const CSVTableColumns = (bind, elm) => [
-  {
-    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
-    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
-    style: { cursor: "default" },
-    csvExport: elm["COLUMN_NAME"] === "ID" ? false : true
-  }
-];
-
 export const CrudTableModeColumns = bind => [
   {
     ...customColumn("action", "操作")[0],

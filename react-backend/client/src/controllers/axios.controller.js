@@ -6,10 +6,10 @@ import {
   CrudTableColumns,
   CrudTableDeleteColumns,
   CrudTableFormColumns,
-  CrudTableModeColumns,
-  CSVTableColumns
+  CrudTableModeColumns
 } from "../models/CRUD.Table.model";
 import { CtrlTableColumns } from "../models/Control.model";
+import { CSVTableColumns } from "../models/CSV.model";
 import { CrudTableMenuData } from "../models/CRUD.TableMenu.model";
 
 // controller
@@ -116,7 +116,7 @@ export function postCSVTableColumns(bind) {
   ];
   let columns = [];
   data.forEach(elm => {
-    columns.push(CSVTableColumns(bind, elm)[0]);
+    columns.push(CSVTableColumns(elm)[0]);
   });
   bind.setState({
     columns: columns
