@@ -115,5 +115,14 @@ module.exports = {
         res.send({ id: data.insertId });
       })
       .catch(err => console.log(err));
+  },
+
+  postSum: (req, res, next) => {
+    dbCtrlModel
+      .fetchSum()
+      .then(([data]) => {
+        res.send(cryptModel.encrypt(data));
+      })
+      .catch(err => console.log(err));
   }
 };

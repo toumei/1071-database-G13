@@ -55,7 +55,7 @@ const pageOptions = {
 
 class DateTime extends PureComponent {
   getValue() {
-    return this.node.value + ".000Z";
+    return this.node.value;
   }
 
   render() {

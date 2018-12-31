@@ -132,6 +132,20 @@ export function postCrudTableData(bind) {
     .catch();
 }
 
+export function postAnalysisTableData(bind) {
+  axios
+    .post(url + "dbCtrl/AnalysisSum")
+    .then(res => {
+      const newData = decrypt(res.data);
+      let dataList = [];
+      for (let i = 0; i < newData.length; i++) {
+        dataList[i] = newData[i][0]["COUNT(*)"];
+      }
+      bind.setState({ sum: dataList });
+    })
+    .catch();
+}
+
 export function postCtrlTableData(bind) {
   axios
     .post(url + "dbCtrl/List?table=_coloption")

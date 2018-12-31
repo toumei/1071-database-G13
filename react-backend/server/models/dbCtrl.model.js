@@ -49,4 +49,10 @@ module.exports = class Product {
       id
     ]);
   }
+
+  static fetchSum() {
+    return db.query(
+      "SELECT COUNT(*) FROM malfunction;SELECT COUNT(*) FROM processing;SELECT COUNT(*) FROM cabinet WHERE status != '正常';SELECT COUNT(*) FROM switch WHERE status != '正常';"
+    );
+  }
 };

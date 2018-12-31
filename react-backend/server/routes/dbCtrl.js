@@ -19,5 +19,6 @@ router.post("/delete", dbCtrlController.postDelete);
 router.post("/add", dbCtrlController.postAdd);
 router.post("/search", dbCtrlController.postSearch);
 router.post("/searchColumnID", dbCtrlController.postSearchColumnID);
+router.post("/AnalysisSum", dbCtrlController.postSum);
 
 module.exports = router;
