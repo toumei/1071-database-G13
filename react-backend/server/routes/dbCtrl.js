@@ -20,5 +20,8 @@ router.post("/add", dbCtrlController.postAdd);
 router.post("/search", dbCtrlController.postSearch);
 router.post("/searchColumnID", dbCtrlController.postSearchColumnID);
 router.post("/AnalysisSum", dbCtrlController.postSum);
+router.post("/AnalysisRepair", dbCtrlController.postAnalysisRepair);
+router.post("/AnalysisMalfunction", dbCtrlController.postAnalysisMalfunction);
+router.post("/AnalysisProcessing", dbCtrlController.postAnalysisProcessing);
 
 module.exports = router;

@@ -4,20 +4,6 @@ import { Bar } from "react-chartjs-2";
 const data = {
   datasets: [
     {
-      type: "line",
-      label: "修復率",
-      data: [100, 70, 85, 99, 70, 80, 60, 76, 55, 85, 67, 87],
-      fill: false,
-      backgroundColor: "rgba(236,147,47,0.2)",
-      borderColor: "rgba(236,147,47,1)",
-      pointBorderColor: "rgba(236,147,47,1)",
-      pointBackgroundColor: "rgba(236,147,47,1)",
-      borderWidth: 2,
-      pointHoverBackgroundColor: "rgba(236,147,47,0.4)",
-      pointHoverBorderColor: "rgba(236,147,47,1)",
-      yAxisID: "y-axis-1"
-    },
-    {
       type: "bubble",
       label: "報修數",
       data: [
@@ -35,7 +21,7 @@ const data = {
       borderWidth: 2,
       hoverBackgroundColor: "rgba(255,99,132,0.4)",
       hoverBorderColor: "rgba(255,99,132,1)",
-      yAxisID: "y-axis-2"
+      yAxisID: "y-axis-1"
     }
   ]
 };
@@ -57,7 +43,6 @@ const options = {
         gridLines: {
           display: true
         },
-
         labels: [
           "1月",
           "2月",
@@ -78,20 +63,8 @@ const options = {
       {
         type: "linear",
         display: true,
-        position: "right",
-        id: "y-axis-1",
-        gridLines: {
-          display: false
-        },
-        labels: {
-          show: true
-        }
-      },
-      {
-        type: "linear",
-        display: true,
         position: "left",
-        id: "y-axis-2",
+        id: "y-axis-1",
         gridLines: {
           display: true
         },

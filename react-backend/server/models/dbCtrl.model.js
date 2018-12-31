@@ -52,7 +52,56 @@ module.exports = class Product {
 
   static fetchSum() {
     return db.query(
-      "SELECT COUNT(*) FROM malfunction;SELECT COUNT(*) FROM processing;SELECT COUNT(*) FROM cabinet WHERE status != '正常';SELECT COUNT(*) FROM switch WHERE status != '正常';"
+      "SELECT COUNT(*) FROM malfunction;\
+      SELECT COUNT(*) FROM processing;\
+      SELECT COUNT(*), matter FROM malfunction group by matter;\
+      SELECT COUNT(*), result FROM processing group by result;\
+      SELECT COUNT(*) FROM cabinet WHERE status != '正常';\
+      SELECT COUNT(*) FROM switch WHERE status != '正常';\
+      SELECT COUNT(*) FROM sweep WHERE date > '2018-12-23';\
+      SELECT COUNT(*) FROM apply;"
+    );
+  }
+
+  static fetchAnalysisRepair(day1, day2) {
+    return db.query(
+      "SELECT DATE_FORMAT(date, '%m') month, COUNT(*) FROM malfunction WHERE date > '" +
+        day2 +
+        "' AND date < '" +
+        day1 +
+        "' GROUP BY DATE_FORMAT(date, '%Y-%m') ORDER BY date ASC;\
+        SELECT DATE_FORMAT(date, '%m') month, COUNT(*) FROM processing WHERE date > '" +
+        day2 +
+        "' AND date < '" +
+        day1 +
+        "' GROUP BY DATE_FORMAT(date, '%Y-%m') ORDER BY date ASC;\
+        SELECT DATE_FORMAT(m.date, '%m') month, COUNT(*) FROM malfunction m, processing p WHERE m.malfunctionID = p.malfunctionID AND m.date > '" +
+        day2 +
+        "' AND m.date < '" +
+        day1 +
+        "' GROUP BY DATE_FORMAT(m.date, '%Y-%m') ORDER BY m.date ASC;"
+    );
+  }
+
+  static fetchAnalysisMalfunction(day1, day2) {
+    return db.query(
+      "SELECT value FROM _coloption WHERE name = 'matter';\
+      SELECT matter, COUNT(*) FROM malfunction WHERE date > '" +
+        day2 +
+        "' AND date < '" +
+        day1 +
+        "'  GROUP BY matter;"
+    );
+  }
+
+  static fetchAnalysisProcessing(day1, day2) {
+    return db.query(
+      "SELECT value FROM _coloption WHERE name = 'result';\
+      SELECT result, COUNT(*) FROM processing WHERE date > '" +
+        day2 +
+        "' AND date < '" +
+        day1 +
+        "'  GROUP BY result;"
     );
   }
 };

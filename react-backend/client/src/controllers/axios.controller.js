@@ -206,6 +206,9 @@ export function postCrudAdd(bind, row) {
 }
 
 export function postCrudEdit(bind, row, info = "") {
+  if (row.date !== undefined) {
+    row.date = row.date.split(".")[0];
+  }
   axios
     .post(url + "dbCtrl/update", {
       table: bind.state.table,
@@ -239,6 +242,121 @@ export async function postCrudSearch(bind, search, id, callback) {
     })
     .then(res => {
       callback(decrypt(res.data));
+    })
+    .catch();
+}
+
+export function postAnalysisRepairData(bind) {
+  axios
+    .post(url + "dbCtrl/AnalysisRepair")
+    .then(res => {
+      const newData = decrypt(res.data);
+      let malfunction = [];
+      let processing = [];
+      let repair = [];
+      let tmpMonth = bind.Month + 1;
+      let tmpPonit = 0;
+      for (let i = 0; i < newData[0].length; i++) {
+        for (let j = tmpMonth; j < newData[0][i]["month"]; j++) {
+          malfunction[tmpPonit] = 0;
+          tmpPonit++;
+        }
+        malfunction[tmpPonit] = newData[0][i]["COUNT(*)"];
+        tmpMonth = newData[0][i]["month"] + 1;
+        tmpPonit++;
+      }
+      tmpMonth = bind.Month + 1;
+      tmpPonit = 0;
+      for (let i = 0; i < newData[1].length; i++) {
+        for (let j = tmpMonth; j < newData[1][i]["month"]; j++) {
+          processing[tmpPonit] = 0;
+          tmpPonit++;
+        }
+        processing[tmpPonit] = newData[1][i]["COUNT(*)"];
+        tmpMonth = newData[1][i]["month"] + 1;
+        tmpPonit++;
+      }
+      tmpMonth = bind.Month + 1;
+      tmpPonit = 0;
+      for (let i = 0; i < newData[1].length; i++) {
+        for (let j = tmpMonth; j < newData[1][i]["month"]; j++) {
+          repair[tmpPonit] = 0;
+          tmpPonit++;
+        }
+        repair[tmpPonit] = newData[1][i]["COUNT(*)"];
+        tmpMonth = newData[1][i]["month"] + 1;
+        tmpPonit++;
+      }
+      let max = Math.max(malfunction.length, processing.length);
+      for (let i = malfunction.length; i < max; i++) {
+        malfunction[i] = 0;
+      }
+      for (let i = processing.length; i < max; i++) {
+        processing[i] = 0;
+      }
+      for (let i = repair.length; i < max; i++) {
+        repair[i] = 0;
+      }
+      for (let i = 0; i < max; i++) {
+        if (malfunction[i] === 0) {
+          repair[i] = 0;
+        } else {
+          repair[i] = repair[i] / malfunction[i];
+        }
+      }
+      bind.state.data.datasets[0].data = repair;
+      bind.state.data.datasets[1].data = malfunction;
+      bind.state.data.datasets[2].data = processing;
+    })
+    .catch();
+}
+
+export function postAnalysisMalfunctionData(bind) {
+  axios
+    .post(url + "dbCtrl/AnalysisMalfunction")
+    .then(res => {
+      const newData = decrypt(res.data);
+      let matterLabel = [];
+      let matterData = [];
+      for (let i = 0; i < newData[0][0].value.length; i++) {
+        matterLabel[i] = newData[0][0].value[i]["label"];
+      }
+      for (let i = 0; i < matterLabel.length; i++) {
+        matterData[i] = 0;
+        for (let j = 0; j < newData[1].length; j++) {
+          if (matterLabel[i] === newData[1][j]["matter"]) {
+            matterData[i] = newData[1][j]["COUNT(*)"];
+            break;
+          }
+        }
+      }
+      bind.state.data.datasets[0].data = matterData;
+      bind.state.data.labels = matterLabel;
+    })
+    .catch();
+}
+
+export function postAnalysisProcessingData(bind) {
+  axios
+    .post(url + "dbCtrl/AnalysisProcessing")
+    .then(res => {
+      const newData = decrypt(res.data);
+      let processingLabel = [];
+      let processingData = [];
+      for (let i = 0; i < newData[0][0].value.length; i++) {
+        processingLabel[i] = newData[0][0].value[i]["label"];
+      }
+      for (let i = 0; i < processingLabel.length; i++) {
+        processingData[i] = 0;
+        for (let j = 0; j < newData[1].length; j++) {
+          if (processingLabel[i] === newData[1][j]["result"]) {
+            processingData[i] = newData[1][j]["COUNT(*)"];
+            break;
+          }
+        }
+      }
+      bind.state.data.datasets[0].data = processingData;
+      bind.state.data.labels = processingLabel;
     })
     .catch();
 }

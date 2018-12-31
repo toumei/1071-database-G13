@@ -28,8 +28,8 @@ const DBNavbar = ({ path }) => (
             (path === "/database" ||
             path === "/database/cabinet" ||
             path === "/database/vendor" ||
-            path === "/database/boarder" ||
-            path === "/database/employee" ||
+            path === "/database/malfunctionMatter" ||
+            path === "/database/processingResult" ||
             path === "/database/sweep"
               ? "active show"
               : "")

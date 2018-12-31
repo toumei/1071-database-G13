@@ -8,7 +8,7 @@ export default class extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      sum: [0, 0, 0, 0]
+      sum: [0, 0, 0, 0, 0, 0, 0]
     };
   }
 
@@ -63,16 +63,16 @@ const AnalysisCardLeft = ({ path, sum }) => (
 
     <div className="card text-center bg-warning text-white mb-3">
       <div className="card-body">
-        <h3>報修種類</h3>
+        <h3>報修事項</h3>
         <h4 className="display-4">
-          <i className="fas fa-users" /> 0
+          <i className="fas fa-list-ul" /> {sum[2]}
         </h4>
         <Link
           className={
             "btn btn-outline-light btn-sm " +
-            (path === "/database/boarder" ? "active" : "")
+            (path === "/database/malfunctionMatter" ? "active" : "")
           }
-          to="/database/boarder"
+          to="/database/malfunctionMatter"
         >
           View
         </Link>
@@ -81,16 +81,16 @@ const AnalysisCardLeft = ({ path, sum }) => (
 
     <div className="card text-center bg-success text-white mb-3">
       <div className="card-body">
-        <h3>維修種類</h3>
+        <h3>維修結果</h3>
         <h4 className="display-4">
-          <i className="fas fa-folder" /> 0
+          <i className="fas fa-check" /> {sum[3]}
         </h4>
         <Link
           className={
             "btn btn-outline-light btn-sm " +
-            (path === "/database/employee" ? "active" : "")
+            (path === "/database/processingResult" ? "active" : "")
           }
-          to="/database/employee"
+          to="/database/processingResult"
         >
           View
         </Link>
@@ -105,7 +105,7 @@ const AnalysisCardRight = ({ path, sum }) => (
       <div className="card-body">
         <h3>機櫃/交換器</h3>
         <h4 className="display-4">
-          <i className="fas fa-exclamation-triangle" /> {sum[2] + "/" + sum[3]}
+          <i className="fas fa-exclamation-triangle" /> {sum[4] + "/" + sum[5]}
         </h4>
         <Link
           className={
@@ -119,11 +119,29 @@ const AnalysisCardRight = ({ path, sum }) => (
       </div>
     </div>
 
+    <div className="card text-center bg-primary text-white mb-3">
+      <div className="card-body">
+        <h3>申報</h3>
+        <h4 className="display-4">
+          <i className="fas fa-industry" /> {sum[7]}
+        </h4>
+        <Link
+          className={
+            "btn btn-outline-light btn-sm " +
+            (path === "/database/apply" ? "active" : "")
+          }
+          to="/database/apply"
+        >
+          View
+        </Link>
+      </div>
+    </div>
+
     <div className="card text-center bg-warning text-white mb-3">
       <div className="card-body">
         <h3>清掃</h3>
         <h4 className="display-4">
-          <i className="fas fa-users" /> 0
+          <i className="fas fa-broom" /> {sum[6]}
         </h4>
         <Link
           className={
@@ -131,24 +149,6 @@ const AnalysisCardRight = ({ path, sum }) => (
             (path === "/database/sweep" ? "active" : "")
           }
           to="/database/sweep"
-        >
-          View
-        </Link>
-      </div>
-    </div>
-
-    <div className="card text-center bg-primary text-white mb-3">
-      <div className="card-body">
-        <h3>廠商</h3>
-        <h4 className="display-4">
-          <i className="fas fa-pencil-alt" /> 0
-        </h4>
-        <Link
-          className={
-            "btn btn-outline-light btn-sm " +
-            (path === "/database/vendor" ? "active" : "")
-          }
-          to="/database/vendor"
         >
           View
         </Link>
