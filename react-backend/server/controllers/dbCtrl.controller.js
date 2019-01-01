@@ -166,5 +166,19 @@ module.exports = {
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => console.log(err));
+  },
+
+  postAnalysisCabinet: (req, res, next) => {
+    let Day1 = new Date();
+    let Day2 = new Date(Day1);
+    Day2.setMonth(Day2.getMonth() - 1);
+    day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
+    day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
+    dbCtrlModel
+      .fetchAnalysisCabinet(day1, day2)
+      .then(([data]) => {
+        res.send(cryptModel.encrypt(data));
+      })
+      .catch(err => console.log(err));
   }
 };

@@ -13,11 +13,9 @@ import CrudTableNav from "./CRUD.TableNav";
 
 // controller
 import {
-  postCrudEdit,
+  postCrudTableEdit,
   postCrudTableColumns,
-  postCrudTableData
-} from "../../../controllers/axios.controller";
-import {
+  postCrudTableData,
   addSelect,
   deleteItem,
   deleteSelect,
@@ -113,7 +111,7 @@ export default class extends Component {
                   blurToSave: true,
                   afterSaveCell: (oldValue, newValue, row, column) => {
                     if (String(oldValue) !== String(newValue))
-                      postCrudEdit(this, row);
+                      postCrudTableEdit(this, row);
                   }
                 })}
                 selectRow={{

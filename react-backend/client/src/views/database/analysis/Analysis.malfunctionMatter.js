@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { Polar } from "react-chartjs-2";
-import { postAnalysisMalfunctionData } from "../../../controllers/axios.controller";
+import { postAnalysisMalfunctionData } from "../../../controllers/Analysis.malfunctionMatter.controller";
 
 export default class extends PureComponent {
   constructor(props) {

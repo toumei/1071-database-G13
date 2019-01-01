@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
 
 import { AnalysisMain } from "../../../router";
-import { postAnalysisTableData } from "../../../controllers/axios.controller";
+import { postAnalysisTableData } from "../../../controllers/Analysis.controller";
 
 export default class extends PureComponent {
   constructor(props) {

@@ -23,5 +23,6 @@ router.post("/AnalysisSum", dbCtrlController.postSum);
 router.post("/AnalysisRepair", dbCtrlController.postAnalysisRepair);
 router.post("/AnalysisMalfunction", dbCtrlController.postAnalysisMalfunction);
 router.post("/AnalysisProcessing", dbCtrlController.postAnalysisProcessing);
+router.post("/AnalysisCabinet", dbCtrlController.postAnalysisCabinet);
 
 module.exports = router;

@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { Bar } from "react-chartjs-2";
-import { postAnalysisRepairData } from "../../../controllers/axios.controller";
+import { postAnalysisRepairData } from "../../../controllers/Analysis.repair.controller";
 
 export default class extends PureComponent {
   constructor(props) {

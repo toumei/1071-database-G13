@@ -104,4 +104,15 @@ module.exports = class Product {
         "'  GROUP BY result;"
     );
   }
+
+  static fetchAnalysisCabinet(day1, day2) {
+    return db.query(
+      "SELECT value FROM _coloption WHERE name = 'result';\
+      SELECT result, COUNT(*) FROM processing WHERE date > '" +
+        day2 +
+        "' AND date < '" +
+        day1 +
+        "'  GROUP BY result;"
+    );
+  }
 };

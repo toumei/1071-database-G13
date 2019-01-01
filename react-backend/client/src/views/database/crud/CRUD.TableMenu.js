@@ -5,7 +5,7 @@ import { CrudTableMenuColumns } from "../../../models/CRUD.TableMenu.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 // controller
-import { postCrudTableMenuData } from "../../../controllers/axios.controller";
+import { postCrudTableMenuData } from "../../../controllers/CRUD.TableMenu.controller";
 
 export default class extends PureComponent {
   constructor(props) {

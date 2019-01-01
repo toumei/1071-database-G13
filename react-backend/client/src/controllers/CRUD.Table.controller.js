@@ -1,9 +1,19 @@
 // controller
-import { postCrudAdd, postCrudDelete, postCrudEdit } from "./axios.controller";
+import axios from "axios";
+
+// model
+import { decrypt } from "../models/crypt.model";
+import { url } from "../models/axios.model";
+import {
+  CrudTableColumns,
+  CrudTableDeleteColumns,
+  CrudTableFormColumns,
+  CrudTableModeColumns
+} from "../models/CRUD.Table.model";
 
 // table nav add
 export function handleAddItem(bind, row) {
-  postCrudAdd(bind, row);
+  postCrudTableAdd(bind, row);
 }
 
 // table select
@@ -34,7 +44,7 @@ export function handleDeleteItem(bind, row, isBottom, info) {
     bind.setState({ data: newData });
   } else {
     info += "成功刪除ID:" + row.ID + "<br />";
-    postCrudDelete(bind, row, info);
+    postCrudTableDelete(bind, row, info);
   }
 }
 
@@ -44,13 +54,13 @@ export function getItem(bind, row) {
 }
 
 export function deleteItem(bind, row) {
-  postCrudDelete(bind, row, "成功刪除ID:" + row.ID);
+  postCrudTableDelete(bind, row, "成功刪除ID:" + row.ID);
   bind.setState({ data: bind.state.data.filter((x, i) => x !== row) });
 }
 
 // table edit
 export function editItem(bind, row) {
-  postCrudEdit(bind, row, "成功編輯ID:" + row.ID);
+  postCrudTableEdit(bind, row, "成功編輯ID:" + row.ID);
   bind.state.data.filter((x, i) => {
     if (x === bind.state.itemData[0]) {
       const data = bind.state.data;
@@ -128,4 +138,96 @@ export function editForm(bind) {
   for (let i = 1; i < newColumns.length - 1; i++) {
     document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value = "";
   }
+}
+
+export function postCrudTableColumns(bind) {
+  axios
+    .post(url + "dbCtrl/ColumnList?table=" + bind.state.table)
+    .then(res => {
+      let columns = [];
+      let deleteColumns = [];
+      let formColumns = [];
+      decrypt(res.data).forEach(elm => {
+        columns.push(CrudTableColumns(bind, elm)[0]);
+        deleteColumns.push(CrudTableDeleteColumns(elm)[0]);
+        formColumns.push(CrudTableFormColumns(elm)[0]);
+      });
+      columns.push(CrudTableModeColumns(bind)[0]);
+      bind.setState({
+        columns: columns,
+        deleteColumns: deleteColumns,
+        formColumns: formColumns
+      });
+    })
+    .catch();
+}
+
+export function postCrudTableData(bind) {
+  axios
+    .post(url + "dbCtrl/List?table=" + bind.state.table)
+    .then(res => {
+      bind.setState({ data: decrypt(res.data) });
+    })
+    .catch();
+}
+
+export function postCrudTableEdit(bind, row, info = "") {
+  if (row.date !== undefined) {
+    row.date = row.date.split(".")[0];
+  }
+  axios
+    .post(url + "dbCtrl/update", {
+      table: bind.state.table,
+      row: row
+    })
+    .then(res => {})
+    .catch();
+  if (info !== "")
+    handleInfo(bind, {
+      title: "警告",
+      content: info,
+      cancel: false
+    });
+}
+
+export function postCrudTableDelete(bind, row, info) {
+  axios
+    .post(url + "dbCtrl/delete", {
+      table: bind.state.table,
+      id: row.ID
+    })
+    .catch();
+  handleInfo(bind, {
+    title: "警告",
+    content: info,
+    cancel: false
+  });
+}
+
+export function postCrudTableAdd(bind, row) {
+  axios
+    .post(url + "dbCtrl/add", { table: bind.state.table, row: row })
+    .then(res => {
+      row["ID"] = res.data.id;
+      bind.setState({ data: [...bind.state.data, row] });
+    })
+    .catch();
+  handleInfo(bind, {
+    title: "警告",
+    content: "新增成功",
+    cancel: false
+  });
+}
+
+export async function postCrudSearch(bind, search, id, callback) {
+  await axios
+    .post(url + "dbCtrl/searchColumnID", {
+      table: bind.state.table,
+      search: search,
+      id: id
+    })
+    .then(res => {
+      callback(decrypt(res.data));
+    })
+    .catch();
 }

@@ -4,7 +4,7 @@ import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import {
   postCSVTableColumns,
   postCSVTableData
-} from "../../../controllers/axios.controller";
+} from "../../../controllers/CSV.controller";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 export default class extends PureComponent {

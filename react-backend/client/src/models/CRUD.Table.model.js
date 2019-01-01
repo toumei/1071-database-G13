@@ -3,8 +3,7 @@ import React from "react";
 import { customColumn, columnWidth } from "./state.model";
 import { type } from "./react-bootstrap.model";
 
-import { getItem } from "../controllers/CRUD.Table.controller";
-import { postCrudSearch } from "../controllers/axios.controller";
+import { getItem, postCrudSearch } from "../controllers/CRUD.Table.controller";
 
 const valid = {
   PK: (bind, newValue, row, column, done) => {

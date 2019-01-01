@@ -5,7 +5,7 @@ import {
   postCtrlTableColumns,
   postCtrlTableData,
   postCtrlEdit
-} from "../../../controllers/axios.controller";
+} from "../../../controllers/Control.controller";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 export default class extends PureComponent {
