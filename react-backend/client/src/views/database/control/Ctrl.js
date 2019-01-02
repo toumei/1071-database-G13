@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 // bootstrap
 import cellEditFactory from "react-bootstrap-table2-editor";
@@ -13,7 +13,7 @@ import {
 // model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,7 +57,7 @@ export default class extends PureComponent {
                         row.value = "NONE";
                       }
                     }
-                    postCtrlEdit(row);
+                    postCtrlEdit(this, row);
                   }
                 }
               })}

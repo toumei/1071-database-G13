@@ -34,15 +34,6 @@ module.exports = {
       .fetchAll(req.body.table)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
-        // 包裹在裡面的json格式需要經過處裡
-        if (req.body.table === "_coloption") {
-          data.filter((x, i) => {
-            if (x.type === "SELECT") {
-              x.value = JSON.stringify(x.value);
-            }
-            return x.name !== "ID";
-          });
-        }
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
@@ -180,16 +171,6 @@ module.exports = {
 
   // update
   postUpdate: (req, res) => {
-    if (req.body.table === "_coloption") {
-      // 包裹在裡面的json格式需要經過處裡
-      if (req.body.row.type !== "SELECT") {
-        req.body.row.value = JSON.stringify(req.body.row.value);
-      }
-    } else {
-      if (req.body.row.date !== undefined) {
-        req.body.row.date = req.body.row.date.split(".")[0];
-      }
-    }
     log.databaseMsg(req, "receive", req.body);
     databaseModel
       .update(req.body.table, req.body.row, req.body.row.ID)

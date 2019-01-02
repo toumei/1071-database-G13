@@ -37,19 +37,34 @@ export const postCtrlData = bind => {
     .post(database + "List", data)
     .then(res => {
       CtrlMsg("postCtrlData", "result", decrypt(res.data));
+      // 包裹在裡面的json格式需要經過處裡
       bind.setState({
-        data: decrypt(res.data)
+        data: decrypt(res.data).filter((x, i) => {
+          if (x.type === "SELECT") {
+            x.value = JSON.stringify(x.value);
+          }
+          return x.name !== "ID";
+        })
       });
     })
     .catch();
 };
 
-export const postCtrlEdit = row => {
+export const postCtrlEdit = (bind, row) => {
+  // 包裹在裡面的json格式需要經過處裡
+  if (row.type !== "SELECT") {
+    row.value = JSON.stringify(row.value);
+  }
   const data = { table: "_coloption", row: row };
   CtrlMsg("postCtrlEdit", "send", data);
   axios
     .post(database + "update", data)
     .then(res => {
+      // data會被動到，因此要還原
+      if (row.type !== "SELECT") {
+        row.value = JSON.parse(row.value);
+        bind.setState({ data: bind.state.data });
+      }
       CtrlMsg("postCtrlEdit", "result", decrypt(res.data));
     })
     .catch();

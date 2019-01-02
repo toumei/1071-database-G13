@@ -173,13 +173,18 @@ export function postCrudTableData(bind) {
     .catch();
 }
 
-export function postCrudTableEdit(bind, row, info = "") {
+export const postCrudTableEdit = (bind, row, info = "") => {
+  if (row.date !== undefined) {
+    row.date = row.date.split(".")[0];
+  }
   axios
-    .post(database + "update", {
-      table: bind.state.table,
-      row: row
+    .post(database + "update", { table: bind.state.table, row: row })
+    .then(res => {
+      if (row.date !== undefined) {
+        row.date = row.date + ".000Z";
+        bind.setState({ data: bind.state.data });
+      }
     })
-    .then(res => {})
     .catch();
   if (info !== "")
     handleInfo(bind, {
@@ -187,7 +192,7 @@ export function postCrudTableEdit(bind, row, info = "") {
       content: info,
       cancel: false
     });
-}
+};
 
 export function postCrudTableDelete(bind, row, info) {
   axios
