@@ -5,9 +5,10 @@ module.exports = {
     console.log(err);
   },
 
-  msg: (req, msg) => {
+  databaseMsg: (req, method, msg) => {
     if (databaseLog) {
       console.log(req.route.stack[0].handle);
+      console.log("Method: " + method);
       console.log(msg);
       console.log();
     }

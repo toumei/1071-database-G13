@@ -27,7 +27,6 @@ router.post("/AnalysisCabinet", dbCtrlController.postAnalysisCabinet);
 
 // update
 router.post("/update", dbCtrlController.postUpdate);
-router.post("/CtrlUpdate", dbCtrlController.postCtrlUpdate);
 
 // delete
 router.post("/delete", dbCtrlController.postDelete);

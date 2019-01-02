@@ -5,10 +5,10 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 
 // controller
 import {
+  postCtrlData,
   postCtrlEdit,
-  postCtrlTableData,
-  postCtrlTableColumns
-} from "../../../controllers/Control.controller";
+  postCtrlColumns
+} from "../../../controllers/Ctrl.controller";
 
 // model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
@@ -23,12 +23,14 @@ export default class extends PureComponent {
     document.title = "資料庫";
   }
 
+  // 載入欄位與資料
   componentDidMount() {
-    postCtrlTableColumns(this);
-    postCtrlTableData(this);
+    postCtrlColumns(this);
+    postCtrlData(this);
   }
 
   render() {
+    // 空欄位時，bootstrap table會讀取失敗
     if (this.state.columns.length > 0) {
       return (
         <div className="row justify-content-center">
@@ -43,7 +45,9 @@ export default class extends PureComponent {
                 mode: "click",
                 blurToSave: true,
                 afterSaveCell: (oldValue, newValue, row) => {
+                  // 預防非字串與字串內容相等卻更新
                   if (String(oldValue) !== String(newValue)) {
+                    // 當type變更時，value將會被預設
                     if (newValue === row.type) {
                       if (row.type === "SELECT") {
                         row.value = JSON.stringify([]);
@@ -52,8 +56,8 @@ export default class extends PureComponent {
                       } else {
                         row.value = "NONE";
                       }
-                      postCtrlEdit(row);
                     }
+                    postCtrlEdit(row);
                   }
                 }
               })}

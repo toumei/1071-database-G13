@@ -6,107 +6,116 @@ const databaseModel = require("../models/database.model");
 module.exports = {
   // create
   postAdd: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .insert(req.body.table, req.body.row)
       .then(([data]) => {
-        log.msg(req, data);
-        res.send({ id: data.insertId });
+        log.databaseMsg(req, "send", data);
+        res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   // read
   postColumnsMsgList: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .fetchColumnsMsgAll(req.body.table)
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postList: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .fetchAll(req.body.table)
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
+        // 包裹在裡面的json格式需要經過處裡
+        if (req.body.table === "_coloption") {
+          data.filter((x, i) => {
+            if (x.type === "SELECT") {
+              x.value = JSON.stringify(x.value);
+            }
+            return x.name !== "ID";
+          });
+        }
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postTableList: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .fetchTableAll()
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postCSVList: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .fetchCSVAll()
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postColumnList: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .fetchColumnAll(req.body.table)
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postSearch: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .fetchAll(req.body.table)
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postSearchColumnID: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .fetchByColumnId(req.body.table, req.body.search, req.body.id)
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postSum: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .fetchSum()
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postAnalysisRepair: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     let Day1 = new Date();
     let Day2 = new Date(Day1);
     Day2.setMonth(Day2.getMonth() - 11);
@@ -115,14 +124,14 @@ module.exports = {
     databaseModel
       .fetchAnalysisRepair(day1, day2)
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postAnalysisMalfunction: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     let Day1 = new Date();
     let Day2 = new Date(Day1);
     Day2.setMonth(Day2.getMonth() - 1);
@@ -131,14 +140,14 @@ module.exports = {
     databaseModel
       .fetchAnalysisMalfunction(day1, day2)
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postAnalysisProcessing: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     let Day1 = new Date();
     let Day2 = new Date(Day1);
     Day2.setMonth(Day2.getMonth() - 1);
@@ -147,14 +156,14 @@ module.exports = {
     databaseModel
       .fetchAnalysisProcessing(day1, day2)
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   postAnalysisCabinet: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     let Day1 = new Date();
     let Day2 = new Date(Day1);
     Day2.setMonth(Day2.getMonth() - 1);
@@ -163,7 +172,7 @@ module.exports = {
     databaseModel
       .fetchAnalysisCabinet(day1, day2)
       .then(([data]) => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
@@ -171,39 +180,34 @@ module.exports = {
 
   // update
   postUpdate: (req, res) => {
-    log.msg(req, req.body);
-    if (req.body.row.date !== undefined) {
-      req.body.row.date = req.body.row.date.split(".")[0];
+    if (req.body.table === "_coloption") {
+      // 包裹在裡面的json格式需要經過處裡
+      if (req.body.row.type !== "SELECT") {
+        req.body.row.value = JSON.stringify(req.body.row.value);
+      }
+    } else {
+      if (req.body.row.date !== undefined) {
+        req.body.row.date = req.body.row.date.split(".")[0];
+      }
     }
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .update(req.body.table, req.body.row, req.body.row.ID)
       .then(data => {
-        log.msg(req, data);
-      })
-      .catch(err => log.error(err));
-  },
-
-  postCtrlUpdate: (req, res) => {
-    if (req.body.row.type !== "SELECT") {
-      req.body.row.value = JSON.stringify(req.body.row.value);
-    }
-    log.msg(req, req.body);
-    databaseModel
-      .fetchColumnAll(req.body.table)
-      .then(([data]) => {
-        log.msg(req, data);
-        res.send({ id: data.insertId });
+        log.databaseMsg(req, "send", data);
+        res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   },
 
   // delete
   postDelete: (req, res) => {
-    log.msg(req, req.body);
+    log.databaseMsg(req, "receive", req.body);
     databaseModel
       .delete(req.body.table, req.body.id)
       .then(data => {
-        log.msg(req, data);
+        log.databaseMsg(req, "send", data);
+        res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
   }

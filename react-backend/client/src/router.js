@@ -17,7 +17,7 @@ import Apply from "./views/database/analysis/Analysis.apply";
 
 import CRUD from "./views/database/crud/CRUD";
 import CSV from "./views/database/csv/CSV";
-import Control from "./views/database/control/Control";
+import Control from "./views/database/control/Ctrl";
 
 import Malfunction from "./views/repair/Malfunction";
 import Processing from "./views/repair/Processing";

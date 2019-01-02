@@ -332,7 +332,9 @@ export class Select extends PureComponent {
       let option = [];
       for (let i = 0; i < options.length; i++) {
         option.push(
-          <option value={options[i].value}>{options[i].label}</option>
+          <option key={i} value={options[i].value}>
+            {options[i].label}
+          </option>
         );
       }
       return option;

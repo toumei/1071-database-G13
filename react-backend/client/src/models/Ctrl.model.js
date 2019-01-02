@@ -11,6 +11,7 @@ import {
   customColumns
 } from "./react-bootstrap.model";
 
+// 設定欄位要哪種輸入框
 export const columnsType = {
   ID: { editable: true, editorType: "TEXT", editorValue: "" },
   name: { editable: false, editorType: "TEXT", editorValue: "" },
@@ -29,19 +30,20 @@ export const columnsType = {
   value: { editable: true, editorType: "TEXTAREA", editorValue: "" }
 };
 
-export const CtrlTableColumns = (elm, editable, editorType, editorValue) => {
+export const CtrlColumns = (elm, editable, editorType, editorValue) => {
   return {
     ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"]),
     editable: editable,
     headerStyle: { cursor: "pointer", ...columnsWidth(elm) },
     style: {
       cursor: "default",
+      // 當文字超出框時顯示"..."
       wordBreak: "keep-all",
       display: elm["COLUMN_NAME"] === "value" ? "-webkit-box" : "",
-      WebkitBoxOrient: "vertical",
       WebkitLineClamp: 1,
       overflow: "hidden",
-      textOverflow: "ellipsis"
+      textOverflow: "ellipsis",
+      WebkitBoxOrient: "vertical"
     },
     editor: {
       type: editorType !== "DATETIME" ? type[editorType] : undefined,
