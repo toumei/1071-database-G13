@@ -26,41 +26,39 @@ export default class extends PureComponent {
   render() {
     if (this.state.columns.length > 0) {
       return (
-        <div className="container-fluid">
-          <div className="row justify-content-md-center">
-            <div className="col-md-11">
-              <ToolkitProvider
-                keyField="ID"
-                columns={this.state.columns}
-                data={this.state.data}
-                exportCSV={{
-                  fileName: "報修系統.csv",
-                  onlyExportSelection: true,
-                  exportAll: true
-                }}
-              >
-                {props => (
-                  <div>
-                    <div className="row justify-content-md-center">
-                      <div className="col-5 col-md-1">
-                        <AllExportCSV {...props.csvProps} bind={this} />
-                      </div>
-                      <div className="col-1 col-md-1" />
-                      <div className="col-5 col-md-1">
-                        <SelectExportCSV {...props.csvProps} />
-                      </div>
+        <div className="row justify-content-md-center">
+          <div className="col-md-11">
+            <ToolkitProvider
+              keyField="ID"
+              columns={this.state.columns}
+              data={this.state.data}
+              exportCSV={{
+                fileName: "報修系統.csv",
+                onlyExportSelection: true,
+                exportAll: true
+              }}
+            >
+              {props => (
+                <div>
+                  <div className="row justify-content-md-center">
+                    <div className="col-5 col-md-1">
+                      <AllExportCSV {...props.csvProps} bind={this} />
                     </div>
-                    <hr />
-                    <CustomBootstrap
-                      base={{ ...props.baseProps }}
-                      selectRow={{ mode: "checkbox", clickToSelect: true }}
-                      pagination={this.state.data.length === 0 ? false : true}
-                      refs={n => (this.node = n)}
-                    />
+                    <div className="col-1 col-md-1" />
+                    <div className="col-5 col-md-1">
+                      <SelectExportCSV {...props.csvProps} />
+                    </div>
                   </div>
-                )}
-              </ToolkitProvider>
-            </div>
+                  <hr />
+                  <CustomBootstrap
+                    base={{ ...props.baseProps }}
+                    selectRow={{ mode: "checkbox", clickToSelect: true }}
+                    pagination={this.state.data.length === 0 ? false : true}
+                    refs={n => (this.node = n)}
+                  />
+                </div>
+              )}
+            </ToolkitProvider>
           </div>
         </div>
       );

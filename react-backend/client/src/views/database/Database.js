@@ -12,7 +12,9 @@ export default class extends PureComponent {
     return (
       <div>
         <DBNavbar path={this.props.location.pathname} />
-        <DBMain />
+        <div className="container-fluid">
+          <DBMain />
+        </div>
       </div>
     );
   }

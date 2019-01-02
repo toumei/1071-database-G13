@@ -1,9 +1,9 @@
-import { customColumn, columnWidth } from "./state.model";
+import { customColumns, columnsWidth } from "./react-bootstrap.model";
 
 export const CSVTableColumns = elm => [
   {
-    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
-    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
+    ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true),
+    headerStyle: { cursor: "pointer", ...columnsWidth(elm) },
     style: { cursor: "default" },
     csvExport: elm["COLUMN_NAME"] === "ID" ? false : true
   }

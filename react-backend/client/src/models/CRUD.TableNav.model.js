@@ -1,6 +1,6 @@
 import React from "react";
 
-import { customColumn, columnWidth } from "./state.model";
+import { customColumns, columnsWidth } from "./react-bootstrap.model";
 
 import { cancelDelete } from "../controllers/CRUD.TableNav.controller";
 
@@ -10,19 +10,19 @@ export function TableNavColumns(bind, props) {
   newColumns.forEach((elm, i) => {
     if (i !== newColumns.length) {
       columns.push({
-        ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
-        headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] }
+        ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true),
+        headerStyle: { cursor: "pointer", ...columnsWidth(elm) }
       });
     }
   });
 
-  columns.push(TableNavModeColumns(bind)[0]);
+  columns.push(TableNavModeColumns(bind));
   return columns;
 }
 
-export const TableNavModeColumns = bind => [
-  {
-    ...customColumn("action", "操作")[0],
+export const TableNavModeColumns = bind => {
+  return {
+    ...customColumns("action", "操作"),
     isDummyField: true,
     formatter: (cell, row) => (
       <div className="btn-group">
@@ -38,5 +38,5 @@ export const TableNavModeColumns = bind => [
     ),
     editable: false,
     headerStyle: { minWidth: "5rem" }
-  }
-];
+  };
+};
