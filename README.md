@@ -47,12 +47,13 @@
   * https server：https://localhost:port
   * 將 三層架構 調整為 Model–view–controller (MVC)
   * EJS 模組化(pages、partials)
-  * 登入系統(email, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
+  * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發，不熟研究中
+  * epilogue：可快速架構具有 RESTful 風的 CRUD API server
+  * 登入系統(id, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
 * client (express)
-  * Ajax 紀錄回傳token
-  * Axios攔截器尚未測試(server端無法跑)，若token失效則重新導向login
+  * Axios攔截器
 * client (react)
   * router 配置完成 (不包含之後新增)
   * server-client 資料加解密
@@ -61,13 +62,8 @@
 
 ### 正在做的部分：
 * sever
-  * epilogue：可快速架構具有 RESTful 風的 CRUD API server，但不支援 ACL，需另外編寫
-  * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發
-    * 將資料庫的內容映射為物件，讓程式開發人員可以用操作物件的方式對資料庫進行操作，而不直接使用SQL語法對資料庫進行操作。
-    * 例如： TableName.findAll().then(data => res.json(data))
-  * 帳戶權限系統：acl、node_acl、rbac
-    * 登入時判斷身份為 一般使用者 、 工作人員 、 DB管理員，切換至不同的使用頁面。
-    * ![account database design](https://i.stack.imgur.com/JVE4x.png)
+  * 帳戶權限系統：express-acl，還沒測試完全
+    * 登入時判斷身份為 user、worker、admin、DB_admin，切換至不同的使用頁面。
 
 * client (express)
 
