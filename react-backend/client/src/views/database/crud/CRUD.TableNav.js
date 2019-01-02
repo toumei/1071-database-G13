@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 
 // model
-import { CustoModal } from "../../../models/bootstrap.model";
+import { CustoModal } from "../../../models/custom.model";
 import { TableNavColumns } from "../../../models/CRUD.TableNav.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 

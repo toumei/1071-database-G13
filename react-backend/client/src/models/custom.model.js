@@ -54,7 +54,9 @@ export const CustomLink = ({
   active,
   activeOptions = [],
   to,
-  content
+  content,
+  dataToggle = "",
+  click = undefined
 }) => (
   <Link
     className={
@@ -64,6 +66,8 @@ export const CustomLink = ({
         : "")
     }
     to={to}
+    data-toggle={dataToggle}
+    onClick={click}
   >
     {content}
   </Link>
@@ -88,12 +92,16 @@ export const CustomActiveClickLink = props => (
   <CustomLink
     {...props}
     className="nav-link "
-    onClick={() => {
+    click={() => {
       const navbarBtn = document.getElementById("navbarBtn");
       if (navbarBtn.getAttribute("class") === "navbar-toggler")
         navbarBtn.click();
     }}
   />
+);
+
+export const CustomActiveDropdownClickLink = props => (
+  <CustomLink {...props} className="nav-link dropdown-toggle " />
 );
 
 export const CustomActiveBtnLink = props => (

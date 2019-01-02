@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react";
-import { Link } from "react-router-dom";
 
 import { Main } from "../router";
 
 import logo from "../logo.svg";
 import {
   CustomActiveClickLink,
+  CustomActiveDropdownClickLink,
   CustomClickLink
-} from "../models/bootstrap.model";
+} from "../models/custom.model";
 
 export default class extends PureComponent {
   constructor(props) {
@@ -94,16 +94,13 @@ const NavItem = ({ title }) => (
 
     <ul className="navbar-nav ml-auto">
       <li className="nav-item dropdown">
-        <Link
-          className={
-            "nav-link dropdown-toggle " +
-            (title === "個人資料" || title === "設定" ? "active show" : "")
-          }
-          data-toggle="dropdown"
+        <CustomActiveDropdownClickLink
+          active={title}
+          activeOptions={["個人資料", "設定"]}
           to="/user"
-        >
-          <i className="fas fa-user" /> 歡迎 Brad
-        </Link>
+          dataToggle="dropdown"
+          content={<i className="fas fa-user"> 歡迎 Brad</i>}
+        />
         <div className="dropdown-menu" style={{ borderRadius: "1em" }}>
           <CustomClickLink
             className="dropdown-item"

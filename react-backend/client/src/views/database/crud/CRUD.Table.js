@@ -5,7 +5,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
 
 // model
-import { CustoModal } from "../../../models/bootstrap.model";
+import { CustoModal } from "../../../models/custom.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 // view

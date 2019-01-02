@@ -4,7 +4,7 @@ import React, { PureComponent } from "react";
 import { DBMain } from "../../router";
 
 // model
-import { CustomActiveClickLink } from "../../models/bootstrap.model";
+import { CustomActiveClickLink } from "../../models/custom.model";
 
 // default program
 export default class extends PureComponent {

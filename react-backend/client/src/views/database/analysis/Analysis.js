@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 
 import { AnalysisMain } from "../../../router";
 import { postAnalysisTableData } from "../../../controllers/Analysis.controller";
-import { CustomActiveBtnLink } from "../../../models/bootstrap.model";
+import { CustomActiveBtnLink } from "../../../models/custom.model";
 
 export default class extends PureComponent {
   constructor(props) {
