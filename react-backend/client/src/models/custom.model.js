@@ -61,7 +61,9 @@ export const CustomLink = ({
   <Link
     className={
       className +
-      (active === to || activeLink(active, activeOptions) ? "active show" : "")
+      (active === to || active === content || activeLink(active, activeOptions)
+        ? "active show"
+        : "")
     }
     to={to}
     data-toggle={dataToggle}

@@ -12,7 +12,7 @@ export function postAnalysisTableData(bind) {
       let dataList = [];
       for (let i = 0; i < newData.length; i++) {
         dataList[i] = 0;
-        dataList[i] = newData[i][0]["COUNT(*)"];
+        // dataList[i] = newData[i][0]["COUNT(*)"];
       }
       bind.setState({ sum: dataList });
     })

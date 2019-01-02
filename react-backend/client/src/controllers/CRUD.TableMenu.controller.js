@@ -11,7 +11,7 @@ export function postCrudTableMenuData(bind) {
     .then(res => {
       let data = [];
       decrypt(res.data).forEach(elm => {
-        if (elm["TABLE_NAME"][0] !== "_") data.push(CrudTableMenuData(elm));
+        if (elm["TABLE_NAME"][0] !== "_") data.push(CrudTableMenuData(elm)[0]);
       });
       bind.setState({ data: data });
     })

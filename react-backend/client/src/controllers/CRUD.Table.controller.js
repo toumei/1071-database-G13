@@ -148,11 +148,11 @@ export function postCrudTableColumns(bind) {
       let deleteColumns = [];
       let formColumns = [];
       decrypt(res.data).forEach(elm => {
-        columns.push(CrudTableColumns(bind, elm));
-        deleteColumns.push(CrudTableDeleteColumns(elm));
-        formColumns.push(CrudTableFormColumns(elm));
+        columns.push(CrudTableColumns(bind, elm)[0]);
+        deleteColumns.push(CrudTableDeleteColumns(elm)[0]);
+        formColumns.push(CrudTableFormColumns(elm)[0]);
       });
-      columns.push(CrudTableModeColumns(bind));
+      columns.push(CrudTableModeColumns(bind)[0]);
       bind.setState({
         columns: columns,
         deleteColumns: deleteColumns,
@@ -172,6 +172,9 @@ export function postCrudTableData(bind) {
 }
 
 export function postCrudTableEdit(bind, row, info = "") {
+  if (row.date !== undefined) {
+    row.date = row.date.split(".")[0];
+  }
   axios
     .post(database + "update", {
       table: bind.state.table,

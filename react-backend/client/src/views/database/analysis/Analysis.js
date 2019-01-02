@@ -18,21 +18,23 @@ export default class extends PureComponent {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-2">
-          <AnalysisCardLeft
-            path={this.props.location.pathname}
-            sum={this.state.sum}
-          />
-        </div>
-        <div className="col-md-8">
-          <AnalysisMain />
-        </div>
-        <div className="col-md-2">
-          <AnalysisCardRight
-            path={this.props.location.pathname}
-            sum={this.state.sum}
-          />
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-2">
+            <AnalysisCardLeft
+              path={this.props.location.pathname}
+              sum={this.state.sum}
+            />
+          </div>
+          <div className="col-md-8">
+            <AnalysisMain />
+          </div>
+          <div className="col-md-2">
+            <AnalysisCardRight
+              path={this.props.location.pathname}
+              sum={this.state.sum}
+            />
+          </div>
         </div>
       </div>
     );
