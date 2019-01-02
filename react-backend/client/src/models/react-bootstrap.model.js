@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 
-// bootstrap
 import { Type } from "react-bootstrap-table2-editor";
+
+// bootstrap
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 
@@ -391,10 +392,10 @@ export const CustomBootstrap = ({
   />
 );
 
-// 沒有資料時，則顯示此訊息
+// no data
 const NoData = () => <div className="text-center">尚未有資料</div>;
 
-// 分頁進階設定
+// page進階設定
 const pageOptions = {
   paginationSize: 10,
   sizePerPageList: [

@@ -174,6 +174,9 @@ export function postCrudTableData(bind) {
 }
 
 export function postCrudTableEdit(bind, row, info = "") {
+  if (row.date !== undefined) {
+    row.date = row.date.split(".")[0];
+  }
   axios
     .post(database + "update", {
       table: bind.state.table,

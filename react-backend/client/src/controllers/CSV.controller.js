@@ -22,7 +22,7 @@ export function postCSVTableColumns(bind) {
   ];
   let columns = [];
   data.forEach(elm => {
-    columns.push(CSVTableColumns(elm)[0]);
+    columns.push(CSVTableColumns(elm));
   });
   bind.setState({
     columns: columns

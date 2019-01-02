@@ -14,27 +14,6 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postSearch: (req, res, next) => {
-    databaseModel
-      .fetchById(req.body.table, req.body.id)
-      .then(([data]) => {
-        log.msg(req, data);
-        res.send(cryptModel.encrypt(data));
-      })
-      .catch(err => log.error(err));
-  },
-
-  postSearchColumnID: (req, res, next) => {
-    databaseModel
-      .fetchByColumnId(req.body.table, req.body.search, req.body.id)
-      .then(([data]) => {
-        log.msg(req, data);
-        res.send(cryptModel.encrypt(data));
-      })
-      .catch(err => log.error(err));
-  },
-
-  // 取得欄位名稱和備註
   postColumnsMsgList: (req, res) => {
     log.msg(req, req.body);
     databaseModel
@@ -79,6 +58,26 @@ module.exports = {
   postColumnList: (req, res, next) => {
     databaseModel
       .fetchColumnAll(req.body.table)
+      .then(([data]) => {
+        log.msg(req, data);
+        res.send(cryptModel.encrypt(data));
+      })
+      .catch(err => log.error(err));
+  },
+
+  postSearch: (req, res, next) => {
+    databaseModel
+      .fetchAll(req.body.table)
+      .then(([data]) => {
+        log.msg(req, data);
+        res.send(cryptModel.encrypt(data));
+      })
+      .catch(err => log.error(err));
+  },
+
+  postSearchColumnID: (req, res, next) => {
+    databaseModel
+      .fetchByColumnId(req.body.table, req.body.search, req.body.id)
       .then(([data]) => {
         log.msg(req, data);
         res.send(cryptModel.encrypt(data));
@@ -156,13 +155,7 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  // 更新欄位
   postUpdate: (req, res, next) => {
-    if (req.body.row.date !== undefined) {
-      // 日期去除.000Z
-      req.body.row.date = req.body.row.date.split(".")[0];
-    }
-    log.msg(req, req.body);
     databaseModel
       .update(req.body.table, req.body.row, req.body.row.ID)
       .then(data => {
@@ -176,9 +169,10 @@ module.exports = {
       req.body.row.value = JSON.stringify(req.body.row.value);
     }
     databaseModel
-      .update("_coloption", req.body.row, req.body.row.ID)
-      .then(data => {
+      .fetchColumnAll(req.body.table)
+      .then(([data]) => {
         log.msg(req, data);
+        res.send({ id: data.insertId });
       })
       .catch(err => log.error(err));
   },

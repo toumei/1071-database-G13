@@ -34,14 +34,7 @@ export const CtrlTableColumns = (elm, editable, editorType, editorValue) => {
     ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"]),
     editable: editable,
     headerStyle: { cursor: "pointer", ...columnsWidth(elm) },
-    style: {
-      cursor: "default",
-      overflow: "hidden",
-      display: elm["COLUMN_NAME"] === "value" ? "-webkit-box" : "",
-      WebkitBoxOrient: "vertical",
-      WebkitLineClamp: 1,
-      wordBreak: "keep-all"
-    },
+    style: { cursor: "default" },
     editor: {
       type: editorType !== "DATETIME" ? type[editorType] : undefined,
       options: editorType === "SELECT" ? editorValue : undefined

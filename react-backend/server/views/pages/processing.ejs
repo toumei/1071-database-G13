@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% path = '../partials/' %> <%- include(path + 'head') %>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <%- include(path + 'navbar') %>
+    <!-- HEADER -->
+    <%- include(path + 'header') %>
+
+    <!-- ACTIONS -->
+        <!-- POSTS -->
+        <section id="posts">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>All Posts</h4>
+                            </div>
+                            <table class="table table-striped">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>malfuntionID</th>
+                                        <th>studentID</th>
+                                        <th>BedNumber</th>
+                                        <th>date</th>
+                                        <th>matter</th>
+                                        <th>desc</th>
+                                        <th>time</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td>
+                                                123
+                                            </td>
+                                            <td>
+                                                1234
+                                            </td>
+                                            <td>
+                                                12345
+                                            </td>
+                                            <td>
+                                                123456
+                                            </td>
+                                            <td>
+                                                1234567
+                                            </td>
+                                            <td>
+                                                12345678
+                                            </td>
+                                            <td>
+                                                123456789
+                                            </td>
+                                            <td>
+                                                0123456789
+                                            </td>
+                                            <td>
+                                                <button value="Details" class="btn btn-secondary" >
+                                                    <i class="fas fa-angle-double-right"></i> Details
+                                                </button>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+    
+                            <!-- PAGINATION -->
+                            <nav class="ml-4">
+                                <ul class="pagination">
+                                    <li class="page-item disabled">
+                                        <a href="#" class="page-link">Previous</a>
+                                    </li>
+                                    <li class="page-item active">
+                                        <a href="#" class="page-link">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#" class="page-link">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#" class="page-link">3</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a href="#" class="page-link">Next</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- JavaScript -->
+    <%- include(path + 'JavaScript') %>
+  </body>
+</html>

@@ -1,38 +1,38 @@
 const db = require("../config/mysql2");
+const $sql = require("./mapper").database;
 
 module.exports = class Product {
+  constructor(id, name, price) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+  }
+
   static insert(table, sqlData) {
     return db.query("INSERT INTO " + table + " SET ?", sqlData);
   }
 
   static update(table, sqlData, id) {
-    return db.query("UPDATE " + table + " SET ? WHERE ID = ?;", [sqlData, id]);
+    return db.query("UPDATE " + table + $sql.update, [sqlData, id]);
   }
 
   static delete(table, id) {
-    return db.execute("DELETE FROM " + table + " WHERE ID = ?;", [id]);
+    return db.execute("DELETE FROM " + table + $sql.delete, [id]);
   }
 
   static fetchAll(table) {
-    return db.query("SELECT * FROM " + table);
+    return db.query($sql.fetchAll + table);
   }
   static fetchColumnAll(table) {
-    return db.query(
-      "select i.column_name, i.column_comment, o.type, o.value from information_schema.columns i, _coloption o where i.table_schema = 'res_net_cmms' and i.table_name = ? and i.column_name = o.name order by i.ordinal_position;",
-      [table]
-    );
+    return db.query($sql.fetchColumnAll, [table]);
   }
 
   static fetchTableAll() {
-    return db.query(
-      "select table_name, table_comment from information_schema.tables where table_schema = 'res_net_cmms';"
-    );
+    return db.query($sql.fetchTableAll);
   }
 
   static fetchCSVAll() {
-    return db.query(
-      "SELECT p.ID ID, p.result, e.name name_e, p.date date_p, p.detail, m.date date_m, m.bedNum, b.name name_b, m.time, m.matter, m.desc FROM processing p, employee e, malfunction m, boarder b WHERE p.employeeID = e.ID and p.ID = m.ID and m.ID = b.studentID;"
-    );
+    return db.query($sql.fetchCSVAll);
   }
 
   static fetchById(table, id) {
@@ -70,7 +70,7 @@ module.exports = class Product {
         "' AND date < '" +
         day1 +
         "' GROUP BY DATE_FORMAT(date, '%Y-%m') ORDER BY date ASC;\
-        SELECT DATE_FORMAT(m.date, '%m') month, COUNT(*) FROM malfunction m, processing p WHERE m.ID = p.ID AND m.date > '" +
+        SELECT DATE_FORMAT(m.date, '%m') month, COUNT(*) FROM malfunction m, processing p WHERE m.malfunctionID = p.malfunctionID AND m.date > '" +
         day2 +
         "' AND m.date < '" +
         day1 +

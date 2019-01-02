@@ -52,8 +52,8 @@ export default class extends PureComponent {
                       } else {
                         row.value = "NONE";
                       }
+                      postCtrlEdit(row);
                     }
-                    postCtrlEdit(row);
                   }
                 }
               })}

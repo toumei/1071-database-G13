@@ -1,6 +1,7 @@
 import React from "react";
 
-import { type, customColumns, columnsWidth } from "./react-bootstrap.model";
+import { customColumn, columnWidth } from "./state.model";
+import { type } from "./react-bootstrap.model";
 
 import { getItem, postCrudSearch } from "../controllers/CRUD.Table.controller";
 
@@ -148,11 +149,11 @@ const valid = {
   }
 };
 
-export const CrudTableColumns = (bind, elm) => {
-  return {
-    ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true),
+export const CrudTableColumns = (bind, elm) => [
+  {
+    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true)[0],
     editable: bind.state.editable,
-    headerStyle: { cursor: "pointer", ...columnsWidth(elm) },
+    headerStyle: { cursor: "pointer", ...columnWidth(elm)[0] },
     style: { cursor: "default" },
     editor: {
       type: elm["type"] !== "DATETIME" ? type[elm["type"]] : undefined,
@@ -167,12 +168,12 @@ export const CrudTableColumns = (bind, elm) => {
             return { async: true };
           }
         : undefined
-  };
-};
+  }
+];
 
-export const CrudTableModeColumns = bind => {
-  return {
-    ...customColumns("action", "操作"),
+export const CrudTableModeColumns = bind => [
+  {
+    ...customColumn("action", "操作")[0],
     isDummyField: true,
     formatter: (cell, row) => (
       <div className="btn-group">
@@ -200,20 +201,17 @@ export const CrudTableModeColumns = bind => {
     ),
     editable: false,
     headerStyle: { cursor: "default", minWidth: "5rem" }
-  };
-};
+  }
+];
 
-export const CrudTableDeleteColumns = elm => {
-  return {
-    ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"]),
-    headerStyle: columnsWidth(elm),
+export const CrudTableDeleteColumns = elm => [
+  {
+    ...customColumn(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"])[0],
+    headerStyle: columnWidth(elm)[0],
     style: { cursor: "default" }
-  };
-};
+  }
+];
 
-export const CrudTableFormColumns = elm => {
-  return {
-    COLUMN_NAME: elm["COLUMN_NAME"],
-    COLUMN_COMMENT: elm["COLUMN_COMMENT"]
-  };
-};
+export const CrudTableFormColumns = elm => [
+  { COLUMN_NAME: elm["COLUMN_NAME"], COLUMN_COMMENT: elm["COLUMN_COMMENT"] }
+];
