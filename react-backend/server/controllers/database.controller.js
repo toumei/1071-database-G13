@@ -4,7 +4,9 @@ const cryptModel = require("../models/crypt.model");
 const databaseModel = require("../models/database.model");
 
 module.exports = {
-  postAdd: (req, res, next) => {
+  // create
+  postAdd: (req, res) => {
+    log.msg(req, req.body);
     databaseModel
       .insert(req.body.table, req.body.row)
       .then(([data]) => {
@@ -14,6 +16,7 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
+  // read
   postColumnsMsgList: (req, res) => {
     log.msg(req, req.body);
     databaseModel
@@ -25,7 +28,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postList: (req, res, next) => {
+  postList: (req, res) => {
+    log.msg(req, req.body);
     databaseModel
       .fetchAll(req.body.table)
       .then(([data]) => {
@@ -35,7 +39,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postTableList: (req, res, next) => {
+  postTableList: (req, res) => {
+    log.msg(req, req.body);
     databaseModel
       .fetchTableAll()
       .then(([data]) => {
@@ -45,7 +50,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postCSVList: (req, res, next) => {
+  postCSVList: (req, res) => {
+    log.msg(req, req.body);
     databaseModel
       .fetchCSVAll()
       .then(([data]) => {
@@ -55,7 +61,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postColumnList: (req, res, next) => {
+  postColumnList: (req, res) => {
+    log.msg(req, req.body);
     databaseModel
       .fetchColumnAll(req.body.table)
       .then(([data]) => {
@@ -65,7 +72,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postSearch: (req, res, next) => {
+  postSearch: (req, res) => {
+    log.msg(req, req.body);
     databaseModel
       .fetchAll(req.body.table)
       .then(([data]) => {
@@ -75,7 +83,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postSearchColumnID: (req, res, next) => {
+  postSearchColumnID: (req, res) => {
+    log.msg(req, req.body);
     databaseModel
       .fetchByColumnId(req.body.table, req.body.search, req.body.id)
       .then(([data]) => {
@@ -85,7 +94,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postSum: (req, res, next) => {
+  postSum: (req, res) => {
+    log.msg(req, req.body);
     databaseModel
       .fetchSum()
       .then(([data]) => {
@@ -95,7 +105,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postAnalysisRepair: (req, res, next) => {
+  postAnalysisRepair: (req, res) => {
+    log.msg(req, req.body);
     let Day1 = new Date();
     let Day2 = new Date(Day1);
     Day2.setMonth(Day2.getMonth() - 11);
@@ -110,7 +121,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postAnalysisMalfunction: (req, res, next) => {
+  postAnalysisMalfunction: (req, res) => {
+    log.msg(req, req.body);
     let Day1 = new Date();
     let Day2 = new Date(Day1);
     Day2.setMonth(Day2.getMonth() - 1);
@@ -125,7 +137,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postAnalysisProcessing: (req, res, next) => {
+  postAnalysisProcessing: (req, res) => {
+    log.msg(req, req.body);
     let Day1 = new Date();
     let Day2 = new Date(Day1);
     Day2.setMonth(Day2.getMonth() - 1);
@@ -140,7 +153,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postAnalysisCabinet: (req, res, next) => {
+  postAnalysisCabinet: (req, res) => {
+    log.msg(req, req.body);
     let Day1 = new Date();
     let Day2 = new Date(Day1);
     Day2.setMonth(Day2.getMonth() - 1);
@@ -155,7 +169,12 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postUpdate: (req, res, next) => {
+  // update
+  postUpdate: (req, res) => {
+    log.msg(req, req.body);
+    if (req.body.row.date !== undefined) {
+      req.body.row.date = req.body.row.date.split(".")[0];
+    }
     databaseModel
       .update(req.body.table, req.body.row, req.body.row.ID)
       .then(data => {
@@ -164,10 +183,11 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postCtrlUpdate: (req, res, next) => {
+  postCtrlUpdate: (req, res) => {
     if (req.body.row.type !== "SELECT") {
       req.body.row.value = JSON.stringify(req.body.row.value);
     }
+    log.msg(req, req.body);
     databaseModel
       .fetchColumnAll(req.body.table)
       .then(([data]) => {
@@ -177,7 +197,9 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postDelete: (req, res, next) => {
+  // delete
+  postDelete: (req, res) => {
+    log.msg(req, req.body);
     databaseModel
       .delete(req.body.table, req.body.id)
       .then(data => {

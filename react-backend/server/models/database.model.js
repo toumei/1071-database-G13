@@ -1,24 +1,12 @@
 const db = require("../config/mysql2");
 
 module.exports = class Product {
-  constructor(id, name, price) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
-  }
-
+  // create
   static insert(table, sqlData) {
     return db.query("INSERT INTO " + table + " SET ?", sqlData);
   }
 
-  static update(table, sqlData, id) {
-    return db.query("UPDATE " + table + " SET ? WHERE ID = ?;", [sqlData, id]);
-  }
-
-  static delete(table, id) {
-    return db.execute("DELETE FROM " + table + " WHERE ID = ?;", [id]);
-  }
-
+  // read
   static fetchAll(table) {
     return db.query("SELECT * FROM " + table);
   }
@@ -122,5 +110,15 @@ module.exports = class Product {
       "select column_name, column_comment from information_schema.columns where table_schema = 'res_net_cmms' and table_name = ?;",
       [table]
     );
+  }
+
+  // update
+  static update(table, sqlData, id) {
+    return db.query("UPDATE " + table + " SET ? WHERE ID = ?;", [sqlData, id]);
+  }
+
+  // delete
+  static delete(table, id) {
+    return db.execute("DELETE FROM " + table + " WHERE ID = ?;", [id]);
   }
 };
