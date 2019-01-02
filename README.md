@@ -48,17 +48,16 @@
   * 將 三層架構 調整為 Model–view–controller (MVC)
   * EJS 模組化(pages、partials)
   * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發，不熟研究中
-  * epilogue：可快速架構具有 RESTful 風的 CRUD API server
+  * epilogue：架構具有 RESTful 風的 CRUD API server
   * 登入系統(id, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
-* client (express)
-  * Axios攔截器
 * client (react)
   * router 配置完成 (不包含之後新增)
   * server-client 資料加解密
   * CRUD 大致完成
   * MVC 配置大致完成
+  * Axios攔截器
 
 ### 正在做的部分：
 * sever
