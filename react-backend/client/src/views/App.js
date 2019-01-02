@@ -73,6 +73,7 @@ const NavItem = ({ title }) => (
       <li className="nav-item">
         <CustomActiveClickLink
           active={title}
+          activeOptions={["資料庫"]}
           to="/database"
           content={<i className="fas"> 資料庫</i>}
         />
@@ -80,6 +81,7 @@ const NavItem = ({ title }) => (
       <li className="nav-item">
         <CustomActiveClickLink
           active={title}
+          activeOptions={["報修單"]}
           to="/repair/malfunction"
           content={<i className="fas"> 報修單</i>}
         />
@@ -87,6 +89,7 @@ const NavItem = ({ title }) => (
       <li className="nav-item">
         <CustomActiveClickLink
           active={title}
+          activeOptions={["維修單"]}
           to="/repair/processing"
           content={<i className="fas"> 維修單</i>}
         />
@@ -94,6 +97,7 @@ const NavItem = ({ title }) => (
       <li className="nav-item">
         <CustomActiveClickLink
           active={title}
+          activeOptions={["產品"]}
           to="/products"
           content={<i className="fas"> 產品</i>}
         />
