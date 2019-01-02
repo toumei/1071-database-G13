@@ -62,7 +62,7 @@
 
 ### 正在做的部分：
 * sever
-  * 帳戶權限系統：express-acl，還沒測試完全
+  * 帳戶權限系統：express-acl，還沒測試完全，[流程](https://segmentfault.com/a/1190000004627946)
     * 登入時判斷身份為 user、worker、admin、DB_admin，切換至不同的使用頁面。
 
 * client (express)
