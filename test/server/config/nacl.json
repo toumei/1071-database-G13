@@ -1,0 +1,57 @@
+[
+  {
+    "group": "DB_admin",
+    "permissions": [
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "admin",
+    "permissions": [
+      {
+        "resource": ["/account", "/role"],
+        "methods": ["DELETE"],
+        "action": "deny"
+      }
+    ]
+  },
+  {
+    "group": "worker",
+    "permissions": [
+      {
+        "resource": ["/boarder/*", "/switch/*", "/cabinet/*"],
+        "methods": ["GET", "PUT"],
+        "action": "allow"
+      },
+      {
+        "resource": ["/malfunction/*", "/processing/*", "/apply/*", "/sweep/*"],
+        "methods": ["DELETE"],
+        "action": "deny"
+      }
+    ]
+  },
+  {
+    "group": "user",
+    "permissions": [
+      {
+        "resource": "/boarder/*",
+        "methods": ["GET", "PUT"],
+        "action": "allow"
+      },
+      {
+        "resource": "/malfunction/*",
+        "methods": ["POST", "GET"],
+        "action": "allow"
+      },
+      {
+        "resource": ["/processing/*", "/cabinet/*", "/switch/*"],
+        "methods": ["GET"],
+        "action": "allow"
+      }
+    ]
+  }
+]
