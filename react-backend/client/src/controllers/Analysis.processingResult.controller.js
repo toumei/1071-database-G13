@@ -2,11 +2,11 @@ import axios from "axios";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { url } from "../models/axios.model";
+import { database } from "../models/axios.model";
 
 export function postAnalysisProcessingData(bind) {
   axios
-    .post(url + "dbCtrl/AnalysisProcessing")
+    .post(database + "AnalysisProcessing")
     .then(res => {
       const newData = decrypt(res.data);
       let processingLabel = [];

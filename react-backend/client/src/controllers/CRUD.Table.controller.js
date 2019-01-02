@@ -3,7 +3,7 @@ import axios from "axios";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { url } from "../models/axios.model";
+import { database } from "../models/axios.model";
 import {
   CrudTableColumns,
   CrudTableDeleteColumns,
@@ -142,7 +142,7 @@ export function editForm(bind) {
 
 export function postCrudTableColumns(bind) {
   axios
-    .post(url + "dbCtrl/ColumnList?table=" + bind.state.table)
+    .post(database + "ColumnList?table=" + bind.state.table)
     .then(res => {
       let columns = [];
       let deleteColumns = [];
@@ -164,7 +164,7 @@ export function postCrudTableColumns(bind) {
 
 export function postCrudTableData(bind) {
   axios
-    .post(url + "dbCtrl/List?table=" + bind.state.table)
+    .post(database + "List?table=" + bind.state.table)
     .then(res => {
       bind.setState({ data: decrypt(res.data) });
     })
@@ -176,7 +176,7 @@ export function postCrudTableEdit(bind, row, info = "") {
     row.date = row.date.split(".")[0];
   }
   axios
-    .post(url + "dbCtrl/update", {
+    .post(database + "update", {
       table: bind.state.table,
       row: row
     })
@@ -192,7 +192,7 @@ export function postCrudTableEdit(bind, row, info = "") {
 
 export function postCrudTableDelete(bind, row, info) {
   axios
-    .post(url + "dbCtrl/delete", {
+    .post(database + "delete", {
       table: bind.state.table,
       id: row.ID
     })
@@ -206,7 +206,7 @@ export function postCrudTableDelete(bind, row, info) {
 
 export function postCrudTableAdd(bind, row) {
   axios
-    .post(url + "dbCtrl/add", { table: bind.state.table, row: row })
+    .post(database + "add", { table: bind.state.table, row: row })
     .then(res => {
       row["ID"] = res.data.id;
       bind.setState({ data: [...bind.state.data, row] });
@@ -221,7 +221,7 @@ export function postCrudTableAdd(bind, row) {
 
 export async function postCrudSearch(bind, search, id, callback) {
   await axios
-    .post(url + "dbCtrl/searchColumnID", {
+    .post(database + "searchColumnID", {
       table: bind.state.table,
       search: search,
       id: id

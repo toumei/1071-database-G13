@@ -2,12 +2,12 @@ import axios from "axios";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { url } from "../models/axios.model";
+import { database } from "../models/axios.model";
 import { CrudTableMenuData } from "../models/CRUD.TableMenu.model";
 
 export function postCrudTableMenuData(bind) {
   axios
-    .post(url + "dbCtrl/TableList")
+    .post(database + "TableList")
     .then(res => {
       let data = [];
       decrypt(res.data).forEach(elm => {

@@ -2,11 +2,11 @@ import axios from "axios";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { url } from "../models/axios.model";
+import { database } from "../models/axios.model";
 
 export function postAnalysisRepairData(bind) {
   axios
-    .post(url + "dbCtrl/AnalysisRepair")
+    .post(database + "AnalysisRepair")
     .then(res => {
       const newData = decrypt(res.data);
       let malfunction = [];

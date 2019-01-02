@@ -12,7 +12,6 @@ router.post("/List", dbCtrlController.postList);
 router.post("/TableList", dbCtrlController.postTableList);
 router.post("/CSVList", dbCtrlController.postCSVList);
 router.post("/ColumnList", dbCtrlController.postColumnList);
-router.post("/CtrlList", dbCtrlController.postCtrlList);
 router.post("/update", dbCtrlController.postUpdate);
 router.post("/CtrlUpdate", dbCtrlController.postCtrlUpdate);
 router.post("/delete", dbCtrlController.postDelete);
@@ -24,5 +23,6 @@ router.post("/AnalysisRepair", dbCtrlController.postAnalysisRepair);
 router.post("/AnalysisMalfunction", dbCtrlController.postAnalysisMalfunction);
 router.post("/AnalysisProcessing", dbCtrlController.postAnalysisProcessing);
 router.post("/AnalysisCabinet", dbCtrlController.postAnalysisCabinet);
+router.post("/ColumnsMsgList", dbCtrlController.postColumnsMsgList);
 
 module.exports = router;

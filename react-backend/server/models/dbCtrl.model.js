@@ -23,11 +23,6 @@ module.exports = class Product {
   static fetchAll(table) {
     return db.query($sql.fetchAll + table);
   }
-
-  static fetchCtrlAll(table) {
-    return db.query($sql.fetchCtrlAll, [table]);
-  }
-
   static fetchColumnAll(table) {
     return db.query($sql.fetchColumnAll, [table]);
   }
@@ -114,5 +109,9 @@ module.exports = class Product {
         day1 +
         "'  GROUP BY result;"
     );
+  }
+
+  static fetchColumnsMsgAll(table) {
+    return db.query($sql.fetchColumnsMsgAll, [table]);
   }
 };

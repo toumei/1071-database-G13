@@ -2,12 +2,14 @@ import axios from "axios";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { url } from "../models/axios.model";
+import { database } from "../models/axios.model";
 import { CtrlTableColumns } from "../models/Control.model";
 
 export function postCtrlTableColumns(bind) {
   axios
-    .post(url + "dbCtrl/CtrlList?table=_coloption")
+    .post(database + "ColumnsMsgList", {
+      table: "_coloption"
+    })
     .then(res => {
       let columns = [];
       decrypt(res.data).forEach(elm => {
@@ -55,7 +57,7 @@ export function postCtrlTableColumns(bind) {
 
 export function postCtrlTableData(bind) {
   axios
-    .post(url + "dbCtrl/List?table=_coloption")
+    .post(database + "List?table=_coloption")
     .then(res => {
       bind.setState({
         data: decrypt(res.data).filter((x, i) => {
@@ -71,7 +73,7 @@ export function postCtrlTableData(bind) {
 
 export function postCtrlEdit(row) {
   axios
-    .post(url + "dbCtrl/CtrlUpdate", {
+    .post(database + "CtrlUpdate", {
       row: row
     })
     .then(res => {})

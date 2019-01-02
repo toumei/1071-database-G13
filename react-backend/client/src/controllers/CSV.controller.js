@@ -2,7 +2,7 @@ import axios from "axios";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { url } from "../models/axios.model";
+import { database } from "../models/axios.model";
 
 import { CSVTableColumns } from "../models/CSV.model";
 
@@ -31,7 +31,7 @@ export function postCSVTableColumns(bind) {
 
 export function postCSVTableData(bind) {
   axios
-    .post(url + "dbCtrl/CSVList")
+    .post(database + "CSVList")
     .then(res => {
       bind.setState({
         data: decrypt(res.data).filter((x, i) => {
