@@ -170,8 +170,8 @@ export const CrudTableColumns = (bind, elm) => {
   };
 };
 
-export const CrudTableModeColumns = bind => [
-  {
+export const CrudTableModeColumns = bind => {
+  return {
     ...customColumns("action", "操作"),
     isDummyField: true,
     formatter: (cell, row) => (
@@ -200,8 +200,8 @@ export const CrudTableModeColumns = bind => [
     ),
     editable: false,
     headerStyle: { cursor: "default", minWidth: "5rem" }
-  }
-];
+  };
+};
 
 export const CrudTableDeleteColumns = elm => {
   return {
