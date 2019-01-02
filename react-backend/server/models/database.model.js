@@ -1,5 +1,4 @@
 const db = require("../config/mysql2");
-const $sql = require("./mapper").database;
 
 module.exports = class Product {
   constructor(id, name, price) {
@@ -13,26 +12,33 @@ module.exports = class Product {
   }
 
   static update(table, sqlData, id) {
-    return db.query("UPDATE " + table + $sql.update, [sqlData, id]);
+    return db.query("UPDATE " + table + " SET ? WHERE ID = ?;", [sqlData, id]);
   }
 
   static delete(table, id) {
-    return db.execute("DELETE FROM " + table + $sql.delete, [id]);
+    return db.execute("DELETE FROM " + table + " WHERE ID = ?;", [id]);
   }
 
   static fetchAll(table) {
-    return db.query($sql.fetchAll + table);
+    return db.query("SELECT * FROM " + table);
   }
   static fetchColumnAll(table) {
-    return db.query($sql.fetchColumnAll, [table]);
+    return db.query(
+      "select i.column_name, i.column_comment, o.type, o.value from information_schema.columns i, _coloption o where i.table_schema = 'res_net_cmms' and i.table_name = ? and i.column_name = o.name order by i.ordinal_position;",
+      [table]
+    );
   }
 
   static fetchTableAll() {
-    return db.query($sql.fetchTableAll);
+    return db.query(
+      "select table_name, table_comment from information_schema.tables where table_schema = 'res_net_cmms';"
+    );
   }
 
   static fetchCSVAll() {
-    return db.query($sql.fetchCSVAll);
+    return db.query(
+      "SELECT p.ID ID, p.result, e.name name_e, p.date date_p, p.detail, m.date date_m, m.bedNum, b.name name_b, m.time, m.matter, m.desc FROM processing p, employee e, malfunction m, boarder b WHERE p.employeeID = e.ID and p.ID = m.ID and m.ID = b.studentID;"
+    );
   }
 
   static fetchById(table, id) {
