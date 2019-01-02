@@ -4,7 +4,7 @@ import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import axios from "axios";
 
-function nameFormatter(column, colIndex, { sortElement, filterElement }) {
+const nameFormatter = (column, colIndex, { sortElement, filterElement }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {filterElement}
@@ -12,17 +12,18 @@ function nameFormatter(column, colIndex, { sortElement, filterElement }) {
       {sortElement}
     </div>
   );
-}
+};
 
 export default class Products extends Component {
+  constructor(props) {
+    super(props);
+    document.title = "產品";
+  }
+
   state = {
     products: [],
     columns: [
-      {
-        dataField: "id",
-        text: "Product ID",
-        sort: true
-      },
+      { dataField: "id", text: "Product ID", sort: true },
       {
         dataField: "name",
         text: "Product Name",
@@ -30,11 +31,7 @@ export default class Products extends Component {
         filter: textFilter(),
         headerFormatter: nameFormatter
       },
-      {
-        dataField: "price",
-        text: "Product Price",
-        sort: true
-      },
+      { dataField: "price", text: "Product Price", sort: true },
       {
         dataField: "action",
         isDummyField: true,
@@ -47,15 +44,15 @@ export default class Products extends Component {
                 name="edit"
                 value="Edit"
                 className="btn btn-success btn-sm"
-                // onClick="Edit('<%= CRUDpath %>', '<%= data[i].id  %>');"
               />
+              {/* onClick="Edit('<%= CRUDpath %>', '<%= data[i].id  %>');" */}
               <input
                 type="button"
                 name="delete"
                 value="Del"
                 className="btn btn-warning btn-sm"
-                // onClick="Delete('<%= CRUDpath %>', '<%= data[i].id  %>');"
               />
+              {/* onClick="Delete('<%= CRUDpath %>', '<%= data[i].id  %>');" */}
             </div>
           );
         }

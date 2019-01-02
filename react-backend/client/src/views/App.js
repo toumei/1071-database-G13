@@ -1,151 +1,154 @@
-import React, { Component } from "react";
-import socketIOClient from "socket.io-client";
-import { Route, Link } from "react-router-dom";
+import React, { PureComponent } from "react";
 
-// router import
-import DB from "./database/DB";
-import { Login } from "./login/Login";
-import Products from "./products/Products";
+import { Main } from "../router";
 
-// default program
-export default class extends Component {
-  constructor() {
-    super();
+import logo from "../logo.svg";
+import {
+  CustomActiveClickLink,
+  CustomActiveDropdownClickLink,
+  CustomClickLink
+} from "../models/custom.model";
 
-    this.state = { endpoint: "http://localhost:3000" };
+export default class extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = { title: "" };
+  }
+
+  componentDidMount() {
+    this.setState({ title: document.title });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.title !== document.title) {
+      this.setState({ title: document.title });
+    }
   }
 
   render() {
-    const socket = socketIOClient(this.state.endpoint);
-    socket.on("change color", color => {
-      document.body.style.backgroundColor = color;
-    });
-
     return (
       <div>
-        <Navbar />
-        <Header />
-        <Router />
+        <Navbar title={this.state.title} />
+        <Header title={this.state.title} />
+        <Main />
       </div>
     );
   }
-
-  send = () => {
-    const socket = socketIOClient(this.state.endpoint);
-    socket.emit("change color", "red");
-  };
 }
 
-// navbar
-const Navbar = () => (
+const Navbar = ({ title }) => (
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
     <div className="container">
-      <Link className="navbar-brand" to="/">
-        首頁
-      </Link>
+      <CustomClickLink
+        className="navbar-brand"
+        style={{ margin: "-0.5em" }}
+        to="/"
+        content={<img src={logo} width="55em" height="55em" alt={"logo"} />}
+      />
+      <h1 className="navbar-toggler">{title}</h1>
       <button
-        className="navbar-toggler"
+        id="navbarBtn"
+        className="navbar-toggler collapsed"
         data-toggle="collapse"
         data-target="#navbarNav"
       >
         <span className="navbar-toggler-icon" />
       </button>
-      <NavItem />
+      <NavItem title={title} />
     </div>
   </nav>
 );
 
-const NavItem = () => (
+const NavItem = ({ title }) => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
       <li className="nav-item">
-        <Link className="nav-link" to="/database/ctrl">
-          資料庫
-        </Link>
+        <CustomActiveClickLink
+          active={title}
+          activeOptions={["ResNetCMMS"]}
+          to="/"
+          content={<i className="fas"> 首頁</i>}
+        />
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/malfunction">
-          報修單
-        </Link>
+        <CustomActiveClickLink
+          active={title}
+          activeOptions={["資料庫"]}
+          to="/database"
+          content={<i className="fas"> 資料庫</i>}
+        />
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/processing">
-          維修單
-        </Link>
+        <CustomActiveClickLink
+          active={title}
+          activeOptions={["報修單"]}
+          to="/repair/malfunction"
+          content={<i className="fas"> 報修單</i>}
+        />
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/products">
-          products
-        </Link>
+        <CustomActiveClickLink
+          active={title}
+          activeOptions={["維修單"]}
+          to="/repair/processing"
+          content={<i className="fas"> 維修單</i>}
+        />
+      </li>
+      <li className="nav-item">
+        <CustomActiveClickLink
+          active={title}
+          activeOptions={["產品"]}
+          to="/products"
+          content={<i className="fas"> 產品</i>}
+        />
       </li>
     </ul>
 
     <ul className="navbar-nav ml-auto">
       <li className="nav-item dropdown">
-        <Link
-          className="nav-link dropdown-toggle"
-          data-toggle="dropdown"
+        <CustomActiveDropdownClickLink
+          active={title}
+          activeOptions={["個人資料", "設定"]}
           to="/user"
-        >
-          <i className="fas fa-user" /> Welcome Brad
-        </Link>
-        <div className="dropdown-menu">
-          <Link className="dropdown-item" to="/profile">
-            <i className="fas fa-user-circle" /> Profile
-          </Link>
-          <Link className="dropdown-item" to="/settings">
-            <i className="fas fa-cog" /> Settings
-          </Link>
+          dataToggle="dropdown"
+          content={<i className="fas fa-user"> 歡迎 Brad</i>}
+        />
+        <div className="dropdown-menu" style={{ borderRadius: "1em" }}>
+          <CustomClickLink
+            className="dropdown-item"
+            style={{ borderRadius: "0.5em" }}
+            to="/user/profile"
+            content={<i className="fas fa-user-circle"> 個人資料</i>}
+          />
+          <CustomClickLink
+            className="dropdown-item"
+            style={{ borderRadius: "0.5em" }}
+            to="/user/settings"
+            content={<i className="fas fa-cog"> 設定</i>}
+          />
         </div>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/login">
-          <i className="fas fa-user-times" /> Logout
-        </Link>
+        <CustomActiveClickLink
+          active={title}
+          activeOptions={["登入", "登出"]}
+          to="/user/login"
+          content={<i className="fas fa-user-times"> 登出</i>}
+        />
       </li>
     </ul>
   </div>
 );
 
-// header
-const Header = () => (
+const Header = ({ title }) => (
   <header className="bg-primary text-light ">
     <div className="container">
       <div className="row">
         <h1 className="col-md-6">
           <i className="fas fa-cog" />
-          title
+          {title}
         </h1>
       </div>
     </div>
   </header>
 );
-
-// router
-const Router = () => (
-  <div>
-    <Route exact path="/" component={index} />
-    <Route path="/database" component={DB} />
-    <Route path="/products" component={Products} />
-    <Route path="/malfunction" component={malfunction} />
-    <Route path="/processing" component={processing} />
-    <Route path="/profile" component={profile} />
-    <Route path="/Settings" component={Settings} />
-    <Route path="/login" component={Login} />
-  </div>
-);
-
-// index
-const index = () => <div>main</div>;
-
-// malfunction
-const malfunction = () => <div>malfunction</div>;
-
-// processing
-const processing = () => <div>processing</div>;
-
-// profile
-const profile = () => <div>profile</div>;
-
-// Settings
-const Settings = () => <div>Settings</div>;

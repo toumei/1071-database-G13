@@ -15,16 +15,5 @@ module.exports = {
     fetchByEmail: "SELECT * FROM user WHERE email = ?;",
     fetchById: "SELECT * FROM user WHERE uid = ?;",
     fetchAll: "SELECT * FROM user;"
-  },
-  dbCtrl: {
-    insert: "INSERT INTO product SET ?;",
-    update: " SET ? WHERE ID = ?;",
-    delete: " WHERE ID = ?;",
-    fetchById: "SELECT * FROM product WHERE ID = ?;",
-    fetchColumnAll:
-      'select column_name, column_comment from information_schema.columns where table_schema = "res_net_cmms" and table_name = ?  order by ordinal_position;',
-    fetchTableAll:
-      'select table_name, table_comment from information_schema.tables where table_schema = "res_net_cmms";',
-    fetchAll: "SELECT * FROM "
   }
 };

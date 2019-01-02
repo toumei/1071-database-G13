@@ -1,18 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var passport = require('passport');
+var createError = require("http-errors");
+var express = require("express");
+var path = require("path");
+var cookieParser = require("cookie-parser");
+var logger = require("morgan");
+var passport = require("passport");
 const expressJwt = require("express-jwt");
-const jwtConfig = require('./config/passport').JWT;
+const jwtConfig = require("./config/passport").JWT;
 
 // Router
 var indexRouter = require("./routes/index");
 var loginRouter = require("./routes/login");
 var usersRouter = require("./routes/users");
-var dbCtrlRouter = require("./routes/dbCtrl");
+var databaseRouter = require("./routes/database");
 var productsRouter = require("./routes/products");
+var malfuntionRouter = require("./routes/malfuntion");
+var processingRouter = require("./routes/processing");
 
 var app = express();
 
@@ -32,28 +34,29 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // set Header
-app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    if (req.method == "OPTIONS") {
-        res.send(200);
-    }
-    else {
-        next();
-    }
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  if (req.method == "OPTIONS") {
+    res.send(200);
+  } else {
+    next();
+  }
 });
 
 //app.use(expressJwt({ secret: jwtConfig.secretOrKey }).unless({ path: ["/login", "/"] }));
-
 
 // Router Path
 app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/users", usersRouter);
-app.use("/dbCtrl", dbCtrlRouter);
+app.use("/database", databaseRouter);
 app.use("/products", productsRouter);
+app.use("/malfuntion", malfuntionRouter);
+app.use("/processing", processingRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
