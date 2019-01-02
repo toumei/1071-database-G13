@@ -26,7 +26,7 @@ module.exports = {
     fetchTableAll:
       'select table_name, table_comment from information_schema.tables where table_schema = "res_net_cmms";',
     fetchCSVAll:
-      "SELECT p.malfunctionID ID, p.result, e.name name_e, p.date date_p, p.detail, m.date date_m, m.bedNum, b.name name_b, m.time, m.matter, m.desc FROM processing p, employee e, malfunction m, boarder b WHERE p.employeeID = e.employeeID and p.malfunctionID = m.malfunctionID and m.studentID = b.studentID;",
+      "SELECT p.ID ID, p.result, e.name name_e, p.date date_p, p.detail, m.date date_m, m.bedNum, b.name name_b, m.time, m.matter, m.desc FROM processing p, employee e, malfunction m, boarder b WHERE p.employeeID = e.ID and p.ID = m.ID and m.ID = b.studentID;",
     fetchAll: "SELECT * FROM ",
     fetchColumnsMsgAll:
       'select column_name, column_comment from information_schema.columns where table_schema = "res_net_cmms" and table_name = ?;'

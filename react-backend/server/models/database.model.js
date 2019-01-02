@@ -70,7 +70,7 @@ module.exports = class Product {
         "' AND date < '" +
         day1 +
         "' GROUP BY DATE_FORMAT(date, '%Y-%m') ORDER BY date ASC;\
-        SELECT DATE_FORMAT(m.date, '%m') month, COUNT(*) FROM malfunction m, processing p WHERE m.malfunctionID = p.malfunctionID AND m.date > '" +
+        SELECT DATE_FORMAT(m.date, '%m') month, COUNT(*) FROM malfunction m, processing p WHERE m.ID = p.ID AND m.date > '" +
         day2 +
         "' AND m.date < '" +
         day1 +
