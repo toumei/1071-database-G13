@@ -1,19 +1,23 @@
 import React, { PureComponent } from "react";
 
 import { AnalysisMain } from "../../../router";
-import { postAnalysisTableData } from "../../../controllers/Analysis.controller";
+
+// model
 import { CustomActiveBtnLink } from "../../../models/custom.model";
+
+// controller
+import { postAnalysisData } from "../../../controllers/Analysis.controller";
 
 export default class extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      sum: [0, 0, 0, 0, 0, 0, 0]
+      count: [0, 0, 0, 0, 0, 0, 0]
     };
   }
 
   componentDidMount() {
-    postAnalysisTableData(this);
+    postAnalysisData(this);
   }
 
   render() {
@@ -23,7 +27,7 @@ export default class extends PureComponent {
           <div className="col-md-2">
             <AnalysisCardLeft
               path={this.props.location.pathname}
-              sum={this.state.sum}
+              count={this.state.count}
             />
           </div>
           <div className="col-md-8">
@@ -32,7 +36,7 @@ export default class extends PureComponent {
           <div className="col-md-2">
             <AnalysisCardRight
               path={this.props.location.pathname}
-              sum={this.state.sum}
+              count={this.state.count}
             />
           </div>
         </div>
@@ -41,13 +45,13 @@ export default class extends PureComponent {
   }
 }
 
-const AnalysisCardLeft = ({ path, sum }) => (
+const AnalysisCardLeft = ({ path, count }) => (
   <div>
     <div className="card text-center bg-primary text-white mb-3">
       <div className="card-body">
         <h3>報修/維修</h3>
         <h4 className="display-4">
-          <i className="fas fa-toolbox" /> {sum[0] + "/" + sum[1]}
+          <i className="fas fa-toolbox" /> {count[0] + "/" + count[1]}
         </h4>
         <CustomActiveBtnLink active={path} to="/database" content="View" />
       </div>
@@ -57,7 +61,7 @@ const AnalysisCardLeft = ({ path, sum }) => (
       <div className="card-body">
         <h3>報修事項</h3>
         <h4 className="display-4">
-          <i className="fas fa-list-ul" /> {sum[2]}
+          <i className="fas fa-list-ul" /> {count[2]}
         </h4>
         <CustomActiveBtnLink
           active={path}
@@ -71,7 +75,7 @@ const AnalysisCardLeft = ({ path, sum }) => (
       <div className="card-body">
         <h3>維修結果</h3>
         <h4 className="display-4">
-          <i className="fas fa-check" /> {sum[3]}
+          <i className="fas fa-check" /> {count[3]}
         </h4>
         <CustomActiveBtnLink
           active={path}
@@ -83,13 +87,14 @@ const AnalysisCardLeft = ({ path, sum }) => (
   </div>
 );
 
-const AnalysisCardRight = ({ path, sum }) => (
+const AnalysisCardRight = ({ path, count }) => (
   <div>
     <div className="card text-center bg-success text-white mb-3">
       <div className="card-body">
         <h3>機櫃/交換器</h3>
         <h4 className="display-4">
-          <i className="fas fa-exclamation-triangle" /> {sum[4] + "/" + sum[5]}
+          <i className="fas fa-exclamation-triangle" />{" "}
+          {count[4] + "/" + count[5]}
         </h4>
         <CustomActiveBtnLink
           active={path}
@@ -103,7 +108,7 @@ const AnalysisCardRight = ({ path, sum }) => (
       <div className="card-body">
         <h3>申報</h3>
         <h4 className="display-4">
-          <i className="fas fa-industry" /> {sum[7]}
+          <i className="fas fa-industry" /> {count[7]}
         </h4>
         <CustomActiveBtnLink
           active={path}
@@ -117,7 +122,7 @@ const AnalysisCardRight = ({ path, sum }) => (
       <div className="card-body">
         <h3>清掃</h3>
         <h4 className="display-4">
-          <i className="fas fa-broom" /> {sum[6]}
+          <i className="fas fa-broom" /> {count[6]}
         </h4>
         <CustomActiveBtnLink
           active={path}
