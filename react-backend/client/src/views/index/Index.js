@@ -13,7 +13,6 @@ export default class extends PureComponent {
         <Iframe
           url="https://docs.google.com/forms/d/e/1FAIpQLSeEu9eCnpZK24Vec-SOCQnKJy5VqsjeeLrgepmtDu6XiThFyg/viewform"
           height="100%"
-          display="initial"
           position="relative"
         />
       </div>

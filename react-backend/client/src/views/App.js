@@ -67,28 +67,36 @@ const NavItem = ({ title }) => (
           active={title}
           activeOptions={["ResNetCMMS"]}
           to="/"
-          content="首頁"
+          content={<i className="fas"> 首頁</i>}
         />
       </li>
       <li className="nav-item">
-        <CustomActiveClickLink active={title} to="/database" content="資料庫" />
+        <CustomActiveClickLink
+          active={title}
+          to="/database"
+          content={<i className="fas"> 資料庫</i>}
+        />
       </li>
       <li className="nav-item">
         <CustomActiveClickLink
           active={title}
           to="/repair/malfunction"
-          content="報修單"
+          content={<i className="fas"> 報修單</i>}
         />
       </li>
       <li className="nav-item">
         <CustomActiveClickLink
           active={title}
           to="/repair/processing"
-          content="維修單"
+          content={<i className="fas"> 維修單</i>}
         />
       </li>
       <li className="nav-item">
-        <CustomActiveClickLink active={title} to="/products" content="產品" />
+        <CustomActiveClickLink
+          active={title}
+          to="/products"
+          content={<i className="fas"> 產品</i>}
+        />
       </li>
     </ul>
 
