@@ -1,8 +1,8 @@
-import { customColumn } from "./state.model";
+import { customColumns } from "./react-bootstrap.model";
 
 export const CrudTableMenuColumns = bind => [
   {
-    ...customColumn("TABLE_COMMENT", "表格")[0],
+    ...customColumns("TABLE_COMMENT", "表格")[0],
     style: (cell, row, rowIndex, colIndex) => {
       if (row.TABLE_NAME === bind.state.table) {
         return { cursor: "pointer", backgroundColor: "#81c784" };
