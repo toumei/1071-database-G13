@@ -48,7 +48,7 @@ module.exports = {
 
   postList: (req, res, next) => {
     databaseModel
-      .fetchAll(req.query.table)
+      .fetchAll(req.body.table)
       .then(([data]) => {
         log.msg(req, data);
         res.send(cryptModel.encrypt(data));
@@ -78,7 +78,7 @@ module.exports = {
 
   postColumnList: (req, res, next) => {
     databaseModel
-      .fetchColumnAll(req.query.table)
+      .fetchColumnAll(req.body.table)
       .then(([data]) => {
         log.msg(req, data);
         res.send(cryptModel.encrypt(data));

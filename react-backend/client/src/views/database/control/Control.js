@@ -42,7 +42,7 @@ export default class extends PureComponent {
               cellEdit={cellEditFactory({
                 mode: "click",
                 blurToSave: true,
-                afterSaveCell: (oldValue, newValue, row, column) => {
+                afterSaveCell: (oldValue, newValue, row) => {
                   if (String(oldValue) !== String(newValue)) {
                     if (newValue === row.type) {
                       if (row.type === "SELECT") {

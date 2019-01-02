@@ -142,7 +142,7 @@ export function editForm(bind) {
 
 export function postCrudTableColumns(bind) {
   axios
-    .post(database + "ColumnList?table=" + bind.state.table)
+    .post(database + "ColumnList", { table: bind.state.table })
     .then(res => {
       let columns = [];
       let deleteColumns = [];
@@ -164,7 +164,9 @@ export function postCrudTableColumns(bind) {
 
 export function postCrudTableData(bind) {
   axios
-    .post(database + "List?table=" + bind.state.table)
+    .post(database + "List", {
+      table: bind.state.table
+    })
     .then(res => {
       bind.setState({ data: decrypt(res.data) });
     })

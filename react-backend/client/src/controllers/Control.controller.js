@@ -3,7 +3,7 @@ import axios from "axios";
 // model
 import { decrypt } from "../models/crypt.model";
 import { database } from "../models/axios.model";
-import { CtrlTableColumns } from "../models/Control.model";
+import { columnsType, CtrlTableColumns } from "../models/Control.model";
 
 export function postCtrlTableColumns(bind) {
   axios
@@ -13,42 +13,14 @@ export function postCtrlTableColumns(bind) {
     .then(res => {
       let columns = [];
       decrypt(res.data).forEach(elm => {
-        if (elm["COLUMN_NAME"] === "name") {
-          columns.push(CtrlTableColumns(elm, false, "TEXT"));
-        } else if (elm["COLUMN_NAME"] === "type") {
-          columns.push(
-            CtrlTableColumns(elm, true, "SELECT", [
-              {
-                value: "TEXT",
-                label: "TEXT"
-              },
-              {
-                value: "SELECT",
-                label: "SELECT"
-              },
-              {
-                value: "TEXTAREA",
-                label: "TEXTAREA"
-              },
-              {
-                value: "CHECKBOX",
-                label: "CHECKBOX"
-              },
-              {
-                value: "DATE",
-                label: "DATE"
-              },
-              {
-                value: "DATETIME",
-                label: "DATETIME"
-              }
-            ])
-          );
-        } else if (elm["COLUMN_NAME"] === "value") {
-          columns.push(CtrlTableColumns(elm, true, "TEXTAREA"));
-        } else {
-          columns.push(CtrlTableColumns(elm, true, "TEXT"));
-        }
+        columns.push(
+          CtrlTableColumns(
+            elm,
+            columnsType[elm["COLUMN_NAME"]].editable,
+            columnsType[elm["COLUMN_NAME"]].editorType,
+            columnsType[elm["COLUMN_NAME"]].editorValue
+          )
+        );
       });
       bind.setState({ columns: columns });
     })
@@ -57,7 +29,7 @@ export function postCtrlTableColumns(bind) {
 
 export function postCtrlTableData(bind) {
   axios
-    .post(database + "List?table=_coloption")
+    .post(database + "List", { table: "_coloption" })
     .then(res => {
       bind.setState({
         data: decrypt(res.data).filter((x, i) => {
