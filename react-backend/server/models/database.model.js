@@ -1,5 +1,5 @@
 const db = require("../config/mysql2");
-const $sql = require("./mapper").dbCtrl;
+const $sql = require("./mapper").database;
 
 module.exports = class Product {
   constructor(id, name, price) {

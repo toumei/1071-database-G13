@@ -26,6 +26,7 @@ const valid = {
       }
     }, 0);
   },
+  FK: () => {},
   IDCARD: (bind, newValue, row, column, done) => {
     setTimeout(() => {
       if (String(newValue) !== String(row[column.dataField])) {

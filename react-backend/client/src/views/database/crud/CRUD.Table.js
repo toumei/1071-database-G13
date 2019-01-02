@@ -87,7 +87,7 @@ export default class extends Component {
           search
         >
           {props => (
-            <div className="col-md-10" style={{ marginTop: 10 }}>
+            <div className="col-md-10">
               <CrudTableNav
                 columns={this.state.formColumns}
                 editable={this.state.editable}

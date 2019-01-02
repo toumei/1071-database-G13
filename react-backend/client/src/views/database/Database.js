@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
-import { Link } from "react-router-dom";
 
+// router
 import { DBMain } from "../../router";
 
-import { CustomLink } from "../../models/bootstrap.model";
+// model
+import { CustomActiveClickLink } from "../../models/bootstrap.model";
 
 // default program
 export default class extends PureComponent {
@@ -19,39 +20,42 @@ export default class extends PureComponent {
 
 // navbar
 const DBNavbar = ({ path }) => (
-  <section className="bg-light">
+  <section className="bg-light" style={{ marginBottom: 10 }}>
     <ul className="nav nav-tabs justify-content-center">
       <li className="nav-item">
-        <Link
-          className={
-            "nav-link " +
-            (path === "/database" ||
-            path === "/database/cabinet" ||
-            path === "/database/vendor" ||
-            path === "/database/malfunctionMatter" ||
-            path === "/database/processingResult" ||
-            path === "/database/sweep"
-              ? "active show"
-              : "")
-          }
+        <CustomActiveClickLink
+          active={path}
+          activeOptions={[
+            "/database/cabinet",
+            "/database/apply",
+            "/database/malfunctionMatter",
+            "/database/processingResult",
+            "/database/sweep"
+          ]}
           to="/database"
-          onClick={() => {
-            const navbarBtn = document.getElementById("navbarBtn");
-            if (navbarBtn.getAttribute("class") === "navbar-toggler")
-              navbarBtn.click();
-          }}
-        >
-          分析表
-        </Link>
+          content="分析表"
+        />
       </li>
       <li className="nav-item">
-        <CustomLink path={path} to="/database/crud" content="表格編輯" />
+        <CustomActiveClickLink
+          active={path}
+          to="/database/crud"
+          content="表格編輯"
+        />
       </li>
       <li className="nav-item">
-        <CustomLink path={path} to="/database/csv" content="匯出csv" />
+        <CustomActiveClickLink
+          active={path}
+          to="/database/csv"
+          content="匯出csv"
+        />
       </li>
       <li className="nav-item">
-        <CustomLink path={path} to="/database/control" content="欄位控制" />
+        <CustomActiveClickLink
+          active={path}
+          to="/database/control"
+          content="欄位控制"
+        />
       </li>
     </ul>
   </section>

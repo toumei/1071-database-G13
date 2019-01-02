@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
-import { Link } from "react-router-dom";
 
 import { AnalysisMain } from "../../../router";
 import { postAnalysisTableData } from "../../../controllers/Analysis.controller";
+import { CustomActiveBtnLink } from "../../../models/bootstrap.model";
 
 export default class extends PureComponent {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class extends PureComponent {
 
   render() {
     return (
-      <div className="container-fluid" style={{ marginTop: 10 }}>
+      <div className="container-fluid">
         <div className="row">
           <div className="col-md-2">
             <AnalysisCardLeft
@@ -49,15 +49,7 @@ const AnalysisCardLeft = ({ path, sum }) => (
         <h4 className="display-4">
           <i className="fas fa-toolbox" /> {sum[0] + "/" + sum[1]}
         </h4>
-        <Link
-          className={
-            "btn btn-outline-light btn-sm " +
-            (path === "/database" ? "active" : "")
-          }
-          to="/database"
-        >
-          View
-        </Link>
+        <CustomActiveBtnLink active={path} to="/database" content="View" />
       </div>
     </div>
 
@@ -67,15 +59,11 @@ const AnalysisCardLeft = ({ path, sum }) => (
         <h4 className="display-4">
           <i className="fas fa-list-ul" /> {sum[2]}
         </h4>
-        <Link
-          className={
-            "btn btn-outline-light btn-sm " +
-            (path === "/database/malfunctionMatter" ? "active" : "")
-          }
+        <CustomActiveBtnLink
+          active={path}
           to="/database/malfunctionMatter"
-        >
-          View
-        </Link>
+          content="View"
+        />
       </div>
     </div>
 
@@ -85,15 +73,11 @@ const AnalysisCardLeft = ({ path, sum }) => (
         <h4 className="display-4">
           <i className="fas fa-check" /> {sum[3]}
         </h4>
-        <Link
-          className={
-            "btn btn-outline-light btn-sm " +
-            (path === "/database/processingResult" ? "active" : "")
-          }
+        <CustomActiveBtnLink
+          active={path}
           to="/database/processingResult"
-        >
-          View
-        </Link>
+          content="View"
+        />
       </div>
     </div>
   </div>
@@ -107,15 +91,11 @@ const AnalysisCardRight = ({ path, sum }) => (
         <h4 className="display-4">
           <i className="fas fa-exclamation-triangle" /> {sum[4] + "/" + sum[5]}
         </h4>
-        <Link
-          className={
-            "btn btn-outline-light btn-sm " +
-            (path === "/database/cabinet" ? "active" : "")
-          }
+        <CustomActiveBtnLink
+          active={path}
           to="/database/cabinet"
-        >
-          View
-        </Link>
+          content="View"
+        />
       </div>
     </div>
 
@@ -125,15 +105,11 @@ const AnalysisCardRight = ({ path, sum }) => (
         <h4 className="display-4">
           <i className="fas fa-industry" /> {sum[7]}
         </h4>
-        <Link
-          className={
-            "btn btn-outline-light btn-sm " +
-            (path === "/database/apply" ? "active" : "")
-          }
+        <CustomActiveBtnLink
+          active={path}
           to="/database/apply"
-        >
-          View
-        </Link>
+          content="View"
+        />
       </div>
     </div>
 
@@ -143,15 +119,11 @@ const AnalysisCardRight = ({ path, sum }) => (
         <h4 className="display-4">
           <i className="fas fa-broom" /> {sum[6]}
         </h4>
-        <Link
-          className={
-            "btn btn-outline-light btn-sm " +
-            (path === "/database/sweep" ? "active" : "")
-          }
+        <CustomActiveBtnLink
+          active={path}
           to="/database/sweep"
-        >
-          View
-        </Link>
+          content="View"
+        />
       </div>
     </div>
   </div>

@@ -1,11 +1,16 @@
 import React, { PureComponent } from "react";
+
+// bootstrap
 import cellEditFactory from "react-bootstrap-table2-editor";
 
+// controller
 import {
-  postCtrlTableColumns,
+  postCtrlEdit,
   postCtrlTableData,
-  postCtrlEdit
+  postCtrlTableColumns
 } from "../../../controllers/Control.controller";
+
+// model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 export default class extends PureComponent {
@@ -27,8 +32,8 @@ export default class extends PureComponent {
     if (this.state.columns.length > 0) {
       return (
         <div className="container-fluid">
-          <div className="row justify-content-md-center">
-            <div className="col-md-10" style={{ marginTop: 10 }}>
+          <div className="row justify-content-center">
+            <div className="col-md-10">
               <CustomBootstrap
                 base={{
                   keyField: "ID",

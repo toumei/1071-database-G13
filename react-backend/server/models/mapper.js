@@ -16,7 +16,7 @@ module.exports = {
     fetchById: "SELECT * FROM user WHERE uid = ?;",
     fetchAll: "SELECT * FROM user;"
   },
-  dbCtrl: {
+  database: {
     insert: "INSERT INTO product SET ?;",
     update: " SET ? WHERE ID = ?;",
     delete: " WHERE ID = ?;",

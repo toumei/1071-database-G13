@@ -1,7 +1,7 @@
-var express = require("express");
-var router = express.Router();
+const router = require("express").Router();
 
-const dbCtrlController = require("../controllers/dbCtrl.controller");
+// controller
+const dbCtrlController = require("../controllers/database.controller");
 
 /* GET home page. */
 router.get("/", function(req, res, next) {

@@ -1,120 +1,111 @@
-const dbCtrlModel = require("../models/dbCtrl.model");
+// model
+const log = require("../models/log.model");
 const cryptModel = require("../models/crypt.model");
-var path = "database/productTable/";
+const databaseModel = require("../models/database.model");
 
 module.exports = {
   postList: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .fetchAll(req.query.table)
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postTableList: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .fetchTableAll()
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postCSVList: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .fetchCSVAll()
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postColumnList: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .fetchColumnAll(req.query.table)
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postSearch: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .fetchById(req.body.table, req.body.id)
       .then(([data]) => {
         console.log(data);
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postSearchColumnID: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .fetchByColumnId(req.body.table, req.body.search, req.body.id)
       .then(([data]) => {
-        console.log("data");
         console.log(data);
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
-  },
-
-  postEdit: (req, res, next) => {
-    dbCtrlModel
-      .fetchById(req.query.id)
-      .then(([data]) => {
-        res.render(path + "productEdit", { title: "Product Edit", data: data });
-      })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postUpdate: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .update(req.body.table, req.body.row, req.body.row.ID)
-      .then(res => {
-        console.log(res);
+      .then(data => {
+        console.log(data);
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postCtrlUpdate: (req, res, next) => {
     if (req.body.row.type !== "SELECT") {
       req.body.row.value = JSON.stringify(req.body.row.value);
     }
-    dbCtrlModel
+    databaseModel
       .update("_coloption", req.body.row, req.body.row.ID)
-      .then(res => {
-        console.log(res);
+      .then(data => {
+        console.log(data);
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postDelete: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .delete(req.body.table, req.body.id)
-      .then(res => {
-        console.log(res);
+      .then(data => {
+        console.log(data);
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postAdd: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .insert(req.body.table, req.body.row)
       .then(([data]) => {
         res.send({ id: data.insertId });
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postSum: (req, res, next) => {
-    dbCtrlModel
+    databaseModel
       .fetchSum()
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postAnalysisRepair: (req, res, next) => {
@@ -123,12 +114,12 @@ module.exports = {
     Day2.setMonth(Day2.getMonth() - 11);
     day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
-    dbCtrlModel
+    databaseModel
       .fetchAnalysisRepair(day1, day2)
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postAnalysisMalfunction: (req, res, next) => {
@@ -137,12 +128,12 @@ module.exports = {
     Day2.setMonth(Day2.getMonth() - 1);
     day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
-    dbCtrlModel
+    databaseModel
       .fetchAnalysisMalfunction(day1, day2)
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postAnalysisProcessing: (req, res, next) => {
@@ -151,12 +142,12 @@ module.exports = {
     Day2.setMonth(Day2.getMonth() - 1);
     day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
-    dbCtrlModel
+    databaseModel
       .fetchAnalysisProcessing(day1, day2)
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
   postAnalysisCabinet: (req, res, next) => {
@@ -165,20 +156,23 @@ module.exports = {
     Day2.setMonth(Day2.getMonth() - 1);
     day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
-    dbCtrlModel
+    databaseModel
       .fetchAnalysisCabinet(day1, day2)
       .then(([data]) => {
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   },
 
-  postColumnsMsgList: (req, res, next) => {
-    dbCtrlModel
+  // start
+  postColumnsMsgList: (req, res) => {
+    log.msg(req, req.body);
+    databaseModel
       .fetchColumnsMsgAll(req.body.table)
       .then(([data]) => {
+        log.msg(req, data);
         res.send(cryptModel.encrypt(data));
       })
-      .catch(err => console.log(err));
+      .catch(err => log.error(err));
   }
 };

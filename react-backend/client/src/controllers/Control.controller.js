@@ -14,10 +14,10 @@ export function postCtrlTableColumns(bind) {
       let columns = [];
       decrypt(res.data).forEach(elm => {
         if (elm["COLUMN_NAME"] === "name") {
-          columns.push(CtrlTableColumns(bind, elm, false, "TEXT")[0]);
+          columns.push(CtrlTableColumns(elm, false, "TEXT"));
         } else if (elm["COLUMN_NAME"] === "type") {
           columns.push(
-            CtrlTableColumns(bind, elm, true, "SELECT", [
+            CtrlTableColumns(elm, true, "SELECT", [
               {
                 value: "TEXT",
                 label: "TEXT"
@@ -42,12 +42,12 @@ export function postCtrlTableColumns(bind) {
                 value: "DATETIME",
                 label: "DATETIME"
               }
-            ])[0]
+            ])
           );
         } else if (elm["COLUMN_NAME"] === "value") {
-          columns.push(CtrlTableColumns(bind, elm, true, "TEXTAREA")[0]);
+          columns.push(CtrlTableColumns(elm, true, "TEXTAREA"));
         } else {
-          columns.push(CtrlTableColumns(bind, elm, true, "TEXT")[0]);
+          columns.push(CtrlTableColumns(elm, true, "TEXT"));
         }
       });
       bind.setState({ columns: columns });

@@ -28,7 +28,7 @@ export default class extends PureComponent {
       return (
         <div className="container-fluid">
           <div className="row justify-content-md-center">
-            <div className="col-md-11" style={{ marginTop: 10 }}>
+            <div className="col-md-11">
               <ToolkitProvider
                 keyField="ID"
                 columns={this.state.columns}

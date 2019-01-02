@@ -41,14 +41,38 @@ export const CustoModal = ({
   </div>
 );
 
-export const CustomLink = ({ path, title, titleOption = "", to, content }) => (
+function activeLink(active, link) {
+  let isTrue = false;
+  for (let i = 0; i < link.length; i++) {
+    isTrue = isTrue || active === link[i];
+  }
+  return isTrue;
+}
+
+export const CustomLink = ({
+  className,
+  active,
+  activeOptions = [],
+  to,
+  content
+}) => (
   <Link
     className={
-      "nav-link " +
-      (title === content || title === titleOption || path === to
+      className +
+      (active === to || active === content || activeLink(active, activeOptions)
         ? "active show"
         : "")
     }
+    to={to}
+  >
+    {content}
+  </Link>
+);
+
+export const CustomClickLink = ({ className, style, to, content }) => (
+  <Link
+    className={className}
+    style={style}
     to={to}
     onClick={() => {
       const navbarBtn = document.getElementById("navbarBtn");
@@ -58,4 +82,20 @@ export const CustomLink = ({ path, title, titleOption = "", to, content }) => (
   >
     {content}
   </Link>
+);
+
+export const CustomActiveClickLink = props => (
+  <CustomLink
+    {...props}
+    className="nav-link "
+    onClick={() => {
+      const navbarBtn = document.getElementById("navbarBtn");
+      if (navbarBtn.getAttribute("class") === "navbar-toggler")
+        navbarBtn.click();
+    }}
+  />
+);
+
+export const CustomActiveBtnLink = props => (
+  <CustomLink {...props} className="btn btn-outline-light btn-sm " />
 );

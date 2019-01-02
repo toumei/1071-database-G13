@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 import { Main } from "../router";
 
 import logo from "../logo.svg";
-import { CustomLink } from "../models/bootstrap.model";
+import {
+  CustomActiveClickLink,
+  CustomClickLink
+} from "../models/bootstrap.model";
 
 export default class extends PureComponent {
   constructor(props) {
@@ -36,18 +39,12 @@ export default class extends PureComponent {
 const Navbar = ({ title }) => (
   <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
     <div className="container">
-      <Link
+      <CustomClickLink
         className="navbar-brand"
         style={{ margin: "-0.5em" }}
         to="/"
-        onClick={() => {
-          const navbarBtn = document.getElementById("navbarBtn");
-          if (navbarBtn.getAttribute("class") === "navbar-toggler")
-            navbarBtn.click();
-        }}
-      >
-        <img src={logo} width="55em" height="55em" alt={"logo"} />
-      </Link>
+        content={<img src={logo} width="55em" height="55em" alt={"logo"} />}
+      />
       <h1 className="navbar-toggler">{title}</h1>
       <button
         id="navbarBtn"
@@ -66,24 +63,32 @@ const NavItem = ({ title }) => (
   <div className="collapse navbar-collapse" id="navbarNav">
     <ul className="navbar-nav">
       <li className="nav-item">
-        <CustomLink
-          title={title}
-          titleOption="ResNetCMMS"
+        <CustomActiveClickLink
+          active={title}
+          activeOptions={["ResNetCMMS"]}
           to="/"
           content="首頁"
         />
       </li>
       <li className="nav-item">
-        <CustomLink title={title} to="/database" content="資料庫" />
+        <CustomActiveClickLink active={title} to="/database" content="資料庫" />
       </li>
       <li className="nav-item">
-        <CustomLink title={title} to="/repair/malfunction" content="報修單" />
+        <CustomActiveClickLink
+          active={title}
+          to="/repair/malfunction"
+          content="報修單"
+        />
       </li>
       <li className="nav-item">
-        <CustomLink title={title} to="/repair/processing" content="維修單" />
+        <CustomActiveClickLink
+          active={title}
+          to="/repair/processing"
+          content="維修單"
+        />
       </li>
       <li className="nav-item">
-        <CustomLink title={title} to="/products" content="產品" />
+        <CustomActiveClickLink active={title} to="/products" content="產品" />
       </li>
     </ul>
 
@@ -92,9 +97,7 @@ const NavItem = ({ title }) => (
         <Link
           className={
             "nav-link dropdown-toggle " +
-            (document.title === "個人資料" || document.title === "設定"
-              ? "active"
-              : "")
+            (title === "個人資料" || title === "設定" ? "active show" : "")
           }
           data-toggle="dropdown"
           to="/user"
@@ -102,38 +105,26 @@ const NavItem = ({ title }) => (
           <i className="fas fa-user" /> 歡迎 Brad
         </Link>
         <div className="dropdown-menu" style={{ borderRadius: "1em" }}>
-          <Link
+          <CustomClickLink
             className="dropdown-item"
             style={{ borderRadius: "0.5em" }}
             to="/user/profile"
-            onClick={() => {
-              const navbarBtn = document.getElementById("navbarBtn");
-              if (navbarBtn.getAttribute("class") === "navbar-toggler")
-                navbarBtn.click();
-            }}
-          >
-            <i className="fas fa-user-circle" /> 個人資料
-          </Link>
-          <Link
+            content={<i className="fas fa-user-circle"> 個人資料</i>}
+          />
+          <CustomClickLink
             className="dropdown-item"
             style={{ borderRadius: "0.5em" }}
             to="/user/settings"
-            onClick={() => {
-              const navbarBtn = document.getElementById("navbarBtn");
-              if (navbarBtn.getAttribute("class") === "navbar-toggler")
-                navbarBtn.click();
-            }}
-          >
-            <i className="fas fa-cog" /> 設定
-          </Link>
+            content={<i className="fas fa-cog"> 設定</i>}
+          />
         </div>
       </li>
       <li className="nav-item">
-        <CustomLink
-          title={title}
-          titleOption="登入"
+        <CustomActiveClickLink
+          active={title}
+          activeOptions={["登入", "登出"]}
           to="/user/login"
-          content={<i className="fas fa-user-times">登出</i>}
+          content={<i className="fas fa-user-times"> 登出</i>}
         />
       </li>
     </ul>
