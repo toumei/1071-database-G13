@@ -4,7 +4,7 @@ import axios from "axios";
 import { decrypt } from "../models/crypt.model";
 import { database } from "../models/axios.model";
 
-export function postAnalysisCabinetData(bind) {
+export const postAnalysisCabinetData = bind => {
   axios
     .post(database + "AnalysisCabinet")
     .then(res => {
@@ -12,4 +12,4 @@ export function postAnalysisCabinetData(bind) {
       console.log(newData);
     })
     .catch();
-}
+};

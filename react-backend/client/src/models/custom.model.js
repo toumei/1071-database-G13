@@ -41,13 +41,13 @@ export const CustoModal = ({
   </div>
 );
 
-function activeLink(active, link) {
+const activeLink = (active, link) => {
   let isTrue = false;
   for (let i = 0; i < link.length; i++) {
     isTrue = isTrue || active === link[i];
   }
   return isTrue;
-}
+};
 
 export const CustomLink = ({
   className,

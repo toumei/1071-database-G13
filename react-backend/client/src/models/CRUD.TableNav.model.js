@@ -4,7 +4,7 @@ import { customColumns, columnsWidth } from "./react-bootstrap.model";
 
 import { cancelDelete } from "../controllers/CRUD.TableNav.controller";
 
-export function TableNavColumns(bind, props) {
+export const TableNavColumns = (bind, props) => {
   let columns = [];
   const newColumns = props.columns;
   newColumns.forEach((elm, i) => {
@@ -18,7 +18,7 @@ export function TableNavColumns(bind, props) {
 
   columns.push(TableNavModeColumns(bind));
   return columns;
-}
+};
 
 export const TableNavModeColumns = bind => {
   return {

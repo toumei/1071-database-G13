@@ -4,7 +4,7 @@ import axios from "axios";
 import { decrypt } from "../models/crypt.model";
 import { database } from "../models/axios.model";
 
-export function postAnalysisTableData(bind) {
+export const postAnalysisTableData = bind => {
   axios
     .post(database + "AnalysisSum")
     .then(res => {
@@ -16,4 +16,4 @@ export function postAnalysisTableData(bind) {
       bind.setState({ sum: dataList });
     })
     .catch();
-}
+};

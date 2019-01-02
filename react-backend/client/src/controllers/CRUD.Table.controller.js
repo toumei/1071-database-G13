@@ -12,26 +12,26 @@ import {
 } from "../models/CRUD.Table.model";
 
 // table nav add
-export function handleAddItem(bind, row) {
+export const handleAddItem = (bind, row) => {
   postCrudTableAdd(bind, row);
-}
+};
 
 // table select
-export function addSelect(bind, row) {
+export const addSelect = (bind, row) => {
   bind.select = [...bind.select, ...row];
-}
+};
 
-export function deleteSelect(bind, row) {
+export const deleteSelect = (bind, row) => {
   bind.select = bind.select.filter((x, i) => x !== row);
-}
+};
 
 // table nav select
-export function handleGetSelect(bind) {
+export const handleGetSelect = bind => {
   bind.setState({});
-}
+};
 
 // table nav delete
-export function handleDeleteItem(bind, row, isBottom, info) {
+export const handleDeleteItem = (bind, row, isBottom, info) => {
   if (isBottom) {
     let newData = bind.state.data;
     let newSelect = bind.select;
@@ -46,20 +46,20 @@ export function handleDeleteItem(bind, row, isBottom, info) {
     info += "成功刪除ID:" + row.ID + "<br />";
     postCrudTableDelete(bind, row, info);
   }
-}
+};
 
 // table edit or delete
-export function getItem(bind, row) {
+export const getItem = (bind, row) => {
   bind.setState({ itemData: [row] });
-}
+};
 
-export function deleteItem(bind, row) {
+export const deleteItem = (bind, row) => {
   postCrudTableDelete(bind, row, "成功刪除ID:" + row.ID);
   bind.setState({ data: bind.state.data.filter((x, i) => x !== row) });
-}
+};
 
 // table edit
-export function editItem(bind, row) {
+export const editItem = (bind, row) => {
   postCrudTableEdit(bind, row, "成功編輯ID:" + row.ID);
   bind.state.data.filter((x, i) => {
     if (x === bind.state.itemData[0]) {
@@ -70,15 +70,15 @@ export function editItem(bind, row) {
     }
     return false;
   });
-}
+};
 
 // handle info
-export function handleInfo(bind, info) {
+export const handleInfo = (bind, info) => {
   bind.setState({ info: [info] });
   document.getElementById("info").click();
-}
+};
 
-export function handleEditable(bind) {
+export const handleEditable = bind => {
   new Promise((resolve, reject) => {
     bind.setState({
       info: [
@@ -107,9 +107,9 @@ export function handleEditable(bind) {
       bind.setState({ columns: newColumns });
     }
   });
-}
+};
 
-export function editForm(bind) {
+export const editForm = bind => {
   const newColumns = JSON.parse(
     JSON.stringify(
       bind.state.columns.map((x, i) => {
@@ -138,9 +138,9 @@ export function editForm(bind) {
   for (let i = 1; i < newColumns.length - 1; i++) {
     document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value = "";
   }
-}
+};
 
-export function postCrudTableColumns(bind) {
+export const postCrudTableColumns = bind => {
   axios
     .post(database + "ColumnList", { table: bind.state.table })
     .then(res => {
@@ -160,9 +160,9 @@ export function postCrudTableColumns(bind) {
       });
     })
     .catch();
-}
+};
 
-export function postCrudTableData(bind) {
+export const postCrudTableData = bind => {
   axios
     .post(database + "List", {
       table: bind.state.table
@@ -171,7 +171,7 @@ export function postCrudTableData(bind) {
       bind.setState({ data: decrypt(res.data) });
     })
     .catch();
-}
+};
 
 export const postCrudTableEdit = (bind, row, info = "") => {
   if (row.date !== undefined) {
@@ -194,7 +194,7 @@ export const postCrudTableEdit = (bind, row, info = "") => {
     });
 };
 
-export function postCrudTableDelete(bind, row, info) {
+export const postCrudTableDelete = (bind, row, info) => {
   axios
     .post(database + "delete", {
       table: bind.state.table,
@@ -206,9 +206,9 @@ export function postCrudTableDelete(bind, row, info) {
     content: info,
     cancel: false
   });
-}
+};
 
-export function postCrudTableAdd(bind, row) {
+export const postCrudTableAdd = (bind, row) => {
   axios
     .post(database + "add", { table: bind.state.table, row: row })
     .then(res => {
@@ -221,9 +221,9 @@ export function postCrudTableAdd(bind, row) {
     content: "新增成功",
     cancel: false
   });
-}
+};
 
-export async function postCrudSearch(bind, search, id, callback) {
+export const postCrudSearch = async (bind, search, id, callback) => {
   await axios
     .post(database + "searchColumnID", {
       table: bind.state.table,
@@ -234,4 +234,4 @@ export async function postCrudSearch(bind, search, id, callback) {
       callback(decrypt(res.data));
     })
     .catch();
-}
+};

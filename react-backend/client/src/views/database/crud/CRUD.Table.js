@@ -47,7 +47,7 @@ export default class extends Component {
 
   componentDidMount() {
     // 當你離開此頁面時，跳出視窗警告你
-    // window.onbeforeunload = function(e) {
+    // window.onbeforeunload = (e) => {
     //   e = e || window.event;
     //   if (e) {
     //     e.returnValue = "close";

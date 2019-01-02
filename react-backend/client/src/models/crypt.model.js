@@ -5,20 +5,20 @@ const iv = "107-database-G13";
 const coding = "utf8";
 const binaryCoding = "hex";
 
-export function encrypt(data) {
+export const encrypt = data => {
   const jsonStr = JSON.stringify(data);
   const cipher = crypto.createCipheriv(aes, pwd, iv);
   let encrypted = cipher.update(jsonStr, coding, binaryCoding);
   encrypted += cipher.final(binaryCoding);
 
   return encrypted;
-}
+};
 
-export function decrypt(data) {
+export const decrypt = data => {
   const decipher = crypto.createDecipheriv(aes, pwd, iv);
   let decrypted = decipher.update(data, binaryCoding, coding);
   decrypted += decipher.final(coding);
   const decryptedJSON = JSON.parse(decrypted);
 
   return decryptedJSON;
-}
+};

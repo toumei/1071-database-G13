@@ -1,4 +1,4 @@
-export function addItem(bind) {
+export const addItem = bind => {
   const newColumns = bind.props.columns;
   let row = {};
   let isNull = false;
@@ -27,9 +27,9 @@ export function addItem(bind) {
       cancel: false
     });
   }
-}
+};
 
-export function deleteForm(bind) {
+export const deleteForm = bind => {
   let info = "";
   const deleteList = bind.state.deleteList;
   deleteList.filter((x, i) => {
@@ -38,10 +38,10 @@ export function deleteForm(bind) {
     return false;
   });
   bind.props.handleDeleteItem(deleteList, true, info);
-}
+};
 
-export function cancelDelete(bind, row) {
+export const cancelDelete = (bind, row) => {
   bind.setState({
     deleteList: bind.state.deleteList.filter((x, i) => x !== row)
   });
-}
+};

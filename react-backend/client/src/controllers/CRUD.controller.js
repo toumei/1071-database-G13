@@ -1,3 +1,3 @@
-export function handleChangeTable(bind, table) {
+export const handleChangeTable = (bind, table) => {
   bind.setState({ table: table });
-}
+};

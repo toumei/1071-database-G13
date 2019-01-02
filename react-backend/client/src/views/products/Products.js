@@ -4,7 +4,7 @@ import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import axios from "axios";
 
-function nameFormatter(column, colIndex, { sortElement, filterElement }) {
+const nameFormatter = (column, colIndex, { sortElement, filterElement }) => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       {filterElement}
@@ -12,7 +12,7 @@ function nameFormatter(column, colIndex, { sortElement, filterElement }) {
       {sortElement}
     </div>
   );
-}
+};
 
 export default class Products extends Component {
   constructor(props) {

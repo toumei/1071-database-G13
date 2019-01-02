@@ -4,7 +4,7 @@ import axios from "axios";
 import { decrypt } from "../models/crypt.model";
 import { database } from "../models/axios.model";
 
-export function postAnalysisProcessingData(bind) {
+export const postAnalysisProcessingData = bind => {
   axios
     .post(database + "AnalysisProcessing")
     .then(res => {
@@ -27,4 +27,4 @@ export function postAnalysisProcessingData(bind) {
       bind.state.data.labels = processingLabel;
     })
     .catch();
-}
+};

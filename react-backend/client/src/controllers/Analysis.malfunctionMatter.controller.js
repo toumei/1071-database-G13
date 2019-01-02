@@ -4,7 +4,7 @@ import axios from "axios";
 import { decrypt } from "../models/crypt.model";
 import { database } from "../models/axios.model";
 
-export function postAnalysisMalfunctionData(bind) {
+export const postAnalysisMalfunctionData = bind => {
   axios
     .post(database + "AnalysisMalfunction")
     .then(res => {
@@ -27,4 +27,4 @@ export function postAnalysisMalfunctionData(bind) {
       bind.state.data.labels = matterLabel;
     })
     .catch();
-}
+};

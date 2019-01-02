@@ -5,7 +5,7 @@ import { decrypt } from "../models/crypt.model";
 import { database } from "../models/axios.model";
 import { CrudTableMenuData } from "../models/CRUD.TableMenu.model";
 
-export function postCrudTableMenuData(bind) {
+export const postCrudTableMenuData = bind => {
   axios
     .post(database + "TableList")
     .then(res => {
@@ -16,4 +16,4 @@ export function postCrudTableMenuData(bind) {
       bind.setState({ data: data });
     })
     .catch();
-}
+};

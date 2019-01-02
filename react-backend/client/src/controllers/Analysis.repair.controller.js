@@ -4,7 +4,7 @@ import axios from "axios";
 import { decrypt } from "../models/crypt.model";
 import { database } from "../models/axios.model";
 
-export function postAnalysisRepairData(bind) {
+export const postAnalysisRepairData = bind => {
   axios
     .post(database + "AnalysisRepair")
     .then(res => {
@@ -67,4 +67,4 @@ export function postAnalysisRepairData(bind) {
       bind.state.data.datasets[2].data = processing;
     })
     .catch();
-}
+};
