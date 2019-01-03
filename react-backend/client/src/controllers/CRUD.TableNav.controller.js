@@ -4,21 +4,69 @@ export const addItem = bind => {
   let isNull = false;
   let info = "";
   for (let i = 1; i < newColumns.length; i++) {
-    if (
-      document.getElementById(newColumns[i].COLUMN_NAME + "Add").value === ""
-    ) {
-      isNull = true;
-      info += newColumns[i].COLUMN_COMMENT + "請勿留白<br />";
+    if (newColumns[i].value === "PK") {
+      if (
+        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value === ""
+      ) {
+        isNull = true;
+        info += newColumns[i].COLUMN_COMMENT + "請勿留白<br />";
+      }
+    }
+    if (newColumns[i].type === "CHECKBOX") {
+      if (
+        document.getElementById(newColumns[i].COLUMN_NAME + "TrueAdd")
+          .checked === true
+      ) {
+        row[newColumns[i].COLUMN_NAME] = document.getElementById(
+          newColumns[i].COLUMN_NAME + "TrueAdd"
+        ).value;
+      } else {
+        row[newColumns[i].COLUMN_NAME] = document.getElementById(
+          newColumns[i].COLUMN_NAME + "FalseAdd"
+        ).value;
+      }
     } else {
-      row[newColumns[i].COLUMN_NAME] = document.getElementById(
-        newColumns[i].COLUMN_NAME + "Add"
-      ).value;
+      row[newColumns[i].COLUMN_NAME] =
+        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value === ""
+          ? null
+          : document.getElementById(newColumns[i].COLUMN_NAME + "Add").value;
     }
   }
   if (!isNull) {
     bind.props.handleAddItem(row);
     for (let i = 1; i < newColumns.length; i++) {
-      document.getElementById(newColumns[i].COLUMN_NAME + "Add").value = "";
+      if (newColumns[i].type === "CHECKBOX") {
+        document.getElementById(
+          newColumns[i].COLUMN_NAME + "TrueAdd"
+        ).checked = true;
+      } else if (newColumns[i].type === "SELECT") {
+        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value =
+          newColumns[i].value[0].value;
+      } else if (newColumns[i].type === "DATE") {
+        const date = new Date();
+        const today = `${date.getFullYear()}-${(
+          "0" +
+          (date.getMonth() + 1)
+        ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
+        document.getElementById(
+          newColumns[i].COLUMN_NAME + "Add"
+        ).value = today;
+      } else if (newColumns[i].type === "DATETIME") {
+        const date = new Date();
+        const today = `${date.getFullYear()}-${(
+          "0" +
+          (date.getMonth() + 1)
+        ).slice(-2)}-${("0" + date.getDate()).slice(-2)}T${(
+          "0" + date.getHours()
+        ).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${(
+          "0" + date.getSeconds()
+        ).slice(-2)}`;
+        document.getElementById(
+          newColumns[i].COLUMN_NAME + "Add"
+        ).value = today;
+      } else {
+        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value = "";
+      }
     }
   } else {
     bind.props.handleInfo({

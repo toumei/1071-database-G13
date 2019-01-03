@@ -127,16 +127,9 @@ export const editForm = bind => {
       row[newColumns[i].COLUMN_NAME] = document.getElementById(
         newColumns[i].COLUMN_NAME + "Edit"
       ).value;
-    } else {
-      row[newColumns[i].COLUMN_NAME] = document.getElementById(
-        newColumns[i].COLUMN_NAME + "Edit"
-      ).placeholder;
     }
   }
   editItem(bind, row);
-  for (let i = 1; i < newColumns.length - 1; i++) {
-    document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value = "";
-  }
 };
 
 export const postCrudTableColumns = bind => {
@@ -210,7 +203,7 @@ export const postCrudTableAdd = (bind, row) => {
   axios
     .post(database + "add", { table: bind.state.table, row: row })
     .then(res => {
-      row["ID"] = res.data.id;
+      row["ID"] = decrypt(res.data).insertId;
       bind.setState({ data: [...bind.state.data, row] });
     })
     .catch();
