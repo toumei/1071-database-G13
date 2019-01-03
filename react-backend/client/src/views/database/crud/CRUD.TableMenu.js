@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 // model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
@@ -7,7 +7,7 @@ import { CrudTableMenuColumns } from "../../../models/CRUD.TableMenu.model";
 // controller
 import { postCrudTableMenuData } from "../../../controllers/CRUD.TableMenu.controller";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {

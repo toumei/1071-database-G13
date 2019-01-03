@@ -1,9 +1,9 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 // iframe
 import Iframe from "react-iframe";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     document.title = "ResNetCMMS";

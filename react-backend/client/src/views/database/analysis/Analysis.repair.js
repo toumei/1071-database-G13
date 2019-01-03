@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 // chart
 import { Bar } from "react-chartjs-2";
@@ -6,7 +6,7 @@ import { Bar } from "react-chartjs-2";
 // controller
 import { postAnalysisRepairData } from "../../../controllers/Analysis.repair.controller";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.Month = new Date().getMonth() + 1;

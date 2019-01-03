@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 // model
 import { CustoModal } from "../../../models/custom.model";
@@ -11,7 +11,7 @@ import {
   deleteForm
 } from "../../../controllers/CRUD.TableNav.controller";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {

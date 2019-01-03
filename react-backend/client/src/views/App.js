@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 import { Main } from "../router";
 
@@ -11,7 +11,7 @@ import {
   CustomActiveDropdownClickLink
 } from "../models/custom.model";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = { title: "" };
