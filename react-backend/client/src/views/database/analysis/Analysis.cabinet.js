@@ -32,20 +32,12 @@ export default class extends PureComponent {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [
-              { x: 1, y: 1, r: 10 },
-              { x: 1, y: 2, r: 10 },
-              { x: 2, y: 2, r: 10 },
-              { x: 3, y: 1, r: 10 },
-              { x: 3, y: 3, r: 10 },
-              { x: 4, y: 1, r: 10 },
-              { x: 5, y: 5, r: 10 }
-            ],
+            data: [],
             yAxisID: "y-axis-1"
           },
           {
             type: "bubble",
-            label: "送修",
+            label: "維修",
             fill: false,
             lineTension: 0,
             backgroundColor: "rgba(255,99,132,0.4)",
@@ -63,15 +55,7 @@ export default class extends PureComponent {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: [
-              { x: 1, y: 3, r: 10 },
-              { x: 1, y: 4, r: 10 },
-              { x: 2, y: 3, r: 10 },
-              { x: 3, y: 2, r: 10 },
-              { x: 3, y: 4, r: 10 },
-              { x: 4, y: 2, r: 10 },
-              { x: 5, y: 6, r: 10 }
-            ],
+            data: [],
             yAxisID: "y-axis-1"
           }
         ]
@@ -94,7 +78,15 @@ export default class extends PureComponent {
                 display: true
               },
               type: "category",
-              labels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+              labels: [],
+              ticks: {
+                callback: function(value, index, values) {
+                  if (value === 0) {
+                    return "交換器";
+                  }
+                  return value + "號機櫃";
+                }
+              }
             }
           ],
           yAxes: [
@@ -109,7 +101,16 @@ export default class extends PureComponent {
               labels: {
                 show: true
               },
-              ticks: { stepSize: 1, min: 0 }
+              ticks: {
+                stepSize: 1,
+                min: 0,
+                callback: function(value, index, values) {
+                  if (value === 0) {
+                    return "機櫃";
+                  }
+                  return value + "號交換器";
+                }
+              }
             }
           ]
         }

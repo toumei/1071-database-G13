@@ -83,7 +83,7 @@ const AnalysisCard = ({ path, count }) => (
       </div>
     </div>
 
-    <div className="card text-center bg-success text-white mb-3 col-3 col-md-12">
+    <div className="card text-center bg-danger text-white mb-3 col-3 col-md-12">
       <div className="card-body">
         <h3 className="analysisBlock">機櫃/交換器</h3>
         <h3 className="analysisBlock">{count[4] + "/" + count[5]}</h3>

@@ -100,14 +100,10 @@ module.exports = class Product {
     );
   }
 
-  static fetchAnalysisCabinet(day1, day2) {
+  static fetchAnalysisCabinet() {
     return db.query(
-      "SELECT value FROM _coloption WHERE name = 'result';\
-      SELECT result, COUNT(*) FROM processing WHERE date > '" +
-        day2 +
-        "' AND date < '" +
-        day1 +
-        "'  GROUP BY result;"
+      "SELECT * FROM cabinet;\
+      SELECT c.ID, s.switchID, s.status FROM cabinet c, switch s WHERE c.ID = s.cabinetID;"
     );
   }
 
