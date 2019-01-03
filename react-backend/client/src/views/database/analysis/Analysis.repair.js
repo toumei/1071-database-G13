@@ -77,7 +77,13 @@ export default class extends PureComponent {
               id: "y-axis-1",
               gridLines: { display: true },
               labels: { show: true },
-              ticks: { min: 0, max: 1 }
+              ticks: {
+                min: 0,
+                max: 100,
+                callback: function(value, index, values) {
+                  return value + "%";
+                }
+              }
             },
             {
               type: "linear",

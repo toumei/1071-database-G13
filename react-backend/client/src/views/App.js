@@ -96,14 +96,14 @@ const NavItem = ({ title }) => (
           content={<i className="fas"> 維修單</i>}
         />
       </li>
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <CustomActiveClickLink
           active={title}
           activeOptions={["產品"]}
           to="/products"
           content={<i className="fas"> 產品</i>}
         />
-      </li>
+      </li> */}
     </ul>
 
     <ul className="navbar-nav ml-auto">

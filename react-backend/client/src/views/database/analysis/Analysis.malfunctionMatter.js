@@ -26,6 +26,14 @@ export default class extends PureComponent {
           }
         ],
         labels: []
+      },
+      options: {
+        scale: {
+          ticks: {
+            min: 0,
+            stepSize: 1
+          }
+        }
       }
     };
     document.title = "資料庫";
@@ -38,7 +46,7 @@ export default class extends PureComponent {
   render() {
     return (
       <div>
-        <Polar data={this.state.data} />
+        <Polar data={this.state.data} options={this.state.options} />
       </div>
     );
   }

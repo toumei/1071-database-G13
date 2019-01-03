@@ -62,7 +62,7 @@ export const postAnalysisRepairData = bind => {
         if (malfunction[i] === 0) {
           repair[i] = 0;
         } else {
-          repair[i] = repair[i] / malfunction[i];
+          repair[i] = (repair[i] / malfunction[i]) * 100;
         }
       }
       bind.state.data.datasets[0].data = repair;
