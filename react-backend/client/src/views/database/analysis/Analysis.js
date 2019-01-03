@@ -26,19 +26,13 @@ export default class extends PureComponent {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-2">
-            <AnalysisCardLeft
+            <AnalysisCard
               path={this.props.location.pathname}
               count={this.state.count}
             />
           </div>
-          <div className="col-md-8">
+          <div className="col-md-10">
             <AnalysisMain />
-          </div>
-          <div className="col-md-2">
-            <AnalysisCardRight
-              path={this.props.location.pathname}
-              count={this.state.count}
-            />
           </div>
         </div>
       </div>
@@ -46,23 +40,25 @@ export default class extends PureComponent {
   }
 }
 
-const AnalysisCardLeft = ({ path, count }) => (
-  <div>
-    <div className="card text-center bg-primary text-white mb-3">
+const AnalysisCard = ({ path, count }) => (
+  <div className="row">
+    <div className="card text-center bg-primary text-white mb-3 col-3 col-md-12">
       <div className="card-body">
-        <h3>報修/維修</h3>
-        <h4 className="display-4">
-          <i className="fas fa-toolbox" /> {count[0] + "/" + count[1]}
+        <h3 className="analysisBlock">報修/維修</h3>
+        <h3 className="analysisBlock">{count[0] + "/" + count[1]}</h3>
+        <h4 className="analysisNone display-4">
+          <i className="fas fa-toolbox" />
         </h4>
         <CustomActiveBtnLink active={path} to="/database" content="View" />
       </div>
     </div>
 
-    <div className="card text-center bg-warning text-white mb-3">
+    <div className="card text-center bg-warning text-white mb-3 col-3 col-md-12">
       <div className="card-body">
-        <h3>報修事項</h3>
-        <h4 className="display-4">
-          <i className="fas fa-list-ul" /> {count[2]}
+        <h3 className="analysisBlock">報修事項</h3>
+        <h3 className="analysisBlock">{count[2]}</h3>
+        <h4 className="analysisNone display-4">
+          <i className="fas fa-list-ul" />
         </h4>
         <CustomActiveBtnLink
           active={path}
@@ -72,11 +68,12 @@ const AnalysisCardLeft = ({ path, count }) => (
       </div>
     </div>
 
-    <div className="card text-center bg-success text-white mb-3">
+    <div className="card text-center bg-success text-white mb-3 col-3 col-md-12">
       <div className="card-body">
-        <h3>維修結果</h3>
-        <h4 className="display-4">
-          <i className="fas fa-check" /> {count[3]}
+        <h3 className="analysisBlock">維修結果</h3>
+        <h3 className="analysisBlock">{count[3]}</h3>
+        <h4 className="analysisNone display-4">
+          <i className="fas fa-check" />
         </h4>
         <CustomActiveBtnLink
           active={path}
@@ -85,49 +82,17 @@ const AnalysisCardLeft = ({ path, count }) => (
         />
       </div>
     </div>
-  </div>
-);
 
-const AnalysisCardRight = ({ path, count }) => (
-  <div>
-    <div className="card text-center bg-success text-white mb-3">
+    <div className="card text-center bg-success text-white mb-3 col-3 col-md-12">
       <div className="card-body">
-        <h3>機櫃/交換器</h3>
-        <h4 className="display-4">
-          <i className="fas fa-exclamation-triangle" />{" "}
-          {count[4] + "/" + count[5]}
+        <h3 className="analysisBlock">機櫃/交換器</h3>
+        <h3 className="analysisBlock">{count[4] + "/" + count[5]}</h3>
+        <h4 className="analysisNone display-4">
+          <i className="fas fa-exclamation-triangle" />
         </h4>
         <CustomActiveBtnLink
           active={path}
           to="/database/cabinet"
-          content="View"
-        />
-      </div>
-    </div>
-
-    <div className="card text-center bg-primary text-white mb-3">
-      <div className="card-body">
-        <h3>申報</h3>
-        <h4 className="display-4">
-          <i className="fas fa-industry" /> {count[7]}
-        </h4>
-        <CustomActiveBtnLink
-          active={path}
-          to="/database/apply"
-          content="View"
-        />
-      </div>
-    </div>
-
-    <div className="card text-center bg-warning text-white mb-3">
-      <div className="card-body">
-        <h3>清掃</h3>
-        <h4 className="display-4">
-          <i className="fas fa-broom" /> {count[6]}
-        </h4>
-        <CustomActiveBtnLink
-          active={path}
-          to="/database/sweep"
           content="View"
         />
       </div>

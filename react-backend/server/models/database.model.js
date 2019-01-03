@@ -54,13 +54,7 @@ module.exports = class Product {
         today +
         "';\
       SELECT COUNT(*) FROM cabinet WHERE status != '正常';\
-      SELECT COUNT(*) FROM switch WHERE status != '正常';\
-      SELECT COUNT(*) FROM sweep WHERE date > '" +
-        today +
-        "';\
-      SELECT COUNT(*) FROM apply WHERE date > '" +
-        today +
-        "';"
+      SELECT COUNT(*) FROM switch WHERE status != '正常';"
     );
   }
 

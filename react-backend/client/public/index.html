@@ -42,9 +42,17 @@
       .react-bootstrap-table::-webkit-scrollbar {
         height: 0 !important;
       }
-
+      .analysisNone {
+        display: none !important;
+      }
       @media screen and (max-width: 575.98px) {
         header {
+          display: none !important;
+        }
+        .analysisNone {
+          display: block !important;
+        }
+        .analysisBlock {
           display: none !important;
         }
       }
