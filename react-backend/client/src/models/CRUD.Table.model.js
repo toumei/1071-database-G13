@@ -27,7 +27,6 @@ const valid = {
       }
     }, 0);
   },
-  FK: () => {},
   IDCARD: (bind, newValue, row, column, done) => {
     setTimeout(() => {
       if (String(newValue) !== String(row[column.dataField])) {
@@ -210,12 +209,5 @@ export const CrudTableDeleteColumns = elm => {
     ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"]),
     headerStyle: columnsWidth(elm),
     style: { cursor: "default" }
-  };
-};
-
-export const CrudTableFormColumns = elm => {
-  return {
-    COLUMN_NAME: elm["COLUMN_NAME"],
-    COLUMN_COMMENT: elm["COLUMN_COMMENT"]
   };
 };

@@ -4,7 +4,6 @@ import { database } from "../models/axios.model";
 import {
   CrudTableColumns,
   CrudTableDeleteColumns,
-  CrudTableFormColumns,
   CrudTableModeColumns
 } from "../models/CRUD.Table.model";
 
@@ -150,7 +149,7 @@ export const postCrudTableColumns = bind => {
       decrypt(res.data).forEach(elm => {
         columns.push(CrudTableColumns(bind, elm));
         deleteColumns.push(CrudTableDeleteColumns(elm));
-        formColumns.push(CrudTableFormColumns(elm));
+        formColumns.push(elm);
       });
       columns.push(CrudTableModeColumns(bind));
       bind.setState({
