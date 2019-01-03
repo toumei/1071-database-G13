@@ -25,6 +25,7 @@ export const postAnalysisMalfunctionData = bind => {
       }
       bind.state.data.datasets[0].data = matterData;
       bind.state.data.labels = matterLabel;
+      bind.setState({ data: bind.state.data });
     })
     .catch();
 };
