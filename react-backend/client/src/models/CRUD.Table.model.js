@@ -1,7 +1,9 @@
 import React from "react";
 
+// model
 import { type, customColumns, columnsWidth } from "./react-bootstrap.model";
 
+// controller
 import { getItem, postCrudSearch } from "../controllers/CRUD.Table.controller";
 
 const valid = {

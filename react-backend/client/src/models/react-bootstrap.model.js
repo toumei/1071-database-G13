@@ -1,8 +1,7 @@
 import React, { PureComponent } from "react";
 
-import { Type } from "react-bootstrap-table2-editor";
-
 // bootstrap
+import { Type } from "react-bootstrap-table2-editor";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 
@@ -54,7 +53,7 @@ export const type = {
 // 快速編輯DATETIME
 class DateTime extends PureComponent {
   getValue() {
-    return this.node.value + ".000Z";
+    return this.node.value;
   }
 
   render() {

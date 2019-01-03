@@ -1,4 +1,6 @@
 import React, { PureComponent } from "react";
+
+// chart
 import { Bar } from "react-chartjs-2";
 
 const data = {

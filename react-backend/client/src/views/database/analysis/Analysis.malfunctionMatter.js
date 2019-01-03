@@ -1,5 +1,9 @@
 import React, { PureComponent } from "react";
+
+// chart
 import { Polar } from "react-chartjs-2";
+
+// controller
 import { postAnalysisMalfunctionData } from "../../../controllers/Analysis.malfunctionMatter.controller";
 
 export default class extends PureComponent {

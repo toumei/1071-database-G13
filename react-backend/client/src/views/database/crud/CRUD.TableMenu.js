@@ -1,8 +1,8 @@
 import React, { PureComponent } from "react";
 
 // model
-import { CrudTableMenuColumns } from "../../../models/CRUD.TableMenu.model";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
+import { CrudTableMenuColumns } from "../../../models/CRUD.TableMenu.model";
 
 // controller
 import { postCrudTableMenuData } from "../../../controllers/CRUD.TableMenu.controller";

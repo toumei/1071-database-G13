@@ -3,10 +3,12 @@ import React, { PureComponent } from "react";
 import { Main } from "../router";
 
 import logo from "../logo.svg";
+
+// model
 import {
+  CustomClickLink,
   CustomActiveClickLink,
-  CustomActiveDropdownClickLink,
-  CustomClickLink
+  CustomActiveDropdownClickLink
 } from "../models/custom.model";
 
 export default class extends PureComponent {
@@ -141,7 +143,7 @@ const NavItem = ({ title }) => (
 );
 
 const Header = ({ title }) => (
-  <header className="bg-primary text-light ">
+  <header className="bg-primary text-light">
     <div className="container">
       <div className="row">
         <h1 className="col-md-6">

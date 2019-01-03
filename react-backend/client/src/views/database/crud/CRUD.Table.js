@@ -13,18 +13,18 @@ import CrudTableNav from "./CRUD.TableNav";
 
 // controller
 import {
-  postCrudTableEdit,
-  postCrudTableColumns,
-  postCrudTableData,
+  editForm,
   addSelect,
   deleteItem,
+  handleInfo,
   deleteSelect,
-  editForm,
   handleAddItem,
-  handleDeleteItem,
   handleEditable,
   handleGetSelect,
-  handleInfo
+  handleDeleteItem,
+  postCrudTableData,
+  postCrudTableEdit,
+  postCrudTableColumns
 } from "../../../controllers/CRUD.Table.controller";
 
 export default class extends Component {
@@ -110,8 +110,9 @@ export default class extends Component {
                   mode: "click",
                   blurToSave: true,
                   afterSaveCell: (oldValue, newValue, row, column) => {
-                    if (String(oldValue) !== String(newValue))
+                    if (String(oldValue) !== String(newValue)) {
                       postCrudTableEdit(this, row);
+                    }
                   }
                 })}
                 selectRow={{

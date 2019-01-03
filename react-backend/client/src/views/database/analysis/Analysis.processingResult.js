@@ -1,5 +1,9 @@
 import React, { PureComponent } from "react";
+
+// chart
 import { Doughnut } from "react-chartjs-2";
+
+// controller
 import { postAnalysisProcessingData } from "../../../controllers/Analysis.processingResult.controller";
 
 export default class extends PureComponent {

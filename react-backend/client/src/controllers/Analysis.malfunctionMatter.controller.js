@@ -9,6 +9,7 @@ export const postAnalysisMalfunctionData = bind => {
     .post(database + "AnalysisMalfunction")
     .then(res => {
       const newData = decrypt(res.data);
+      console.log(newData);
       let matterLabel = [];
       let matterData = [];
       for (let i = 0; i < newData[0][0].value.length; i++) {

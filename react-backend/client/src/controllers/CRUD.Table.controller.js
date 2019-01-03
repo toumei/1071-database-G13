@@ -1,6 +1,3 @@
-// controller
-import axios from "axios";
-
 // model
 import { decrypt } from "../models/crypt.model";
 import { database } from "../models/axios.model";
@@ -10,6 +7,9 @@ import {
   CrudTableFormColumns,
   CrudTableModeColumns
 } from "../models/CRUD.Table.model";
+
+// controller
+import axios from "axios";
 
 // table nav add
 export const handleAddItem = (bind, row) => {
@@ -168,23 +168,22 @@ export const postCrudTableData = bind => {
       table: bind.state.table
     })
     .then(res => {
-      bind.setState({ data: decrypt(res.data) });
+      bind.setState({
+        data: decrypt(res.data).filter((x, i) => {
+          if (x.date !== undefined) {
+            x.date = x.date.split(".")[0];
+          }
+          return x;
+        })
+      });
     })
     .catch();
 };
 
 export const postCrudTableEdit = (bind, row, info = "") => {
-  if (row.date !== undefined) {
-    row.date = row.date.split(".")[0];
-  }
   axios
     .post(database + "update", { table: bind.state.table, row: row })
-    .then(res => {
-      if (row.date !== undefined) {
-        row.date = row.date + ".000Z";
-        bind.setState({ data: bind.state.data });
-      }
-    })
+    .then(res => {})
     .catch();
   if (info !== "")
     handleInfo(bind, {

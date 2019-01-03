@@ -49,10 +49,10 @@ module.exports = class Product {
         "';\
       SELECT COUNT(*) FROM malfunction WHERE date > '" +
         today +
-        "' group by matter;\
+        "';\
       SELECT COUNT(*) FROM processing WHERE date > '" +
         today +
-        "' group by result;\
+        "';\
       SELECT COUNT(*) FROM cabinet WHERE status != '正常';\
       SELECT COUNT(*) FROM switch WHERE status != '正常';\
       SELECT COUNT(*) FROM sweep WHERE date > '" +

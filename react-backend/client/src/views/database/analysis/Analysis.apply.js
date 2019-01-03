@@ -1,4 +1,6 @@
 import React, { PureComponent } from "react";
+
+// chart
 import { Pie } from "react-chartjs-2";
 
 const data = {

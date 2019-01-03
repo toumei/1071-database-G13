@@ -1,5 +1,9 @@
 import React, { PureComponent } from "react";
+
+// chart
 import { Bubble } from "react-chartjs-2";
+
+// controller
 import { postAnalysisCabinetData } from "../../../controllers/Analysis.cabinet.controller";
 
 export default class extends PureComponent {

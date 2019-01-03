@@ -127,11 +127,14 @@ module.exports = {
 
   postAnalysisMalfunction: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
+    const Day1 = new Date(Today);
+    Day1.setMonth(Day1.getMonth() + 1);
+    day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
     const Day2 = new Date(Today);
     Day2.setMonth(Day2.getMonth() - 1);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
     databaseModel
-      .fetchAnalysisMalfunction(today, day2)
+      .fetchAnalysisMalfunction(day1, day2)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -141,11 +144,14 @@ module.exports = {
 
   postAnalysisProcessing: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
+    const Day1 = new Date(Today);
+    Day1.setMonth(Day1.getMonth() + 1);
+    day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
     const Day2 = new Date(Today);
     Day2.setMonth(Day2.getMonth() - 1);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
     databaseModel
-      .fetchAnalysisProcessing(today, day2)
+      .fetchAnalysisProcessing(day1, day2)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -155,11 +161,14 @@ module.exports = {
 
   postAnalysisCabinet: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
+    const Day1 = new Date(Today);
+    Day1.setMonth(Day1.getMonth() + 1);
+    day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
     const Day2 = new Date(Today);
     Day2.setMonth(Day2.getMonth() - 1);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
     databaseModel
-      .fetchAnalysisCabinet(today, day2)
+      .fetchAnalysisCabinet(day1, day2)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
