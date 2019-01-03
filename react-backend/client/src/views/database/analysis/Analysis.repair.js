@@ -1,8 +1,12 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
+
+// chart
 import { Bar } from "react-chartjs-2";
+
+// controller
 import { postAnalysisRepairData } from "../../../controllers/Analysis.repair.controller";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.Month = new Date().getMonth() + 1;
@@ -73,7 +77,13 @@ export default class extends PureComponent {
               id: "y-axis-1",
               gridLines: { display: true },
               labels: { show: true },
-              ticks: { min: 0, max: 1 }
+              ticks: {
+                min: 0,
+                max: 100,
+                callback: function(value, index, values) {
+                  return value + "%";
+                }
+              }
             },
             {
               type: "linear",

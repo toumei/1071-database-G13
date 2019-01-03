@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 // bootstrap
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
@@ -14,7 +14,7 @@ import {
   handleSelectExport
 } from "../../../controllers/CSV.controller";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = { columns: [], data: [], isSelect: [] };

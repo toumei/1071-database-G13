@@ -3,15 +3,15 @@ import React, { Component } from "react";
 // bootstrap
 import cellEditFactory from "react-bootstrap-table2-editor";
 
+// model
+import { CustomBootstrap } from "../../../models/react-bootstrap.model";
+
 // controller
 import {
   postCtrlData,
   postCtrlEdit,
   postCtrlColumns
 } from "../../../controllers/Ctrl.controller";
-
-// model
-import { CustomBootstrap } from "../../../models/react-bootstrap.model";
 
 export default class extends Component {
   constructor(props) {

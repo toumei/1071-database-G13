@@ -1,8 +1,7 @@
-import React, { PureComponent } from "react";
-
-import { Type } from "react-bootstrap-table2-editor";
+import React, { Component } from "react";
 
 // bootstrap
+import { Type } from "react-bootstrap-table2-editor";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 
@@ -52,9 +51,9 @@ export const type = {
 };
 
 // 快速編輯DATETIME
-class DateTime extends PureComponent {
+class DateTime extends Component {
   getValue() {
-    return this.node.value + ".000Z";
+    return this.node.value;
   }
 
   render() {
@@ -81,7 +80,7 @@ class DateTime extends PureComponent {
   }
 }
 
-export class CheckBox extends PureComponent {
+export class CheckBox extends Component {
   getValue() {
     return this.node1.value + ":" + this.node2.value;
   }
@@ -139,7 +138,7 @@ export class CheckBox extends PureComponent {
   }
 }
 
-export class AddOptiont extends PureComponent {
+export class AddOptiont extends Component {
   constructor(props) {
     super(props);
     this.state = { dict: JSON.parse(props.value) };
@@ -320,7 +319,7 @@ export class AddOptiont extends PureComponent {
   }
 }
 
-export class Select extends PureComponent {
+export class Select extends Component {
   getValue() {
     return this.node.value;
   }
@@ -354,7 +353,7 @@ export class Select extends PureComponent {
   }
 }
 
-export class ReadOnly extends PureComponent {
+export class ReadOnly extends Component {
   getValue() {
     return "NONE";
   }

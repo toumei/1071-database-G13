@@ -64,7 +64,6 @@ export const CtrlColumns = (elm, editable, editorType, editorValue) => {
                   options={[
                     { value: "NONE", label: "NONE" },
                     { value: "PK", label: "Primary Key" },
-                    { value: "FK", label: "Foreign Key" },
                     { value: "IDCARD", label: "ID card" },
                     { value: "EMAIL", label: "Email" },
                     { value: "TEL", label: "Telephone" }

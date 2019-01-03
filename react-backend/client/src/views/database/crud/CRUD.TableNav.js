@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 // model
 import { CustoModal } from "../../../models/custom.model";
@@ -11,7 +11,7 @@ import {
   deleteForm
 } from "../../../controllers/CRUD.TableNav.controller";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -111,23 +111,142 @@ const AddForm = ({ bind }) => {
   let columns = [];
   const newColumns = bind.props.columns;
   for (let i = 1; i < newColumns.length; i++) {
-    columns.push(
-      <div key={i} className="form-group row">
-        <label
-          htmlFor={newColumns[i].COLUMN_NAME + "Add"}
-          className="col-sm-2 col-form-label"
-        >
-          {newColumns[i].COLUMN_COMMENT}
-        </label>
-        <div className="col-sm-10">
-          <input
-            type="text"
-            className="form-control"
-            id={newColumns[i].COLUMN_NAME + "Add"}
-          />
+    if (newColumns[i].type === "DATETIME") {
+      columns.push(
+        <div key={i} className="form-group row">
+          <label
+            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            className="col-sm-2 col-form-label"
+          >
+            {newColumns[i].COLUMN_COMMENT}
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="datetime-local"
+              className="form-control"
+              id={newColumns[i].COLUMN_NAME + "Add"}
+            />
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else if (newColumns[i].type === "DATE") {
+      columns.push(
+        <div key={i} className="form-group row">
+          <label
+            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            className="col-sm-2 col-form-label"
+          >
+            {newColumns[i].COLUMN_COMMENT}
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="date"
+              className="form-control"
+              id={newColumns[i].COLUMN_NAME + "Add"}
+            />
+          </div>
+        </div>
+      );
+    } else if (newColumns[i].type === "TEXTAREA") {
+      columns.push(
+        <div key={i} className="form-group row">
+          <label
+            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            className="col-sm-2 col-form-label"
+          >
+            {newColumns[i].COLUMN_COMMENT}
+          </label>
+          <div className="col-sm-10">
+            <textarea
+              className="form-control"
+              id={newColumns[i].COLUMN_NAME + "Add"}
+            />
+          </div>
+        </div>
+      );
+    } else if (newColumns[i].type === "CHECKBOX") {
+      columns.push(
+        <div key={i} className="form-group row">
+          <label
+            htmlFor={newColumns[i].COLUMN_NAME + "TrueAdd"}
+            className="col-sm-2 col-form-label"
+          >
+            {newColumns[i].COLUMN_COMMENT}
+          </label>
+          <div className="input-group col-sm-10">
+            <div className="input-group-text">
+              <input
+                type="radio"
+                id={newColumns[i].COLUMN_NAME + "TrueAdd"}
+                name="radio-group"
+                value="1"
+                defaultChecked
+              />
+            </div>
+            <label
+              className="form-control"
+              htmlFor={newColumns[i].COLUMN_NAME + "TrueAdd"}
+            >
+              1
+            </label>
+            <div className="input-group-text">
+              <input
+                type="radio"
+                id={newColumns[i].COLUMN_NAME + "FalseAdd"}
+                name="radio-group"
+                value="2"
+              />
+            </div>
+            <label
+              className="form-control"
+              htmlFor={newColumns[i].COLUMN_NAME + "FalseAdd"}
+            >
+              2
+            </label>
+          </div>
+        </div>
+      );
+    } else if (newColumns[i].type === "SELECT") {
+      columns.push(
+        <div key={i} className="form-group row">
+          <label
+            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            className="col-sm-2 col-form-label"
+          >
+            {newColumns[i].COLUMN_COMMENT}
+          </label>
+          <div className="col-sm-10">
+            <select
+              class="custom-select"
+              id={newColumns[i].COLUMN_NAME + "Add"}
+            >
+              <option selected>Choose...</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+      );
+    } else {
+      columns.push(
+        <div key={i} className="form-group row">
+          <label
+            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            className="col-sm-2 col-form-label"
+          >
+            {newColumns[i].COLUMN_COMMENT}
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              className="form-control"
+              id={newColumns[i].COLUMN_NAME + "Add"}
+            />
+          </div>
+        </div>
+      );
+    }
   }
   return columns;
 };

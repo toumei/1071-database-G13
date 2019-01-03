@@ -25,6 +25,7 @@ export const postAnalysisProcessingData = bind => {
       }
       bind.state.data.datasets[0].data = processingData;
       bind.state.data.labels = processingLabel;
+      bind.setState({ data: bind.state.data });
     })
     .catch();
 };

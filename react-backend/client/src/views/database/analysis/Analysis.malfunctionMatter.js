@@ -1,8 +1,12 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
+
+// chart
 import { Polar } from "react-chartjs-2";
+
+// controller
 import { postAnalysisMalfunctionData } from "../../../controllers/Analysis.malfunctionMatter.controller";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,6 +26,14 @@ export default class extends PureComponent {
           }
         ],
         labels: []
+      },
+      options: {
+        scale: {
+          ticks: {
+            min: 0,
+            stepSize: 1
+          }
+        }
       }
     };
     document.title = "資料庫";
@@ -34,7 +46,7 @@ export default class extends PureComponent {
   render() {
     return (
       <div>
-        <Polar data={this.state.data} />
+        <Polar data={this.state.data} options={this.state.options} />
       </div>
     );
   }

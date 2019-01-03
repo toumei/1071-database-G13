@@ -19,7 +19,7 @@ router.post("/ColumnList", dbCtrlController.postColumnList);
 router.post("/ColumnsMsgList", dbCtrlController.postColumnsMsgList);
 router.post("/search", dbCtrlController.postSearch);
 router.post("/searchColumnID", dbCtrlController.postSearchColumnID);
-router.post("/AnalysisSum", dbCtrlController.postSum);
+router.post("/AnalysisCount", dbCtrlController.postCount);
 router.post("/AnalysisRepair", dbCtrlController.postAnalysisRepair);
 router.post("/AnalysisMalfunction", dbCtrlController.postAnalysisMalfunction);
 router.post("/AnalysisProcessing", dbCtrlController.postAnalysisProcessing);

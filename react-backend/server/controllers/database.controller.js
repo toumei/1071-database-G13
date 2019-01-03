@@ -2,6 +2,9 @@
 const log = require("../models/log.model");
 const cryptModel = require("../models/crypt.model");
 const databaseModel = require("../models/database.model");
+const Today = new Date();
+const today =
+  Today.getFullYear() + "-" + ("0" + (Today.getMonth() + 1)).slice(-2);
 
 module.exports = {
   // create
@@ -94,10 +97,10 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postSum: (req, res) => {
+  postCount: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
     databaseModel
-      .fetchSum()
+      .fetchCount(today)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -107,10 +110,11 @@ module.exports = {
 
   postAnalysisRepair: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
-    let Day1 = new Date();
-    let Day2 = new Date(Day1);
-    Day2.setMonth(Day2.getMonth() - 11);
+    const Day1 = new Date(Today);
+    Day1.setMonth(Day1.getMonth() + 1);
     day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
+    const Day2 = new Date(Today);
+    Day2.setMonth(Day2.getMonth() - 11);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
     databaseModel
       .fetchAnalysisRepair(day1, day2)
@@ -123,10 +127,11 @@ module.exports = {
 
   postAnalysisMalfunction: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
-    let Day1 = new Date();
-    let Day2 = new Date(Day1);
-    Day2.setMonth(Day2.getMonth() - 1);
+    const Day1 = new Date(Today);
+    Day1.setMonth(Day1.getMonth() + 1);
     day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
+    const Day2 = new Date(Today);
+    Day2.setMonth(Day2.getMonth() - 1);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
     databaseModel
       .fetchAnalysisMalfunction(day1, day2)
@@ -139,10 +144,11 @@ module.exports = {
 
   postAnalysisProcessing: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
-    let Day1 = new Date();
-    let Day2 = new Date(Day1);
-    Day2.setMonth(Day2.getMonth() - 1);
+    const Day1 = new Date(Today);
+    Day1.setMonth(Day1.getMonth() + 1);
     day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
+    const Day2 = new Date(Today);
+    Day2.setMonth(Day2.getMonth() - 1);
     day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
     databaseModel
       .fetchAnalysisProcessing(day1, day2)
@@ -155,13 +161,8 @@ module.exports = {
 
   postAnalysisCabinet: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
-    let Day1 = new Date();
-    let Day2 = new Date(Day1);
-    Day2.setMonth(Day2.getMonth() - 1);
-    day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
-    day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
     databaseModel
-      .fetchAnalysisCabinet(day1, day2)
+      .fetchAnalysisCabinet()
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));

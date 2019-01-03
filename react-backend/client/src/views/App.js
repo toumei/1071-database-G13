@@ -1,15 +1,17 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 import { Main } from "../router";
 
 import logo from "../logo.svg";
+
+// model
 import {
+  CustomClickLink,
   CustomActiveClickLink,
-  CustomActiveDropdownClickLink,
-  CustomClickLink
+  CustomActiveDropdownClickLink
 } from "../models/custom.model";
 
-export default class extends PureComponent {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = { title: "" };
@@ -94,14 +96,14 @@ const NavItem = ({ title }) => (
           content={<i className="fas"> 維修單</i>}
         />
       </li>
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <CustomActiveClickLink
           active={title}
           activeOptions={["產品"]}
           to="/products"
           content={<i className="fas"> 產品</i>}
         />
-      </li>
+      </li> */}
     </ul>
 
     <ul className="navbar-nav ml-auto">
@@ -141,7 +143,7 @@ const NavItem = ({ title }) => (
 );
 
 const Header = ({ title }) => (
-  <header className="bg-primary text-light ">
+  <header className="bg-primary text-light">
     <div className="container">
       <div className="row">
         <h1 className="col-md-6">

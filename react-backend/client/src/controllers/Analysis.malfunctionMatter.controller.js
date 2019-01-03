@@ -9,6 +9,7 @@ export const postAnalysisMalfunctionData = bind => {
     .post(database + "AnalysisMalfunction")
     .then(res => {
       const newData = decrypt(res.data);
+      console.log(newData);
       let matterLabel = [];
       let matterData = [];
       for (let i = 0; i < newData[0][0].value.length; i++) {
@@ -25,6 +26,7 @@ export const postAnalysisMalfunctionData = bind => {
       }
       bind.state.data.datasets[0].data = matterData;
       bind.state.data.labels = matterLabel;
+      bind.setState({ data: bind.state.data });
     })
     .catch();
 };

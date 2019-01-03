@@ -13,18 +13,18 @@ import CrudTableNav from "./CRUD.TableNav";
 
 // controller
 import {
-  postCrudTableEdit,
-  postCrudTableColumns,
-  postCrudTableData,
+  editForm,
   addSelect,
   deleteItem,
+  handleInfo,
   deleteSelect,
-  editForm,
   handleAddItem,
-  handleDeleteItem,
   handleEditable,
   handleGetSelect,
-  handleInfo
+  handleDeleteItem,
+  postCrudTableData,
+  postCrudTableEdit,
+  postCrudTableColumns
 } from "../../../controllers/CRUD.Table.controller";
 
 export default class extends Component {
@@ -46,14 +46,6 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    // 當你離開此頁面時，跳出視窗警告你
-    // window.onbeforeunload = (e) => {
-    //   e = e || window.event;
-    //   if (e) {
-    //     e.returnValue = "close";
-    //   }
-    //   return "close";
-    // };
     postCrudTableColumns(this);
     postCrudTableData(this);
   }
@@ -70,10 +62,6 @@ export default class extends Component {
       postCrudTableColumns(this);
       postCrudTableData(this);
     }
-  }
-
-  componentWillUnmount() {
-    // window.onbeforeunload = undefined;
   }
 
   render() {
@@ -110,8 +98,9 @@ export default class extends Component {
                   mode: "click",
                   blurToSave: true,
                   afterSaveCell: (oldValue, newValue, row, column) => {
-                    if (String(oldValue) !== String(newValue))
+                    if (String(oldValue) !== String(newValue)) {
                       postCrudTableEdit(this, row);
+                    }
                   }
                 })}
                 selectRow={{
@@ -252,24 +241,124 @@ const EditForm = ({ bind }) => {
     let columns = [];
     const newColumns = bind.state.formColumns;
     for (let i = 1; i < newColumns.length; i++) {
-      columns.push(
-        <div key={i} className="form-group row">
-          <label
-            htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
-            className="col-sm-2 col-form-label"
-          >
-            {newColumns[i].COLUMN_COMMENT}
-          </label>
-          <div className="col-sm-10">
-            <input
-              type="text"
-              className="form-control"
-              id={newColumns[i].COLUMN_NAME + "Edit"}
-              placeholder={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
-            />
+      if (newColumns[i].type === "DATETIME") {
+        columns.push(
+          <div key={i} className="form-group row">
+            <label
+              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+              className="col-sm-2 col-form-label"
+            >
+              {newColumns[i].COLUMN_COMMENT}
+            </label>
+            <div className="col-sm-10">
+              <input
+                type="datetime-local"
+                className="form-control"
+                id={newColumns[i].COLUMN_NAME + "Edit"}
+                value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
+              />
+            </div>
           </div>
-        </div>
-      );
+        );
+      } else if (newColumns[i].type === "DATE") {
+        columns.push(
+          <div key={i} className="form-group row">
+            <label
+              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+              className="col-sm-2 col-form-label"
+            >
+              {newColumns[i].COLUMN_COMMENT}
+            </label>
+            <div className="col-sm-10">
+              <input
+                type="date"
+                className="form-control"
+                id={newColumns[i].COLUMN_NAME + "Edit"}
+                value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
+              />
+            </div>
+          </div>
+        );
+      } else if (newColumns[i].type === "TEXTAREA") {
+        columns.push(
+          <div key={i} className="form-group row">
+            <label
+              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+              className="col-sm-2 col-form-label"
+            >
+              {newColumns[i].COLUMN_COMMENT}
+            </label>
+            <div className="col-sm-10">
+              <textarea
+                className="form-control"
+                id={newColumns[i].COLUMN_NAME + "Edit"}
+                value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
+              />
+            </div>
+          </div>
+        );
+      } else if (newColumns[i].type === "CHECKBOX") {
+        columns.push(<div key={i} className="form-group row">
+            <label htmlFor={newColumns[i].COLUMN_NAME + "TrueEdit"} className="col-sm-2 col-form-label">
+              {newColumns[i].COLUMN_COMMENT}
+            </label>
+            <div className="input-group col-sm-10">
+              <div className="input-group-text">
+                <input type="radio" id={newColumns[i].COLUMN_NAME + "TrueEdit"} name="radio-group" value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]} defaultChecked />
+              </div>
+              <label className="form-control" htmlFor={newColumns[i].COLUMN_NAME + "TrueEdit"}>
+                {bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
+              </label>
+              <div className="input-group-text">
+                <input type="radio" id={newColumns[i].COLUMN_NAME + "FalseEdit"} name="radio-group" value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]} />
+              </div>
+              <label className="form-control" htmlFor={newColumns[i].COLUMN_NAME + "FalseEdit"}>
+                {bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
+              </label>
+            </div>
+          </div>);
+      } else if (newColumns[i].type === "SELECT") {
+        columns.push(
+          <div key={i} className="form-group row">
+            <label
+              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+              className="col-sm-2 col-form-label"
+            >
+              {newColumns[i].COLUMN_COMMENT}
+            </label>
+            <div className="col-sm-10">
+              <select
+                class="custom-select"
+                id={newColumns[i].COLUMN_NAME + "Edit"}
+              >
+                <option selected>Choose...</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </div>
+        );
+      } else {
+        columns.push(
+          <div key={i} className="form-group row">
+            <label
+              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+              className="col-sm-2 col-form-label"
+            >
+              {newColumns[i].COLUMN_COMMENT}
+            </label>
+            <div className="col-sm-10">
+              <input
+                type="text"
+                className="form-control"
+                id={newColumns[i].COLUMN_NAME + "Edit"}
+                value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
+              />
+            </div>
+          </div>
+        );
+      }
     }
     return columns;
   }

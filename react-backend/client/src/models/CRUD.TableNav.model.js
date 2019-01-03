@@ -1,7 +1,9 @@
 import React from "react";
 
+// model
 import { customColumns, columnsWidth } from "./react-bootstrap.model";
 
+// controller
 import { cancelDelete } from "../controllers/CRUD.TableNav.controller";
 
 export const TableNavColumns = (bind, props) => {

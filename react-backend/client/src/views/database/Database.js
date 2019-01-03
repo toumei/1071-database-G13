@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
 // router
 import { DBMain } from "../../router";
@@ -7,7 +7,7 @@ import { DBMain } from "../../router";
 import { CustomActiveClickLink } from "../../models/custom.model";
 
 // default program
-export default class extends PureComponent {
+export default class extends Component {
   render() {
     return (
       <div>

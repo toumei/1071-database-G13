@@ -12,8 +12,6 @@ import Repair from "./views/database/analysis/Analysis.repair";
 import MalfunctionMatter from "./views/database/analysis/Analysis.malfunctionMatter";
 import Cabinet from "./views/database/analysis/Analysis.cabinet";
 import ProcessingResult from "./views/database/analysis/Analysis.processingResult";
-import Sweep from "./views/database/analysis/Analysis.sweep";
-import Apply from "./views/database/analysis/Analysis.apply";
 
 import CRUD from "./views/database/crud/CRUD";
 import CSV from "./views/database/csv/CSV";
@@ -35,10 +33,8 @@ export const Router = () => (
       <Route exact path="/" component={App} />
       <Route exact path="/database" component={App} />
       <Route exact path="/database/cabinet" component={App} />
-      <Route exact path="/database/apply" component={App} />
       <Route exact path="/database/malfunctionMatter" component={App} />
       <Route exact path="/database/processingResult" component={App} />
-      <Route exact path="/database/sweep" component={App} />
       <Route exact path="/database/crud" component={App} />
       <Route exact path="/database/csv" component={App} />
       <Route exact path="/database/control" component={App} />
@@ -72,10 +68,8 @@ export const DBMain = () => (
   <div>
     <Route exact path="/database" component={Analysis} />
     <Route path="/database/cabinet" component={Analysis} />
-    <Route path="/database/apply" component={Analysis} />
     <Route path="/database/malfunctionMatter" component={Analysis} />
     <Route path="/database/processingResult" component={Analysis} />
-    <Route path="/database/sweep" component={Analysis} />
     <Route path="/database/crud" component={CRUD} />
     <Route path="/database/csv" component={CSV} />
     <Route path="/database/control" component={Control} />
@@ -87,9 +81,7 @@ export const AnalysisMain = () => (
   <div>
     <Route exact path="/database" component={Repair} />
     <Route path="/database/cabinet" component={Cabinet} />
-    <Route path="/database/apply" component={Apply} />
     <Route path="/database/malfunctionMatter" component={MalfunctionMatter} />
     <Route path="/database/processingResult" component={ProcessingResult} />
-    <Route path="/database/sweep" component={Sweep} />
   </div>
 );

@@ -1,19 +1,24 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 
+// router
 import { AnalysisMain } from "../../../router";
-import { postAnalysisTableData } from "../../../controllers/Analysis.controller";
+
+// model
 import { CustomActiveBtnLink } from "../../../models/custom.model";
 
-export default class extends PureComponent {
+// controller
+import { postAnalysisData } from "../../../controllers/Analysis.controller";
+
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      sum: [0, 0, 0, 0, 0, 0, 0]
+      count: [0, 0, 0, 0, 0, 0, 0]
     };
   }
 
   componentDidMount() {
-    postAnalysisTableData(this);
+    postAnalysisData(this);
   }
 
   render() {
@@ -21,19 +26,13 @@ export default class extends PureComponent {
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-2">
-            <AnalysisCardLeft
+            <AnalysisCard
               path={this.props.location.pathname}
-              sum={this.state.sum}
+              count={this.state.count}
             />
           </div>
-          <div className="col-md-8">
+          <div className="col-md-10">
             <AnalysisMain />
-          </div>
-          <div className="col-md-2">
-            <AnalysisCardRight
-              path={this.props.location.pathname}
-              sum={this.state.sum}
-            />
           </div>
         </div>
       </div>
@@ -41,23 +40,25 @@ export default class extends PureComponent {
   }
 }
 
-const AnalysisCardLeft = ({ path, sum }) => (
-  <div>
-    <div className="card text-center bg-primary text-white mb-3">
+const AnalysisCard = ({ path, count }) => (
+  <div className="row">
+    <div className="card text-center bg-primary text-white mb-3 col-3 col-md-12">
       <div className="card-body">
-        <h3>報修/維修</h3>
-        <h4 className="display-4">
-          <i className="fas fa-toolbox" /> {sum[0] + "/" + sum[1]}
+        <h3 className="analysisBlock">報修/維修</h3>
+        <h3 className="analysisBlock">{count[0] + "/" + count[1]}</h3>
+        <h4 className="analysisNone display-4">
+          <i className="fas fa-toolbox" />
         </h4>
         <CustomActiveBtnLink active={path} to="/database" content="View" />
       </div>
     </div>
 
-    <div className="card text-center bg-warning text-white mb-3">
+    <div className="card text-center bg-warning text-white mb-3 col-3 col-md-12">
       <div className="card-body">
-        <h3>報修事項</h3>
-        <h4 className="display-4">
-          <i className="fas fa-list-ul" /> {sum[2]}
+        <h3 className="analysisBlock">報修事項</h3>
+        <h3 className="analysisBlock">{count[2]}</h3>
+        <h4 className="analysisNone display-4">
+          <i className="fas fa-list-ul" />
         </h4>
         <CustomActiveBtnLink
           active={path}
@@ -67,11 +68,12 @@ const AnalysisCardLeft = ({ path, sum }) => (
       </div>
     </div>
 
-    <div className="card text-center bg-success text-white mb-3">
+    <div className="card text-center bg-success text-white mb-3 col-3 col-md-12">
       <div className="card-body">
-        <h3>維修結果</h3>
-        <h4 className="display-4">
-          <i className="fas fa-check" /> {sum[3]}
+        <h3 className="analysisBlock">維修結果</h3>
+        <h3 className="analysisBlock">{count[3]}</h3>
+        <h4 className="analysisNone display-4">
+          <i className="fas fa-check" />
         </h4>
         <CustomActiveBtnLink
           active={path}
@@ -80,48 +82,17 @@ const AnalysisCardLeft = ({ path, sum }) => (
         />
       </div>
     </div>
-  </div>
-);
 
-const AnalysisCardRight = ({ path, sum }) => (
-  <div>
-    <div className="card text-center bg-success text-white mb-3">
+    <div className="card text-center bg-danger text-white mb-3 col-3 col-md-12">
       <div className="card-body">
-        <h3>機櫃/交換器</h3>
-        <h4 className="display-4">
-          <i className="fas fa-exclamation-triangle" /> {sum[4] + "/" + sum[5]}
+        <h3 className="analysisBlock">機櫃/交換器</h3>
+        <h3 className="analysisBlock">{count[4] + "/" + count[5]}</h3>
+        <h4 className="analysisNone display-4">
+          <i className="fas fa-exclamation-triangle" />
         </h4>
         <CustomActiveBtnLink
           active={path}
           to="/database/cabinet"
-          content="View"
-        />
-      </div>
-    </div>
-
-    <div className="card text-center bg-primary text-white mb-3">
-      <div className="card-body">
-        <h3>申報</h3>
-        <h4 className="display-4">
-          <i className="fas fa-industry" /> {sum[7]}
-        </h4>
-        <CustomActiveBtnLink
-          active={path}
-          to="/database/apply"
-          content="View"
-        />
-      </div>
-    </div>
-
-    <div className="card text-center bg-warning text-white mb-3">
-      <div className="card-body">
-        <h3>清掃</h3>
-        <h4 className="display-4">
-          <i className="fas fa-broom" /> {sum[6]}
-        </h4>
-        <CustomActiveBtnLink
-          active={path}
-          to="/database/sweep"
           content="View"
         />
       </div>

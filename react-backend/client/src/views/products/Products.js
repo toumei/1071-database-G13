@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import BootstrapTable from "react-bootstrap-table-next";
-import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
-import paginationFactory from "react-bootstrap-table2-paginator";
 import axios from "axios";
+import React, { Component } from "react";
+
+// bootstrap
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
+import filterFactory, { textFilter } from "react-bootstrap-table2-filter";
 
 const nameFormatter = (column, colIndex, { sortElement, filterElement }) => {
   return (

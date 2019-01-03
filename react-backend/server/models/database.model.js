@@ -39,16 +39,22 @@ module.exports = class Product {
     ]);
   }
 
-  static fetchSum() {
+  static fetchCount(today) {
     return db.query(
-      "SELECT COUNT(*) FROM malfunction;\
-      SELECT COUNT(*) FROM processing;\
-      SELECT COUNT(*), matter FROM malfunction group by matter;\
-      SELECT COUNT(*), result FROM processing group by result;\
+      "SELECT COUNT(*) FROM malfunction WHERE date > '" +
+        today +
+        "';\
+      SELECT COUNT(*) FROM processing WHERE date > '" +
+        today +
+        "';\
+      SELECT COUNT(*) FROM malfunction WHERE date > '" +
+        today +
+        "';\
+      SELECT COUNT(*) FROM processing WHERE date > '" +
+        today +
+        "';\
       SELECT COUNT(*) FROM cabinet WHERE status != '正常';\
-      SELECT COUNT(*) FROM switch WHERE status != '正常';\
-      SELECT COUNT(*) FROM sweep WHERE date > '2018-12-23';\
-      SELECT COUNT(*) FROM apply;"
+      SELECT COUNT(*) FROM switch WHERE status != '正常';"
     );
   }
 
@@ -56,12 +62,12 @@ module.exports = class Product {
     return db.query(
       "SELECT DATE_FORMAT(date, '%m') month, COUNT(*) FROM malfunction WHERE date > '" +
         day2 +
-        "' AND date < '" +
+        "' AND date <= '" +
         day1 +
         "' GROUP BY DATE_FORMAT(date, '%Y-%m') ORDER BY date ASC;\
         SELECT DATE_FORMAT(date, '%m') month, COUNT(*) FROM processing WHERE date > '" +
         day2 +
-        "' AND date < '" +
+        "' AND date <= '" +
         day1 +
         "' GROUP BY DATE_FORMAT(date, '%Y-%m') ORDER BY date ASC;\
         SELECT DATE_FORMAT(m.date, '%m') month, COUNT(*) FROM malfunction m, processing p WHERE m.ID = p.ID AND m.date > '" +
@@ -94,14 +100,10 @@ module.exports = class Product {
     );
   }
 
-  static fetchAnalysisCabinet(day1, day2) {
+  static fetchAnalysisCabinet() {
     return db.query(
-      "SELECT value FROM _coloption WHERE name = 'result';\
-      SELECT result, COUNT(*) FROM processing WHERE date > '" +
-        day2 +
-        "' AND date < '" +
-        day1 +
-        "'  GROUP BY result;"
+      "SELECT * FROM cabinet;\
+      SELECT c.ID, s.switchID, s.status FROM cabinet c, switch s WHERE c.ID = s.cabinetID;"
     );
   }
 
