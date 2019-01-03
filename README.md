@@ -5,9 +5,27 @@
 * **express用ES5語法，react用ES6語法，少用var(型態可變，值可變)改用let(型態不可變，值可變)、const(型態不可變，值不可變)**
 ---
 ### 日程：
-* 2019年12月22日 (六) 第一次分組討論 (暫定)
-* 2019年01月05日 (六) 繳交報告
-* 2019年01月07日 (一) 口頭報告
+* 2019年01月04日 (五) 繳交報告，請每組組長代表繳交至 iClass
+* 2019年01月07日 (一) 口頭報告 (20:00~21:00 -- G13~G18，每組時間10分鐘，要準備 PPT，報告5分鐘，老師詢問5分鐘)
+### 檔案：
+a. PPT 檔，檔名 Gxx-題目.ppt
+
+b. 所有程式碼壓縮成一個檔，
+　* Gxx_source.zip，裡面要包含測試資料 Gxx.sql 可以匯入，
+  * Gxx_setup.txt 說明原始檔如何安裝並且可以執行的方法，尤其是資料庫的設定。
+
+c. Github repository URL, Github contribution圖片 及分工說明
+
+d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
+
+1. 題目
+2. 組員及分工
+3. 系統需求
+4. ER model (根據3之系統需求產生)
+5. Relational Model
+6. Testing data (展示有多少筆)
+7. 前端頁面，能針對後端資料庫資料做 CRUD
+8. 自評完成度
 ---
 ### 重要資訊：
 * **更新資訊後面請補上更新日期，之後不定期清理不必要資訊**
@@ -16,13 +34,9 @@
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
 ---
 ### port setting
-* server http-port：http://localhost:3000
+* server http-port：http://localhost:5000
 * server https-port：https://localhost:8000
-* client http-port：http://localhost:3001 
-  > * "start": "set PORT=3001&&react-scripts start" => 設定 port
-  > * {"proxy": "http://localhost:3001"} => 指向 server port：3001 
-  > * 與伺服器取值傳值則不再需要 http://localhost:3001 可以省略
-  > * http://localhost:3001/
+* client http-port：http://localhost:5000
 ---
 ### 更新資訊：
 * EJS 模組化(pages、partials)
@@ -31,6 +45,9 @@
 * 使用http攔截器，攔截請求，若header無token，則setHeader(Local Storage的token資料)
 * [react練習/測試檔](https://github.com/toumei/107-01-database-4B/tree/master/example-create-react-app-express) - 12/10
 * router 已全部配置完成 - 10/19
+* ORM
+* RESTful API
+* ACL
 ---
 
 ### WIKI：
@@ -39,6 +56,7 @@
 * [npm 擴充插件](https://github.com/toumei/1071-database-G13/wiki/npm-Extensions)
 * [git指令](https://github.com/toumei/1071-database-G13/wiki/git-command)
 * [SQL Table](https://github.com/toumei/1071-database-G13/wiki/SQL-Table)
+* [API接口](https://github.com/toumei/1071-database-G13/wiki/API-%E6%8E%A5%E5%8F%A3)
 * [參考資料](https://github.com/toumei/1071-database-G13/wiki/Reference)
 ---
 
@@ -47,27 +65,22 @@
   * https server：https://localhost:port
   * 將 三層架構 調整為 Model–view–controller (MVC)
   * EJS 模組化(pages、partials)
-  * 登入系統(email, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
+  * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發，不熟研究中
+  * epilogue：架構具有 RESTful 風的 CRUD API server
+  * 登入系統(id, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
-* client (express)
-  * Ajax 紀錄回傳token
-  * Axios攔截器尚未測試(server端無法跑)，若token失效則重新導向login
 * client (react)
   * router 配置完成 (不包含之後新增)
   * server-client 資料加解密
   * CRUD 大致完成
   * MVC 配置大致完成
+  * Axios攔截器
 
 ### 正在做的部分：
 * sever
-  * epilogue：可快速架構具有 RESTful 風的 CRUD API server，但不支援 ACL，需另外編寫
-  * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發
-    * 將資料庫的內容映射為物件，讓程式開發人員可以用操作物件的方式對資料庫進行操作，而不直接使用SQL語法對資料庫進行操作。
-    * 例如： TableName.findAll().then(data => res.json(data))
-  * 帳戶權限系統：acl、node_acl、rbac
-    * 登入時判斷身份為 一般使用者 、 工作人員 、 DB管理員，切換至不同的使用頁面。
-    * ![account database design](https://i.stack.imgur.com/JVE4x.png)
+  * 帳戶權限系統：express-acl，還沒測試完全，[流程](https://segmentfault.com/a/1190000004627946)
+    * 登入時判斷身份為 user、worker、admin、DB_admin，切換至不同的使用頁面。
 
 * client (express)
 
