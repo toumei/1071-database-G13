@@ -14,6 +14,7 @@ axios.defaults.headers.post["Content-Type"] =
 axios.interceptors.request.use(
   config => {
     const token = window.localStorage.getItem("token");
+    console.log(token);
     if (token) {
       config.headers.Authorization = token;
       config.headers["Authorization"] = token;

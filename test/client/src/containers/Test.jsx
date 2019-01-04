@@ -23,18 +23,29 @@ export default class Test extends Component {
       .post("login", this.state)
       .then(res => {
         window.localStorage.setItem("token", res.data.token);
-        return apiRequest.get("account", { data: { id: 1 } });
+        return apiRequest.get("account");
       })
-      .then(res => {
-        console.log(res);
+      .then(data => {
+        console.log(data);
       })
       .catch(err => {
         console.error(err.message);
       });
 
-    //window.location.pathname = "/boarder";
+    //window.location.pathname = "/";
   }
-  componentDidMount() {}
+  componentDidMount() {
+    /*
+    apiRequest
+      .get("boarder")
+      .then(res => {
+        this.setState(res.data);
+        console.log(res.data);
+      })
+      .catch(err => {
+        console.error(err.message);
+      });*/
+  }
 
   render() {
     return (

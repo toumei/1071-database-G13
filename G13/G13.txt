@@ -1,0 +1,24 @@
+﻿a. G13-學生宿舍網路維修管理系統(ResNetCMMS).ppt
+
+b. 所有程式碼壓縮成一個檔，
+　* G13_source.zip，裡面要包含測試資料 Gxx.sql 可以匯入，
+   * G13_setup.txt 說明原始檔如何安裝並且可以執行的方法，尤其是資料庫的設定。
+
+c. Github repository URL, Github contribution圖片 及分工說明
+
+d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
+
+1.
+學生宿舍網路維修管理系統(ResNetCMMS)
+2. 
+組長：
+404410119 陳思瑜 資工4B 
+組員：
+404412214 郭英杰 資工4B react的整個配置與前後端的CRUD介面、分析、匯出CSV、欄位控制，
+404411166 黃品維 資工4B 前後端的報修單、維修單介面
+3. 系統需求
+4. ER model (根據3之系統需求產生)
+5. Relational Model
+6. Testing data (展示有多少筆)
+7. 前端頁面，能針對後端資料庫資料做 CRUD
+8. 自評完成度

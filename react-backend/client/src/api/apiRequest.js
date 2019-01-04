@@ -33,7 +33,7 @@ axios.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          window.location.href = "/";
+          window.location.href = "/user/login";
       }
     }
     return Promise.reject(error.response.data);

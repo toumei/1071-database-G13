@@ -1,0 +1,23 @@
+確認 MySQL service 是否啟動，若無則手動開啟
+進入預設之連線 http:127.0.0.1:3306，帳號為 root，密碼為 0000
+建立新的schema，命名為res_net_cmms，編碼選 UTF8
+匯入sql檔案
+
+打開 VS code
+開 2 個 TERMINAL 視窗，分別進行server與client的啟動
+$ cd server
+$ npm install
+$ npm start
+
+$ cd client
+$ npm install
+$ npm start
+
+開啟瀏覽器訪問 http:127.0.0.1:3000，進入系統
+首頁為 原先使用google表單的網路報修頁面 
+按上方選單的登入或資料庫，將切換至登入頁面
+輸入帳號為 1，密碼為 1
+登入成功後進行跳轉，即可瀏覽資料庫頁面進行操控
+
+
+
