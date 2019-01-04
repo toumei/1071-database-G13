@@ -1,16 +1,15 @@
-import axios from "axios";
+import apiRequest from "../api/apiRequest";
 
 // model
 import { CtrlMsg } from "../models/log.model";
 import { decrypt } from "../models/crypt.model";
-import { database } from "../models/axios.model";
 import { columnsType, CtrlColumns } from "../models/Ctrl.model";
 
 export const postCtrlColumns = bind => {
   const data = { table: "_coloption" };
   CtrlMsg("postCtrlColumns", "send", data);
-  axios
-    .post(database + "ColumnsMsgList", data)
+  apiRequest
+    .post("/database/" + "ColumnsMsgList", data)
     .then(res => {
       CtrlMsg("postCtrlColumns", "result", decrypt(res.data));
       let columns = [];
@@ -33,8 +32,8 @@ export const postCtrlColumns = bind => {
 export const postCtrlData = bind => {
   const data = { table: "_coloption" };
   CtrlMsg("postCtrlData", "send", data);
-  axios
-    .post(database + "List", data)
+  apiRequest
+    .post("/database/" + "List", data)
     .then(res => {
       CtrlMsg("postCtrlData", "result", decrypt(res.data));
       // 包裹在裡面的json格式需要經過處裡
@@ -57,8 +56,8 @@ export const postCtrlEdit = (bind, row) => {
   }
   const data = { table: "_coloption", row: row };
   CtrlMsg("postCtrlEdit", "send", data);
-  axios
-    .post(database + "update", data)
+  apiRequest
+    .post("/database/" + "update", data)
     .then(res => {
       // data會被動到，因此要還原
       if (row.type !== "SELECT") {

@@ -1,13 +1,12 @@
-import axios from "axios";
+import apiRequest from "../api/apiRequest";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { database } from "../models/axios.model";
 import { CrudTableMenuData } from "../models/CRUD.TableMenu.model";
 
 export const postCrudTableMenuData = bind => {
-  axios
-    .post(database + "TableList")
+  apiRequest
+    .post("/database/" + "TableList")
     .then(res => {
       let data = [];
       decrypt(res.data).forEach(elm => {

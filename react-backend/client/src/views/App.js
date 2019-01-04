@@ -52,8 +52,7 @@ const Navbar = ({ title }) => (
         id="navbarBtn"
         className="navbar-toggler collapsed"
         data-toggle="collapse"
-        data-target="#navbarNav"
-      >
+        data-target="#navbarNav">
         <span className="navbar-toggler-icon" />
       </button>
       <NavItem title={title} />
@@ -113,7 +112,7 @@ const NavItem = ({ title }) => (
           activeOptions={["個人資料", "設定"]}
           to="/user"
           dataToggle="dropdown"
-          content={<i className="fas fa-user"> 歡迎 Brad</i>}
+          content={<i className="fas fa-user"> 歡迎 </i>}
         />
         <div className="dropdown-menu" style={{ borderRadius: "1em" }}>
           <CustomClickLink
@@ -135,7 +134,7 @@ const NavItem = ({ title }) => (
           active={title}
           activeOptions={["登入", "登出"]}
           to="/user/login"
-          content={<i className="fas fa-user-times"> 登出</i>}
+          content={<i className="fas fa-user-times"> 登入</i>}
         />
       </li>
     </ul>

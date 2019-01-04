@@ -1,12 +1,11 @@
-import axios from "axios";
+import apiRequest from "../api/apiRequest";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { database } from "../models/axios.model";
 
 export const postAnalysisProcessingData = bind => {
-  axios
-    .post(database + "AnalysisProcessing")
+  apiRequest
+    .post("/database/" + "AnalysisProcessing")
     .then(res => {
       const newData = decrypt(res.data);
       let processingLabel = [];

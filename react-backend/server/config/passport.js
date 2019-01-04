@@ -5,8 +5,8 @@ module.exports = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
   },
   local: {
-    usernameField: "email",
-    passwordField: "pwd",
+    usernameField: "id",
+    passwordField: "password",
     passReqToCallback: true
   }
 };

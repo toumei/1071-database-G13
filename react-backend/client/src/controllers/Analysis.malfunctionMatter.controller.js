@@ -1,12 +1,11 @@
-import axios from "axios";
+import apiRequest from "../api/apiRequest";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { database } from "../models/axios.model";
 
 export const postAnalysisMalfunctionData = bind => {
-  axios
-    .post(database + "AnalysisMalfunction")
+  apiRequest
+    .post("/database/" + "AnalysisMalfunction")
     .then(res => {
       const newData = decrypt(res.data);
       console.log(newData);

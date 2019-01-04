@@ -1,12 +1,11 @@
-import axios from "axios";
+import apiRequest from "../api/apiRequest";
 
 // model
 import { decrypt } from "../models/crypt.model";
-import { database } from "../models/axios.model";
 
 export const postAnalysisData = bind => {
-  axios
-    .post(database + "AnalysisCount")
+  apiRequest
+    .post("/database/" + "AnalysisCount")
     .then(res => {
       const newData = decrypt(res.data);
       let dataList = [];

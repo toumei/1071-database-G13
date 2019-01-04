@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
-const malfuntioncontroller = require('../controllers/malfuntion.controller');
+const malfuntioncontroller = require("../controllers/malfunction.controller");
 
 router.get("/", function(req, res, next) {
-    res.render("malfuntion", { title: "報修單" });
-  });
+  res.render("malfuntion", { title: "報修單" });
+});
 
-router.post('/', malfuntioncontroller.getMalfuntion);
+router.post("/", malfuntioncontroller.getMalfuntion);
 
 module.exports = router;

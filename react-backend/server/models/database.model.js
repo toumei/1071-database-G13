@@ -1,6 +1,6 @@
 const db = require("../config/mysql2");
 
-module.exports = class Product {
+module.exports = class Database {
   // create
   static insert(table, sqlData) {
     return db.query("INSERT INTO " + table + " SET ?", sqlData);

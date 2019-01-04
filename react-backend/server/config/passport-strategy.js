@@ -1,4 +1,4 @@
-const passportController = require("../controllers/passport.controller");
+const passportController = require("../controllers/passport");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const JwtStrategy = require("passport-jwt").Strategy;

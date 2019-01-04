@@ -1,9 +1,8 @@
-import axios from "axios";
+import apiRequest from "../api/apiRequest";
 
 // model
 import { CSVMsg } from "../models/log.model";
 import { decrypt } from "../models/crypt.model";
-import { database } from "../models/axios.model";
 import { CSVColumns, CSVColumnsList } from "../models/CSV.model";
 
 export const postCSVColumns = bind => {
@@ -18,8 +17,8 @@ export const postCSVColumns = bind => {
 
 export const postCSVData = bind => {
   CSVMsg("postCSVTableData", "send");
-  axios
-    .post(database + "CSVList")
+  apiRequest
+    .post("/database/" + "CSVList")
     .then(res => {
       CSVMsg("postCSVData", "result", decrypt(res.data));
       // 去除時間標記.000Z

@@ -1,6 +1,5 @@
 // model
 import { decrypt } from "../models/crypt.model";
-import { database } from "../models/axios.model";
 import {
   CrudTableColumns,
   CrudTableDeleteColumns,
@@ -8,7 +7,7 @@ import {
 } from "../models/CRUD.Table.model";
 
 // controller
-import axios from "axios";
+import apiRequest from "../api/apiRequest";
 
 // table nav add
 export const handleAddItem = (bind, row) => {
@@ -152,8 +151,8 @@ export const editForm = bind => {
 };
 
 export const postCrudTableColumns = bind => {
-  axios
-    .post(database + "ColumnList", { table: bind.state.table })
+  apiRequest
+    .post("/database/" + "ColumnList", { table: bind.state.table })
     .then(res => {
       let columns = [];
       let deleteColumns = [];
@@ -174,8 +173,8 @@ export const postCrudTableColumns = bind => {
 };
 
 export const postCrudTableData = bind => {
-  axios
-    .post(database + "List", {
+  apiRequest
+    .post("/database/" + "List", {
       table: bind.state.table
     })
     .then(res => {
@@ -192,8 +191,8 @@ export const postCrudTableData = bind => {
 };
 
 export const postCrudTableEdit = (bind, row, info = "") => {
-  axios
-    .post(database + "update", { table: bind.state.table, row: row })
+  apiRequest
+    .post("/database/" + "update", { table: bind.state.table, row: row })
     .then(res => {})
     .catch();
   if (info !== "")
@@ -205,8 +204,8 @@ export const postCrudTableEdit = (bind, row, info = "") => {
 };
 
 export const postCrudTableDelete = (bind, row, info) => {
-  axios
-    .post(database + "delete", {
+  apiRequest
+    .post("/database/" + "delete", {
       table: bind.state.table,
       id: row.ID
     })
@@ -219,8 +218,8 @@ export const postCrudTableDelete = (bind, row, info) => {
 };
 
 export const postCrudTableAdd = (bind, row) => {
-  axios
-    .post(database + "add", { table: bind.state.table, row: row })
+  apiRequest
+    .post("/database/" + "add", { table: bind.state.table, row: row })
     .then(res => {
       row["ID"] = decrypt(res.data).insertId;
       bind.setState({ data: [...bind.state.data, row] });
@@ -234,8 +233,8 @@ export const postCrudTableAdd = (bind, row) => {
 };
 
 export const postCrudSearch = async (bind, search, id, callback) => {
-  await axios
-    .post(database + "searchColumnID", {
+  await apiRequest
+    .post("/database/" + "searchColumnID", {
       table: bind.state.table,
       search: search,
       id: id
