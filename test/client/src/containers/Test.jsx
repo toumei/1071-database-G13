@@ -23,7 +23,7 @@ export default class Test extends Component {
       .post("login", this.state)
       .then(res => {
         window.localStorage.setItem("token", res.data.token);
-        return apiRequest.get("account");
+        return apiRequest.get("account", { data: { id: 1 } });
       })
       .then(res => {
         console.log(res);

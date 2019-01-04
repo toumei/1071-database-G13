@@ -13,6 +13,11 @@
     "group": "admin",
     "permissions": [
       {
+        "resource": "*",
+        "methods": "*",
+        "action": "allow"
+      },
+      {
         "resource": ["/account", "/role"],
         "methods": ["DELETE"],
         "action": "deny"
