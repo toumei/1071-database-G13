@@ -27,11 +27,15 @@
     "socket.io-client": "^2.2.0"
   },
   "scripts": {
-    "start": "set PORT=3001&&react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+<<<<<<< HEAD
+  "proxy": "http://localhost:3001",
+=======
+>>>>>>> 31b10f35ea8f55a6dc0be51b8cb240b95b699d9c
   "eslintConfig": {
     "extends": "react-app"
   },
