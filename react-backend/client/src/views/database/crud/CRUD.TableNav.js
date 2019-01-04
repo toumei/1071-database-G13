@@ -93,9 +93,41 @@ const AddBtn = ({ bind }) => (
             onClick={() => {
               const newColumns = bind.props.columns;
               for (let i = 1; i < newColumns.length; i++) {
-                document.getElementById(
-                  newColumns[i].COLUMN_NAME + "Add"
-                ).value = "";
+                if (newColumns[i].type === "CHECKBOX") {
+                  document.getElementById(
+                    newColumns[i].COLUMN_NAME + "TrueAdd"
+                  ).checked = true;
+                } else if (newColumns[i].type === "SELECT") {
+                  document.getElementById(
+                    newColumns[i].COLUMN_NAME + "Add"
+                  ).value = newColumns[i].value[0].value;
+                } else if (newColumns[i].type === "DATE") {
+                  const date = new Date();
+                  const today = `${date.getFullYear()}-${(
+                    "0" +
+                    (date.getMonth() + 1)
+                  ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
+                  document.getElementById(
+                    newColumns[i].COLUMN_NAME + "Add"
+                  ).value = today;
+                } else if (newColumns[i].type === "DATETIME") {
+                  const date = new Date();
+                  const today = `${date.getFullYear()}-${(
+                    "0" +
+                    (date.getMonth() + 1)
+                  ).slice(-2)}-${("0" + date.getDate()).slice(-2)}T${(
+                    "0" + date.getHours()
+                  ).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${(
+                    "0" + date.getSeconds()
+                  ).slice(-2)}`;
+                  document.getElementById(
+                    newColumns[i].COLUMN_NAME + "Add"
+                  ).value = today;
+                } else {
+                  document.getElementById(
+                    newColumns[i].COLUMN_NAME + "Add"
+                  ).value = "";
+                }
               }
             }}
           >
@@ -112,8 +144,17 @@ const AddForm = ({ bind }) => {
   const newColumns = bind.props.columns;
   for (let i = 1; i < newColumns.length; i++) {
     if (newColumns[i].type === "DATETIME") {
+      const date = new Date();
+      const today = `${date.getFullYear()}-${(
+        "0" +
+        (date.getMonth() + 1)
+      ).slice(-2)}-${("0" + date.getDate()).slice(-2)}T${(
+        "0" + date.getHours()
+      ).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${(
+        "0" + date.getSeconds()
+      ).slice(-2)}`;
       columns.push(
-        <div key={i} className="form-group row">
+        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
           <label
             htmlFor={newColumns[i].COLUMN_NAME + "Add"}
             className="col-sm-2 col-form-label"
@@ -125,13 +166,19 @@ const AddForm = ({ bind }) => {
               type="datetime-local"
               className="form-control"
               id={newColumns[i].COLUMN_NAME + "Add"}
+              defaultValue={today}
             />
           </div>
         </div>
       );
     } else if (newColumns[i].type === "DATE") {
+      const date = new Date();
+      const today = `${date.getFullYear()}-${(
+        "0" +
+        (date.getMonth() + 1)
+      ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
       columns.push(
-        <div key={i} className="form-group row">
+        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
           <label
             htmlFor={newColumns[i].COLUMN_NAME + "Add"}
             className="col-sm-2 col-form-label"
@@ -143,13 +190,14 @@ const AddForm = ({ bind }) => {
               type="date"
               className="form-control"
               id={newColumns[i].COLUMN_NAME + "Add"}
+              defaultValue={today}
             />
           </div>
         </div>
       );
     } else if (newColumns[i].type === "TEXTAREA") {
       columns.push(
-        <div key={i} className="form-group row">
+        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
           <label
             htmlFor={newColumns[i].COLUMN_NAME + "Add"}
             className="col-sm-2 col-form-label"
@@ -160,13 +208,14 @@ const AddForm = ({ bind }) => {
             <textarea
               className="form-control"
               id={newColumns[i].COLUMN_NAME + "Add"}
+              defaultValue=""
             />
           </div>
         </div>
       );
     } else if (newColumns[i].type === "CHECKBOX") {
       columns.push(
-        <div key={i} className="form-group row">
+        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
           <label
             htmlFor={newColumns[i].COLUMN_NAME + "TrueAdd"}
             className="col-sm-2 col-form-label"
@@ -179,7 +228,7 @@ const AddForm = ({ bind }) => {
                 type="radio"
                 id={newColumns[i].COLUMN_NAME + "TrueAdd"}
                 name="radio-group"
-                value="1"
+                defaultValue={newColumns[i].value.split(":")[0]}
                 defaultChecked
               />
             </div>
@@ -187,28 +236,40 @@ const AddForm = ({ bind }) => {
               className="form-control"
               htmlFor={newColumns[i].COLUMN_NAME + "TrueAdd"}
             >
-              1
+              {newColumns[i].value.split(":")[0]}
             </label>
             <div className="input-group-text">
               <input
                 type="radio"
                 id={newColumns[i].COLUMN_NAME + "FalseAdd"}
                 name="radio-group"
-                value="2"
+                defaultValue={newColumns[i].value.split(":")[1]}
               />
             </div>
             <label
               className="form-control"
               htmlFor={newColumns[i].COLUMN_NAME + "FalseAdd"}
             >
-              2
+              {newColumns[i].value.split(":")[1]}
             </label>
           </div>
         </div>
       );
     } else if (newColumns[i].type === "SELECT") {
+      let options = newColumns[i].value;
+      const Option = () => {
+        let option = [];
+        for (let i = 0; i < options.length; i++) {
+          option.push(
+            <option key={i} value={options[i].value}>
+              {options[i].label}
+            </option>
+          );
+        }
+        return option;
+      };
       columns.push(
-        <div key={i} className="form-group row">
+        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
           <label
             htmlFor={newColumns[i].COLUMN_NAME + "Add"}
             className="col-sm-2 col-form-label"
@@ -217,20 +278,18 @@ const AddForm = ({ bind }) => {
           </label>
           <div className="col-sm-10">
             <select
-              class="custom-select"
+              className="custom-select"
               id={newColumns[i].COLUMN_NAME + "Add"}
+              defaultValue={options[0].value}
             >
-              <option selected>Choose...</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <Option />
             </select>
           </div>
         </div>
       );
     } else {
       columns.push(
-        <div key={i} className="form-group row">
+        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
           <label
             htmlFor={newColumns[i].COLUMN_NAME + "Add"}
             className="col-sm-2 col-form-label"
@@ -242,6 +301,7 @@ const AddForm = ({ bind }) => {
               type="text"
               className="form-control"
               id={newColumns[i].COLUMN_NAME + "Add"}
+              defaultValue=""
             />
           </div>
         </div>

@@ -25,7 +25,7 @@ module.exports = class Product {
 
   static fetchCSVAll() {
     return db.query(
-      "SELECT p.ID ID, p.result, e.name name_e, p.date date_p, p.detail, m.date date_m, m.bedNum, b.name name_b, m.time, m.matter, m.desc FROM processing p, employee e, malfunction m, boarder b WHERE p.employeeID = e.ID and p.ID = m.ID and m.ID = b.studentID;"
+      "SELECT p.malfunctionID ID, p.result, e.name name_e, p.date date_p, p.detail, m.date date_m, m.bedNum, b.name name_b, m.time, m.matter, m.desc FROM processing p, employee e, malfunction m, boarder b WHERE p.employeeID = e.ID and p.malfunctionID = m.ID and m.ID = b.studentID;"
     );
   }
 
@@ -47,12 +47,12 @@ module.exports = class Product {
       SELECT COUNT(*) FROM processing WHERE date > '" +
         today +
         "';\
-      SELECT COUNT(*) FROM malfunction WHERE date > '" +
+      SELECT COUNT(*) FROM (SELECT matter FROM malfunction WHERE date > '" +
         today +
-        "';\
-      SELECT COUNT(*) FROM processing WHERE date > '" +
+        "' group by matter) m;\
+      SELECT COUNT(*) FROM (SELECT result FROM processing WHERE date > '" +
         today +
-        "';\
+        "' group by result) p;\
       SELECT COUNT(*) FROM cabinet WHERE status != '正常';\
       SELECT COUNT(*) FROM switch WHERE status != '正常';"
     );
@@ -70,7 +70,7 @@ module.exports = class Product {
         "' AND date <= '" +
         day1 +
         "' GROUP BY DATE_FORMAT(date, '%Y-%m') ORDER BY date ASC;\
-        SELECT DATE_FORMAT(m.date, '%m') month, COUNT(*) FROM malfunction m, processing p WHERE m.ID = p.ID AND m.date > '" +
+        SELECT DATE_FORMAT(m.date, '%m') month, COUNT(*) FROM malfunction m, processing p WHERE m.ID = p.malfunctionID AND m.date > '" +
         day2 +
         "' AND m.date < '" +
         day1 +

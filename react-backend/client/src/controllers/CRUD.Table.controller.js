@@ -109,33 +109,45 @@ export const handleEditable = bind => {
 };
 
 export const editForm = bind => {
-  const newColumns = JSON.parse(
-    JSON.stringify(
-      bind.state.columns.map((x, i) => {
-        return {
-          COLUMN_NAME: x.dataField,
-          COLUMN_COMMENT: x.text
-        };
-      })
-    )
-  );
+  const newColumns = bind.state.formColumns;
   let row = { ID: bind.state.itemData[0].ID };
-  for (let i = 1; i < newColumns.length - 1; i++) {
+  let isNull = false;
+  // let info = "";
+  for (let i = 1; i < newColumns.length; i++) {
     if (
-      document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value !== ""
+      newColumns[i].value === "PK" ||
+      newColumns[i].type === "DATE" ||
+      newColumns[i].type === "DATETIME"
     ) {
-      row[newColumns[i].COLUMN_NAME] = document.getElementById(
-        newColumns[i].COLUMN_NAME + "Edit"
-      ).value;
+      if (
+        document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value === ""
+      ) {
+        isNull = true;
+        // info += newColumns[i].COLUMN_COMMENT + "請勿留白<br />";
+      }
+    }
+    if (newColumns[i].type === "CHECKBOX") {
+      if (
+        document.getElementById(newColumns[i].COLUMN_NAME + "TrueEdit")
+          .checked === true
+      ) {
+        row[newColumns[i].COLUMN_NAME] = document.getElementById(
+          newColumns[i].COLUMN_NAME + "TrueEdit"
+        ).value;
+      } else {
+        row[newColumns[i].COLUMN_NAME] = document.getElementById(
+          newColumns[i].COLUMN_NAME + "FalseEdit"
+        ).value;
+      }
     } else {
-      row[newColumns[i].COLUMN_NAME] = document.getElementById(
-        newColumns[i].COLUMN_NAME + "Edit"
-      ).placeholder;
+      row[newColumns[i].COLUMN_NAME] =
+        document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value === ""
+          ? null
+          : document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value;
     }
   }
-  editItem(bind, row);
-  for (let i = 1; i < newColumns.length - 1; i++) {
-    document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value = "";
+  if (!isNull) {
+    editItem(bind, row);
   }
 };
 
@@ -210,7 +222,7 @@ export const postCrudTableAdd = (bind, row) => {
   axios
     .post(database + "add", { table: bind.state.table, row: row })
     .then(res => {
-      row["ID"] = res.data.id;
+      row["ID"] = decrypt(res.data).insertId;
       bind.setState({ data: [...bind.state.data, row] });
     })
     .catch();

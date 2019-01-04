@@ -147,6 +147,33 @@ export default class extends Component {
                       type="button"
                       className="btn btn-secondary"
                       data-dismiss="modal"
+                      onClick={() => {
+                        const newColumns = this.state.formColumns;
+                        for (let i = 1; i < newColumns.length; i++) {
+                          if (newColumns[i].type === "CHECKBOX") {
+                            if (
+                              document.getElementById(
+                                newColumns[i].COLUMN_NAME + "TrueEdit"
+                              ).value ===
+                              this.state.itemData[0][newColumns[i].COLUMN_NAME]
+                            ) {
+                              document.getElementById(
+                                newColumns[i].COLUMN_NAME + "TrueEdit"
+                              ).checked = true;
+                            } else {
+                              document.getElementById(
+                                newColumns[i].COLUMN_NAME + "FalseEdit"
+                              ).checked = true;
+                            }
+                          } else {
+                            document.getElementById(
+                              newColumns[i].COLUMN_NAME + "Edit"
+                            ).value = this.state.itemData[0][
+                              newColumns[i].COLUMN_NAME
+                            ];
+                          }
+                        }
+                      }}
                     >
                       取消
                     </button>
@@ -241,123 +268,192 @@ const EditForm = ({ bind }) => {
     let columns = [];
     const newColumns = bind.state.formColumns;
     for (let i = 1; i < newColumns.length; i++) {
-      if (newColumns[i].type === "DATETIME") {
-        columns.push(
-          <div key={i} className="form-group row">
-            <label
-              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
-              className="col-sm-2 col-form-label"
+      if (bind.state.itemData[0][newColumns[i].COLUMN_NAME] !== undefined) {
+        if (newColumns[i].type === "DATETIME") {
+          columns.push(
+            <div
+              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              className="form-group row"
             >
-              {newColumns[i].COLUMN_COMMENT}
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="datetime-local"
-                className="form-control"
-                id={newColumns[i].COLUMN_NAME + "Edit"}
-                value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
-              />
-            </div>
-          </div>
-        );
-      } else if (newColumns[i].type === "DATE") {
-        columns.push(
-          <div key={i} className="form-group row">
-            <label
-              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
-              className="col-sm-2 col-form-label"
-            >
-              {newColumns[i].COLUMN_COMMENT}
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="date"
-                className="form-control"
-                id={newColumns[i].COLUMN_NAME + "Edit"}
-                value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
-              />
-            </div>
-          </div>
-        );
-      } else if (newColumns[i].type === "TEXTAREA") {
-        columns.push(
-          <div key={i} className="form-group row">
-            <label
-              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
-              className="col-sm-2 col-form-label"
-            >
-              {newColumns[i].COLUMN_COMMENT}
-            </label>
-            <div className="col-sm-10">
-              <textarea
-                className="form-control"
-                id={newColumns[i].COLUMN_NAME + "Edit"}
-                value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
-              />
-            </div>
-          </div>
-        );
-      } else if (newColumns[i].type === "CHECKBOX") {
-        columns.push(<div key={i} className="form-group row">
-            <label htmlFor={newColumns[i].COLUMN_NAME + "TrueEdit"} className="col-sm-2 col-form-label">
-              {newColumns[i].COLUMN_COMMENT}
-            </label>
-            <div className="input-group col-sm-10">
-              <div className="input-group-text">
-                <input type="radio" id={newColumns[i].COLUMN_NAME + "TrueEdit"} name="radio-group" value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]} defaultChecked />
-              </div>
-              <label className="form-control" htmlFor={newColumns[i].COLUMN_NAME + "TrueEdit"}>
-                {bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
-              </label>
-              <div className="input-group-text">
-                <input type="radio" id={newColumns[i].COLUMN_NAME + "FalseEdit"} name="radio-group" value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]} />
-              </div>
-              <label className="form-control" htmlFor={newColumns[i].COLUMN_NAME + "FalseEdit"}>
-                {bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
-              </label>
-            </div>
-          </div>);
-      } else if (newColumns[i].type === "SELECT") {
-        columns.push(
-          <div key={i} className="form-group row">
-            <label
-              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
-              className="col-sm-2 col-form-label"
-            >
-              {newColumns[i].COLUMN_COMMENT}
-            </label>
-            <div className="col-sm-10">
-              <select
-                class="custom-select"
-                id={newColumns[i].COLUMN_NAME + "Edit"}
+              <label
+                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                className="col-sm-2 col-form-label"
               >
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-              </select>
+                {newColumns[i].COLUMN_COMMENT}
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="datetime-local"
+                  className="form-control"
+                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  defaultValue={
+                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                  }
+                />
+              </div>
             </div>
-          </div>
-        );
-      } else {
-        columns.push(
-          <div key={i} className="form-group row">
-            <label
-              htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
-              className="col-sm-2 col-form-label"
+          );
+        } else if (newColumns[i].type === "DATE") {
+          columns.push(
+            <div
+              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              className="form-group row"
             >
-              {newColumns[i].COLUMN_COMMENT}
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id={newColumns[i].COLUMN_NAME + "Edit"}
-                value={bind.state.itemData[0][newColumns[i].COLUMN_NAME]}
-              />
+              <label
+                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                className="col-sm-2 col-form-label"
+              >
+                {newColumns[i].COLUMN_COMMENT}
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="date"
+                  className="form-control"
+                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  defaultValue={
+                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                  }
+                />
+              </div>
             </div>
-          </div>
-        );
+          );
+        } else if (newColumns[i].type === "TEXTAREA") {
+          columns.push(
+            <div
+              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              className="form-group row"
+            >
+              <label
+                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                className="col-sm-2 col-form-label"
+              >
+                {newColumns[i].COLUMN_COMMENT}
+              </label>
+              <div className="col-sm-10">
+                <textarea
+                  className="form-control"
+                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  defaultValue={
+                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                  }
+                />
+              </div>
+            </div>
+          );
+        } else if (newColumns[i].type === "CHECKBOX") {
+          columns.push(
+            <div
+              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              className="form-group row"
+            >
+              <label
+                htmlFor={newColumns[i].COLUMN_NAME + "TrueEdit"}
+                className="col-sm-2 col-form-label"
+              >
+                {newColumns[i].COLUMN_COMMENT}
+              </label>
+              <div className="input-group col-sm-10">
+                <div className="input-group-text">
+                  <input
+                    type="radio"
+                    id={newColumns[i].COLUMN_NAME + "TrueEdit"}
+                    name="radio-group"
+                    defaultValue={newColumns[i].value.split(":")[0]}
+                    defaultChecked={
+                      newColumns[i].value.split(":")[0] ===
+                      bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                    }
+                  />
+                </div>
+                <label
+                  className="form-control"
+                  htmlFor={newColumns[i].COLUMN_NAME + "TrueEdit"}
+                >
+                  {newColumns[i].value.split(":")[0]}
+                </label>
+                <div className="input-group-text">
+                  <input
+                    type="radio"
+                    id={newColumns[i].COLUMN_NAME + "FalseEdit"}
+                    name="radio-group"
+                    defaultValue={newColumns[i].value.split(":")[1]}
+                    defaultChecked={
+                      newColumns[i].value.split(":")[1] ===
+                      bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                    }
+                  />
+                </div>
+                <label
+                  className="form-control"
+                  htmlFor={newColumns[i].COLUMN_NAME + "FalseEdit"}
+                >
+                  {newColumns[i].value.split(":")[1]}
+                </label>
+              </div>
+            </div>
+          );
+        } else if (newColumns[i].type === "SELECT") {
+          let options = newColumns[i].value;
+          const Option = () => {
+            let option = [];
+            for (let i = 0; i < options.length; i++) {
+              option.push(
+                <option key={i} value={options[i].value}>
+                  {options[i].label}
+                </option>
+              );
+            }
+            return option;
+          };
+          columns.push(
+            <div
+              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              className="form-group row"
+            >
+              <label
+                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                className="col-sm-2 col-form-label"
+              >
+                {newColumns[i].COLUMN_COMMENT}
+              </label>
+              <div className="col-sm-10">
+                <select
+                  className="custom-select"
+                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  defaultValue={
+                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                  }
+                >
+                  <Option />
+                </select>
+              </div>
+            </div>
+          );
+        } else {
+          columns.push(
+            <div
+              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              className="form-group row"
+            >
+              <label
+                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                className="col-sm-2 col-form-label"
+              >
+                {newColumns[i].COLUMN_COMMENT}
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  defaultValue={
+                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                  }
+                />
+              </div>
+            </div>
+          );
+        }
       }
     }
     return columns;
