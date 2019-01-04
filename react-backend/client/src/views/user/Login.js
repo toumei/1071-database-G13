@@ -23,12 +23,11 @@ export default class extends Component {
       .post("login", this.state)
       .then(res => {
         window.localStorage.setItem("token", res.data.token);
+        window.location.pathname = "/";
       })
       .catch(err => {
         console.error(err.message);
       });
-
-    window.location.pathname = "/";
   }
   render() {
     return (
