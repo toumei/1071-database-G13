@@ -25,7 +25,7 @@ module.exports = class Product {
 
   static fetchCSVAll() {
     return db.query(
-      "SELECT p.malfunctionID ID, p.result, e.name name_e, p.date date_p, p.detail, m.date date_m, m.bedNum, b.name name_b, m.time, m.matter, m.desc FROM processing p, employee e, malfunction m, boarder b WHERE p.employeeID = e.ID and p.malfunctionID = m.ID and m.ID = b.studentID;"
+      "SELECT p.malfunctionID ID, p.result, e.name name_e, p.date date_p, p.detail, m.date date_m, m.bedNum, b.name name_b, m.time, m.matter, m.desc FROM processing p, employee e, malfunction m, boarder b WHERE p.employeeID = e.ID and p.malfunctionID = m.ID and m.boarderID = b.studentCode;"
     );
   }
 
@@ -103,7 +103,7 @@ module.exports = class Product {
   static fetchAnalysisCabinet() {
     return db.query(
       "SELECT * FROM cabinet;\
-      SELECT c.ID, s.switchID, s.status FROM cabinet c, switch s WHERE c.ID = s.cabinetID;"
+      SELECT c.cabinetCode, s.switchID, s.status FROM cabinet c, switch s WHERE c.ID = s.cabinetID;"
     );
   }
 
