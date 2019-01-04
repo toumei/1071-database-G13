@@ -200,7 +200,7 @@ export const CrudTableModeColumns = bind => {
       </div>
     ),
     editable: false,
-    headerStyle: { cursor: "default", minWidth: "5rem" }
+    headerStyle: { cursor: "default", minWidth: "8rem" }
   };
 };
 
