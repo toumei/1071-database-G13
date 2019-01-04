@@ -68,6 +68,8 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
   * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發，不熟研究中
   * epilogue：架構具有 RESTful 風的 CRUD API server
   * 登入系統(id, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
+  * 帳戶權限系統：express-acl，[流程](https://segmentfault.com/a/1190000004627946)
+    * 登入時判斷身份為 user、worker、admin、DB_admin，切換至不同的使用頁面。
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
 * client (react)
@@ -79,8 +81,7 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 
 ### 正在做的部分：
 * sever
-  * 帳戶權限系統：express-acl，還沒測試完全，[流程](https://segmentfault.com/a/1190000004627946)
-    * 登入時判斷身份為 user、worker、admin、DB_admin，切換至不同的使用頁面。
+  
 
 * client (express)
 
