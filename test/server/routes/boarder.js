@@ -3,6 +3,6 @@ var router = express.Router();
 
 const boarderController = require("../controllers/boarder");
 
-router.get("/list", boarderController.findAll);
+router.get("/", boarderController.findAll);
 
 module.exports = router;

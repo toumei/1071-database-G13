@@ -15,7 +15,9 @@ router.post(
   "/login",
   passport.authenticate("login", { session: false }),
   function(req, res, next) {
-    var token = jwt.sign(req.body, jwtConfig.secretOrKey, { expiresIn: "1h" });
+    var token = jwt.sign(req.body, jwtConfig.secretOrKey, {
+      expiresIn: "1h"
+    });
     res.json({ success: true, token: "Bearer " + token });
   }
 );

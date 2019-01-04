@@ -53,8 +53,14 @@ app.use(function(req, res, next) {
   next();
 });
 
-// set router auth
-//app.use(expressJwt({ secret: jwtConfig.secretOrKey }).unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
+// set jwt auth
+app.use(
+  expressJwt({ secret: jwtConfig.secretOrKey }).unless({
+    path: ["/api/", "/api/login", "/api/sigup"]
+  })
+);
+
+// set acl auth
 app.use(acl.authorize.unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
 
 //set CRUD router

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import List from "../components/List";
+import apiRequest from "../api/apiRequest";
 
 export default class TableList extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ export default class TableList extends Component {
   }
 
   componentDidMount() {
-    fetch("/api" + window.location.pathname)
+    /*apiRequest
+      .get()
       .then(res => res.json())
       .then(res => {
         this.setState({ title: res.title });
@@ -26,7 +28,7 @@ export default class TableList extends Component {
           data: { colName: res.data.colName, rows: res.data.rows }
         });
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log(error));*/
   }
   componentWillUnmount() {}
   render() {

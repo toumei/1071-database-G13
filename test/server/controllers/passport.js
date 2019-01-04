@@ -11,17 +11,17 @@ module.exports = {
 
   deserializeUser: (id, done) => {
     Account.findById(id)
-      .then(([data]) => {
-        return done(null, data[0]);
+      .then(data => {
+        return done(null, data.dataValues);
       })
       .catch(err => console.log(err));
   },
 
   jwtStrategy: (jwt_payload, done) => {
-    Account.findById(jwt_payload.sub)
-      .then(([data]) => {
-        if (!data) return done(null, false, { message: "Wrong JWT Token" });
-        return done(null, data[0]);
+    Account.count({ where: { id: jwt_payload.id } })
+      .then(exist => {
+        if (!exist) return done(null, false, { message: "Wrong JWT Token" });
+        return done(null, jwt_payload);
       })
       .catch(err => {
         return done(err);
@@ -37,13 +37,12 @@ module.exports = {
 
         return Account_role.findOne({
           where: { accountID: id },
-          include: { model: Role }
+          include: { model: Role, attributes: ["name"] }
         });
       })
       .then(data => {
-        console.log(data._role.dataValues);
-
-        return done(null, { accountID: id, roles: data._role.dataValues });
+        req.body["role"] = data._role.dataValues["name"];
+        return done(null, data);
       })
       .catch(err => {
         return done(err);
@@ -53,7 +52,6 @@ module.exports = {
   signupStrategy: (req, id, password, done) => {
     Account.count({ where: { id: id } })
       .then(exist => {
-        console.log(exist);
         if (exist) {
           return done(null, false, { message: "id Already Exists" });
         } else {
