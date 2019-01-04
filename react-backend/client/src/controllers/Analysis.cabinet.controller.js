@@ -13,18 +13,31 @@ export const postAnalysisCabinetData = bind => {
       const trueStatus = [];
       const falseStatus = [];
       for (let i = 0; i < newData[0].length; i++) {
-        label[i + 1] = newData[0][i].ID;
+        label[i + 1] = newData[0][i].cabinetCode;
+        if (newData[0][i].status === "正常") {
+          trueStatus.push({
+            x: newData[0][i].cabinetCode,
+            y: 0,
+            r: 20
+          });
+        } else {
+          falseStatus.push({
+            x: newData[0][i].cabinetCode,
+            y: 0,
+            r: 20
+          });
+        }
       }
       for (let i = 0; i < newData[1].length; i++) {
         if (newData[1][i].status === "正常") {
           trueStatus.push({
-            x: newData[1][i].ID,
+            x: newData[1][i].cabinetCode,
             y: newData[1][i].switchID,
             r: 10
           });
         } else {
           falseStatus.push({
-            x: newData[1][i].ID,
+            x: newData[1][i].cabinetCode,
             y: newData[1][i].switchID,
             r: 15
           });
