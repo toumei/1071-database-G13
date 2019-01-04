@@ -82,7 +82,6 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 ### 正在做的部分：
 * sever
   
-
 * client (express)
 
 * client (react)
@@ -102,11 +101,6 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 ---
 
 ### 預期做的部分：
-* server
-  * 在DB權限下，可用web操控後端table
-  * 在admin權限下，可填寫報修單、維修單
-  * 在user權限下，可填寫報修單
-  * 在guest權限下，只能瀏覽index、login，不可進入此系統
 
 * client (express)
   * 顯示那個用戶登入
@@ -128,4 +122,3 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 * DB ctrl
 * malfunction
 * processing
-* user
