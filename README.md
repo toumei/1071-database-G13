@@ -44,10 +44,10 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 * 登入後會將token記錄在本地端 Local Storage
 * 使用http攔截器，攔截請求，若header無token，則setHeader(Local Storage的token資料)
 * [react練習/測試檔](https://github.com/toumei/107-01-database-4B/tree/master/example-create-react-app-express) - 12/10
-* router 已全部配置完成 - 10/19
 * ORM
 * RESTful API
 * ACL
+* 前端CRUD、分析、匯入CSV、欄位選擇控制、編輯驗證
 ---
 
 ### WIKI：
@@ -73,20 +73,21 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 ![token機制](https://cdn-images-1.medium.com/max/1334/1*7T41R0dSLEzssIXPHpvimQ.png)
 
 * client (react)
-  * router 配置完成 (不包含之後新增)
-  * server-client 資料加解密
-  * CRUD 大致完成
-  * MVC 配置大致完成
-  * Axios攔截器
+  * router 配置
+  * MVC 配置
+  * axios攔截器
+  * server-client 傳輸資料加解密(aes-256-cbc)
+  * CRUD 基本架構
+  * 快速編輯模式
+  * 資料庫分析
+  * 將資料匯出成csv檔
+  * 欄位選擇控制 (text、checkbox、select、textarea、date、datetime)
+  * 編輯驗證 (主鍵、email、電話、身分證)
 
 ### 正在做的部分：
 * sever
   
 * client (express)
-
-* client (react)
-  * db 分析
-  * handleEditable更新columns的editable有時會有問題 (尚未找到問題，待解決)
 
 ### 尚未做的部分：
 * server
@@ -98,6 +99,7 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 * client (react)
   * malfunction (express->react)
   * processing (express->react)
+  * 編輯驗證 (外鍵)
 ---
 
 ### 預期做的部分：
@@ -113,12 +115,10 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
   * ACL、RBAC (配合server)
   * 即時顯示新資訊 (學生填報修單通知工作人員，工作人員報修完畢通知學生)
   * 多國語言
-  * 支援手機排版 (全部非部分)
   * bootstrap table 改成 remote 模式
-  * edit 有選擇模式
 
 ### 前端可操作之Table：
 * product (課本教材，以此為基礎修改，兼功能測試用)
-* DB ctrl
+* database CRUD
 * malfunction
 * processing
