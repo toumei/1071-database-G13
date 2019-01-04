@@ -4,7 +4,11 @@ export const addItem = bind => {
   let isNull = false;
   let info = "";
   for (let i = 1; i < newColumns.length; i++) {
-    if (newColumns[i].value === "PK") {
+    if (
+      newColumns[i].value === "PK" ||
+      newColumns[i].type === "DATE" ||
+      newColumns[i].type === "DATETIME"
+    ) {
       if (
         document.getElementById(newColumns[i].COLUMN_NAME + "Add").value === ""
       ) {
