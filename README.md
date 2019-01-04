@@ -74,7 +74,7 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 
 * client (react)
   * router 配置
-  * MVC 配置
+  * MVC 架構
   * axios攔截器
   * server-client 傳輸資料加解密(aes-256-cbc)
   * CRUD 基本架構
