@@ -152,7 +152,7 @@ export const editForm = bind => {
 
 export const getCrudTableColumns = bind => {
   apiRequest
-    .get("/database/" + "ColumnList", { table: bind.state.table })
+    .get("/database/ColumnList", { table: bind.state.table })
     .then(res => {
       let columns = [];
       let deleteColumns = [];
@@ -175,7 +175,7 @@ export const getCrudTableColumns = bind => {
 
 export const getCrudTableData = bind => {
   apiRequest
-    .get("/database/" + "List", {
+    .get("/database/List", {
       table: bind.state.table
     })
     .then(res => {
@@ -198,7 +198,7 @@ export const getCrudTableData = bind => {
 
 export const putCrudTableEdit = (bind, row, info = "") => {
   apiRequest
-    .put("/database/" + "update", { table: bind.state.table, row: row })
+    .put("/database/update", { table: bind.state.table, row: row })
     .then(res => {})
     .catch();
   if (info !== "")
@@ -211,7 +211,7 @@ export const putCrudTableEdit = (bind, row, info = "") => {
 
 export const deleteCrudTable = (bind, row, info) => {
   apiRequest
-    .delete("/database/" + "delete", {
+    .delete("/database/delete", {
       table: bind.state.table,
       id: row.ID
     })
@@ -225,7 +225,7 @@ export const deleteCrudTable = (bind, row, info) => {
 
 export const postCrudTableAdd = (bind, row) => {
   apiRequest
-    .post("/database/" + "add", { table: bind.state.table, row: row })
+    .post("/database/add", { table: bind.state.table, row: row })
     .then(res => {
       console.log(decrypt(res.data));
       row["ID"] = decrypt(res.data).insertId;
@@ -241,7 +241,7 @@ export const postCrudTableAdd = (bind, row) => {
 
 export const getCrudSearch = async (bind, search, id, callback) => {
   await apiRequest
-    .get("/database/" + "searchColumnID", {
+    .get("/database/searchColumnID", {
       table: bind.state.table,
       search: search,
       id: id

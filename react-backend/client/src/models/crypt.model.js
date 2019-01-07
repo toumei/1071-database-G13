@@ -34,8 +34,15 @@ export const decrypt = data => {
 
 export const lowerJSONKey = jsonObj => {
   for (var key in jsonObj) {
-    jsonObj[key.toLowerCase()] = jsonObj[key];
-    delete jsonObj[key];
+    if (
+      key === "COLUMN_NAME" ||
+      key === "COLUMN_COMMENT" ||
+      key === "TABLE_NAME" ||
+      key === "TABLE_COMMENT"
+    ) {
+      jsonObj[key.toLowerCase()] = jsonObj[key];
+      delete jsonObj[key];
+    }
   }
   return jsonObj;
 };

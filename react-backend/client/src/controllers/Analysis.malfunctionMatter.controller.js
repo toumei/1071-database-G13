@@ -5,7 +5,7 @@ import { decrypt } from "../models/crypt.model";
 
 export const postAnalysisMalfunctionData = bind => {
   apiRequest
-    .get("/database/" + "AnalysisMalfunction")
+    .get("/database/AnalysisMalfunction")
     .then(res => {
       const newData = decrypt(res.data);
       let matterLabel = [];

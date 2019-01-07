@@ -16,7 +16,7 @@ export default class extends Component {
   componentDidMount() {
     const data = { table: "_coloption" };
     apiRequest
-      .get("/database/" + "List", data)
+      .get("/database/List", data)
       .then(res => {
         const matter = decrypt(res.data).filter((x, i) => x.name === "matter");
         this.setState({ matter: matter[0].value });
@@ -41,7 +41,7 @@ export default class extends Component {
     if (name !== "" && room !== "" && time !== "") {
       let boarderID = 0;
       await apiRequest
-        .get("/malfunction/" + "searchID", {
+        .get("/malfunction/searchID", {
           table: "boarder",
           name: name
         })
@@ -70,7 +70,7 @@ export default class extends Component {
           }
         };
         apiRequest
-          .post("/database/" + "add", row)
+          .post("/database/add", row)
           .then(res => {
             console.log(decrypt(res.data));
             const malfunctionID = decrypt(res.data).insertId;
@@ -83,11 +83,11 @@ export default class extends Component {
               row: { malfunctionID: malfunctionID, time: time, exc: exc }
             };
             apiRequest
-              .post("/database/" + "add", rowBed)
+              .post("/database/add", rowBed)
               .then(res => {})
               .catch();
             apiRequest
-              .post("/database/" + "add", rowTime)
+              .post("/database/add", rowTime)
               .then(res => {})
               .catch();
           })
@@ -171,7 +171,8 @@ const BedOption = ({ bind }) => {
           bind.clickValue = e.target.value;
           document.getElementById("add_edit").innerHTML = "修改";
           document.getElementById("clear_delete").innerHTML = "刪除";
-        }}>
+        }}
+      >
         {bind.state.bed[i].value}
       </option>
     );
@@ -202,7 +203,8 @@ const Bed = ({ bind }) => (
               document.getElementById("bed").value = e.target.value;
               document.getElementById("add_edit").innerHTML = "新增";
               document.getElementById("clear_delete").innerHTML = "清除";
-            }}>
+            }}
+          >
             請輸入床號
           </option>
           <BedOption bind={bind} />
@@ -264,7 +266,8 @@ const Bed = ({ bind }) => (
               document.getElementById("add_edit").innerHTML = "新增";
               document.getElementById("clear_delete").innerHTML = "清除";
             }
-          }}>
+          }}
+        >
           新增
         </button>
         <button
@@ -286,7 +289,8 @@ const Bed = ({ bind }) => (
               document.getElementById("add_edit").innerHTML = "新增";
               document.getElementById("clear_delete").innerHTML = "清除";
             }
-          }}>
+          }}
+        >
           清除
         </button>
       </div>
@@ -338,7 +342,8 @@ const Matter = ({ matter }) => (
         id="matter"
         defaultValue={matter[0].value}
         className="form-control"
-        autoFocus>
+        autoFocus
+      >
         <MatterOption matter={matter} />
       </select>
     </div>

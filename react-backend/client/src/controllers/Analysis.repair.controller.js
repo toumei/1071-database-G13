@@ -5,7 +5,7 @@ import { decrypt } from "../models/crypt.model";
 
 export const postAnalysisRepairData = bind => {
   apiRequest
-    .get("/database/" + "AnalysisRepair")
+    .get("/database/AnalysisRepair")
     .then(res => {
       const newData = decrypt(res.data);
       let malfunction = [];

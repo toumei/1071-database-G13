@@ -72,7 +72,8 @@ export default class extends Component {
           keyField={"ID"}
           columns={this.state.columns}
           data={this.state.data}
-          search>
+          search
+        >
           {props => (
             <div className="col-md-10">
               <CrudTableNav
@@ -138,7 +139,8 @@ export default class extends Component {
                       type="button"
                       className="btn btn-primary"
                       data-dismiss="modal"
-                      onClick={() => editForm(this)}>
+                      onClick={() => editForm(this)}
+                    >
                       確定
                     </button>
                     <button
@@ -171,7 +173,8 @@ export default class extends Component {
                             ];
                           }
                         }
-                      }}>
+                      }}
+                    >
                       取消
                     </button>
                   </div>
@@ -197,13 +200,15 @@ export default class extends Component {
                       type="button"
                       className="btn btn-primary"
                       data-dismiss="modal"
-                      onClick={() => deleteItem(this, this.state.itemData[0])}>
+                      onClick={() => deleteItem(this, this.state.itemData[0])}
+                    >
                       確定
                     </button>
                     <button
                       type="button"
                       className="btn btn-secondary"
-                      data-dismiss="modal">
+                      data-dismiss="modal"
+                    >
                       取消
                     </button>
                   </div>
@@ -229,7 +234,8 @@ export default class extends Component {
                       id="infoTrue"
                       type="button"
                       className="btn btn-primary"
-                      data-dismiss="modal">
+                      data-dismiss="modal"
+                    >
                       確定
                     </button>
                     <button
@@ -240,7 +246,8 @@ export default class extends Component {
                       style={{
                         display:
                           this.state.info[0].cancel === true ? "block" : "none"
-                      }}>
+                      }}
+                    >
                       取消
                     </button>
                   </div>
@@ -266,10 +273,12 @@ const EditForm = ({ bind }) => {
           columns.push(
             <div
               key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
-              className="form-group row">
+              className="form-group row"
+            >
               <label
                 htmlFor={newColumns[i].column_name + "Edit"}
-                className="col-sm-2 col-form-label">
+                className="col-sm-2 col-form-label"
+              >
                 {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">
@@ -288,10 +297,12 @@ const EditForm = ({ bind }) => {
           columns.push(
             <div
               key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
-              className="form-group row">
+              className="form-group row"
+            >
               <label
                 htmlFor={newColumns[i].column_name + "Edit"}
-                className="col-sm-2 col-form-label">
+                className="col-sm-2 col-form-label"
+              >
                 {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">
@@ -310,10 +321,12 @@ const EditForm = ({ bind }) => {
           columns.push(
             <div
               key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
-              className="form-group row">
+              className="form-group row"
+            >
               <label
                 htmlFor={newColumns[i].column_name + "Edit"}
-                className="col-sm-2 col-form-label">
+                className="col-sm-2 col-form-label"
+              >
                 {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">
@@ -331,10 +344,12 @@ const EditForm = ({ bind }) => {
           columns.push(
             <div
               key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
-              className="form-group row">
+              className="form-group row"
+            >
               <label
                 htmlFor={newColumns[i].column_name + "TrueEdit"}
-                className="col-sm-2 col-form-label">
+                className="col-sm-2 col-form-label"
+              >
                 {newColumns[i].column_comment}
               </label>
               <div className="input-group col-sm-10">
@@ -352,7 +367,8 @@ const EditForm = ({ bind }) => {
                 </div>
                 <label
                   className="form-control"
-                  htmlFor={newColumns[i].column_name + "TrueEdit"}>
+                  htmlFor={newColumns[i].column_name + "TrueEdit"}
+                >
                   {newColumns[i].value.split(":")[0]}
                 </label>
                 <div className="input-group-text">
@@ -369,7 +385,8 @@ const EditForm = ({ bind }) => {
                 </div>
                 <label
                   className="form-control"
-                  htmlFor={newColumns[i].column_name + "FalseEdit"}>
+                  htmlFor={newColumns[i].column_name + "FalseEdit"}
+                >
                   {newColumns[i].value.split(":")[1]}
                 </label>
               </div>
@@ -391,10 +408,12 @@ const EditForm = ({ bind }) => {
           columns.push(
             <div
               key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
-              className="form-group row">
+              className="form-group row"
+            >
               <label
                 htmlFor={newColumns[i].column_name + "Edit"}
-                className="col-sm-2 col-form-label">
+                className="col-sm-2 col-form-label"
+              >
                 {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">
@@ -403,7 +422,8 @@ const EditForm = ({ bind }) => {
                   id={newColumns[i].column_name + "Edit"}
                   defaultValue={
                     bind.state.itemData[0][newColumns[i].column_name]
-                  }>
+                  }
+                >
                   <Option />
                 </select>
               </div>
@@ -413,10 +433,12 @@ const EditForm = ({ bind }) => {
           columns.push(
             <div
               key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
-              className="form-group row">
+              className="form-group row"
+            >
               <label
                 htmlFor={newColumns[i].column_name + "Edit"}
-                className="col-sm-2 col-form-label">
+                className="col-sm-2 col-form-label"
+              >
                 {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">

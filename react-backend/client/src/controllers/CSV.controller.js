@@ -18,7 +18,7 @@ export const postCSVColumns = bind => {
 export const postCSVData = bind => {
   CSVMsg("getCSVTableData", "send");
   apiRequest
-    .get("/database/" + "CSVList")
+    .get("/database/CSVList")
     .then(res => {
       CSVMsg("getCSVData", "result", decrypt(res.data));
       // 去除時間標記.000Z

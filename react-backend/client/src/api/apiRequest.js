@@ -1,6 +1,4 @@
 import axios from "axios";
-import qs from "qs";
-import apiManager from "../api/apiManager";
 
 axios.defaults.baseURL = "/api/";
 axios.defaults.timeout = 10000;

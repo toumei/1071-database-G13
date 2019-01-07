@@ -5,7 +5,7 @@ import { decrypt } from "../models/crypt.model";
 
 export const postAnalysisCabinetData = bind => {
   apiRequest
-    .get("/database/" + "AnalysisCabinet")
+    .get("/database/AnalysisCabinet")
     .then(res => {
       const newData = decrypt(res.data);
       const label = [0];

@@ -14,14 +14,14 @@ export default class extends Component {
   componentDidMount() {
     const data = { table: "_coloption" };
     apiRequest
-      .get("/database/" + "List", data)
+      .get("/database/List", data)
       .then(res => {
         const result = decrypt(res.data).filter((x, i) => x.name === "result");
         this.setState({ result: result[0].value });
       })
       .catch();
     apiRequest
-      .get("/processing/" + "searchNum")
+      .get("/processing/searchNum")
       .then(res => {
         const num1 = [];
         const num2 = [];
@@ -62,7 +62,7 @@ export default class extends Component {
     const detail = detailID.value;
     if (name !== "") {
       await apiRequest
-        .get("/malfunction/" + "searchID", {
+        .get("/malfunction/searchID", {
           table: "employee",
           name: name
         })
@@ -84,7 +84,7 @@ export default class extends Component {
           }
         };
         apiRequest
-          .post("/database/" + "add", row)
+          .post("/database/add", row)
           .then(res => {})
           .catch();
         const date = new Date();
@@ -167,7 +167,8 @@ const Malfunction = ({ malfunction }) => (
         id="malfunction"
         defaultValue={malfunction[0].ID}
         className="form-control"
-        autoFocus>
+        autoFocus
+      >
         <MalfunctionOption malfunction={malfunction} />
       </select>
     </div>
@@ -233,7 +234,8 @@ const Result = ({ result }) => (
         id="result"
         defaultValue={result[0].value}
         className="form-control"
-        autoFocus>
+        autoFocus
+      >
         <ResultOption result={result} />
       </select>
     </div>

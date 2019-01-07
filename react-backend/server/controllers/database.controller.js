@@ -22,6 +22,8 @@ module.exports = {
       })
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
+        console.log(req.body);
+        console.log(data);
         res.send(cryptModel.encrypt(data));
       })
       .catch(err => log.error(err));
