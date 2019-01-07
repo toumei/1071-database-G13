@@ -3,6 +3,8 @@ const db = require("../config/mysql");
 
 // Model
 var Vendor = db.define("vendor", {
+  vendorCode: { type: Sequelize.STRING, unique: true },
+  name: Sequelize.STRING,
   tel: Sequelize.STRING,
   email: Sequelize.STRING,
   addr: Sequelize.STRING

@@ -1,19 +1,18 @@
-const Processing = require("../models/processing");
+const cryptModel = require("../models/crypt.model");
+const db = require("../config/mysql2");
 
 /* READ *****************************/
 
-module.exports.getProcessing = (req, res, next) => {
-  Processing.fetchAll()
-    .then(([rows]) => {
-      for (let p of rows) {
-        p.date = moment(p.date).format("MMM D, YYYY");
-      }
-      console.log(JSON.stringify(rows, ["id", "title", "date"]));
-      //res.send(JSON.stringify(rows));
-      res.render("processing", {
-        data: rows,
-        title: "Processing List"
-      });
-    })
-    .catch(err => console.log(err));
+module.exports = {
+  getSearchNum: (req, res) => {
+    db.query(
+      "SELECT ID FROM malfunction;\
+    SELECT m.ID FROM malfunction m, processing p WHERE m.ID = p.malfunctionID;"
+    )
+      .then(([data]) => {
+        console.log(data);
+        res.send(cryptModel.encrypt(data));
+      })
+      .catch(err => console.log(err));
+  }
 };

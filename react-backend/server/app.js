@@ -16,9 +16,8 @@ const jwtConfig = require("./config/passport").JWT;
 
 // Router
 var indexRouter = require("./routes/index");
-var loginRouter = require("./routes/login");
 var databaseRouter = require("./routes/database");
-var malfuntionRouter = require("./routes/malfuntion");
+var malfunctionRouter = require("./routes/malfunction");
 var processingRouter = require("./routes/processing");
 
 var app = express();
@@ -58,7 +57,7 @@ app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
-
+/*
 // set jwt auth
 app.use(
   expressJwt({ secret: jwtConfig.secretOrKey }).unless({
@@ -68,14 +67,13 @@ app.use(
 
 // set acl auth
 app.use(acl.authorize.unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
-
+*/
 //set CRUD router
-require("./routes/CRUD");
+//require("./routes/CRUD");
 // Router Path
 app.use("/api/", indexRouter);
-app.use("/api/login", loginRouter);
 app.use("/api/database", databaseRouter);
-app.use("/api/malfuntion", malfuntionRouter);
+app.use("/api/malfunction", malfunctionRouter);
 app.use("/api/processing", processingRouter);
 
 // catch 404 and forward to error handler

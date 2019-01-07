@@ -9,7 +9,7 @@ export const postCtrlColumns = bind => {
   const data = { table: "_coloption" };
   CtrlMsg("postCtrlColumns", "send", data);
   apiRequest
-    .post("/database/" + "ColumnsMsgList", data)
+    .get("/database/" + "ColumnsMsgList", data)
     .then(res => {
       CtrlMsg("postCtrlColumns", "result", decrypt(res.data));
       let columns = [];
@@ -33,7 +33,7 @@ export const postCtrlData = bind => {
   const data = { table: "_coloption" };
   CtrlMsg("postCtrlData", "send", data);
   apiRequest
-    .post("/database/" + "List", data)
+    .get("/database/" + "List", data)
     .then(res => {
       CtrlMsg("postCtrlData", "result", decrypt(res.data));
       // 包裹在裡面的json格式需要經過處裡

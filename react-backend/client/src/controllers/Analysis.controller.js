@@ -5,7 +5,7 @@ import { decrypt } from "../models/crypt.model";
 
 export const postAnalysisData = bind => {
   apiRequest
-    .post("/database/" + "AnalysisCount")
+    .get("/database/" + "AnalysisCount")
     .then(res => {
       const newData = decrypt(res.data);
       let dataList = [];

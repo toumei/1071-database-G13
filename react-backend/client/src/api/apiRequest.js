@@ -42,8 +42,8 @@ axios.interceptors.response.use(
 
 export default new class apiRequest {
   // Read
-  get(url, config = {}) {
-    return axios.get(url, config);
+  get(url, data = undefined, config = {}) {
+    return axios.get(url, { params: data }, config);
   }
 
   // Create
@@ -58,7 +58,7 @@ export default new class apiRequest {
   }
 
   // Delete
-  delete(url, config = {}) {
-    return axios.delete(url, config);
+  delete(url, data = undefined, config = {}) {
+    return axios.delete(url, { data: data }, config);
   }
 }();

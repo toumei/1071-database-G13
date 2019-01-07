@@ -6,8 +6,8 @@ const Cabinet = require("./cabinet");
 // Model
 var Switch = db.define("switch", {
   cabinetID: { type: Sequelize.INTEGER, unique: true },
-  vendorCode: Sequelize.STRING,
-  status: Sequelize.BOOLEAN,
+  switchCode: Sequelize.INTEGER,
+  status: Sequelize.STRING,
   specification: Sequelize.STRING
 });
 

@@ -16,14 +16,14 @@ export const postCSVColumns = bind => {
 };
 
 export const postCSVData = bind => {
-  CSVMsg("postCSVTableData", "send");
+  CSVMsg("getCSVTableData", "send");
   apiRequest
-    .post("/database/" + "CSVList")
+    .get("/database/" + "CSVList")
     .then(res => {
-      CSVMsg("postCSVData", "result", decrypt(res.data));
+      CSVMsg("getCSVData", "result", decrypt(res.data));
       // 去除時間標記.000Z
       bind.setState({
-        data: decrypt(res.data).filter((x, i) => {
+        data: decrypt(res.data)[1].filter((x, i) => {
           const date_p = x.date_p.split("T");
           const date_m = x.date_m.split("T");
           x.date_p = date_p[0] + " " + date_p[1].split(".")[0];

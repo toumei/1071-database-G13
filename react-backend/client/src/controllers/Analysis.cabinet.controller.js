@@ -5,7 +5,7 @@ import { decrypt } from "../models/crypt.model";
 
 export const postAnalysisCabinetData = bind => {
   apiRequest
-    .post("/database/" + "AnalysisCabinet")
+    .get("/database/" + "AnalysisCabinet")
     .then(res => {
       const newData = decrypt(res.data);
       const label = [0];
@@ -31,13 +31,15 @@ export const postAnalysisCabinetData = bind => {
         if (newData[1][i].status === "正常") {
           trueStatus.push({
             x: newData[1][i].cabinetCode,
-            y: newData[1][i].switchID,
+            // 此處修改
+            y: newData[1][i].switchCode,
             r: 10
           });
         } else {
           falseStatus.push({
             x: newData[1][i].cabinetCode,
-            y: newData[1][i].switchID,
+            // 此處修改
+            y: newData[1][i].switchCode,
             r: 15
           });
         }

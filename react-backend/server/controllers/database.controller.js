@@ -2,9 +2,14 @@
 const log = require("../models/log.model");
 const cryptModel = require("../models/crypt.model");
 const databaseModel = require("../models/database.model");
+
 const Today = new Date();
-const today =
-  Today.getFullYear() + "-" + ("0" + (Today.getMonth() + 1)).slice(-2);
+const Day1 = new Date(Today);
+Day1.setMonth(Day1.getMonth() + 1);
+day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
+const Day2 = new Date(Today);
+Day2.setMonth(Day2.getMonth() - 11);
+day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
 
 module.exports = {
   // create
@@ -12,6 +17,9 @@ module.exports = {
     log.databaseMsg(req, "receive", req.body);
     databaseModel
       .insert(req.body.table, req.body.row)
+      .then(() => {
+        return databaseModel.fetchAll(req.body.table);
+      })
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -20,10 +28,10 @@ module.exports = {
   },
 
   // read
-  postColumnsMsgList: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
+  getColumnsMsgList: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
-      .fetchColumnsMsgAll(req.body.table)
+      .fetchColumnsMsgAll(req.query.table)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -31,10 +39,10 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postList: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
+  getList: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
-      .fetchAll(req.body.table)
+      .fetchAll(req.query.table)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -42,8 +50,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postTableList: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
+  getTableList: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
       .fetchTableAll()
       .then(([data]) => {
@@ -53,8 +61,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postCSVList: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
+  getCSVList: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
       .fetchCSVAll()
       .then(([data]) => {
@@ -64,10 +72,10 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postColumnList: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
+  getColumnList: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
-      .fetchColumnAll(req.body.table)
+      .fetchColumnAll(req.query.table)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -75,10 +83,10 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postSearch: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
+  getSearch: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
-      .fetchAll(req.body.table)
+      .fetchAll(req.query.table)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -86,10 +94,10 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postSearchColumnID: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
+  getSearchColumnID: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
-      .fetchByColumnId(req.body.table, req.body.search, req.body.id)
+      .fetchByColumnId(req.query.table, req.query.search, req.query.id)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -97,10 +105,10 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postCount: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
+  getCount: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
-      .fetchCount(today)
+      .fetchCount(day1, day2)
       .then(([data]) => {
         log.databaseMsg(req, "send", data);
         res.send(cryptModel.encrypt(data));
@@ -108,14 +116,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postAnalysisRepair: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
-    const Day1 = new Date(Today);
-    Day1.setMonth(Day1.getMonth() + 1);
-    day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
-    const Day2 = new Date(Today);
-    Day2.setMonth(Day2.getMonth() - 11);
-    day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
+  getAnalysisRepair: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
       .fetchAnalysisRepair(day1, day2)
       .then(([data]) => {
@@ -125,14 +127,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postAnalysisMalfunction: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
-    const Day1 = new Date(Today);
-    Day1.setMonth(Day1.getMonth() + 1);
-    day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
-    const Day2 = new Date(Today);
-    Day2.setMonth(Day2.getMonth() - 1);
-    day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
+  getAnalysisMalfunction: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
       .fetchAnalysisMalfunction(day1, day2)
       .then(([data]) => {
@@ -142,14 +138,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postAnalysisProcessing: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
-    const Day1 = new Date(Today);
-    Day1.setMonth(Day1.getMonth() + 1);
-    day1 = Day1.getFullYear() + "-" + ("0" + (Day1.getMonth() + 1)).slice(-2);
-    const Day2 = new Date(Today);
-    Day2.setMonth(Day2.getMonth() - 1);
-    day2 = Day2.getFullYear() + "-" + ("0" + (Day2.getMonth() + 1)).slice(-2);
+  getAnalysisProcessing: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
       .fetchAnalysisProcessing(day1, day2)
       .then(([data]) => {
@@ -159,8 +149,8 @@ module.exports = {
       .catch(err => log.error(err));
   },
 
-  postAnalysisCabinet: (req, res) => {
-    log.databaseMsg(req, "receive", req.body);
+  getAnalysisCabinet: (req, res) => {
+    log.databaseMsg(req, "receive", req.query);
     databaseModel
       .fetchAnalysisCabinet()
       .then(([data]) => {
@@ -171,7 +161,7 @@ module.exports = {
   },
 
   // update
-  postUpdate: (req, res) => {
+  putUpdate: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
     databaseModel
       .update(req.body.table, req.body.row, req.body.row.ID)
@@ -183,7 +173,7 @@ module.exports = {
   },
 
   // delete
-  postDelete: (req, res) => {
+  delete: (req, res) => {
     log.databaseMsg(req, "receive", req.body);
     databaseModel
       .delete(req.body.table, req.body.id)

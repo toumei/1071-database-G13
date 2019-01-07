@@ -1,24 +1,118 @@
 ﻿a. G13-學生宿舍網路維修管理系統(ResNetCMMS).ppt
 
 b. 所有程式碼壓縮成一個檔，
+
 　* G13_source.zip，裡面要包含測試資料 Gxx.sql 可以匯入，
+
    * G13_setup.txt 說明原始檔如何安裝並且可以執行的方法，尤其是資料庫的設定。
 
-c. Github repository URL, Github contribution圖片 及分工說明
+c.
+
+Github repository URL
+
+https://github.com/toumei/1071-database-G13.git
+
+Github contribution
+
+https://raw.githubusercontent.com/toumei/1071-database-G13/master/G13/Github-contribution.PNG
+
+Image
+
+分工說明
+陳思瑜：建立 api server、account system
+郭英杰：react的整個配置與前後端的CRUD介面、分析、匯出CSV、欄位控制，
+黃品維：前後端的報修單、維修單介面
+
 
 d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 
 1.
+
 學生宿舍網路維修管理系統(ResNetCMMS)
-2. 
+
+2.
+
 組長：
-404410119 陳思瑜 資工4B 
+
+404410119 陳思瑜 資工4B 建立 api server、account system
+
 組員：
+
 404412214 郭英杰 資工4B react的整個配置與前後端的CRUD介面、分析、匯出CSV、欄位控制，
+
 404411166 黃品維 資工4B 前後端的報修單、維修單介面
+
 3. 系統需求
+
+學生宿舍網路維修管理系統，該系統紀錄網路維修的相關事項。
+
+具體說來，該系統的資料需求如下：
+
+帳戶(_account)：
+
+包括流水號(ID)、密碼(password)。其中流水號(ID)是唯一。
+
+角色(_role)：
+
+包括流水號(ID)、名稱(name)。其中流水號(ID)是唯一。
+
+住宿生(boarder)：
+
+包括流水號(ID)、學號(studentCode)、姓名(name)。其中流水號(ID)是唯一。
+
+報修單(malfunction)：
+
+包括單號(ID)、寢室編號(roomNum)、寢室床號(bedNum)、報修日期(date)、報修事項(matter)、狀況描述(desc)、方便維修時段(time)。其中寢室床號(bedNum)、方便維修時段(time)可能有多個，且單號(ID)是唯一。此外，報修者(是一位住宿生)也必須紀錄。
+
+維修單(processing)：
+
+包括流水號(ID)、維修日期(date)、維修結果(result)、處理內容(detail)。此外相對應的報修單及維修人員(是一位工作人員)都必須紀錄。請注意一張報修單可能有數張維修單，且維修單的流水號(ID)必不同。
+
+工作人員(employee)：
+
+包括員工編號(ID)、姓名(name)、身份證字號(IDcard)。其中員工編號(ID)是唯一。
+
+廠商(vendor)：
+
+包括流水號(ID)、廠商代號(vendorCode)、名稱(name)、電話(tel)、電子信箱(email)、地址(addr)。其中流水號(ID)是唯一。
+
+交換器(switch)：
+
+包括流水號(ID)、交換器代號(switchCode)、狀態(state)、規格(specification)。此外相對應廠商都必須記錄。請注意一個機櫃可能會有數個交換器，而流水號(ID)必不同。
+
+機櫃(cabinet)：
+
+包括流水號(ID)、機櫃編號(cabinetCode)、狀態(state)。其中流水號(ID)是唯一。
+
+此外，工作人員與廠商間有一個關係型態為「申報(apply)」，並記載申報日期(date)、送修日期(repair_date)、維修說明(desc)，並將交換器的狀態公告給所有住宿生知道。
+
+工作人員與機櫃有一關係型態為「清掃(sweep)」，並記載清掃日期(date)，此外清掃區域(是一個機櫃)也必須紀錄。
+
+帳戶跟角色有一關係型態為「帳戶權限管理(_account_role)」，並記載帳戶編號、角色編號。
+
+
 4. ER model (根據3之系統需求產生)
+
+Image
+
 5. Relational Model
+
+Image
+
 6. Testing data (展示有多少筆)
+
 7. 前端頁面，能針對後端資料庫資料做 CRUD
+
 8. 自評完成度
+
+整體：85%
+
+組長：
+
+404410119 陳思瑜 資工4B 80%
+
+組員：
+
+404412214 郭英杰 資工4B 95%
+
+404411166 黃品維 資工4B 30%

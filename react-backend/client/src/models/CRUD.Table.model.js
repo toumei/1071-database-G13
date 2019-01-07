@@ -4,7 +4,7 @@ import React from "react";
 import { type, customColumns, columnsWidth } from "./react-bootstrap.model";
 
 // controller
-import { getItem, postCrudSearch } from "../controllers/CRUD.Table.controller";
+import { getItem, getCrudSearch } from "../controllers/CRUD.Table.controller";
 
 const valid = {
   PK: (bind, newValue, row, column, done) => {
@@ -14,7 +14,7 @@ const valid = {
         if (isNaN(newValue) || newValue.length === 0) {
           return done({ valid: false, message: "請輸入數字" });
         }
-        await postCrudSearch(bind, column.dataField, newValue, res => {
+        await getCrudSearch(bind, column.dataField, newValue, res => {
           if (res.length !== 0) {
             isValid = false;
           } else {
@@ -183,8 +183,7 @@ export const CrudTableModeColumns = bind => {
           className="btn btn-primary btn-sm"
           data-toggle="modal"
           data-target={"#editModal"}
-          onClick={() => getItem(bind, row)}
-        >
+          onClick={() => getItem(bind, row)}>
           編輯
         </button>
         <button
@@ -193,8 +192,7 @@ export const CrudTableModeColumns = bind => {
           className="btn btn-danger btn-sm"
           data-toggle="modal"
           data-target={"#deleteModal"}
-          onClick={() => getItem(bind, row)}
-        >
+          onClick={() => getItem(bind, row)}>
           刪除
         </button>
       </div>

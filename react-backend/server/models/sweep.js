@@ -1,6 +1,6 @@
 var Sequelize = require("sequelize");
 const db = require("../config/mysql");
-const Account = require("./account");
+const Employee = require("./employee");
 const Cabinet = require("./cabinet");
 
 // Model
@@ -12,7 +12,7 @@ var Sweep = db.define("sweep", {
 
 // Database synchronization
 Sweep.sync({ force: false });
-Sweep.Account = Sweep.belongsTo(Account, {
+Sweep.Employee = Sweep.belongsTo(Employee, {
   foreignKey: "employeeID"
 });
 Sweep.Cabinet = Sweep.belongsTo(Cabinet, { foreignKey: "cabinetID" });

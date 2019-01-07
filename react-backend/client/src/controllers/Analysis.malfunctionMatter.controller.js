@@ -5,12 +5,13 @@ import { decrypt } from "../models/crypt.model";
 
 export const postAnalysisMalfunctionData = bind => {
   apiRequest
-    .post("/database/" + "AnalysisMalfunction")
+    .get("/database/" + "AnalysisMalfunction")
     .then(res => {
       const newData = decrypt(res.data);
-      console.log(newData);
       let matterLabel = [];
       let matterData = [];
+      // 此處修改
+      let count = 0;
       for (let i = 0; i < newData[0][0].value.length; i++) {
         matterLabel[i] = newData[0][0].value[i]["label"];
       }
@@ -18,6 +19,8 @@ export const postAnalysisMalfunctionData = bind => {
         matterData[i] = 0;
         for (let j = 0; j < newData[1].length; j++) {
           if (matterLabel[i] === newData[1][j]["matter"]) {
+            // 此處修改
+            count = Math.max(count, newData[1][j]["COUNT(*)"]);
             matterData[i] = newData[1][j]["COUNT(*)"];
             break;
           }
@@ -25,7 +28,15 @@ export const postAnalysisMalfunctionData = bind => {
       }
       bind.state.data.datasets[0].data = matterData;
       bind.state.data.labels = matterLabel;
-      bind.setState({ data: bind.state.data });
+      // 此處修改
+      bind.state.options.scale.ticks.stepSize = Math.pow(
+        10,
+        String(count).length - 1
+      );
+      bind.setState({
+        data: bind.state.data,
+        options: bind.state.options
+      });
     })
     .catch();
 };

@@ -3,7 +3,8 @@ const db = require("../config/mysql");
 
 // Model
 var Cabinet = db.define("cabinet", {
-  status: Sequelize.BOOLEAN
+  cabinetCode: { type: Sequelize.INTEGER, unique: true },
+  status: Sequelize.STRING
 });
 
 // Database synchronization

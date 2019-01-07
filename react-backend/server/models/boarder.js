@@ -10,6 +10,6 @@ var Boarder = db.define("boarder", {
 
 // Database synchronization
 Boarder.sync({ force: false });
-Boarder.Account = Boarder.belongsTo(Account, { foreignKey: "accountID" });
+Boarder.Account = Boarder.belongsTo(Account, { foreignKey: "studentCode" });
 
 module.exports = Boarder;

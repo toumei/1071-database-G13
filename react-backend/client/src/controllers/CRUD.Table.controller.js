@@ -42,7 +42,7 @@ export const handleDeleteItem = (bind, row, isBottom, info) => {
     bind.setState({ data: newData });
   } else {
     info += "成功刪除ID:" + row.ID + "<br />";
-    postCrudTableDelete(bind, row, info);
+    deleteCrudTable(bind, row, info);
   }
 };
 
@@ -52,13 +52,13 @@ export const getItem = (bind, row) => {
 };
 
 export const deleteItem = (bind, row) => {
-  postCrudTableDelete(bind, row, "成功刪除ID:" + row.ID);
+  deleteCrudTable(bind, row, "成功刪除ID:" + row.ID);
   bind.setState({ data: bind.state.data.filter((x, i) => x !== row) });
 };
 
 // table edit
 export const editItem = (bind, row) => {
-  postCrudTableEdit(bind, row, "成功編輯ID:" + row.ID);
+  putCrudTableEdit(bind, row, "成功編輯ID:" + row.ID);
   bind.state.data.filter((x, i) => {
     if (x === bind.state.itemData[0]) {
       const data = bind.state.data;
@@ -150,9 +150,9 @@ export const editForm = bind => {
   }
 };
 
-export const postCrudTableColumns = bind => {
+export const getCrudTableColumns = bind => {
   apiRequest
-    .post("/database/" + "ColumnList", { table: bind.state.table })
+    .get("/database/" + "ColumnList", { table: bind.state.table })
     .then(res => {
       let columns = [];
       let deleteColumns = [];
@@ -172,27 +172,29 @@ export const postCrudTableColumns = bind => {
     .catch();
 };
 
-export const postCrudTableData = bind => {
+export const getCrudTableData = bind => {
   apiRequest
-    .post("/database/" + "List", {
+    .get("/database/" + "List", {
       table: bind.state.table
     })
     .then(res => {
-      bind.setState({
-        data: decrypt(res.data).filter((x, i) => {
-          if (x.date !== undefined) {
-            x.date = x.date.split(".")[0];
-          }
-          return x;
-        })
-      });
+      if (res.data) {
+        bind.setState({
+          data: decrypt(res.data).filter((x, i) => {
+            if (x.date !== undefined) {
+              x.date = x.date.split(".")[0];
+            }
+            return x;
+          })
+        });
+      }
     })
     .catch();
 };
 
-export const postCrudTableEdit = (bind, row, info = "") => {
+export const putCrudTableEdit = (bind, row, info = "") => {
   apiRequest
-    .post("/database/" + "update", { table: bind.state.table, row: row })
+    .put("/database/" + "update", { table: bind.state.table, row: row })
     .then(res => {})
     .catch();
   if (info !== "")
@@ -203,9 +205,9 @@ export const postCrudTableEdit = (bind, row, info = "") => {
     });
 };
 
-export const postCrudTableDelete = (bind, row, info) => {
+export const deleteCrudTable = (bind, row, info) => {
   apiRequest
-    .post("/database/" + "delete", {
+    .delete("/database/" + "delete", {
       table: bind.state.table,
       id: row.ID
     })
@@ -232,9 +234,9 @@ export const postCrudTableAdd = (bind, row) => {
   });
 };
 
-export const postCrudSearch = async (bind, search, id, callback) => {
+export const getCrudSearch = async (bind, search, id, callback) => {
   await apiRequest
-    .post("/database/" + "searchColumnID", {
+    .get("/database/" + "searchColumnID", {
       table: bind.state.table,
       search: search,
       id: id

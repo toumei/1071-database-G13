@@ -1,19 +1,15 @@
-const Malfuntion = require("../models/malfunction");
-
+const cryptModel = require("../models/crypt.model");
+const db = require("../config/mysql2");
 /* READ *****************************/
 
-module.exports.getMalfuntion = (req, res, next) => {
-  Malfuntion.fetchAll()
-    .then(([rows]) => {
-      for (let p of rows) {
-        p.date = moment(p.date).format("MMM D, YYYY");
-      }
-      console.log(JSON.stringify(rows, ["id", "title", "date"]));
-      //res.send(JSON.stringify(rows));
-      res.render("malfunction", {
-        data: rows,
-        title: "Malfunction List"
-      });
-    })
-    .catch(err => console.log(err));
+module.exports = {
+  getSearchID: (req, res) => {
+    db.query("SELECT * FROM " + req.query.table + " where name = ?", [
+      req.query.name
+    ])
+      .then(([data]) => {
+        res.send(cryptModel.encrypt(data));
+      })
+      .catch(err => console.log(err));
+  }
 };

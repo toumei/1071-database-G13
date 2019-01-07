@@ -6,7 +6,7 @@ import { CrudTableMenuData } from "../models/CRUD.TableMenu.model";
 
 export const postCrudTableMenuData = bind => {
   apiRequest
-    .post("/database/" + "TableList")
+    .get("/database/" + "TableList")
     .then(res => {
       let data = [];
       decrypt(res.data).forEach(elm => {
