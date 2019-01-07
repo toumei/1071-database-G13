@@ -57,7 +57,7 @@ app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
-/*
+
 // set jwt auth
 app.use(
   expressJwt({ secret: jwtConfig.secretOrKey }).unless({
@@ -67,7 +67,7 @@ app.use(
 
 // set acl auth
 app.use(acl.authorize.unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
-*/
+
 //set CRUD router
 //require("./routes/CRUD");
 // Router Path
