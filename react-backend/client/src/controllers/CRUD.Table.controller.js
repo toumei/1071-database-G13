@@ -227,8 +227,27 @@ export const postCrudTableAdd = (bind, row) => {
   apiRequest
     .post("/database/add", { table: bind.state.table, row: row })
     .then(res => {
-      console.log(decrypt(res.data));
-      row["ID"] = decrypt(res.data).insertId;
+      const num1 = [];
+      const num2 = [];
+      var temp = [];
+      var temparray = [];
+      decrypt(res.data).filter((x, i) => {
+        num1[i] = x.ID;
+        return false;
+      });
+      bind.state.data.filter((x, i) => {
+        num2[i] = x.ID;
+        return false;
+      });
+      for (let i = 0; i < num2.length; i++) {
+        temp[num2[i]] = true;
+      }
+      for (let i = 0; i < num1.length; i++) {
+        if (!temp[num1[i]]) {
+          temparray.push({ ID: num1[i] });
+        }
+      }
+      row["ID"] = temparray[0].ID;
       bind.setState({ data: [...bind.state.data, row] });
     })
     .catch();

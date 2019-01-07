@@ -72,8 +72,17 @@ export default class extends Component {
         apiRequest
           .post("/database/add", row)
           .then(res => {
-            console.log(decrypt(res.data));
-            const malfunctionID = decrypt(res.data).insertId;
+            let malfunctionID = 0;
+            decrypt(res.data).filter((x, i) => {
+              if (
+                x.boarderID === boarderID &&
+                x.roomNum === room &&
+                x.matter === matter &&
+                x.desc === desc
+              ) {
+                malfunctionID = x.ID;
+              }
+            });
             const rowBed = {
               table: "bed",
               row: { malfunctionID: malfunctionID, bedNum: newBed }
