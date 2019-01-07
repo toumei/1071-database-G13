@@ -1,10 +1,12 @@
-﻿a. G13-學生宿舍網路維修管理系統(ResNetCMMS).ppt
+﻿
 
-b. 所有程式碼壓縮成一個檔，
+a. G13-學生宿舍網路維修管理系統(ResNetCMMS).ppt
 
-　* G13_source.zip，裡面要包含測試資料 Gxx.sql 可以匯入，
+b. 所有程式碼壓縮成一個檔，檔案過大不能傳zip。
 
-   * G13_setup.txt 說明原始檔如何安裝並且可以執行的方法，尤其是資料庫的設定。
+　* G13_source.zip：裡面要包含測試資料 G13.sql 可以匯入，
+
+   * G13_setup.txt：說明原始檔如何安裝並且可以執行的方法，尤其是資料庫的設定。
 
 c.
 
@@ -16,21 +18,18 @@ Github contribution
 
 https://raw.githubusercontent.com/toumei/1071-database-G13/master/G13/Github-contribution.PNG
 
-Image
+
 
 分工說明
 陳思瑜：建立 api server、account system
-郭英杰：react的整個配置與前後端的CRUD介面、分析、匯出CSV、欄位控制，
+郭英杰：react 整個配置、前後端的CRUD介面、分析、匯出CSV、欄位控制
 黃品維：前後端的報修單、維修單介面
-
 
 d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 
-1.
+1. 學生宿舍網路維修管理系統(ResNetCMMS)
 
-學生宿舍網路維修管理系統(ResNetCMMS)
-
-2.
+2. 組員名單
 
 組長：
 
@@ -93,23 +92,24 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 
 4. ER model (根據3之系統需求產生)
 
-Image
 
 5. Relational Model
 
-Image
 
 6. Testing data (展示有多少筆)
 
+
+
 7. 前端頁面，能針對後端資料庫資料做 CRUD
+
 
 8. 自評完成度
 
-整體：85%
+整體：100%
 
 組長：
 
-404410119 陳思瑜 資工4B 80%
+404410119 陳思瑜 資工4B 95%
 
 組員：
 
