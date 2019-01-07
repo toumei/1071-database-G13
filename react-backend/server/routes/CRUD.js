@@ -68,3 +68,18 @@ const vendor = epilogue.resource({
   model: Vendor,
   endpoints: ["/api/vendor", "/api/vendor/:id"]
 });
+
+const bed = epilogue.resource({
+  model: Bed,
+  endpoints: ["/api/bed", "/api/bed/:id"]
+});
+
+const time = epilogue.resource({
+  model: Time,
+  endpoints: ["/api/time", "/api/time/:id"]
+});
+
+const coloption = epilogue.resource({
+  model: Coloption,
+  endpoints: ["/api/coloption", "/api/coloption/:id"]
+});
