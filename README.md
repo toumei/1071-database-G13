@@ -1,12 +1,13 @@
 # 1071-database-G13
+### 日程：本學期結束，暫無行程。
+---
 ### G13 為 報告文件(含安裝文件)
 ### G13_source 為程式碼及sql
 ### 備用連結：
  * [程式碼載點01](https://drive.google.com/file/d/1x9wwBtMrHf9wap1tYzPw2toBK_o5Oh3p/view?usp=sharing)
  * [程式碼載點02](https://drive.google.com/open?id=1TqUmDavop8C1p3INWbTHH24-u51YxSzi)
 ---
-### 日程：本學期結束，暫無行程。
----
+
 # [寫 code & 上傳 github 注意事項](https://github.com/toumei/1071-database-G13/wiki/Advance-preparation)
 * **有任何參考資料請放上來，這樣比較好協助了解程式碼和報告**
 * **安裝擴充插件，以便於後續編程**
