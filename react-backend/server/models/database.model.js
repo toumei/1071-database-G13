@@ -11,6 +11,9 @@ const Switch = require("../models/switch");
 const Sweep = require("../models/sweep");
 const Cabinet = require("../models/cabinet");
 const Vendor = require("../models/vendor");
+const Bed = require("../models/bed");
+const Time = require("../models/time");
+const Coloption = require("../models/coloption");
 
 function UpperCase(str) {
   str = str[0].toUpperCase() + str.slice(1);
