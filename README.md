@@ -19,16 +19,7 @@
 * **express用ES5語法，react用ES6語法，少用var(型態可變，值可變)改用let(型態不可變，值可變)、const(型態不可變，值不可變)**
 ---
 ---
-### 更新資訊：
-* EJS 模組化(pages、partials)
-* 新增sql指令：describe: 'DESCRIBE table'，取得column_name
-* 登入後會將token記錄在本地端 Local Storage
-* 使用http攔截器，攔截請求，若header無token，則setHeader(Local Storage的token資料)
-* [react練習/測試檔](https://github.com/toumei/107-01-database-4B/tree/master/example-create-react-app-express) - 12/10
-* ORM
-* RESTful API
-* ACL
-* 前端CRUD、分析、匯入CSV、欄位選擇控制、編輯驗證
+### 更新資訊：暫無更新。
 ---
 
 ### WIKI：
@@ -42,14 +33,14 @@
 ---
 
 ### 已經做的部分：
-* server
-  * http server：https://localhost:5000
+* server (express)
+  * http  server：https://localhost:5000
   * https server：https://localhost:8000
+  
   * 將 三層架構 調整為 Model–view–controller (MVC)
-  * EJS 模組化(pages、partials) => 廢棄
-  * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發
-  * epilogue：架構具有 RESTful 風的 CRUD API server
-  * 登入系統(id, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
+  * sequelize： 使用 Object Relational Mapping(ORM) 框架開發
+  * epilogue： 架構具有 RESTful 風的 CRUD API server
+  * account system (id, pwd)： 使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
   * 帳戶權限系統：express-acl，[流程](https://segmentfault.com/a/1190000004627946)
     * 登入時判斷身份為 user、worker、admin、DB_admin，切換至不同的使用頁面。
 
@@ -67,39 +58,15 @@
 
 ### 正在做的部分：
 * sever
-  
-* client (express)
+* client
 
 ### 尚未做的部分：
 * server
-
-* client (express)
-  * malfunction
-  * processing
-
-* client (react)
-  * malfunction (express->react)
-  * processing (express->react)
-  * 編輯驗證 (外鍵)
----
+* client
 
 ### 預期做的部分：
-
-* client (express)
-  * 顯示那個用戶登入
-  * 顯示更動的資料
-  * 顯示哪個用戶填了報修單或維修單
-  * 顯示CRUD的操作
- 
-* client (react)
+* server
+* client
   * https server (配合server)
-  * ACL、RBAC (配合server)
   * 即時顯示新資訊 (學生填報修單通知工作人員，工作人員報修完畢通知學生)
   * 多國語言
-  * bootstrap table 改成 remote 模式
-
-### 前端可操作之Table：
-* product (課本教材，以此為基礎修改，兼功能測試用)
-* database CRUD
-* malfunction
-* processing
