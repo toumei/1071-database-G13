@@ -2,41 +2,22 @@
 # [寫 code & 上傳 github 注意事項](https://github.com/toumei/1071-database-G13/wiki/Advance-preparation)
 * **有任何參考資料請放上來，這樣比較好協助了解程式碼和報告**
 * **安裝擴充插件，以便於後續編程**
-* **express用ES5語法，react用ES6語法，少用var(型態可變，值可變)改用let(型態不可變，值可變)、const(型態不可變，值不可變)**
 ---
-### 日程：
-* 2019年01月04日 (五) 繳交報告，請每組組長代表繳交至 iClass
-* 2019年01月07日 (一) 口頭報告 (20:00 ~ 21:00 -- G13 ~ G18，每組時間10分鐘，要準備 PPT，報告5分鐘，老師詢問5分鐘)
-### 檔案：
-a. PPT 檔，檔名 Gxx-題目.ppt
+### 日程：本學期結束，暫無行程。
+### G13 為 報告文件(含安裝文件)
+### G13_source 為程式碼及sql
+### 備用連結：
+ * [程式碼載點01](https://drive.google.com/file/d/1x9wwBtMrHf9wap1tYzPw2toBK_o5Oh3p/view?usp=sharing)
+ * [程式碼載點02](https://drive.google.com/open?id=1TqUmDavop8C1p3INWbTHH24-u51YxSzi)
 
-b. 所有程式碼壓縮成一個檔，
-　* Gxx_source.zip，裡面要包含測試資料 Gxx.sql 可以匯入，
-  * Gxx_setup.txt 說明原始檔如何安裝並且可以執行的方法，尤其是資料庫的設定。
-
-c. Github repository URL, Github contribution圖片 及分工說明
-
-d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
-
-1. 題目
-2. 組員及分工
-3. 系統需求
-4. ER model (根據3之系統需求產生)
-5. Relational Model
-6. Testing data (展示有多少筆)
-7. 前端頁面，能針對後端資料庫資料做 CRUD
-8. 自評完成度
 ---
 ### 重要資訊：
 * **更新資訊後面請補上更新日期，之後不定期清理不必要資訊**
 * **有Git忽略文件(.gitignore)，就不用擔心上傳到 node_modules**
 * **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，
   > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
+* **express用ES5語法，react用ES6語法，少用var(型態可變，值可變)改用let(型態不可變，值可變)、const(型態不可變，值不可變)**
 ---
-### port setting
-* server http-port：http://localhost:5000
-* server https-port：https://localhost:8000
-* client http-port：http://localhost:5000
 ---
 ### 更新資訊：
 * EJS 模組化(pages、partials)
@@ -62,10 +43,11 @@ d. 總結報告，請剪輯 PPT 重要圖片及文字說明如下
 
 ### 已經做的部分：
 * server
-  * https server：https://localhost:port
+  * http server：https://localhost:5000
+  * https server：https://localhost:8000
   * 將 三層架構 調整為 Model–view–controller (MVC)
-  * EJS 模組化(pages、partials)
-  * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發，不熟研究中
+  * EJS 模組化(pages、partials) => 廢棄
+  * Object Relational Mapping(ORM)框架：使用 sequelize orm 開發
   * epilogue：架構具有 RESTful 風的 CRUD API server
   * 登入系統(id, pwd)：使用passport(驗證帳密)、bcrypt(加密密碼)、JWT(回傳token)、express-jwt(管理router的驗證token)
   * 帳戶權限系統：express-acl，[流程](https://segmentfault.com/a/1190000004627946)
