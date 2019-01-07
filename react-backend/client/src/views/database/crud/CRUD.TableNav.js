@@ -95,11 +95,11 @@ const AddBtn = ({ bind }) => (
               for (let i = 1; i < newColumns.length; i++) {
                 if (newColumns[i].type === "CHECKBOX") {
                   document.getElementById(
-                    newColumns[i].COLUMN_NAME + "TrueAdd"
+                    newColumns[i].column_name + "TrueAdd"
                   ).checked = true;
                 } else if (newColumns[i].type === "SELECT") {
                   document.getElementById(
-                    newColumns[i].COLUMN_NAME + "Add"
+                    newColumns[i].column_name + "Add"
                   ).value = newColumns[i].value[0].value;
                 } else if (newColumns[i].type === "DATE") {
                   const date = new Date();
@@ -108,7 +108,7 @@ const AddBtn = ({ bind }) => (
                     (date.getMonth() + 1)
                   ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
                   document.getElementById(
-                    newColumns[i].COLUMN_NAME + "Add"
+                    newColumns[i].column_name + "Add"
                   ).value = today;
                 } else if (newColumns[i].type === "DATETIME") {
                   const date = new Date();
@@ -121,11 +121,11 @@ const AddBtn = ({ bind }) => (
                     "0" + date.getSeconds()
                   ).slice(-2)}`;
                   document.getElementById(
-                    newColumns[i].COLUMN_NAME + "Add"
+                    newColumns[i].column_name + "Add"
                   ).value = today;
                 } else {
                   document.getElementById(
-                    newColumns[i].COLUMN_NAME + "Add"
+                    newColumns[i].column_name + "Add"
                   ).value = "";
                 }
               }
@@ -154,18 +154,18 @@ const AddForm = ({ bind }) => {
         "0" + date.getSeconds()
       ).slice(-2)}`;
       columns.push(
-        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
+        <div key={newColumns[i].column_name + i} className="form-group row">
           <label
-            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            htmlFor={newColumns[i].column_name + "Add"}
             className="col-sm-2 col-form-label"
           >
-            {newColumns[i].COLUMN_COMMENT}
+            {newColumns[i].column_comment}
           </label>
           <div className="col-sm-10">
             <input
               type="datetime-local"
               className="form-control"
-              id={newColumns[i].COLUMN_NAME + "Add"}
+              id={newColumns[i].column_name + "Add"}
               defaultValue={today}
             />
           </div>
@@ -178,18 +178,18 @@ const AddForm = ({ bind }) => {
         (date.getMonth() + 1)
       ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
       columns.push(
-        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
+        <div key={newColumns[i].column_name + i} className="form-group row">
           <label
-            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            htmlFor={newColumns[i].column_name + "Add"}
             className="col-sm-2 col-form-label"
           >
-            {newColumns[i].COLUMN_COMMENT}
+            {newColumns[i].column_comment}
           </label>
           <div className="col-sm-10">
             <input
               type="date"
               className="form-control"
-              id={newColumns[i].COLUMN_NAME + "Add"}
+              id={newColumns[i].column_name + "Add"}
               defaultValue={today}
             />
           </div>
@@ -197,17 +197,17 @@ const AddForm = ({ bind }) => {
       );
     } else if (newColumns[i].type === "TEXTAREA") {
       columns.push(
-        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
+        <div key={newColumns[i].column_name + i} className="form-group row">
           <label
-            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            htmlFor={newColumns[i].column_name + "Add"}
             className="col-sm-2 col-form-label"
           >
-            {newColumns[i].COLUMN_COMMENT}
+            {newColumns[i].column_comment}
           </label>
           <div className="col-sm-10">
             <textarea
               className="form-control"
-              id={newColumns[i].COLUMN_NAME + "Add"}
+              id={newColumns[i].column_name + "Add"}
               defaultValue=""
             />
           </div>
@@ -215,18 +215,18 @@ const AddForm = ({ bind }) => {
       );
     } else if (newColumns[i].type === "CHECKBOX") {
       columns.push(
-        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
+        <div key={newColumns[i].column_name + i} className="form-group row">
           <label
-            htmlFor={newColumns[i].COLUMN_NAME + "TrueAdd"}
+            htmlFor={newColumns[i].column_name + "TrueAdd"}
             className="col-sm-2 col-form-label"
           >
-            {newColumns[i].COLUMN_COMMENT}
+            {newColumns[i].column_comment}
           </label>
           <div className="input-group col-sm-10">
             <div className="input-group-text">
               <input
                 type="radio"
-                id={newColumns[i].COLUMN_NAME + "TrueAdd"}
+                id={newColumns[i].column_name + "TrueAdd"}
                 name="radio-group"
                 defaultValue={newColumns[i].value.split(":")[0]}
                 defaultChecked
@@ -234,21 +234,21 @@ const AddForm = ({ bind }) => {
             </div>
             <label
               className="form-control"
-              htmlFor={newColumns[i].COLUMN_NAME + "TrueAdd"}
+              htmlFor={newColumns[i].column_name + "TrueAdd"}
             >
               {newColumns[i].value.split(":")[0]}
             </label>
             <div className="input-group-text">
               <input
                 type="radio"
-                id={newColumns[i].COLUMN_NAME + "FalseAdd"}
+                id={newColumns[i].column_name + "FalseAdd"}
                 name="radio-group"
                 defaultValue={newColumns[i].value.split(":")[1]}
               />
             </div>
             <label
               className="form-control"
-              htmlFor={newColumns[i].COLUMN_NAME + "FalseAdd"}
+              htmlFor={newColumns[i].column_name + "FalseAdd"}
             >
               {newColumns[i].value.split(":")[1]}
             </label>
@@ -269,17 +269,17 @@ const AddForm = ({ bind }) => {
         return option;
       };
       columns.push(
-        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
+        <div key={newColumns[i].column_name + i} className="form-group row">
           <label
-            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            htmlFor={newColumns[i].column_name + "Add"}
             className="col-sm-2 col-form-label"
           >
-            {newColumns[i].COLUMN_COMMENT}
+            {newColumns[i].column_comment}
           </label>
           <div className="col-sm-10">
             <select
               className="custom-select"
-              id={newColumns[i].COLUMN_NAME + "Add"}
+              id={newColumns[i].column_name + "Add"}
               defaultValue={options[0].value}
             >
               <Option />
@@ -289,18 +289,18 @@ const AddForm = ({ bind }) => {
       );
     } else {
       columns.push(
-        <div key={newColumns[i].COLUMN_NAME + i} className="form-group row">
+        <div key={newColumns[i].column_name + i} className="form-group row">
           <label
-            htmlFor={newColumns[i].COLUMN_NAME + "Add"}
+            htmlFor={newColumns[i].column_name + "Add"}
             className="col-sm-2 col-form-label"
           >
-            {newColumns[i].COLUMN_COMMENT}
+            {newColumns[i].column_comment}
           </label>
           <div className="col-sm-10">
             <input
               type="text"
               className="form-control"
-              id={newColumns[i].COLUMN_NAME + "Add"}
+              id={newColumns[i].column_name + "Add"}
               defaultValue=""
             />
           </div>

@@ -32,14 +32,14 @@ export const columnsType = {
 
 export const CtrlColumns = (elm, editable, editorType, editorValue) => {
   return {
-    ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"]),
+    ...customColumns(elm["column_name"], elm["column_comment"]),
     editable: editable,
     headerStyle: { cursor: "pointer", ...columnsWidth(elm) },
     style: {
       cursor: "default",
       // 當文字超出框時顯示"..."
       wordBreak: "keep-all",
-      display: elm["COLUMN_NAME"] === "value" ? "-webkit-box" : "",
+      display: elm["column_name"] === "value" ? "-webkit-box" : "",
       WebkitLineClamp: 1,
       overflow: "hidden",
       textOverflow: "ellipsis",
@@ -50,7 +50,7 @@ export const CtrlColumns = (elm, editable, editorType, editorValue) => {
       options: editorType === "SELECT" ? editorValue : undefined
     },
     editorRenderer:
-      elm["COLUMN_NAME"] === "value"
+      elm["column_name"] === "value"
         ? (editorProps, value, row) => {
             if (row.type === "CHECKBOX") {
               return <CheckBox {...editorProps} value={value} />;

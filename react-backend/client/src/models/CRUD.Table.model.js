@@ -151,7 +151,7 @@ const valid = {
 
 export const CrudTableColumns = (bind, elm) => {
   return {
-    ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true),
+    ...customColumns(elm["column_name"], elm["column_comment"], true),
     editable: bind.state.editable,
     headerStyle: { cursor: "pointer", ...columnsWidth(elm) },
     style: { cursor: "default" },
@@ -204,7 +204,7 @@ export const CrudTableModeColumns = bind => {
 
 export const CrudTableDeleteColumns = elm => {
   return {
-    ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"]),
+    ...customColumns(elm["column_name"], elm["column_comment"]),
     headerStyle: columnsWidth(elm),
     style: { cursor: "default" }
   };

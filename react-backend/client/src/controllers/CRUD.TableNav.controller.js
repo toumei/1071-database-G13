@@ -6,30 +6,30 @@ export const addItem = bind => {
   for (let i = 1; i < newColumns.length; i++) {
     if (newColumns[i].value === "PK") {
       if (
-        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value === ""
+        document.getElementById(newColumns[i].column_name + "Add").value === ""
       ) {
         isNull = true;
-        info += newColumns[i].COLUMN_COMMENT + "請勿留白<br />";
+        info += newColumns[i].column_comment + "請勿留白<br />";
       }
     }
     if (newColumns[i].type === "CHECKBOX") {
       if (
-        document.getElementById(newColumns[i].COLUMN_NAME + "TrueAdd")
+        document.getElementById(newColumns[i].column_name + "TrueAdd")
           .checked === true
       ) {
-        row[newColumns[i].COLUMN_NAME] = document.getElementById(
-          newColumns[i].COLUMN_NAME + "TrueAdd"
+        row[newColumns[i].column_name] = document.getElementById(
+          newColumns[i].column_name + "TrueAdd"
         ).value;
       } else {
-        row[newColumns[i].COLUMN_NAME] = document.getElementById(
-          newColumns[i].COLUMN_NAME + "FalseAdd"
+        row[newColumns[i].column_name] = document.getElementById(
+          newColumns[i].column_name + "FalseAdd"
         ).value;
       }
     } else {
-      row[newColumns[i].COLUMN_NAME] =
-        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value === ""
+      row[newColumns[i].column_name] =
+        document.getElementById(newColumns[i].column_name + "Add").value === ""
           ? null
-          : document.getElementById(newColumns[i].COLUMN_NAME + "Add").value;
+          : document.getElementById(newColumns[i].column_name + "Add").value;
     }
   }
   if (!isNull) {
@@ -37,10 +37,10 @@ export const addItem = bind => {
     for (let i = 1; i < newColumns.length; i++) {
       if (newColumns[i].type === "CHECKBOX") {
         document.getElementById(
-          newColumns[i].COLUMN_NAME + "TrueAdd"
+          newColumns[i].column_name + "TrueAdd"
         ).checked = true;
       } else if (newColumns[i].type === "SELECT") {
-        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value =
+        document.getElementById(newColumns[i].column_name + "Add").value =
           newColumns[i].value[0].value;
       } else if (newColumns[i].type === "DATE") {
         const date = new Date();
@@ -49,7 +49,7 @@ export const addItem = bind => {
           (date.getMonth() + 1)
         ).slice(-2)}-${("0" + date.getDate()).slice(-2)}`;
         document.getElementById(
-          newColumns[i].COLUMN_NAME + "Add"
+          newColumns[i].column_name + "Add"
         ).value = today;
       } else if (newColumns[i].type === "DATETIME") {
         const date = new Date();
@@ -62,10 +62,10 @@ export const addItem = bind => {
           "0" + date.getSeconds()
         ).slice(-2)}`;
         document.getElementById(
-          newColumns[i].COLUMN_NAME + "Add"
+          newColumns[i].column_name + "Add"
         ).value = today;
       } else {
-        document.getElementById(newColumns[i].COLUMN_NAME + "Add").value = "";
+        document.getElementById(newColumns[i].column_name + "Add").value = "";
       }
     }
   } else {

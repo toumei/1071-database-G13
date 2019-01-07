@@ -26,7 +26,7 @@ export default class extends Component {
       <div className="col-md-2" style={{ marginTop: 10 }}>
         <CustomBootstrap
           base={{
-            keyField: "TABLE_COMMENT",
+            keyField: "table_comment",
             columns: this.state.columns,
             data: this.state.data
           }}
@@ -36,8 +36,8 @@ export default class extends Component {
             hideSelectColumn: true,
             bgColor: "#c8e6c9",
             onSelect: (row, isSelect, rowIndex, e) => {
-              this.props.handleChangeTable(row.TABLE_NAME);
-              this.setState({ table: row.TABLE_NAME });
+              this.props.handleChangeTable(row.table_name);
+              this.setState({ table: row.table_name });
               return false;
             }
           }}

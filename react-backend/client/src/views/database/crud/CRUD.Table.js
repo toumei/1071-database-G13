@@ -39,7 +39,7 @@ export default class extends Component {
       deleteColumns: [],
       itemData: [],
       editItem: "",
-      editable: true,
+      editable: false,
       info: [{ title: "", content: "", cancel: false }]
     };
     this.select = [];
@@ -151,23 +151,23 @@ export default class extends Component {
                           if (newColumns[i].type === "CHECKBOX") {
                             if (
                               document.getElementById(
-                                newColumns[i].COLUMN_NAME + "TrueEdit"
+                                newColumns[i].column_name + "TrueEdit"
                               ).value ===
-                              this.state.itemData[0][newColumns[i].COLUMN_NAME]
+                              this.state.itemData[0][newColumns[i].column_name]
                             ) {
                               document.getElementById(
-                                newColumns[i].COLUMN_NAME + "TrueEdit"
+                                newColumns[i].column_name + "TrueEdit"
                               ).checked = true;
                             } else {
                               document.getElementById(
-                                newColumns[i].COLUMN_NAME + "FalseEdit"
+                                newColumns[i].column_name + "FalseEdit"
                               ).checked = true;
                             }
                           } else {
                             document.getElementById(
-                              newColumns[i].COLUMN_NAME + "Edit"
+                              newColumns[i].column_name + "Edit"
                             ).value = this.state.itemData[0][
-                              newColumns[i].COLUMN_NAME
+                              newColumns[i].column_name
                             ];
                           }
                         }
@@ -261,24 +261,24 @@ const EditForm = ({ bind }) => {
     let columns = [];
     const newColumns = bind.state.formColumns;
     for (let i = 1; i < newColumns.length; i++) {
-      if (bind.state.itemData[0][newColumns[i].COLUMN_NAME] !== undefined) {
+      if (bind.state.itemData[0][newColumns[i].column_name] !== undefined) {
         if (newColumns[i].type === "DATETIME") {
           columns.push(
             <div
-              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
               className="form-group row">
               <label
-                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                htmlFor={newColumns[i].column_name + "Edit"}
                 className="col-sm-2 col-form-label">
-                {newColumns[i].COLUMN_COMMENT}
+                {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">
                 <input
                   type="datetime-local"
                   className="form-control"
-                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  id={newColumns[i].column_name + "Edit"}
                   defaultValue={
-                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                    bind.state.itemData[0][newColumns[i].column_name]
                   }
                 />
               </div>
@@ -287,20 +287,20 @@ const EditForm = ({ bind }) => {
         } else if (newColumns[i].type === "DATE") {
           columns.push(
             <div
-              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
               className="form-group row">
               <label
-                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                htmlFor={newColumns[i].column_name + "Edit"}
                 className="col-sm-2 col-form-label">
-                {newColumns[i].COLUMN_COMMENT}
+                {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">
                 <input
                   type="date"
                   className="form-control"
-                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  id={newColumns[i].column_name + "Edit"}
                   defaultValue={
-                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                    bind.state.itemData[0][newColumns[i].column_name]
                   }
                 />
               </div>
@@ -309,19 +309,19 @@ const EditForm = ({ bind }) => {
         } else if (newColumns[i].type === "TEXTAREA") {
           columns.push(
             <div
-              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
               className="form-group row">
               <label
-                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                htmlFor={newColumns[i].column_name + "Edit"}
                 className="col-sm-2 col-form-label">
-                {newColumns[i].COLUMN_COMMENT}
+                {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">
                 <textarea
                   className="form-control"
-                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  id={newColumns[i].column_name + "Edit"}
                   defaultValue={
-                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                    bind.state.itemData[0][newColumns[i].column_name]
                   }
                 />
               </div>
@@ -330,46 +330,46 @@ const EditForm = ({ bind }) => {
         } else if (newColumns[i].type === "CHECKBOX") {
           columns.push(
             <div
-              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
               className="form-group row">
               <label
-                htmlFor={newColumns[i].COLUMN_NAME + "TrueEdit"}
+                htmlFor={newColumns[i].column_name + "TrueEdit"}
                 className="col-sm-2 col-form-label">
-                {newColumns[i].COLUMN_COMMENT}
+                {newColumns[i].column_comment}
               </label>
               <div className="input-group col-sm-10">
                 <div className="input-group-text">
                   <input
                     type="radio"
-                    id={newColumns[i].COLUMN_NAME + "TrueEdit"}
+                    id={newColumns[i].column_name + "TrueEdit"}
                     name="radio-group"
                     defaultValue={newColumns[i].value.split(":")[0]}
                     defaultChecked={
                       newColumns[i].value.split(":")[0] ===
-                      bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                      bind.state.itemData[0][newColumns[i].column_name]
                     }
                   />
                 </div>
                 <label
                   className="form-control"
-                  htmlFor={newColumns[i].COLUMN_NAME + "TrueEdit"}>
+                  htmlFor={newColumns[i].column_name + "TrueEdit"}>
                   {newColumns[i].value.split(":")[0]}
                 </label>
                 <div className="input-group-text">
                   <input
                     type="radio"
-                    id={newColumns[i].COLUMN_NAME + "FalseEdit"}
+                    id={newColumns[i].column_name + "FalseEdit"}
                     name="radio-group"
                     defaultValue={newColumns[i].value.split(":")[1]}
                     defaultChecked={
                       newColumns[i].value.split(":")[1] ===
-                      bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                      bind.state.itemData[0][newColumns[i].column_name]
                     }
                   />
                 </div>
                 <label
                   className="form-control"
-                  htmlFor={newColumns[i].COLUMN_NAME + "FalseEdit"}>
+                  htmlFor={newColumns[i].column_name + "FalseEdit"}>
                   {newColumns[i].value.split(":")[1]}
                 </label>
               </div>
@@ -390,19 +390,19 @@ const EditForm = ({ bind }) => {
           };
           columns.push(
             <div
-              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
               className="form-group row">
               <label
-                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                htmlFor={newColumns[i].column_name + "Edit"}
                 className="col-sm-2 col-form-label">
-                {newColumns[i].COLUMN_COMMENT}
+                {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">
                 <select
                   className="custom-select"
-                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  id={newColumns[i].column_name + "Edit"}
                   defaultValue={
-                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                    bind.state.itemData[0][newColumns[i].column_name]
                   }>
                   <Option />
                 </select>
@@ -412,20 +412,20 @@ const EditForm = ({ bind }) => {
         } else {
           columns.push(
             <div
-              key={newColumns[i].COLUMN_NAME + bind.state.itemData[0].ID + i}
+              key={newColumns[i].column_name + bind.state.itemData[0].ID + i}
               className="form-group row">
               <label
-                htmlFor={newColumns[i].COLUMN_NAME + "Edit"}
+                htmlFor={newColumns[i].column_name + "Edit"}
                 className="col-sm-2 col-form-label">
-                {newColumns[i].COLUMN_COMMENT}
+                {newColumns[i].column_comment}
               </label>
               <div className="col-sm-10">
                 <input
                   type="text"
                   className="form-control"
-                  id={newColumns[i].COLUMN_NAME + "Edit"}
+                  id={newColumns[i].column_name + "Edit"}
                   defaultValue={
-                    bind.state.itemData[0][newColumns[i].COLUMN_NAME]
+                    bind.state.itemData[0][newColumns[i].column_name]
                   }
                 />
               </div>

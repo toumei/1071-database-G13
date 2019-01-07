@@ -2,7 +2,7 @@ import apiRequest from "../api/apiRequest";
 
 // model
 import { CtrlMsg } from "../models/log.model";
-import { decrypt } from "../models/crypt.model";
+import { decrypt, lowerJSONKey } from "../models/crypt.model";
 import { columnsType, CtrlColumns } from "../models/Ctrl.model";
 
 export const postCtrlColumns = bind => {
@@ -14,13 +14,14 @@ export const postCtrlColumns = bind => {
       CtrlMsg("postCtrlColumns", "result", decrypt(res.data));
       let columns = [];
       decrypt(res.data).forEach(elm => {
+        elm = lowerJSONKey(elm);
         columns.push(
           // 不同欄位放進不同的輸入框
           CtrlColumns(
             elm,
-            columnsType[elm["COLUMN_NAME"]].editable,
-            columnsType[elm["COLUMN_NAME"]].editorType,
-            columnsType[elm["COLUMN_NAME"]].editorValue
+            columnsType[elm["column_name"]].editable,
+            columnsType[elm["column_name"]].editorType,
+            columnsType[elm["column_name"]].editorValue
           )
         );
       });

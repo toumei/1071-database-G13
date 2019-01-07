@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: res_net_cmms
+-- Host: localhost    Database: res_net_cmms
 -- ------------------------------------------------------
--- Server version	8.0.12
+-- Server version	5.7.16-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `_account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `_account` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(255) NOT NULL,
@@ -45,7 +45,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `_account_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `_account_role` (
   `accountID` int(11) NOT NULL,
   `roleID` int(11) NOT NULL,
@@ -69,15 +69,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `_coloption`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `_coloption` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
-  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '名字',
-  `type` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '型態',
+  `name` varchar(30) NOT NULL COMMENT '名字',
+  `type` varchar(30) NOT NULL COMMENT '型態',
   `value` json DEFAULT NULL COMMENT '值',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `name_UNIQUE` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='欄位控制';
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='欄位控制';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `_role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `_role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -120,7 +120,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `apply`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `apply` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
   `employeeID` int(10) unsigned DEFAULT NULL COMMENT '員工編號',
@@ -128,7 +128,7 @@ CREATE TABLE `apply` (
   `vendorID` int(10) unsigned DEFAULT NULL COMMENT '廠商編號',
   `date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '申報日期',
   `repair_date` datetime DEFAULT NULL COMMENT '送修日期',
-  `desc` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '維護說明',
+  `desc` varchar(500) DEFAULT NULL COMMENT '維護說明',
   PRIMARY KEY (`ID`),
   KEY `FK_switchID_apply_idx` (`switchID`),
   KEY `FK_employeeID_apply_idx` (`employeeID`),
@@ -136,7 +136,7 @@ CREATE TABLE `apply` (
   CONSTRAINT `FK_employeeID_apply` FOREIGN KEY (`employeeID`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_switchID_apply` FOREIGN KEY (`switchID`) REFERENCES `switch` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_vendorID_apply` FOREIGN KEY (`vendorID`) REFERENCES `vendor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='申報';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='申報';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,7 +145,7 @@ CREATE TABLE `apply` (
 
 LOCK TABLES `apply` WRITE;
 /*!40000 ALTER TABLE `apply` DISABLE KEYS */;
-INSERT INTO `apply` VALUES (2,2,2,2,'2019-01-07 01:09:06','2019-01-07 09:09:06','3'),(3,2,2,2,'2019-01-07 09:15:10','2019-01-07 09:15:10','2'),(4,2,2,2,'2019-01-07 09:16:41','2019-01-07 09:16:41','2'),(5,2,2,2,'2019-01-07 09:17:11','2019-01-07 09:17:11','2'),(6,2,2,2,'2019-01-07 09:20:24','2019-01-07 09:20:24','2');
+INSERT INTO `apply` VALUES (2,2,2,2,'2019-01-06 09:09:06','2019-01-06 17:09:06','3'),(3,2,2,2,'2019-01-07 01:15:10','2019-01-07 01:15:10','2'),(4,2,2,2,'2019-01-07 01:16:41','2019-01-07 01:16:41','2'),(5,2,2,2,'2019-01-07 01:17:11','2019-01-07 01:17:11','2'),(6,2,2,2,'2019-01-07 01:20:24','2019-01-07 01:20:24','2');
 /*!40000 ALTER TABLE `apply` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,15 +155,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `bed`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bed` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
   `malfunctionID` int(10) unsigned DEFAULT NULL COMMENT '單號',
-  `bedNum` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '寢室床號',
+  `bedNum` varchar(30) DEFAULT NULL COMMENT '寢室床號',
   PRIMARY KEY (`ID`),
   KEY `FK_malfunctionID_bed_idx` (`malfunctionID`),
   CONSTRAINT `FK_malfunctionID_bed` FOREIGN KEY (`malfunctionID`) REFERENCES `malfunction` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='寢室';
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 COMMENT='寢室';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -182,14 +182,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `boarder`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `boarder` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
   `studentCode` int(10) unsigned NOT NULL COMMENT '學號',
-  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '姓名',
+  `name` varchar(30) DEFAULT NULL COMMENT '姓名',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `studentID_UNIQUE` (`studentCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='住宿生';
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COMMENT='住宿生';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,14 +208,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cabinet`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `cabinet` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
   `cabinetCode` int(10) unsigned NOT NULL COMMENT '機櫃編號',
   `status` varchar(30) DEFAULT NULL COMMENT '狀態',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `cabinetID_UNIQUE` (`cabinetCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='機櫃';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='機櫃';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,14 +234,14 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `employee`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `employee` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
-  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '姓名',
-  `IDcard` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '身分證',
+  `name` varchar(30) DEFAULT NULL COMMENT '姓名',
+  `IDcard` char(10) DEFAULT NULL COMMENT '身分證',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `IDcard_UNIQUE` (`IDcard`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='工作人員';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='工作人員';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,18 +260,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `malfunction`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `malfunction` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
   `boarderID` int(10) unsigned DEFAULT NULL COMMENT '住宿生編號',
   `roomNum` varchar(30) DEFAULT NULL COMMENT '寢室編號',
   `date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '報修日期',
-  `matter` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '報修事項',
-  `desc` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '狀況描述',
+  `matter` varchar(30) DEFAULT NULL COMMENT '報修事項',
+  `desc` varchar(500) DEFAULT NULL COMMENT '狀況描述',
   PRIMARY KEY (`ID`),
   KEY `FK_boarderID_malfunction_idx` (`boarderID`),
-  CONSTRAINT `FK_boarderID_malfunction` FOREIGN KEY (`boarderID`) REFERENCES `boarder` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='報修單';
+  CONSTRAINT `FK_boarderID_malfunction` FOREIGN KEY (`boarderID`) REFERENCES `boarder` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 COMMENT='報修單';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -290,22 +290,22 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `processing`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `processing` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
   `malfunctionID` int(10) unsigned NOT NULL COMMENT '單號',
   `employeeID` int(10) unsigned DEFAULT NULL COMMENT '員工編號',
   `date` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '維修日期',
-  `result` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '維修結果',
-  `detail` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '處理內容',
+  `result` varchar(500) DEFAULT NULL COMMENT '維修結果',
+  `detail` varchar(500) DEFAULT NULL COMMENT '處理內容',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `malfunctionID_UNIQUE` (`malfunctionID`),
   KEY `FK_employeeID_processing_idx` (`employeeID`),
   KEY `FK_malfunctionID_processing_idx` (`ID`),
   KEY `FK_malfunctionID_processing_idx1` (`malfunctionID`),
-  CONSTRAINT `FK_employeeID_processing` FOREIGN KEY (`employeeID`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_malfunctionID_processing` FOREIGN KEY (`malfunctionID`) REFERENCES `malfunction` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='維修單';
+  CONSTRAINT `FK_employeeID_processing` FOREIGN KEY (`employeeID`) REFERENCES `employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_malfunctionID_processing` FOREIGN KEY (`malfunctionID`) REFERENCES `malfunction` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8 COMMENT='維修單';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -324,7 +324,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `sweep`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `sweep` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
   `employeeID` int(10) unsigned DEFAULT NULL COMMENT '員工編號',
@@ -333,9 +333,9 @@ CREATE TABLE `sweep` (
   PRIMARY KEY (`ID`),
   KEY `FK_cabinetID_sweep_idx` (`cabinetID`),
   KEY `FK_employeeID_sweep_idx` (`employeeID`),
-  CONSTRAINT `FK_cabinetID_sweep` FOREIGN KEY (`cabinetID`) REFERENCES `cabinet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `FK_employeeID_sweep` FOREIGN KEY (`employeeID`) REFERENCES `employee` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='清掃';
+  CONSTRAINT `FK_cabinetID_sweep` FOREIGN KEY (`cabinetID`) REFERENCES `cabinet` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_employeeID_sweep` FOREIGN KEY (`employeeID`) REFERENCES `employee` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='清掃';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -354,17 +354,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `switch`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `switch` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
   `cabinetID` int(10) unsigned DEFAULT NULL COMMENT '機櫃編號',
   `switchCode` int(10) unsigned DEFAULT NULL COMMENT '交換器代號',
   `status` varchar(30) DEFAULT NULL COMMENT '狀態',
-  `specification` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL COMMENT '規格',
+  `specification` varchar(500) DEFAULT NULL COMMENT '規格',
   PRIMARY KEY (`ID`),
   KEY `FK_cabinetID_switch_idx` (`cabinetID`),
-  CONSTRAINT `FK_cabinetID_switch` FOREIGN KEY (`cabinetID`) REFERENCES `cabinet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='交換器';
+  CONSTRAINT `FK_cabinetID_switch` FOREIGN KEY (`cabinetID`) REFERENCES `cabinet` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=154 DEFAULT CHARSET=utf8 COMMENT='交換器';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,16 +383,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `time`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `time` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
   `malfunctionID` int(10) unsigned DEFAULT NULL COMMENT '單號',
-  `time` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '方便維修時段',
-  `exc` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '例外時段',
+  `time` varchar(30) DEFAULT NULL COMMENT '方便維修時段',
+  `exc` varchar(30) DEFAULT NULL COMMENT '例外時段',
   PRIMARY KEY (`ID`),
   KEY `FK_malfunctionID_time_idx` (`malfunctionID`),
-  CONSTRAINT `FK_malfunctionID_time` FOREIGN KEY (`malfunctionID`) REFERENCES `malfunction` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='時段';
+  CONSTRAINT `FK_malfunctionID_time` FOREIGN KEY (`malfunctionID`) REFERENCES `malfunction` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 COMMENT='時段';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -411,17 +411,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `vendor`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `vendor` (
   `ID` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '#',
-  `vendorCode` char(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '廠商代號',
+  `vendorCode` char(7) DEFAULT NULL COMMENT '廠商代號',
   `name` varchar(30) DEFAULT NULL COMMENT '名稱',
-  `tel` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '電話',
-  `email` varchar(90) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '電子信箱',
-  `addr` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '地址',
+  `tel` varchar(30) DEFAULT NULL COMMENT '電話',
+  `email` varchar(90) DEFAULT NULL COMMENT '電子信箱',
+  `addr` varchar(500) DEFAULT NULL COMMENT '地址',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `vendorCode_UNIQUE` (`vendorCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='廠商';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='廠商';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -433,10 +433,6 @@ LOCK TABLES `vendor` WRITE;
 INSERT INTO `vendor` VALUES (1,'K666666','666','026666666','666@666.com','6666'),(2,'K123456','K123456','123456789','K123456@K123456.com','K123456'),(3,'K654321','K654321','0911222333','K654321@gmail.com','K654321'),(4,'K111111','K111111','0933444555','K111111@gmail.com','K111111');
 /*!40000 ALTER TABLE `vendor` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'res_net_cmms'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -447,4 +443,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-01-07 17:40:12
+-- Dump completed on 2019-01-07 21:46:40

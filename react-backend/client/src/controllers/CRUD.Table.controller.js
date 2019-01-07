@@ -1,5 +1,5 @@
 // model
-import { decrypt } from "../models/crypt.model";
+import { decrypt, lowerJSONKey } from "../models/crypt.model";
 import {
   CrudTableColumns,
   CrudTableDeleteColumns,
@@ -119,30 +119,30 @@ export const editForm = bind => {
       newColumns[i].type === "DATETIME"
     ) {
       if (
-        document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value === ""
+        document.getElementById(newColumns[i].column_name + "Edit").value === ""
       ) {
         isNull = true;
-        // info += newColumns[i].COLUMN_COMMENT + "請勿留白<br />";
+        // info += newColumns[i].column_comment + "請勿留白<br />";
       }
     }
     if (newColumns[i].type === "CHECKBOX") {
       if (
-        document.getElementById(newColumns[i].COLUMN_NAME + "TrueEdit")
+        document.getElementById(newColumns[i].column_name + "TrueEdit")
           .checked === true
       ) {
-        row[newColumns[i].COLUMN_NAME] = document.getElementById(
-          newColumns[i].COLUMN_NAME + "TrueEdit"
+        row[newColumns[i].column_name] = document.getElementById(
+          newColumns[i].column_name + "TrueEdit"
         ).value;
       } else {
-        row[newColumns[i].COLUMN_NAME] = document.getElementById(
-          newColumns[i].COLUMN_NAME + "FalseEdit"
+        row[newColumns[i].column_name] = document.getElementById(
+          newColumns[i].column_name + "FalseEdit"
         ).value;
       }
     } else {
-      row[newColumns[i].COLUMN_NAME] =
-        document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value === ""
+      row[newColumns[i].column_name] =
+        document.getElementById(newColumns[i].column_name + "Edit").value === ""
           ? null
-          : document.getElementById(newColumns[i].COLUMN_NAME + "Edit").value;
+          : document.getElementById(newColumns[i].column_name + "Edit").value;
     }
   }
   if (!isNull) {
@@ -158,6 +158,7 @@ export const getCrudTableColumns = bind => {
       let deleteColumns = [];
       let formColumns = [];
       decrypt(res.data).forEach(elm => {
+        elm = lowerJSONKey(elm);
         columns.push(CrudTableColumns(bind, elm));
         deleteColumns.push(CrudTableDeleteColumns(elm));
         formColumns.push(elm);
@@ -183,6 +184,9 @@ export const getCrudTableData = bind => {
           data: decrypt(res.data).filter((x, i) => {
             if (x.date !== undefined) {
               x.date = x.date.split(".")[0];
+            }
+            if (x.repair_date !== undefined) {
+              x.repair_date = x.repair_date.split(".")[0];
             }
             return x;
           })
@@ -223,6 +227,7 @@ export const postCrudTableAdd = (bind, row) => {
   apiRequest
     .post("/database/" + "add", { table: bind.state.table, row: row })
     .then(res => {
+      console.log(decrypt(res.data));
       row["ID"] = decrypt(res.data).insertId;
       bind.setState({ data: [...bind.state.data, row] });
     })

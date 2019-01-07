@@ -12,7 +12,7 @@ export const TableNavColumns = (bind, props) => {
   newColumns.forEach((elm, i) => {
     if (i !== newColumns.length) {
       columns.push({
-        ...customColumns(elm["COLUMN_NAME"], elm["COLUMN_COMMENT"], true),
+        ...customColumns(elm["column_name"], elm["column_comment"], true),
         headerStyle: { cursor: "pointer", ...columnsWidth(elm) }
       });
     }

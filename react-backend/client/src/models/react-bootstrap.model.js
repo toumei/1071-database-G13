@@ -35,8 +35,8 @@ export const customColumns = (data, text, sort = false) => {
 
 export const columnsWidth = elm => {
   return {
-    width: elm["COLUMN_NAME"] === "ID" ? "6rem" : "110rem",
-    minWidth: elm["COLUMN_NAME"] === "ID" ? "6rem" : "11rem"
+    width: elm["column_name"] === "ID" ? "6rem" : "110rem",
+    minWidth: elm["column_name"] === "ID" ? "6rem" : "11rem"
   };
 };
 

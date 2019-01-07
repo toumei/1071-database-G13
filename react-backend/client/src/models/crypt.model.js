@@ -3,8 +3,6 @@ const crypto = require("crypto");
 const aes = "aes-256-cbc";
 const pwd = "ResNetCMMSResNetCMMSResNetCMMS13";
 const iv = "107-database-G13";
-const coding = "utf8";
-const binaryCoding = "hex";
 
 export const encrypt = data => {
   if (data) {
@@ -32,4 +30,12 @@ export const decrypt = data => {
   } else {
     return data;
   }
+};
+
+export const lowerJSONKey = jsonObj => {
+  for (var key in jsonObj) {
+    jsonObj[key.toLowerCase()] = jsonObj[key];
+    delete jsonObj[key];
+  }
+  return jsonObj;
 };
