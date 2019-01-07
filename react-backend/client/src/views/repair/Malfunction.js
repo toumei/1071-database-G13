@@ -82,6 +82,7 @@ export default class extends Component {
               ) {
                 malfunctionID = x.ID;
               }
+              return false;
             });
             const rowBed = {
               table: "bed",
