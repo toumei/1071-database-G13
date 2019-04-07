@@ -62,6 +62,8 @@
 * server
   * 將 API的接口(admin、client)調整完畢
   * 套用 https server
+  * 優化 token 機制(MD5)、存取cookie、API加解密
+  * 優化帳戶系統
 * client
   * https server (配合server)
   * 即時顯示新資訊 (學生填報修單通知工作人員，工作人員報修完畢通知學生)
