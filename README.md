@@ -1,25 +1,21 @@
 # 1071-database-G13
-### 日程：本學期結束，暫無行程。
+### 日程：
+* 108.04.15(一) 模擬考
+* 108.04.22(一) 筆試期中考(7:00pm)
+* 108.05.06(一) 上機模擬考
+* 108.05.13(一) 上機期末考
+* 108.05.20(一) 期末報告驗收
 ---
-### G13 為 報告文件(含安裝文件)
-### G13_source 為程式碼及sql
-### 備用連結：
- * [程式碼載點01](https://drive.google.com/file/d/1x9wwBtMrHf9wap1tYzPw2toBK_o5Oh3p/view?usp=sharing)
- * [程式碼載點02](https://drive.google.com/open?id=1TqUmDavop8C1p3INWbTHH24-u51YxSzi)
----
-
 # [寫 code & 上傳 github 注意事項](https://github.com/toumei/1071-database-G13/wiki/Advance-preparation)
 * **有任何參考資料請放上來，這樣比較好協助了解程式碼和報告**
 * **安裝擴充插件，以便於後續編程**
 ---
 ### 公告：
 * **更新資訊後面請補上更新日期，之後不定期清理不必要資訊**
-* **有Git忽略文件(.gitignore)，就不用擔心上傳到 node_modules**
-* **package.json** 內的 code 改成 **"scripts": {"start": "nodemon ./bin/www"}**，
-  > 下 **npm start** 指令後，ctrl+s後會自動重啟服務器
 * **express用ES5語法，react用ES6語法，少用var(型態可變，值可變)改用let(型態不可變，值可變)、const(型態不可變，值不可變)**
 ---
-### 更新：暫無更新。
+### 更新歷程：
+暫無更新。
 ---
 
 ### WIKI：
@@ -66,7 +62,15 @@
 
 ### 預期做的部分：
 * server
+  * 將 API的接口(admin、client)調整完畢
+  * 套用 https server
+  * 優化 token 機制(MD5)、存取cookie、API加解密
+  * 優化帳戶系統
 * client
   * https server (配合server)
   * 即時顯示新資訊 (學生填報修單通知工作人員，工作人員報修完畢通知學生)
   * 多國語言
+  * 參考市面上免費模板
+  * 將登入後介面分成客戶端跟管理端，並隨身分切換至不同頁面
+  * 登入者可修改個人帳戶資料(如密碼)
+  * 新增首頁
