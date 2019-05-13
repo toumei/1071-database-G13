@@ -11,7 +11,8 @@
 * **express用ES5語法，react用ES6語法，少用var(型態可變，值可變)改用let(型態不可變，值可變)、const(型態不可變，值不可變)**
 ---
 ### 更新歷程：
-暫無更新。
+* 新增 url 訪問日誌，依據日期分檔紀錄
+* 新增 API 安全機制，新增參數(timestamp、nonce、sign)，防止API被他人竄改
 ---
 
 ### WIKI：
@@ -59,11 +60,10 @@
 ### 預期做的部分：
 * server
   * 將 API的接口(admin、client)調整完畢
-  * 套用 https server
-  * 優化 token 機制(MD5)、存取cookie、API加解密
-  * 優化帳戶系統
+  * 判斷IP、身分、cookie
+  * API 加解密
+  * 優化帳戶系統 (RBAC要調整的部分太多 先暫緩)
 * client
-  * https server (配合server)
   * 即時顯示新資訊 (學生填報修單通知工作人員，工作人員報修完畢通知學生)
   * 多國語言
   * 參考市面上免費模板

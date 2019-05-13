@@ -69,6 +69,7 @@
 
     .wrg-bg,
     .wrg-ring,
+    .wrg-hand,
     .wrg-title {
       position: fixed;
       top: 0;
@@ -78,9 +79,9 @@
     }
 
     .wrg-bg {
-      -webkit-animation: page-out 5s ease-out;
-      animation: page-out 5s ease-out;
-      animation-delay: 3s;
+      -webkit-animation: page-out 2.55s linear;
+      animation: page-out 2.55s linear;
+      animation-delay: 2.9s;
       background-image: url(%PUBLIC_URL%/bg.jpg);
       background-size: cover;
       background-position: center;
@@ -93,6 +94,16 @@
       animation-delay: 2.8s;
       background-image: url(%PUBLIC_URL%/ring.png);
       background-size: 110% 80%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .wrg-hand {
+      -webkit-animation: page-out 2.5s ease-out;
+      animation: page-out 2.5s ease-out;
+      animation-delay: 2.75s;
+      background-image: url(%PUBLIC_URL%/hand.png);
+      background-size: 100% 100%;
       background-position: center;
       background-repeat: no-repeat;
     }
@@ -288,6 +299,7 @@
 
     .wrg-bg,
     .wrg-ring,
+    .wrg-hand,
     .wrg-title,
     .wrg-main,
     .opacity,
@@ -301,6 +313,7 @@
 <body onload="onload()" id="body" class="overflow">
   <div class="wrg-bg"></div>
   <div class="wrg-ring"></div>
+  <div class="wrg-hand"></div>
   <div class="wrg-title">
     <h1 class="opacity">
       <span class="jump jump-1">R</span>

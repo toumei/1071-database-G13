@@ -11,7 +11,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div style={{ height: "85vh" }}>
+      <div style={{ height: "90vh" }}>
         <Iframe
           url="https://docs.google.com/forms/d/e/1FAIpQLSeEu9eCnpZK24Vec-SOCQnKJy5VqsjeeLrgepmtDu6XiThFyg/viewform"
           height="100%"

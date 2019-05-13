@@ -75,7 +75,7 @@ app.use(function(req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
-/*
+
 // set jwt auth
 // app.use(
 //   expressJwt({ secret: jwtConfig.secretOrKey }).unless({
@@ -84,8 +84,8 @@ app.use(function(req, res, next) {
 // );
 
 // set acl auth
-app.use(acl.authorize.unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
-*/
+// app.use(acl.authorize.unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
+
 var nonceArr = {};
 var clearTime = moment().unix();
 app.use(function(req, res, next) {
