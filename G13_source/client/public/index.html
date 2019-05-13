@@ -21,7 +21,21 @@
 
   <meta name="theme-color" content="#000000" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <script>
+    function onload() {
+      setTimeout(overflow, 4800);
+    }
+    function overflow() {
+      var classVal = document.getElementById("body").getAttribute("class");
+      classVal = classVal.replace("overflow", "");
+      document.getElementById("body").setAttribute("class", classVal);
+    }
+  </script>
   <style>
+    .overflow {
+      overflow-y: hidden;
+    }
+
     .react-bootstrap-table {
       overflow-x: auto !important;
     }
@@ -53,99 +67,256 @@
       }
     }
 
-    .wrg-loader {
-      -webkit-animation: page-out 1.25s ease-out;
-      animation: page-out 1.25s ease-out;
+    .wrg-bg,
+    .wrg-ring,
+    .wrg-title {
       position: fixed;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0;
-      background-color: #000;
+    }
+
+    .wrg-bg {
+      -webkit-animation: page-out 5s ease-out;
+      animation: page-out 5s ease-out;
+      animation-delay: 3s;
+      background-image: url(%PUBLIC_URL%/bg.jpg);
+      background-size: cover;
+      background-position: center;
+    }
+
+    .wrg-ring {
+      margin-top: 50px;
+      -webkit-animation: page-out 2.75s ease-out;
+      animation: page-out 2.75s ease-out;
+      animation-delay: 2.8s;
+      background-image: url(%PUBLIC_URL%/ring.png);
+      background-size: 110% 80%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .wrg-title {
+      -webkit-animation: page-out 2.5s ease-out;
+      animation: page-out 2.5s ease-out;
+      animation-delay: 2.8s;
+    }
+
+    .wrg-title h1 {
+      color: #2600ff;
+      font-weight: 400;
+      font-size: 5em;
+      text-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+      margin: 0;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100%;
     }
 
-    .wrg-loader h1 {
-      position: relative;
-      top: 0;
-      left: 0;
-      color: #fff;
-    }
-
-    .wrg-navbar {
-      -webkit-transform: translate3d(0, 100vh, 0);
-      transform: translate3d(0, 100vh, 0);
-      -webkit-animation: page-in 1.25s ease-out;
-      animation: page-in 1.25s ease-out;
-    }
-
-    .wrg-loader,
-    .wrg-navbar {
-      -webkit-animation-fill-mode: forwards;
-      animation-fill-mode: forwards;
-      animation-delay: 1s;
+    .wrg-main {
+      -webkit-transform: translateY(100vh);
+      transform: translateY(100vh);
+      -webkit-animation: page-in 2s ease-out;
+      animation: page-in 2s ease-out;
+      animation-delay: 3s;
+      background-color: white;
     }
 
     @-webkit-keyframes page-in {
+      0% {
+        -webkit-transform: translateY(100vh);
+        transform: translateY(100vh);
+      }
+
       20% {
-        -webkit-transform: translate3d(0, 100vh, 0);
-        transform: translate3d(0, 100vh, 0);
+        -webkit-transform: translateY(100vh);
+        transform: translateY(100vh);
       }
 
       100% {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
       }
     }
 
     @keyframes page-in {
+      0% {
+        -webkit-transform: translateY(100vh);
+        transform: translateY(100vh);
+      }
+
       20% {
-        -webkit-transform: translate3d(0, 100vh, 0);
-        transform: translate3d(0, 100vh, 0);
+        -webkit-transform: translateY(100vh);
+        transform: translateY(100vh);
       }
 
       100% {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
       }
     }
 
     @-webkit-keyframes page-out {
+      0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+
       20% {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
       }
 
       100% {
-        -webkit-transform: translate3d(0, -100vh, 0);
-        transform: translate3d(0, -100vh, 0);
+        -webkit-transform: translateY(-100vh);
+        transform: translateY(-100vh);
       }
     }
 
     @keyframes page-out {
+      0% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+      }
+
       20% {
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
       }
 
       100% {
-        -webkit-transform: translate3d(0, -100vh, 0);
-        transform: translate3d(0, -100vh, 0);
+        -webkit-transform: translateY(-100vh);
+        transform: translateY(-100vh);
       }
+    }
+
+    .opacity {
+      opacity: 0;
+      -webkit-animation: fade-in 1s linear;
+      animation: fade-in 1s linear;
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+
+    }
+
+    @-webkit-keyframes fade-in {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .jump {
+      -webkit-animation: jump 1.0s ease-in-out;
+      animation: jump 1.0s ease-in-out;
+    }
+
+    .jump-1 {
+      animation-delay: 1.1s;
+    }
+
+    .jump-2 {
+      animation-delay: 1.2s;
+    }
+
+    .jump-3 {
+      animation-delay: 1.3s;
+    }
+
+    .jump-4 {
+      animation-delay: 1.4s;
+    }
+
+    .jump-5 {
+      animation-delay: 1.5s;
+    }
+
+    .jump-6 {
+      animation-delay: 1.6s;
+    }
+
+    .jump-7 {
+      animation-delay: 1.7s;
+    }
+
+    .jump-8 {
+      animation-delay: 1.8s;
+    }
+
+    .jump-9 {
+      animation-delay: 1.9s;
+    }
+
+    .jump-10 {
+      animation-delay: 2.0s;
+    }
+
+    @keyframes jump {
+      50% {
+        color: red;
+        transform: translateY(-2rem);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @-webkit-keyframes jump {
+      50% {
+        color: red;
+        transform: translateY(-0.4rem);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .wrg-bg,
+    .wrg-ring,
+    .wrg-title,
+    .wrg-main,
+    .opacity,
+    .jump {
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
     }
   </style>
 </head>
 
-<body>
-  <div class="wrg-loader">
-    <h1>
-      ResNetCMMS
+<body onload="onload()" id="body" class="overflow">
+  <div class="wrg-bg"></div>
+  <div class="wrg-ring"></div>
+  <div class="wrg-title">
+    <h1 class="opacity">
+      <span class="jump jump-1">R</span>
+      <span class="jump jump-2">e</span>
+      <span class="jump jump-3">s</span>
+      <span class="jump jump-4">N</span>
+      <span class="jump jump-5">e</span>
+      <span class="jump jump-6">t</span>
+      <span class="jump jump-7">C</span>
+      <span class="jump jump-8">M</span>
+      <span class="jump jump-9">M</span>
+      <span class="jump jump-10">S</span>
     </h1>
   </div>
 
-  <div id="root" class="wrg-navbar"></div>
+  <div id="root" class="wrg-main"></div>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -33,36 +33,38 @@ export default class extends Component {
     // 空欄位時，bootstrap table會讀取失敗
     if (this.state.columns.length > 0) {
       return (
-        <div className="row justify-content-center">
-          <div className="col-md-11">
-            <CustomBootstrap
-              base={{
-                keyField: "ID",
-                columns: this.state.columns,
-                data: this.state.data
-              }}
-              cellEdit={cellEditFactory({
-                mode: "click",
-                blurToSave: true,
-                afterSaveCell: (oldValue, newValue, row) => {
-                  // 預防非字串與字串內容相等卻更新
-                  if (String(oldValue) !== String(newValue)) {
-                    // 當type變更時，value將會被預設
-                    if (newValue === row.type) {
-                      if (row.type === "SELECT") {
-                        row.value = JSON.stringify([]);
-                      } else if (row.type === "CHECKBOX") {
-                        row.value = ":";
-                      } else {
-                        row.value = "NONE";
+        <div className="container-fluid">
+          <div className="row justify-content-center">
+            <div className="col-md-11">
+              <CustomBootstrap
+                base={{
+                  keyField: "ID",
+                  columns: this.state.columns,
+                  data: this.state.data
+                }}
+                cellEdit={cellEditFactory({
+                  mode: "click",
+                  blurToSave: true,
+                  afterSaveCell: (oldValue, newValue, row) => {
+                    // 預防非字串與字串內容相等卻更新
+                    if (String(oldValue) !== String(newValue)) {
+                      // 當type變更時，value將會被預設
+                      if (newValue === row.type) {
+                        if (row.type === "SELECT") {
+                          row.value = JSON.stringify([]);
+                        } else if (row.type === "CHECKBOX") {
+                          row.value = ":";
+                        } else {
+                          row.value = "NONE";
+                        }
                       }
+                      postCtrlEdit(this, row);
                     }
-                    postCtrlEdit(this, row);
                   }
-                }
-              })}
-              pagination={this.state.data.length === 0 ? false : true}
-            />
+                })}
+                pagination={this.state.data.length === 0 ? false : true}
+              />
+            </div>
           </div>
         </div>
       );
