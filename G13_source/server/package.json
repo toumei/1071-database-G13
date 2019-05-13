@@ -28,6 +28,7 @@
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^5.5.0"
+    "@fortawesome/fontawesome-free": "^5.5.0",
+    "nodemon": "^1.19.0"
   }
 }

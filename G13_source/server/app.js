@@ -77,11 +77,11 @@ app.use(function(req, res, next) {
 });
 /*
 // set jwt auth
-app.use(
-  expressJwt({ secret: jwtConfig.secretOrKey }).unless({
-    path: ["/api/", "/api/login", "/api/sigup"]
-  })
-);
+// app.use(
+//   expressJwt({ secret: jwtConfig.secretOrKey }).unless({
+//     path: ["/api/", "/api/login", "/api/sigup"]
+//   })
+// );
 
 // set acl auth
 app.use(acl.authorize.unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
