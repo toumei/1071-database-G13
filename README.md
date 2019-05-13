@@ -1,9 +1,5 @@
 # 1071-database-G13
 ### 日程：
-* 108.04.15(一) 模擬考
-* 108.04.22(一) 筆試期中考(7:00pm)
-* 108.05.06(一) 上機模擬考
-* 108.05.13(一) 上機期末考
 * 108.05.20(一) 期末報告驗收
 ---
 # [寫 code & 上傳 github 注意事項](https://github.com/toumei/1071-database-G13/wiki/Advance-preparation)
@@ -32,7 +28,7 @@
 * server (express)
   * http  server：https://localhost:5000
   * https server：https://localhost:8000
-  
+  * morgan：將訪問日誌儲存在log檔
   * 將 三層架構 調整為 Model–view–controller (MVC)
   * sequelize： 使用 Object Relational Mapping(ORM) 框架開發
   * epilogue： 架構具有 RESTful 風的 CRUD API server
