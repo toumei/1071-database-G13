@@ -4,6 +4,14 @@ const aes = "aes-256-cbc";
 const pwd = "ResNetCMMSResNetCMMSResNetCMMS13";
 const iv = "107-database-G13";
 
+export const md5 = data => {
+  console.log("md5: " + data);
+  return crypto
+    .createHash("md5")
+    .update(data.toString())
+    .digest("hex");
+};
+
 export const encrypt = data => {
   if (data) {
     console.log("encrypt: " + data);

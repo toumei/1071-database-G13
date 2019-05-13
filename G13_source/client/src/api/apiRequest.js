@@ -1,6 +1,8 @@
 import axios from "axios";
+import moment from "moment";
+import { md5 } from "../models/crypt.model";
 
-axios.defaults.baseURL = "/api/";
+axios.defaults.baseURL = "/api";
 axios.defaults.timeout = 10000;
 axios.defaults.withCredentials = true;
 axios.defaults.isRetryRequest = false;
@@ -34,29 +36,84 @@ axios.interceptors.response.use(
           window.location.href = "/user/login";
       }
     }
-    return Promise.reject(error.response.data);
+    return Promise.reject(error.response);
   }
 );
 
 export default new class apiRequest {
   // Read
   get(url, data = undefined, config = {}) {
+    var timestamp = moment().unix();
+    var nonce = md5(timestamp + Math.random());
+    var sign = md5({
+      url: axios.defaults.baseURL + url,
+      timestamp: timestamp,
+      nonce: nonce
+    });
+    if (data == undefined) {
+      data = { timestamp: timestamp, nonce: nonce, sign: sign };
+    } else {
+      data["timestamp"] = timestamp;
+      data["nonce"] = nonce;
+      data["sign"] = sign;
+    }
     return axios.get(url, { params: data }, config);
   }
 
   // Create
   post(url, data = undefined, config = {}) {
-    console.log(url);
+    var timestamp = 0;
+    var nonce = md5(timestamp + Math.random());
+    var sign = md5({
+      url: axios.defaults.baseURL + url,
+      timestamp: timestamp,
+      nonce: nonce
+    });
+    if (data == undefined) {
+      data = { timestamp: timestamp, nonce: nonce, sign: sign };
+    } else {
+      data["timestamp"] = timestamp;
+      data["nonce"] = nonce;
+      data["sign"] = sign;
+    }
     return axios.post(url, data, config);
   }
 
   // Update
   put(url, data = undefined, config = {}) {
+    var timestamp = moment().unix();
+    var nonce = md5(timestamp + Math.random());
+    var sign = md5({
+      url: axios.defaults.baseURL + url,
+      timestamp: timestamp,
+      nonce: nonce
+    });
+    if (data == undefined) {
+      data = { timestamp: timestamp, nonce: nonce, sign: sign };
+    } else {
+      data["timestamp"] = timestamp;
+      data["nonce"] = nonce;
+      data["sign"] = sign;
+    }
     return axios.put(url, data, config);
   }
 
   // Delete
   delete(url, data = undefined, config = {}) {
+    var timestamp = moment().unix();
+    var nonce = md5(timestamp + Math.random());
+    var sign = md5({
+      url: axios.defaults.baseURL + url,
+      timestamp: timestamp,
+      nonce: nonce
+    });
+    if (data == undefined) {
+      data = { timestamp: timestamp, nonce: nonce, sign: sign };
+    } else {
+      data["timestamp"] = timestamp;
+      data["nonce"] = nonce;
+      data["sign"] = sign;
+    }
     return axios.delete(url, { data: data }, config);
   }
 }();

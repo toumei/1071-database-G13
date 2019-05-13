@@ -4,6 +4,14 @@ var pwd = "ResNetCMMSResNetCMMSResNetCMMS13";
 var iv = "107-database-G13";
 
 module.exports = class {
+  static md5(data) {
+    console.log("md5: " + data);
+    return crypto
+      .createHash("md5")
+      .update(data.toString())
+      .digest("hex");
+  }
+
   static encrypt(data) {
     if (data) {
       console.log("encrypt: " + data);
