@@ -31,7 +31,6 @@ export default class extends Component {
     return (
       <div>
         <Navbar title={this.state.title} />
-        <Header title={this.state.title} />
         <Main />
       </div>
     );
@@ -139,17 +138,4 @@ const NavItem = ({ title }) => (
       </li>
     </ul>
   </div>
-);
-
-const Header = ({ title }) => (
-  <header className="bg-primary text-light">
-    <div className="container">
-      <div className="row">
-        <h1 className="col-md-6">
-          <i className="fas fa-cog" />
-          {title}
-        </h1>
-      </div>
-    </div>
-  </header>
 );

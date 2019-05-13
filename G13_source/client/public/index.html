@@ -1,84 +1,164 @@
 <!DOCTYPE html>
 <html lang="zh-tw">
-  <head>
-    <title>ResNetCMMS</title>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+<head>
+  <title>ResNetCMMS</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <!-- fontawesome CSS -->
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-      crossorigin="anonymous"
-    />
+  <!-- fontawesome CSS -->
 
-    <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+    integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
-      crossorigin="anonymous"
-    />
+  <!-- Bootstrap CSS -->
 
-    <meta name="theme-color" content="#000000" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <style>
-      .react-bootstrap-table {
-        overflow-x: auto !important;
-      }
-      /* 隱藏滾動條 */
-      body::-webkit-scrollbar {
-        width: 0 !important;
-      }
-      .react-bootstrap-table::-webkit-scrollbar {
-        height: 0 !important;
-      }
-      .analysisNone {
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
+
+  <meta name="theme-color" content="#000000" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <style>
+    .react-bootstrap-table {
+      overflow-x: auto !important;
+    }
+
+    /* 隱藏滾動條 */
+    body::-webkit-scrollbar {
+      width: 0 !important;
+    }
+
+    .react-bootstrap-table::-webkit-scrollbar {
+      height: 0 !important;
+    }
+
+    .analysisNone {
+      display: none !important;
+    }
+
+    @media screen and (max-width: 575.98px) {
+      header {
         display: none !important;
       }
-      @media screen and (max-width: 575.98px) {
-        header {
-          display: none !important;
-        }
-        .analysisNone {
-          display: block !important;
-        }
-        .analysisBlock {
-          display: none !important;
-        }
+
+      .analysisNone {
+        display: block !important;
       }
-    </style>
-  </head>
 
-  <body>
-    <div id="root"></div>
+      .analysisBlock {
+        display: none !important;
+      }
+    }
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    .wrg-loader {
+      -webkit-animation: page-out 1.25s ease-out;
+      animation: page-out 1.25s ease-out;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    .wrg-loader h1 {
+      position: relative;
+      top: 0;
+      left: 0;
+      color: #fff;
+    }
+
+    .wrg-navbar {
+      -webkit-transform: translate3d(0, 100vh, 0);
+      transform: translate3d(0, 100vh, 0);
+      -webkit-animation: page-in 1.25s ease-out;
+      animation: page-in 1.25s ease-out;
+    }
+
+    .wrg-loader,
+    .wrg-navbar {
+      -webkit-animation-fill-mode: forwards;
+      animation-fill-mode: forwards;
+      animation-delay: 1s;
+    }
+
+    @-webkit-keyframes page-in {
+      20% {
+        -webkit-transform: translate3d(0, 100vh, 0);
+        transform: translate3d(0, 100vh, 0);
+      }
+
+      100% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes page-in {
+      20% {
+        -webkit-transform: translate3d(0, 100vh, 0);
+        transform: translate3d(0, 100vh, 0);
+      }
+
+      100% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @-webkit-keyframes page-out {
+      20% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        -webkit-transform: translate3d(0, -100vh, 0);
+        transform: translate3d(0, -100vh, 0);
+      }
+    }
+
+    @keyframes page-out {
+      20% {
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        -webkit-transform: translate3d(0, -100vh, 0);
+        transform: translate3d(0, -100vh, 0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrg-loader">
+    <h1>
+      ResNetCMMS
+    </h1>
+  </div>
+
+  <div id="root" class="wrg-navbar"></div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
