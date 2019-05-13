@@ -123,14 +123,13 @@ app.use(function(req, res, next) {
       nonce: nonce
     }) != sign
   ) {
-    console.error("sign error");
+    res.status(500).send('sign error!');
   } else if (moment().unix() - timestamp > 60) {
-    console.error("timestamp error");
+    res.status(500).send('timestamp error!');
   } else if (nonceArr.hasOwnProperty(nonce)) {
-    console.error("repeat error");
+    res.status(500).send('repeat error!');
   } else {
     nonceArr[nonce] = timestamp;
-    console.log("API call OK!");
     next();
   }
 });

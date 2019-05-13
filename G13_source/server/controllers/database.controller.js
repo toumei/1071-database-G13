@@ -1,5 +1,5 @@
 // model
-const log = require("../models/log.model");
+const log = require("../config/logger");
 const cryptModel = require("../models/crypt.model");
 const databaseModel = require("../models/database.model");
 

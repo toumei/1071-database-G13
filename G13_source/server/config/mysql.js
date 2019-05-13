@@ -8,6 +8,7 @@ module.exports = new Sequelize(
   {
     host: dbConfig.host,
     dialect: "mysql",
+    logging: false,
     pool: {
       max: dbConfig.connectionLimit,
       min: 0,
