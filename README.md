@@ -11,7 +11,8 @@
 * **express用ES5語法，react用ES6語法，少用var(型態可變，值可變)改用let(型態不可變，值可變)、const(型態不可變，值不可變)**
 ---
 ### 更新歷程：
-暫無更新。
+* 新增 url 訪問日誌，依據日期分檔紀錄
+* 新增 API 安全機制，新增參數(timestamp、nonce、sign)，防止API被他人竄改
 ---
 
 ### WIKI：
