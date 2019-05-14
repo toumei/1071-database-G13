@@ -1,5 +1,5 @@
 var Sequelize = require("sequelize");
-const db = require("../config/mysql");
+const db = require("../utils/mysql");
 const Account = require("./account");
 
 // Model

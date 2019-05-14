@@ -1,6 +1,0 @@
-GET /api/... 401 2521 - 63.502 ms
-GET /favicon.ico 401 2521 - 4.147 ms
-GET / 401 2521 - 2.975 ms
-GET /favicon.ico 401 2521 - 2.654 ms
-GET /api 401 2521 - 3.133 ms
-GET /favicon.ico 401 2521 - 1.605 ms
