@@ -23,6 +23,7 @@
 * 新增 url 訪問日誌，依據日期分檔紀錄
 * 新增 API 安全機制，新增參數(timestamp、nonce、sign)，防止API被他人竄改
 * 新增 DB debug日誌
+* 採取 https connections，並修復連線 error
 ---
 
 ### WIKI：
