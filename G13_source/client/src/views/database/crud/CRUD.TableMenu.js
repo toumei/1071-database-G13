@@ -23,7 +23,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="col-md-2" style={{ marginTop: 10 }}>
+      <div className="col-md-2">
         <CustomBootstrap
           base={{
             keyField: "table_comment",

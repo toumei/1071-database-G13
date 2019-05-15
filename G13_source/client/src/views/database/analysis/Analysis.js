@@ -23,7 +23,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
+      <div className="container-fluid main-opacity">
         <div className="row">
           <div className="col-md-2">
             <AnalysisCard
@@ -49,7 +49,7 @@ const AnalysisCard = ({ path, count }) => (
         <h4 className="analysisNone display-4">
           <i className="fas fa-toolbox" />
         </h4>
-        <CustomActiveBtnLink active={path} to="/database" content="View" />
+        <CustomActiveBtnLink active={path} to="/database/analysis/repair" content="View" />
       </div>
     </div>
 
@@ -62,7 +62,7 @@ const AnalysisCard = ({ path, count }) => (
         </h4>
         <CustomActiveBtnLink
           active={path}
-          to="/database/malfunctionMatter"
+          to="/database/analysis/malfunctionMatter"
           content="View"
         />
       </div>
@@ -77,7 +77,7 @@ const AnalysisCard = ({ path, count }) => (
         </h4>
         <CustomActiveBtnLink
           active={path}
-          to="/database/processingResult"
+          to="/database/analysis/processingResult"
           content="View"
         />
       </div>
@@ -92,7 +92,7 @@ const AnalysisCard = ({ path, count }) => (
         </h4>
         <CustomActiveBtnLink
           active={path}
-          to="/database/cabinet"
+          to="/database/analysis/cabinet"
           content="View"
         />
       </div>

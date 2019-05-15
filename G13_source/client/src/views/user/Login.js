@@ -31,7 +31,7 @@ export default class extends Component {
   }
   render() {
     return (
-      <div className="container" style={{ marginTop: 10 }}>
+      <div className="container main-opacity" style={{ marginTop: 10 }}>
         <form name="addform" id="addform" onSubmit={this.handleSubmit}>
           <div className="form-group row">
             <label className="col-md-1" htmlFor="idInput">

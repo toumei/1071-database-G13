@@ -7,6 +7,6 @@ export default class extends Component {
   }
 
   render() {
-    return <div>settings</div>;
+    return <div className="main-opacity">settings</div>;
   }
 }

@@ -6,7 +6,6 @@ import Error from "./views/Error";
 
 import Index from "./views/index/Index";
 
-import Database from "./views/database/Database";
 import Analysis from "./views/database/analysis/Analysis";
 import Repair from "./views/database/analysis/Analysis.repair";
 import MalfunctionMatter from "./views/database/analysis/Analysis.malfunctionMatter";
@@ -31,10 +30,10 @@ export const Router = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={App} />
-      <Route exact path="/database" component={App} />
-      <Route exact path="/database/cabinet" component={App} />
-      <Route exact path="/database/malfunctionMatter" component={App} />
-      <Route exact path="/database/processingResult" component={App} />
+      <Route exact path="/database/analysis/repair" component={App} />
+      <Route exact path="/database/analysis/cabinet" component={App} />
+      <Route exact path="/database/analysis/malfunctionMatter" component={App} />
+      <Route exact path="/database/analysis/processingResult" component={App} />
       <Route exact path="/database/crud" component={App} />
       <Route exact path="/database/csv" component={App} />
       <Route exact path="/database/control" component={App} />
@@ -51,9 +50,12 @@ export const Router = () => (
 
 // App Router
 export const Main = () => (
-  <div>
+  <div className="main-opacity main-delay">
     <Route exact path="/" component={Index} />
-    <Route path="/database" component={Database} />
+    <Route path="/database/analysis" component={Analysis} />
+    <Route path="/database/crud" component={CRUD} />
+    <Route path="/database/csv" component={CSV} />
+    <Route path="/database/control" component={Control} />
     <Route path="/repair/malfunction" component={Malfunction} />
     <Route path="/repair/processing" component={Processing} />
     <Route path="/products" component={Products} />
@@ -63,25 +65,12 @@ export const Main = () => (
   </div>
 );
 
-// Database Router
-export const DBMain = () => (
-  <div>
-    <Route exact path="/database" component={Analysis} />
-    <Route path="/database/cabinet" component={Analysis} />
-    <Route path="/database/malfunctionMatter" component={Analysis} />
-    <Route path="/database/processingResult" component={Analysis} />
-    <Route path="/database/crud" component={CRUD} />
-    <Route path="/database/csv" component={CSV} />
-    <Route path="/database/control" component={Control} />
-  </div>
-);
-
-// Database Router
+// Analysis Router
 export const AnalysisMain = () => (
   <div>
-    <Route exact path="/database" component={Repair} />
-    <Route path="/database/cabinet" component={Cabinet} />
-    <Route path="/database/malfunctionMatter" component={MalfunctionMatter} />
-    <Route path="/database/processingResult" component={ProcessingResult} />
+    <Route path="/database/analysis/repair" component={Repair} />
+    <Route path="/database/analysis/cabinet" component={Cabinet} />
+    <Route path="/database/analysis/malfunctionMatter" component={MalfunctionMatter} />
+    <Route path="/database/analysis/processingResult" component={ProcessingResult} />
   </div>
 );

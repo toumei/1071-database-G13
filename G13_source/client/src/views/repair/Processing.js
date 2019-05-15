@@ -85,7 +85,7 @@ export default class extends Component {
         };
         apiRequest
           .post("/database/add", row)
-          .then(res => {})
+          .then(res => { })
           .catch();
         const date = new Date();
         const today = `${date.getFullYear()}-${(
@@ -117,7 +117,7 @@ export default class extends Component {
   render() {
     if (this.state.malfunction.length > 0 && this.state.result.length > 0) {
       return (
-        <div className="container" style={{ marginTop: 10 }}>
+        <div className="container main-opacity" style={{ marginTop: 10 }}>
           <form>
             <Malfunction malfunction={this.state.malfunction} />
             <Name />
@@ -137,11 +137,7 @@ export default class extends Component {
         </div>
       );
     }
-    return (
-      <div className="container" style={{ marginTop: 10 }}>
-        沒有維修單
-      </div>
-    );
+    return null;
   }
 }
 

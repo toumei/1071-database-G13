@@ -29,7 +29,7 @@ export default class extends Component {
   render() {
     if (this.state.columns.length > 0) {
       return (
-        <div className="container-fluid">
+        <div className="container-fluid main-opacity">
           <div className="row justify-content-md-center">
             <div className="col-md-11">
               <ToolkitProvider
