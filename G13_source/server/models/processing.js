@@ -1,5 +1,5 @@
 var Sequelize = require("sequelize");
-const db = require("../config/mysql");
+const db = require("../utils/mysql");
 const Employee = require("./employee");
 const Malfunction = require("./malfunction");
 

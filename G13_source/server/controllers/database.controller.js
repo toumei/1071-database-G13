@@ -1,6 +1,6 @@
 // model
-const log = require("../models/log.model");
-const cryptModel = require("../models/crypt.model");
+const log = require("../utils/logger");
+const cryptModel = require("../utils/crypt");
 const databaseModel = require("../models/database.model");
 
 const Today = new Date();

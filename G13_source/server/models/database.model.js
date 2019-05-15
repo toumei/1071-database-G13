@@ -1,5 +1,5 @@
-const db = require("../config/mysql");
-const db2 = require("../config/mysql2");
+const db = require("../utils/mysql");
+const db2 = require("../utils/mysql2");
 const Boarder = require("../models/boarder");
 const Account = require("../models/account");
 const Account_role = require("../models/account_role");

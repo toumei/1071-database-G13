@@ -1,5 +1,5 @@
-const cryptModel = require("../models/crypt.model");
-const db = require("../config/mysql2");
+const cryptModel = require("../utils/crypt");
+const db = require("../utils/mysql2");
 /* READ *****************************/
 
 module.exports = {

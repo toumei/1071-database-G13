@@ -13,6 +13,7 @@
 ### 更新歷程：
 * 新增 url 訪問日誌，依據日期分檔紀錄
 * 新增 API 安全機制，新增參數(timestamp、nonce、sign)，防止API被他人竄改
+* 新增 DB debug日誌
 ---
 
 ### WIKI：
@@ -30,6 +31,7 @@
   * http  server：https://localhost:5000
   * https server：https://localhost:8000
   * morgan：將訪問日誌儲存在log檔
+  * log4js：自訂日誌，用於debug
   * 將 三層架構 調整為 Model–view–controller (MVC)
   * sequelize： 使用 Object Relational Mapping(ORM) 框架開發
   * epilogue： 架構具有 RESTful 風的 CRUD API server

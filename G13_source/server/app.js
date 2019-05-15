@@ -8,7 +8,7 @@ var FileStreamRotator = require("file-stream-rotator");
 var fs = require("fs");
 // DB
 const epilogue = require("epilogue");
-const database = require("./config/mysql");
+const database = require("./utils/mysql");
 // ACL
 const acl = require("express-acl");
 const aclConfig = require("./config/acl");
@@ -18,7 +18,7 @@ const expressJwt = require("express-jwt");
 const jwtConfig = require("./config/passport").JWT;
 // API
 var moment = require("moment");
-const cryptModel = require("./models/crypt.model");
+const cryptModel = require("./utils/crypt");
 
 // Router
 var indexRouter = require("./routes/index");
@@ -37,7 +37,7 @@ epilogue.initialize({
 // set ACL
 acl.config(aclConfig);
 // set passport
-require("./config/passport-strategy");
+require("./utils/passport-strategy");
 
 // view engine setup
 app.set("views", path.join(__dirname, "views/pages"));
@@ -123,14 +123,13 @@ app.use(function(req, res, next) {
       nonce: nonce
     }) != sign
   ) {
-    console.error("sign error");
+    res.status(500).send("sign error!");
   } else if (moment().unix() - timestamp > 60) {
-    console.error("timestamp error");
+    res.status(500).send("timestamp error!");
   } else if (nonceArr.hasOwnProperty(nonce)) {
-    console.error("repeat error");
+    res.status(500).send("repeat error!");
   } else {
     nonceArr[nonce] = timestamp;
-    console.log("API call OK!");
     next();
   }
 });
