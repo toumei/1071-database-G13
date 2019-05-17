@@ -1,6 +1,15 @@
 # 1071-database-G13
 ### 日程：
 * 108.05.20(一) 期末報告驗收
+1. 必須選一個 bootstrap template (以代號A表示)來實作前端應用
+1. 上學期所做管理後臺資料之程式(以代號B表示)必須要跟上 A 結合，並可以由A切換B，由B切換A
+1. 在A中必須要有頁面存取資料庫中的資料，在後端code中，A和B的code不能在同目錄內。A存取資料庫的動作，一律不准交php，老師上課時已經有提過。
+1. 資料庫中的測試資料必須要匯出，以組號來命名，如 G01.sql, G02.sql ~ G13.sql。
+1. 所有文件資料必須放在doc目錄中，doc下面分兩個目錄，client, admin，其中client 放A的資料，admin放B的資料。
+1. B中資料要有上學期期末的所有說明資料，包含系統需求，ER model, Relational model, Gxx.sql (測試資料)，上學期報告的PPT檔，及其他相關資料。
+1. A中要有本學期期末報告的PPT檔，及本學期會用到的 Relational model, Gxx.sql (測試資料)(可能和上學期的不同)
+1. 如果是本學期才修資料庫的同學，B可以考試用的blogen來替代，如有新的實作B，會給加分。
+1. 所有程式除了在E213你們自行選用的電腦外，還必須能安裝到老師上課的電腦上，老師必須統一整理並能帶走。請提早到E213安裝。
 ---
 # [寫 code & 上傳 github 注意事項](https://github.com/toumei/1071-database-G13/wiki/Advance-preparation)
 * **有任何參考資料請放上來，這樣比較好協助了解程式碼和報告**
@@ -14,6 +23,7 @@
 * 新增 url 訪問日誌，依據日期分檔紀錄
 * 新增 API 安全機制，新增參數(timestamp、nonce、sign)，防止API被他人竄改
 * 新增 DB debug日誌
+* 採取 https connections，並修復連線 error
 ---
 
 ### WIKI：

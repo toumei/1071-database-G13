@@ -40,80 +40,42 @@ axios.interceptors.response.use(
   }
 );
 
+function Security(url, data = undefined) {
+  var timestamp = moment().unix();
+  var nonce = md5(timestamp + Math.random());
+  var sign = md5({
+    url: axios.defaults.baseURL + url,
+    timestamp: timestamp,
+    nonce: nonce
+  });
+  if (data === undefined) {
+    data = { timestamp: timestamp, nonce: nonce, sign: sign };
+  } else {
+    data["timestamp"] = timestamp;
+    data["nonce"] = nonce;
+    data["sign"] = sign;
+  }
+  return data;
+}
+
 export default new class apiRequest {
   // Read
   get(url, data = undefined, config = {}) {
-    var timestamp = moment().unix();
-    var nonce = md5(timestamp + Math.random());
-    var sign = md5({
-      url: axios.defaults.baseURL + url,
-      timestamp: timestamp,
-      nonce: nonce
-    });
-    if (data == undefined) {
-      data = { timestamp: timestamp, nonce: nonce, sign: sign };
-    } else {
-      data["timestamp"] = timestamp;
-      data["nonce"] = nonce;
-      data["sign"] = sign;
-    }
-    return axios.get(url, { params: data }, config);
+    return axios.get(url, { params: Security(url, data) }, config);
   }
 
   // Create
   post(url, data = undefined, config = {}) {
-    var timestamp = 0;
-    var nonce = md5(timestamp + Math.random());
-    var sign = md5({
-      url: axios.defaults.baseURL + url,
-      timestamp: timestamp,
-      nonce: nonce
-    });
-    if (data == undefined) {
-      data = { timestamp: timestamp, nonce: nonce, sign: sign };
-    } else {
-      data["timestamp"] = timestamp;
-      data["nonce"] = nonce;
-      data["sign"] = sign;
-    }
-    return axios.post(url, data, config);
+    return axios.post(url, Security(url, data), config);
   }
 
   // Update
   put(url, data = undefined, config = {}) {
-    var timestamp = moment().unix();
-    var nonce = md5(timestamp + Math.random());
-    var sign = md5({
-      url: axios.defaults.baseURL + url,
-      timestamp: timestamp,
-      nonce: nonce
-    });
-    if (data == undefined) {
-      data = { timestamp: timestamp, nonce: nonce, sign: sign };
-    } else {
-      data["timestamp"] = timestamp;
-      data["nonce"] = nonce;
-      data["sign"] = sign;
-    }
-    return axios.put(url, data, config);
+    return axios.put(url, Security(url, data), config);
   }
 
   // Delete
   delete(url, data = undefined, config = {}) {
-    var timestamp = moment().unix();
-    var nonce = md5(timestamp + Math.random());
-    var sign = md5({
-      url: axios.defaults.baseURL + url,
-      timestamp: timestamp,
-      nonce: nonce
-    });
-    if (data == undefined) {
-      data = { timestamp: timestamp, nonce: nonce, sign: sign };
-    } else {
-      data["timestamp"] = timestamp;
-      data["nonce"] = nonce;
-      data["sign"] = sign;
-    }
-    return axios.delete(url, { data: data }, config);
+    return axios.delete(url, { data: Security(url, data) }, config);
   }
 }();
