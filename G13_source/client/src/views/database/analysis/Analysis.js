@@ -23,7 +23,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="container-fluid main-opacity">
+      <div className="height-full container-fluid main-opacity">
         <div className="row">
           <div className="col-md-2">
             <AnalysisCard

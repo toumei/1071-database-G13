@@ -7,6 +7,6 @@ export default class extends Component {
   }
 
   render() {
-    return <div className="main-opacity">profile</div>;
+    return <div className="height-full main-opacity">profile</div>;
   }
 }

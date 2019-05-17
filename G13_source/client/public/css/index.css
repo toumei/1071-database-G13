@@ -1,3 +1,7 @@
+.height-full {
+  height: 100%;
+}
+
 .overflow {
   overflow-y: hidden;
 }
@@ -19,20 +23,6 @@ body::-webkit-scrollbar {
   display: none !important;
 }
 
-@media screen and (max-width: 575.98px) {
-  header {
-    display: none !important;
-  }
-
-  .analysisNone {
-    display: block !important;
-  }
-
-  .analysisBlock {
-    display: none !important;
-  }
-}
-
 /* loading animation */
 .wrg-bg,
 .wrg-ring,
@@ -45,9 +35,14 @@ body::-webkit-scrollbar {
   left: 0;
 }
 
+.loading {
+  position: fixed;
+  width: 100%;
+}
+
 .wrg-bg {
-  -webkit-animation: page-out 2.55s linear;
-  animation: page-out 2.55s linear;
+  /* -webkit-animation: page-out 2.55s linear;
+  animation: page-out 2.55s linear; */
   animation-delay: 2.9s;
   background-image: url(../img/bg.jpg);
   background-size: cover;
@@ -84,7 +79,7 @@ body::-webkit-scrollbar {
 .wrg-title h1 {
   color: #2600ff;
   font-weight: 400;
-  font-size: 5em;
+  font-size: 5rem;
   text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
   margin: 0;
   display: flex;
@@ -174,7 +169,7 @@ body::-webkit-scrollbar {
 }
 
 .main-delay {
-  animation-delay: 4.8s;
+  /* animation-delay: 4.8s; */
 }
 
 .main-iframe-delay {
@@ -296,5 +291,38 @@ body::-webkit-scrollbar {
 
   100% {
     transform: translateY(0);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .wrg-hand {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 575.98px) {
+  .analysisNone {
+    display: block !important;
+  }
+
+  header,
+  .analysisBlock {
+    display: none !important;
+  }
+
+  .wrg-title h1 {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .wrg-title h1 {
+    font-size: 3.5rem;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .wrg-title h1 {
+    font-size: 3rem;
   }
 }

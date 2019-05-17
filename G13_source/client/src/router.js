@@ -50,7 +50,7 @@ export const Router = () => (
 
 // App Router
 export const Main = () => (
-  <div className="main-opacity main-delay">
+  <div id="main" className="main-opacity main-delay" style={{ zIndex: "0" }}>
     <Route exact path="/" component={Index} />
     <Route path="/database/analysis" component={Analysis} />
     <Route path="/database/crud" component={CRUD} />

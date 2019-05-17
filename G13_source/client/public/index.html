@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/img/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   <!-- fontawesome CSS -->
@@ -24,7 +24,22 @@
   <script>
     function onload() {
       setTimeout(overflow, 4800);
+      onresize();
     }
+
+    function onresize() {
+      if (document.documentElement.clientWidth > 767.98) {
+        document.getElementById("progress").style.height = document.documentElement.clientHeight - 56 + 'px';
+        document.getElementById("main").style.height = document.documentElement.clientHeight - 56 + 'px';
+      } else if (document.documentElement.clientWidth > 575.98) {
+        document.getElementById("progress").style.height = document.documentElement.clientHeight - 49.4 + 'px';
+        document.getElementById("main").style.height = document.documentElement.clientHeight - 49.4 + 'px';
+      } else {
+        document.getElementById("progress").style.height = document.documentElement.clientHeight - 49.4 + 'px';
+        document.getElementById("main").style.height = document.documentElement.clientHeight - 49.4 + 'px';
+      }
+    }
+
     function overflow() {
       var classVal = document.getElementById("body").getAttribute("class");
       classVal = classVal.replace("overflow", "");
@@ -32,10 +47,10 @@
     }
   </script>
 
-  <link rel="stylesheet" href="%PUBLIC_URL%/css/index.css"/>
+  <link rel="stylesheet" href="%PUBLIC_URL%/css/index.css" />
 </head>
 
-<body onload="onload()" id="body" class="overflow">
+<body onload="onload()" onresize="onresize()" id="body" class="overflow">
   <!-- <div class="wrg-bg"></div>
   <div class="wrg-ring"></div>
   <div class="wrg-hand"></div>

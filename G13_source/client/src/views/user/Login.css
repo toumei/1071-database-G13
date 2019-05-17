@@ -1,0 +1,391 @@
+.login {
+  background-image: url(./grassland.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.loginForm {
+  background-color: white;
+  border: 3px gray solid;
+  border-radius: 10px;
+  margin-top: 50px;
+  margin-left: -400px;
+  width: 300px;
+  height: 410px;
+  padding: 20px;
+}
+
+.boy {
+  position: fixed;
+  margin-top: 65px;
+  margin-left: 120px;
+  width: 175px;
+  height: 462px;
+  background-image: url(./boy.png);
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.dialog {
+  position: fixed;
+  margin-top: -150px;
+  margin-left: 300px;
+  width: 262px;
+  height: 147px;
+  background-image: url(./dialog.png);
+  background-size: 100% 100%;
+  background-position: center;
+  display: none;
+}
+
+.dialogue {
+  position: fixed;
+  margin-top: -170px;
+  margin-left: 300px;
+  display: none;
+}
+
+.dialogblock {
+  display: block;
+}
+
+.hand {
+  position: fixed;
+  margin-top: 30px;
+  margin-left: 25px;
+  width: 116px;
+  height: 124px;
+  background-image: url(./hand.png);
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.t_hand101 {
+  -webkit-animation: hand01 1s linear;
+  animation: hand01 1s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.t_hand202 {
+  -webkit-animation: hand02 1s linear;
+  animation: hand02 1s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.t_hand303 {
+  -webkit-animation: hand03 1s linear;
+  animation: hand03 1s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.t_hand212 {
+  -webkit-animation: hand12 1s linear;
+  animation: hand12 1s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.t_hand313 {
+  -webkit-animation: hand13 1s linear;
+  animation: hand13 1s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.t_hand121 {
+  -webkit-animation: hand21 1s linear;
+  animation: hand21 1s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.t_hand323 {
+  -webkit-animation: hand23 1s linear;
+  animation: hand23 1s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.t_hand131 {
+  -webkit-animation: hand31 1s linear;
+  animation: hand31 1s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.t_hand232 {
+  -webkit-animation: hand32 1s linear;
+  animation: hand32 1s linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hand01 {
+  0% {
+    margin-top: 30px;
+    margin-left: 25px;
+    transform: rotate(0deg);
+  }
+
+  100% {
+    margin-top: 40px;
+    margin-left: 15px;
+    transform: rotate(-15deg);
+  }
+}
+
+@keyframes hand02 {
+  0% {
+    margin-top: 30px;
+    margin-left: 25px;
+    transform: rotate(0deg);
+  }
+
+  33.33% {
+    margin-top: 40px;
+    margin-left: 15px;
+    transform: rotate(-15deg);
+  }
+
+  66.66% {
+    margin-top: 54px;
+    margin-left: 10px;
+    transform: rotate(-30deg);
+  }
+
+  100% {
+    margin-top: 68px;
+    margin-left: 05px;
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes hand03 {
+  0% {
+    margin-top: 30px;
+    margin-left: 25px;
+    transform: rotate(0deg);
+  }
+
+  16.66% {
+    margin-top: 40px;
+    margin-left: 15px;
+    transform: rotate(-15deg);
+  }
+
+  33.33% {
+    margin-top: 54px;
+    margin-left: 10px;
+    transform: rotate(-30deg);
+  }
+
+  50% {
+    margin-top: 68px;
+    margin-left: 05px;
+    transform: rotate(-45deg);
+  }
+
+  66.66% {
+    margin-top: 80px;
+    margin-left: 06px;
+    transform: rotate(-60deg);
+  }
+
+  83.33% {
+    margin-top: 93px;
+    margin-left: 12px;
+    transform: rotate(-75deg);
+  }
+
+  100% {
+    margin-top: 103px;
+    margin-left: 20px;
+    transform: rotate(-90deg);
+  }
+}
+
+@keyframes hand12 {
+  0% {
+    margin-top: 40px;
+    margin-left: 15px;
+    transform: rotate(-15deg);
+  }
+
+  50% {
+    margin-top: 54px;
+    margin-left: 10px;
+    transform: rotate(-30deg);
+  }
+
+  100% {
+    margin-top: 68px;
+    margin-left: 05px;
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes hand13 {
+  0% {
+    margin-top: 40px;
+    margin-left: 15px;
+    transform: rotate(-15deg);
+  }
+
+  20% {
+    margin-top: 54px;
+    margin-left: 10px;
+    transform: rotate(-30deg);
+  }
+
+  40% {
+    margin-top: 68px;
+    margin-left: 05px;
+    transform: rotate(-45deg);
+  }
+
+  60% {
+    margin-top: 80px;
+    margin-left: 06px;
+    transform: rotate(-60deg);
+  }
+
+  80% {
+    margin-top: 93px;
+    margin-left: 12px;
+    transform: rotate(-75deg);
+  }
+
+  100% {
+    margin-top: 103px;
+    margin-left: 20px;
+    transform: rotate(-90deg);
+  }
+}
+
+@keyframes hand21 {
+  0% {
+    margin-top: 68px;
+    margin-left: 05px;
+    transform: rotate(-45deg);
+  }
+
+  50% {
+    margin-top: 54px;
+    margin-left: 10px;
+    transform: rotate(-30deg);
+  }
+
+  100% {
+    margin-top: 40px;
+    margin-left: 15px;
+    transform: rotate(-15deg);
+  }
+}
+
+@keyframes hand23 {
+  0% {
+    margin-top: 68px;
+    margin-left: 05px;
+    transform: rotate(-45deg);
+  }
+
+  33.33% {
+    margin-top: 80px;
+    margin-left: 06px;
+    transform: rotate(-60deg);
+  }
+
+  66.66% {
+    margin-top: 93px;
+    margin-left: 12px;
+    transform: rotate(-75deg);
+  }
+
+  100% {
+    margin-top: 103px;
+    margin-left: 20px;
+    transform: rotate(-90deg);
+  }
+}
+
+@keyframes hand31 {
+  0% {
+    margin-top: 103px;
+    margin-left: 20px;
+    transform: rotate(-90deg);
+  }
+
+  20% {
+    margin-top: 93px;
+    margin-left: 12px;
+    transform: rotate(-75deg);
+  }
+
+  40% {
+    margin-top: 80px;
+    margin-left: 06px;
+    transform: rotate(-60deg);
+  }
+
+  60% {
+    margin-top: 68px;
+    margin-left: 05px;
+    transform: rotate(-45deg);
+  }
+
+  80% {
+    margin-top: 54px;
+    margin-left: 10px;
+    transform: rotate(-30deg);
+  }
+
+  100% {
+    margin-top: 40px;
+    margin-left: 15px;
+    transform: rotate(-15deg);
+  }
+}
+
+@keyframes hand32 {
+  0% {
+    margin-top: 103px;
+    margin-left: 20px;
+    transform: rotate(-90deg);
+  }
+
+  33.33% {
+    margin-top: 93px;
+    margin-left: 12px;
+    transform: rotate(-75deg);
+  }
+
+  66.66% {
+    margin-top: 80px;
+    margin-left: 06px;
+    transform: rotate(-60deg);
+  }
+
+  100% {
+    margin-top: 68px;
+    margin-left: 05px;
+    transform: rotate(-45deg);
+  }
+}
+
+@media screen and (max-width: 899px) {
+  .loginForm {
+    margin-top: 0px;
+    margin-left: 0px;
+  }
+
+  .boy,
+  .dialog,
+  .dialogue,
+  .dialogblock,
+  .hand {
+    display: none;
+  }
+}

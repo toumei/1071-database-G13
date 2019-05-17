@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 
+import MenuIcon from '@material-ui/icons/Menu';
+
 import { Main } from "../router";
 
-import logo from "../logo.svg";
-
+// import logo from "../logo.svg";
+import user from "./user.png";
 import "./App.css"
 
 // model
@@ -12,6 +14,8 @@ import {
   CustomActiveClickLink,
   CustomActiveDropdownClickLink
 } from "../models/custom.model";
+
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class extends Component {
   constructor(props) {
@@ -33,14 +37,20 @@ export default class extends Component {
     return (
       <div>
         <Navbar title={this.state.title} />
-        <Main />
+        <div id="progress" className="loading d-flex flex-column align-items-center">
+          <CircularProgress
+            disableShrink
+            color="secondary"
+          />
+        </div>
+        {/* <Main /> */}
       </div>
     );
   }
 }
 
 const Navbar = ({ title }) => (
-  <nav className="navbar navbar-expand-sm navbar-light bg-white topbar mb-4 static-top shadow">
+  <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ zIndex: "100", boxShadow: "4px 4px 12px 4px rgba(20%,20%,40%,0.5)" }}>
     <div className="container">
       {/* <img className="navbar-brand" src={logo} width="55em" height="55em" alt={"logo"} /> */}
       <button
@@ -48,22 +58,25 @@ const Navbar = ({ title }) => (
         className="navbar-toggler collapsed"
         data-toggle="collapse"
         data-target="#navbarNav"
-        style={{ borderWidth: "0" }}>
-        <span className="navbar-toggler-icon" />
+        style={{ borderWidth: "0", outline: "none" }}
+      >
+        <MenuIcon />
       </button>
-      <h1 className="navbar-toggler">{title}</h1>
+      {/* <h1 className="navbar-toggler">{title}</h1> */}
       <button
         id="navbarUserBtn"
-        className="navbar-toggler collapsed"
+        className="navbar-toggler collapsed display-none-none"
         data-toggle="collapse"
         data-target="#navUserCell"
-        style={{ borderWidth: "0" }}>
-        <img className="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" width="35em" height="35em" alt={"Sticker"} />
+        style={{ borderWidth: "0", outline: "none" }}
+      >
+        <img className="img-profile rounded-circle" src={user} width="24em" height="24em" alt={"Sticker"} />
       </button>
       <button
-        className="navbar-toggler collapsed display-none"
-        data-toggle="collapse"
-        style={{ borderWidth: "0" }}>
+        id="navbarLoginBtn"
+        className="navbar-toggler collapsed display-none-block"
+        style={{ borderWidth: "0", outline: "none" }}
+      >
         <CustomActiveClickLink
           active={title}
           activeOptions={["登入", "登出"]}
@@ -71,6 +84,7 @@ const Navbar = ({ title }) => (
           content={<i className="fas"> 登入</i>}
         />
       </button>
+
       <NavItem title={title} />
       <NavUserCell title={title} />
       <NavUserPC title={title} />
@@ -83,6 +97,7 @@ const NavItem = ({ title }) => (
     <ul className="navbar-nav">
       <li className="nav-item">
         <CustomActiveClickLink
+          id="index"
           active={title}
           activeOptions={["ResNetCMMS"]}
           to="/"
@@ -147,7 +162,7 @@ const NavItem = ({ title }) => (
 const NavUserPC = ({ title }) => (
   <div className="collapse navbar-collapse">
     <ul className="navbar-nav ml-auto">
-      <li className="nav-item dropdown no-arrow">
+      <li id="navUserPC" className="nav-item dropdown no-arrow display-none-none">
         <CustomActiveDropdownClickLink
           active={title}
           activeOptions={["個人資料", "設定"]}
@@ -155,7 +170,7 @@ const NavUserPC = ({ title }) => (
           dataToggle="dropdown"
           content={
             <div>
-              <img className="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60" width="25em" height="25em" alt={"Sticker"} />
+              <img className="img-profile rounded-circle" src={user} width="25em" height="25em" alt={"Sticker"} />
               &nbsp;&nbsp;
               <i className="fas"> 郭英杰 </i>
             </div>
@@ -176,6 +191,7 @@ const NavUserPC = ({ title }) => (
           />
           <div className="dropdown-divider"></div>
           <CustomClickLink
+            id="pcLogout"
             className="dropdown-item"
             style={{ borderRadius: "0.5em" }}
             to="/"
@@ -183,7 +199,7 @@ const NavUserPC = ({ title }) => (
           />
         </div>
       </li>
-      <li className="nav-item display-none">
+      <li id="navbarLogin" className="nav-item display-block-none">
         <CustomActiveClickLink
           active={title}
           activeOptions={["登入", "登出"]}
@@ -197,7 +213,7 @@ const NavUserPC = ({ title }) => (
 
 const NavUserCell = ({ title }) => (
   <div id="navUserCell" className="collapse navbar-collapse">
-    <ul className="navbar-nav display-none">
+    <ul className="navbar-nav display-none-block">
       <li className="nav-item">
         <CustomClickLink
           className="dropdown-item"
@@ -217,6 +233,7 @@ const NavUserCell = ({ title }) => (
       <div className="dropdown-divider"></div>
       <li className="nav-item">
         <CustomClickLink
+          id="cellLogout"
           className="dropdown-item"
           style={{ borderRadius: "0.5em" }}
           to="/"

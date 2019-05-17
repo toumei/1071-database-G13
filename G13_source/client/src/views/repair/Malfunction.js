@@ -94,11 +94,11 @@ export default class extends Component {
             };
             apiRequest
               .post("/database/add", rowBed)
-              .then(res => {})
+              .then(res => { })
               .catch();
             apiRequest
               .post("/database/add", rowTime)
-              .then(res => {})
+              .then(res => { })
               .catch();
           })
           .catch();
@@ -120,7 +120,7 @@ export default class extends Component {
   render() {
     if (this.state.matter.length > 0) {
       return (
-        <div className="container main-opacity" style={{ marginTop: 10 }}>
+        <div className="height-full container main-opacity" style={{ marginTop: 10 }}>
           <form>
             <Name />
             <Room />

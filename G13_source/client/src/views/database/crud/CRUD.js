@@ -16,7 +16,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="container-fluid main-opacity">
+      <div className="height-full container-fluid main-opacity">
         <div className="row">
           <CrudTableMenu
             table={this.state.table}

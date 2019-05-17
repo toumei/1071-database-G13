@@ -117,7 +117,7 @@ export default class extends Component {
   render() {
     if (this.state.malfunction.length > 0 && this.state.result.length > 0) {
       return (
-        <div className="container main-opacity" style={{ marginTop: 10 }}>
+        <div className="height-full container main-opacity" style={{ marginTop: 10 }}>
           <form>
             <Malfunction malfunction={this.state.malfunction} />
             <Name />

@@ -11,7 +11,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="main-opacity main-iframe-delay" style={{ height: "92vh", marginTop: "-23px" }}>
+      <div className="height-full main-opacity main-iframe-delay">
         <Iframe
           url="https://docs.google.com/forms/d/e/1FAIpQLSeEu9eCnpZK24Vec-SOCQnKJy5VqsjeeLrgepmtDu6XiThFyg/viewform"
           height="100%"

@@ -50,6 +50,7 @@ const activeLink = (active, link) => {
 };
 
 export const CustomLink = ({
+  id,
   className,
   active,
   activeOptions = [],
@@ -59,6 +60,7 @@ export const CustomLink = ({
   click = undefined
 }) => (
     <Link
+      id={id}
       className={
         className +
         (active === to || active === content || activeLink(active, activeOptions)
@@ -73,21 +75,36 @@ export const CustomLink = ({
     </Link>
   );
 
-export const CustomClickLink = ({ className, style, to, content }) => (
+export const CustomClickLink = ({ id, className, style, to, content }) => (
   <Link
+    id={id}
     className={className}
     style={style}
     to={to}
     onClick={() => {
       const navbarBtn = document.getElementById("navbarBtn");
       const navbarUserBtn = document.getElementById("navbarUserBtn");
-      if (navbarBtn.getAttribute("class") === "navbar-toggler" && navbarUserBtn.getAttribute("class") === "navbar-toggler") {
+      if (navbarBtn.getAttribute("class") === "navbar-toggler" && navbarUserBtn.getAttribute("class") === "navbar-toggler display-none-block") {
         navbarBtn.click();
         navbarUserBtn.click();
       } else if (navbarBtn.getAttribute("class") === "navbar-toggler") {
         navbarBtn.click();
-      } else if (navbarUserBtn.getAttribute("class") === "navbar-toggler") {
+      } else if (navbarUserBtn.getAttribute("class") === "navbar-toggler display-none-block") {
         navbarUserBtn.click();
+      }
+      if (id === "pcLogout" || id === "cellLogout") {
+        const navbarLogin = document.getElementById("navbarLogin");
+        let navbarLoginR = navbarLogin.getAttribute("class").replace("display-none-none", "display-block-none");
+        document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
+        const navUserPC = document.getElementById("navUserPC");
+        let navUserPCR = navUserPC.getAttribute("class").replace("display-block-none", "display-none-none");
+        document.getElementById("navUserPC").setAttribute("class", navUserPCR);
+
+        const navbarLoginBtn = document.getElementById("navbarLoginBtn");
+        let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-none", "display-none-block");
+        document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
+        let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-block", "display-none-none");
+        document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
       }
     }}
   >

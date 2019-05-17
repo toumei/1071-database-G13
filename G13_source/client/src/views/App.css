@@ -2,6 +2,34 @@
   display: none;
 }
 
-.display-none {
+.display-none-none {
   display: none !important;
+}
+
+.display-none-block {
+  display: none !important;
+}
+
+.display-block-none {
+  display: block !important;
+}
+.display-block-block {
+  display: block !important;
+}
+
+@media (max-width: 575.98px) {
+  .display-none-none {
+    display: none !important;
+  }
+
+  .display-none-block {
+    display: block !important;
+  }
+
+  .display-block-none {
+    display: none !important;
+  }
+  .display-block-block {
+    display: block !important;
+  }
 }
