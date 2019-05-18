@@ -177,9 +177,10 @@ export default class extends Component {
     //     console.error(err.message);
     //   });
   }
+  
   render() {
     return (
-      <div className="height-full login d-flex flex-column justify-content-center align-items-center main-opacity">
+      <div className="height-full login d-flex flex-column justify-content-center align-items-center opacity">
         <form className="loginForm">
           <div className="d-flex flex-column align-items-center" style={{ height: "120px" }}>
             <Avatar style={{ backgroundColor: "#FF4081", height: "80px", width: "80px" }}>

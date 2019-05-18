@@ -4,10 +4,15 @@ import apiRequest from "../../api/apiRequest";
 // model
 import { decrypt } from "../../models/crypt.model";
 
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import "./Processing.css"
+
 export default class extends Component {
   constructor(props) {
     super(props);
-    this.state = { malfunction: [], result: [] };
+    this.state = { malfunction: [{ ID: " " }], result: [{ label: " ", value: " " }] };
     document.title = "維修單";
   }
 
@@ -115,29 +120,29 @@ export default class extends Component {
   };
 
   render() {
-    if (this.state.malfunction.length > 0 && this.state.result.length > 0) {
-      return (
-        <div className="height-full container main-opacity" style={{ marginTop: 10 }}>
-          <form>
-            <Malfunction malfunction={this.state.malfunction} />
-            <Name />
-            <DateTime />
-            <Result result={this.state.result} />
-            <Detail />
-            <div className="row">
-              <div className="col-11" />
-              <input
-                type="button"
-                className="btn btn-primary"
-                value="確定"
-                onClick={this.handleClick}
-              />
-            </div>
-          </form>
-        </div>
-      );
-    }
-    return null;
+    // if (this.state.malfunction.length > 0 && this.state.result.length > 0) {
+    return (
+      <div id="processing" className="height-full d-flex flex-column justify-content-center align-items-center opacity" style={{ backgroundColor: "white" }}>
+        <form id="processingForm">
+          <Malfunction malfunction={this.state.malfunction} />
+          <Name />
+          <DateTime />
+          <Result result={this.state.result} />
+          <Detail />
+          <div className="d-flex flex-column align-items-center">
+            <Button
+              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "1.9rem", lineHeight: "1.9rem" }}
+              variant="outlined"
+              color="secondary"
+              onClick={this.handleClick}>
+              確定
+            </Button>
+          </div>
+        </form>
+      </div>
+    );
+    // }
+    // return null;
   }
 }
 
@@ -154,31 +159,33 @@ const MalfunctionOption = ({ malfunction }) => {
 };
 
 const Malfunction = ({ malfunction }) => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="malfunction">
-      報修單
-    </label>
-    <div className="input-group col-md-10">
-      <select
-        id="malfunction"
-        defaultValue={malfunction[0].ID}
-        className="form-control"
-        autoFocus
-      >
-        <MalfunctionOption malfunction={malfunction} />
-      </select>
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="malfunction"
+      select
+      label="報修單"
+      defaultValue={malfunction[0].ID}
+      SelectProps={{
+        native: true
+      }}
+      margin="normal"
+      variant="outlined"
+    >
+      <MalfunctionOption malfunction={malfunction} />
+    </TextField>
   </div>
 );
 
 const Name = () => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="name">
-      員工姓名
-    </label>
-    <div className="input-group col-md-10">
-      <input type="text" className="form-control" id="name" />
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="name"
+      label="員工姓名"
+      margin="normal"
+      variant="outlined"
+    />
   </div>
 );
 
@@ -192,18 +199,16 @@ const DateTime = () => {
     -2
   )}`;
   return (
-    <div className="form-group row">
-      <label className="col-md-2" htmlFor="date">
-        維修日期
-      </label>
-      <div className="input-group col-md-10">
-        <input
-          type="datetime-local"
-          className="form-control"
-          id="date"
-          defaultValue={today}
-        />
-      </div>
+    <div>
+      <TextField
+        style={{ width: "100%" }}
+        id="date"
+        label="維修日期"
+        margin="normal"
+        variant="outlined"
+        type="datetime-local"
+        defaultValue={today}
+      />
     </div>
   );
 };
@@ -221,30 +226,34 @@ const ResultOption = ({ result }) => {
 };
 
 const Result = ({ result }) => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="result">
-      維修結果
-    </label>
-    <div className="input-group col-md-10">
-      <select
-        id="result"
-        defaultValue={result[0].value}
-        className="form-control"
-        autoFocus
-      >
-        <ResultOption result={result} />
-      </select>
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="result"
+      select
+      label="維修結果"
+      defaultValue={result[0].value}
+      SelectProps={{
+        native: true
+      }}
+      margin="normal"
+      variant="outlined"
+    >
+      <ResultOption result={result} />
+    </TextField>
   </div>
 );
 
 const Detail = () => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="detail">
-      處裡內容
-    </label>
-    <div className="input-group col-md-10">
-      <textarea className="form-control" id="detail" rows="3" />
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="detail"
+      label="處裡內容"
+      multiline
+      rows="3"
+      margin="normal"
+      variant="outlined"
+    />
   </div>
 );

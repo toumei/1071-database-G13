@@ -10,6 +10,7 @@ import {
   addItem,
   deleteForm
 } from "../../../controllers/CRUD.TableNav.controller";
+import Button from '@material-ui/core/Button';
 
 export default class extends Component {
   constructor(props) {
@@ -38,9 +39,10 @@ export default class extends Component {
       <div>
         <section className="bg-light py-1">
           <div className="row">
-            <FastEditBtn bind={this} />
+            <DrawerBtn bind={this} />
             <AddBtn bind={this} />
             <DeleteBtn bind={this} />
+            <FastEditBtn bind={this} />
           </div>
         </section>
       </div>
@@ -48,27 +50,41 @@ export default class extends Component {
   }
 }
 
+const DrawerBtn = ({ bind }) => (
+  <div className="col-3">
+    <Button
+      variant="contained"
+      className="btn btn-secondary btn-block"
+      onClick={bind.props.toggleDrawer()}
+    >
+      <i className="fas fa-bars" />&nbsp;&nbsp;表格
+    </Button>
+  </div>
+);
+
 const FastEditBtn = ({ bind }) => (
-  <div className="col-4">
-    <button
+  <div className="col-3">
+    <Button
+      variant="contained"
       className="btn btn-secondary btn-block"
       onClick={() => bind.props.handleEditable()}
     >
-      <i className="fas fa-edit" /> {bind.state.editable ? "關閉" : "開啟"}
-      快速編輯
-    </button>
+      <i className="fas fa-edit" />&nbsp;&nbsp;編輯
+    </Button>
   </div>
 );
 
 const AddBtn = ({ bind }) => (
-  <div className="col-4">
-    <button
+  <div className="col-3">
+    <Button
+      variant="contained"
+      color="primary"
       className="btn btn-success btn-block"
       data-toggle="modal"
       data-target="#addModal"
     >
-      <i className="fas fa-plus-circle" /> 新增
-    </button>
+      <i className="fas fa-plus-circle" />&nbsp;&nbsp;新增
+    </Button>
     <CustoModal
       id="addModal"
       title="新增一筆資料"
@@ -312,8 +328,10 @@ const AddForm = ({ bind }) => {
 };
 
 const DeleteBtn = ({ bind }) => (
-  <div className="col-4">
-    <button
+  <div className="col-3">
+    <Button
+      variant="contained"
+      color="secondary"
       className="btn btn-warning btn-block"
       data-toggle="modal"
       data-target="#deleteListModal"
@@ -322,8 +340,8 @@ const DeleteBtn = ({ bind }) => (
         bind.setState({ deleteList: bind.props.select });
       }}
     >
-      <i className="fas fa-trash-alt" /> 刪除
-    </button>
+      <i className="fas fa-trash-alt" />&nbsp;&nbsp;刪除
+    </Button>
     <CustoModal
       id="deleteListModal"
       title="確定刪除這些資料?"

@@ -20,7 +20,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 export default class extends Component {
   constructor(props) {
     super(props);
-    this.state = { title: "" };
+    this.state = { title: "", completed: 0 };
   }
 
   componentDidMount() {
@@ -39,11 +39,12 @@ export default class extends Component {
         <Navbar title={this.state.title} />
         <div id="progress" className="loading d-flex flex-column align-items-center">
           <CircularProgress
-            disableShrink
-            color="secondary"
+            style={{ width: "100px", height: "auto", color: "green" }}
+            value={this.state.completed}
+          // color="secondary"
           />
         </div>
-        {/* <Main /> */}
+        <Main />
       </div>
     );
   }
@@ -58,7 +59,12 @@ const Navbar = ({ title }) => (
         className="navbar-toggler collapsed"
         data-toggle="collapse"
         data-target="#navbarNav"
-        style={{ borderWidth: "0", outline: "none" }}
+        style={{ borderWidth: "0", outline: "none" }} onClick={() => {
+          const navbarUserBtn = document.getElementById("navbarUserBtn");
+          if (navbarUserBtn.getAttribute("class").indexOf('collapsed') === -1) {
+            navbarUserBtn.click();
+          }
+        }}
       >
         <MenuIcon />
       </button>
@@ -69,6 +75,12 @@ const Navbar = ({ title }) => (
         data-toggle="collapse"
         data-target="#navUserCell"
         style={{ borderWidth: "0", outline: "none" }}
+        onClick={() => {
+          const navbarBtn = document.getElementById("navbarBtn");
+          if (navbarBtn.getAttribute("class").indexOf('collapsed') === -1) {
+            navbarBtn.click();
+          }
+        }}
       >
         <img className="img-profile rounded-circle" src={user} width="24em" height="24em" alt={"Sticker"} />
       </button>
@@ -183,12 +195,12 @@ const NavUserPC = ({ title }) => (
             to="/user/profile"
             content={<div><i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">個人資料</span></div>}
           />
-          <CustomClickLink
+          {/* <CustomClickLink
             className="dropdown-item"
             style={{ borderRadius: "0.5em" }}
             to="/user/settings"
             content={<div><i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">設定</span></div>}
-          />
+          /> */}
           <div className="dropdown-divider"></div>
           <CustomClickLink
             id="pcLogout"
@@ -222,14 +234,14 @@ const NavUserCell = ({ title }) => (
           content={<div><i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">個人資料</span></div>}
         />
       </li>
-      <li className="nav-item">
+      {/* <li className="nav-item">
         <CustomClickLink
           className="dropdown-item"
           style={{ borderRadius: "0.5em" }}
           to="/user/settings"
           content={<div><i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">設定</span></div>}
         />
-      </li>
+      </li> */}
       <div className="dropdown-divider"></div>
       <li className="nav-item">
         <CustomClickLink

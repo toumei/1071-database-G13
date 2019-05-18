@@ -28,15 +28,17 @@
     }
 
     function onresize() {
-      if (document.documentElement.clientWidth > 767.98) {
-        document.getElementById("progress").style.height = document.documentElement.clientHeight - 56 + 'px';
-        document.getElementById("main").style.height = document.documentElement.clientHeight - 56 + 'px';
-      } else if (document.documentElement.clientWidth > 575.98) {
-        document.getElementById("progress").style.height = document.documentElement.clientHeight - 49.4 + 'px';
-        document.getElementById("main").style.height = document.documentElement.clientHeight - 49.4 + 'px';
+      var width = document.documentElement.clientWidth;
+      var height = document.documentElement.clientHeight;
+      if (width > 767.98) {
+        document.getElementById("progress").style.marginTop = (height - 156) / 2 + 'px';
+        document.getElementById("main").style.height = height - 56 + 'px';
+      } else if (width > 575.98) {
+        document.getElementById("progress").style.marginTop = (height - 149.4) / 2 + 'px';
+        document.getElementById("main").style.height = height - 49.4 + 'px';
       } else {
-        document.getElementById("progress").style.height = document.documentElement.clientHeight - 49.4 + 'px';
-        document.getElementById("main").style.height = document.documentElement.clientHeight - 49.4 + 'px';
+        document.getElementById("progress").style.marginTop = (height - 149.4) / 2 + 'px';
+        document.getElementById("main").style.height = height - 49.4 + 'px';
       }
     }
 

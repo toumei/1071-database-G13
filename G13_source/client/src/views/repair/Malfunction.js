@@ -5,11 +5,15 @@ import apiRequest from "../../api/apiRequest";
 
 // model
 import { decrypt } from "../../models/crypt.model";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+import "./Malfunction.css"
 
 export default class extends Component {
   constructor(props) {
     super(props);
-    this.state = { bed: [], matter: [] };
+    this.state = { bed: [], matter: [{ label: " ", value: " " }] };
     document.title = "報修單";
   }
 
@@ -118,53 +122,55 @@ export default class extends Component {
   };
 
   render() {
-    if (this.state.matter.length > 0) {
-      return (
-        <div className="height-full container main-opacity" style={{ marginTop: 10 }}>
-          <form>
-            <Name />
-            <Room />
-            <Bed bind={this} />
-            <Time />
-            <Exc />
-            <Matter matter={this.state.matter} />
-            <Desc />
-            <div className="row">
-              <div className="col-11" />
-              <input
-                type="button"
-                className="btn btn-primary"
-                value="確定"
-                onClick={this.handleClick}
-              />
-            </div>
-          </form>
-        </div>
-      );
-    }
-    return null;
+    // if (this.state.matter.length > 0) {
+    return (
+      <div id="malfunction1" className="d-flex flex-column justify-content-center align-items-center opacity" style={{ backgroundColor: "white" }}>
+        <form id="malfunctionForm">
+          <Name />
+          <Room />
+          <Bed bind={this} />
+          <Time />
+          <Exc />
+          <Matter matter={this.state.matter} />
+          <Desc />
+          <div className="d-flex flex-column align-items-center">
+            <Button
+              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "1.9rem", lineHeight: "1.9rem" }}
+              variant="outlined"
+              color="secondary"
+              onClick={this.handleClick}>
+              確定
+            </Button>
+          </div>
+        </form>
+      </div>
+    );
+    // }
+    // return null;
   }
 }
 
 const Name = () => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="name">
-      申請者姓名
-    </label>
-    <div className="input-group col-md-10">
-      <input type="text" className="form-control" id="name" />
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="name"
+      label="申請者姓名"
+      margin="normal"
+      variant="outlined"
+    />
   </div>
 );
 
 const Room = () => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="room">
-      寢室編號
-    </label>
-    <div className="input-group col-md-10">
-      <input type="text" className="form-control" id="room" />
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="room"
+      label="寢室編號"
+      margin="normal"
+      variant="outlined"
+    />
   </div>
 );
 
@@ -191,142 +197,143 @@ const BedOption = ({ bind }) => {
 };
 
 const Bed = ({ bind }) => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="bed">
-      寢室床號
-    </label>
-    <div className="input-group col-md-10">
-      <input type="text" className="form-control" id="bed" />
-      <div className="input-group-append">
-        <button
-          type="button"
-          className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        />
-        <div className="dropdown-menu">
-          <option
-            className="dropdown-item"
-            value=""
-            onClick={e => {
-              document.getElementById("bed").value = e.target.value;
-              document.getElementById("add_edit").innerHTML = "新增";
-              document.getElementById("clear_delete").innerHTML = "清除";
-            }}
-          >
-            請輸入床號
-          </option>
-          <BedOption bind={bind} />
-        </div>
-      </div>
-      <div className="input-group-append">
-        <button
-          className="btn btn-outline-secondary"
-          type="button"
-          id="add_edit"
-          onClick={e => {
-            if (e.target.innerHTML === "新增") {
-              const bed = document.getElementById("bed");
-              const value_input = bed.value;
-              let isSame = false;
-              bind.state.bed.filter((x, i) => {
-                if (x.value === value_input) {
-                  isSame = true;
-                }
-                return false;
-              });
-              if (value_input !== "" && isSame === false) {
-                let newBed = [...bind.state.bed, { value: value_input }];
-                newBed.sort(bind.sortBy);
-                bind.setState({ bed: newBed });
-              }
-              bed.value = "";
-              bed.focus();
-            } else {
-              const bed = document.getElementById("bed");
-              const value_input = bed.value;
-              if (value_input !== bind.clickValue) {
-                let isSame = false;
-                let newBed;
-                bind.state.bed.filter((x, i) => {
-                  if (x.value === value_input) {
-                    isSame = true;
-                  }
-                  return false;
-                });
-                if (isSame === true) {
-                  newBed = bind.state.bed.filter(
-                    (x, i) => x.value !== bind.clickValue
-                  );
-                } else {
-                  newBed = bind.state.bed.filter((x, i) => {
-                    if (x.value === bind.clickValue) {
-                      x.value = bed.value;
-                      x.label = bed.value;
-                    }
-                    return x;
-                  });
-                  newBed.sort(bind.sortBy);
-                }
-                bind.setState({ bed: newBed });
-              }
-              bed.value = "";
-              bed.focus();
-              document.getElementById("add_edit").innerHTML = "新增";
-              document.getElementById("clear_delete").innerHTML = "清除";
-            }
-          }}
-        >
-          新增
-        </button>
-        <button
-          className="btn btn-outline-secondary"
-          type="button"
-          id="clear_delete"
-          onClick={e => {
-            const bed = document.getElementById("bed");
-            if (e.target.innerHTML === "清除") {
-              bed.value = "";
-              bed.focus();
-            } else {
-              const value_input = bed.value;
-              bind.setState({
-                bed: bind.state.bed.filter((x, i) => x.value !== value_input)
-              });
-              bed.value = "";
-              bed.focus();
-              document.getElementById("add_edit").innerHTML = "新增";
-              document.getElementById("clear_delete").innerHTML = "清除";
-            }
-          }}
-        >
-          清除
-        </button>
-      </div>
+  <div>
+    <TextField
+      style={{ width: "54%" }}
+      id="bed"
+      label="寢室床號"
+      margin="normal"
+      variant="outlined"
+    />
+    <button
+      style={{ marginTop: "15px", height: "55.4px", borderRadius: "0px" }}
+      type="button"
+      className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    />
+    <div className="dropdown-menu">
+      <option
+        className="dropdown-item"
+        value=""
+        onClick={e => {
+          document.getElementById("bed").value = e.target.value;
+          document.getElementById("add_edit").innerHTML = "新增";
+          document.getElementById("clear_delete").innerHTML = "清除";
+        }}
+      >
+        請輸入床號
+      </option>
+      <BedOption bind={bind} />
     </div>
+    <Button
+      style={{ marginTop: "15px", height: "55.4px", borderRadius: "0px" }}
+      variant="outlined"
+      className="btn btn-outline-secondary"
+      id="add_edit"
+      onClick={e => {
+        if (e.target.innerHTML === "新增") {
+          const bed = document.getElementById("bed");
+          const value_input = bed.value;
+          let isSame = false;
+          bind.state.bed.filter((x, i) => {
+            if (x.value === value_input) {
+              isSame = true;
+            }
+            return false;
+          });
+          if (value_input !== "" && isSame === false) {
+            let newBed = [...bind.state.bed, { value: value_input }];
+            newBed.sort(bind.sortBy);
+            bind.setState({ bed: newBed });
+          }
+          bed.value = "";
+          bed.focus();
+        } else {
+          const bed = document.getElementById("bed");
+          const value_input = bed.value;
+          if (value_input !== bind.clickValue) {
+            let isSame = false;
+            let newBed;
+            bind.state.bed.filter((x, i) => {
+              if (x.value === value_input) {
+                isSame = true;
+              }
+              return false;
+            });
+            if (isSame === true) {
+              newBed = bind.state.bed.filter(
+                (x, i) => x.value !== bind.clickValue
+              );
+            } else {
+              newBed = bind.state.bed.filter((x, i) => {
+                if (x.value === bind.clickValue) {
+                  x.value = bed.value;
+                  x.label = bed.value;
+                }
+                return x;
+              });
+              newBed.sort(bind.sortBy);
+            }
+            bind.setState({ bed: newBed });
+          }
+          bed.value = "";
+          bed.focus();
+          document.getElementById("add_edit").innerHTML = "新增";
+          document.getElementById("clear_delete").innerHTML = "清除";
+        }
+      }}
+    >
+      新增
+    </Button>
+    <Button
+      style={{ marginTop: "15px", height: "55.4px", borderRadius: "0px 5px 5px 0px" }}
+      variant="outlined"
+      className="btn btn-outline-secondary"
+      id="clear_delete"
+      onClick={e => {
+        const bed = document.getElementById("bed");
+        if (e.target.innerHTML === "清除") {
+          bed.value = "";
+          bed.focus();
+        } else {
+          const value_input = bed.value;
+          bind.setState({
+            bed: bind.state.bed.filter((x, i) => x.value !== value_input)
+          });
+          bed.value = "";
+          bed.focus();
+          document.getElementById("add_edit").innerHTML = "新增";
+          document.getElementById("clear_delete").innerHTML = "清除";
+        }
+      }}>
+      清除
+      </Button>
   </div>
 );
 
 const Time = () => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="time">
-      方便維修時段
-    </label>
-    <div className="input-group col-md-10">
-      <input type="text" className="form-control" id="time" />
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="time"
+      label="方便維修時段"
+      margin="normal"
+      variant="outlined"
+    />
   </div>
 );
 
 const Exc = () => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="exc">
-      例外時段
-    </label>
-    <div className="input-group col-md-10">
-      <input type="text" className="form-control" id="exc" />
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="exc"
+      label="例外時段"
+      margin="normal"
+      variant="outlined"
+    />
   </div>
 );
 
@@ -343,30 +350,34 @@ const MatterOption = ({ matter }) => {
 };
 
 const Matter = ({ matter }) => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="matter">
-      報修事項
-    </label>
-    <div className="input-group col-md-10">
-      <select
-        id="matter"
-        defaultValue={matter[0].value}
-        className="form-control"
-        autoFocus
-      >
-        <MatterOption matter={matter} />
-      </select>
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="matter"
+      select
+      label="報修事項"
+      defaultValue={matter[0].value}
+      SelectProps={{
+        native: true
+      }}
+      margin="normal"
+      variant="outlined"
+    >
+      <MatterOption matter={matter} />
+    </TextField>
   </div>
 );
 
 const Desc = () => (
-  <div className="form-group row">
-    <label className="col-md-2" htmlFor="desc">
-      狀況描述
-    </label>
-    <div className="input-group col-md-10">
-      <textarea className="form-control" id="desc" rows="3" />
-    </div>
+  <div>
+    <TextField
+      style={{ width: "100%" }}
+      id="desc"
+      label="狀況描述"
+      multiline
+      rows="3"
+      margin="normal"
+      variant="outlined"
+    />
   </div>
 );

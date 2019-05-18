@@ -84,12 +84,9 @@ export const CustomClickLink = ({ id, className, style, to, content }) => (
     onClick={() => {
       const navbarBtn = document.getElementById("navbarBtn");
       const navbarUserBtn = document.getElementById("navbarUserBtn");
-      if (navbarBtn.getAttribute("class") === "navbar-toggler" && navbarUserBtn.getAttribute("class") === "navbar-toggler display-none-block") {
+      if (navbarBtn.getAttribute("class").indexOf('collapsed') === -1) {
         navbarBtn.click();
-        navbarUserBtn.click();
-      } else if (navbarBtn.getAttribute("class") === "navbar-toggler") {
-        navbarBtn.click();
-      } else if (navbarUserBtn.getAttribute("class") === "navbar-toggler display-none-block") {
+      } else if (navbarUserBtn.getAttribute("class").indexOf('collapsed') === -1) {
         navbarUserBtn.click();
       }
       if (id === "pcLogout" || id === "cellLogout") {

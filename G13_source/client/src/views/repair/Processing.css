@@ -1,0 +1,13 @@
+#processing {
+  background-image: url(./wood.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+#processingForm {
+  background-image: url(./paper.png);
+  background-size: cover;
+  background-position: center;
+  width: 450px;
+  padding: 70px 50px 50px 50px;
+}

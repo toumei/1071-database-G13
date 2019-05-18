@@ -1,0 +1,14 @@
+#malfunction1 {
+  background-image: url(./wood.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+#malfunctionForm {
+  background-image: url(./paper.png);
+  background-size: cover;
+  background-position: center;
+  margin-top: 6px;
+  width: 450px;
+  padding: 50px 50px 40px 50px;
+}

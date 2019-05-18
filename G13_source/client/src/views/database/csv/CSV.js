@@ -14,6 +14,9 @@ import {
   handleSelectExport
 } from "../../../controllers/CSV.controller";
 
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation';
+
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -29,8 +32,8 @@ export default class extends Component {
   render() {
     if (this.state.columns.length > 0) {
       return (
-        <div className="height-full container-fluid main-opacity">
-          <div className="row justify-content-md-center">
+        <div className="container-fluid opacity" style={{ backgroundColor: "white" }}>
+          <div className="row justify-content-md-center" style={{ marginTop: "10px" }}>
             <div className="col-md-11">
               <ToolkitProvider
                 keyField="ID"
@@ -75,14 +78,17 @@ export default class extends Component {
 const AllExportCSV = props => {
   return (
     <div>
-      <button
+      <Fab
         className="btn btn-success"
         onClick={() => {
           handleAllExport(props);
         }}
-      >
+        variant="extended"
+        color="primary"
+        aria-label="Add" >
+        <NavigationIcon />
         全部資料匯出成CSV
-      </button>
+      </Fab>
     </div>
   );
 };
@@ -90,14 +96,17 @@ const AllExportCSV = props => {
 const SelectExportCSV = props => {
   return (
     <div>
-      <button
+      <Fab
         className="btn btn-success"
         onClick={() => {
           handleSelectExport(props);
         }}
-      >
+        variant="extended"
+        color="primary"
+        aria-label="Add" >
+        <NavigationIcon />
         選取資料匯出成CSV
-      </button>
+      </Fab>
     </div>
   );
 };

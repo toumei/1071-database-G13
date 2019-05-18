@@ -23,8 +23,8 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="height-full container-fluid main-opacity">
-        <div className="row">
+      <div className="container-fluid opacity" style={{ backgroundColor: "white" }}>
+        <div className="row" style={{ marginTop: "10px" }}>
           <div className="col-md-2">
             <AnalysisCard
               path={this.props.location.pathname}

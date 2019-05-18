@@ -75,7 +75,7 @@ export default class extends Component {
           search
         >
           {props => (
-            <div className="col-md-10">
+            <div className="col-md-12" style={{ backgroundColor: "white" }}>
               <CrudTableNav
                 columns={this.state.formColumns}
                 editable={this.state.editable}
@@ -83,6 +83,7 @@ export default class extends Component {
                 handleDeleteItem={(bindTableNav, row, info) =>
                   handleDeleteItem(this, bindTableNav, row, info)
                 }
+                toggleDrawer={() => this.props.toggleDrawer()}
                 handleEditable={() => handleEditable(this)}
                 handleGetSelect={() => handleGetSelect(this)}
                 handleInfo={info => handleInfo(this, info)}
@@ -170,7 +171,7 @@ export default class extends Component {
                               newColumns[i].column_name + "Edit"
                             ).value = this.state.itemData[0][
                               newColumns[i].column_name
-                            ];
+                              ];
                           }
                         }
                       }}

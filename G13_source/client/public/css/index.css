@@ -160,18 +160,6 @@ body::-webkit-scrollbar {
   animation-fill-mode: forwards;
 }
 
-.main-opacity {
-  opacity: 0;
-  -webkit-animation: fade-in 1s linear;
-  animation: fade-in 1s linear;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-}
-
-.main-delay {
-  /* animation-delay: 4.8s; */
-}
-
 .main-iframe-delay {
   animation-delay: 0.5s;
 }
