@@ -16,6 +16,7 @@ export const CustoModal = ({
       tabIndex="-1"
       role="dialog"
       aria-hidden="true"
+      data-backdrop="false"
     >
       <div className={"modal-dialog " + modalStyle} role="document">
         <div className="modal-content">

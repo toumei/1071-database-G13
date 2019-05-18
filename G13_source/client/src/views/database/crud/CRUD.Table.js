@@ -253,7 +253,6 @@ export default class extends Component {
                     </button>
                   </div>
                 }
-                modalStyle=""
               />
             </div>
           )}

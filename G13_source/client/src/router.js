@@ -50,7 +50,7 @@ export const Router = () => (
 
 // App Router
 export const Main = () => (
-  <div id="main" style={{ zIndex: "0" }}>
+  <div id="main" style={{ zIndex: "50" }}>
     <Route exact path="/" component={Index} />
     <Route path="/database/analysis" component={Analysis} />
     <Route path="/database/crud" component={CRUD} />

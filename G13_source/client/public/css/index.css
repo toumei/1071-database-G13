@@ -1,3 +1,12 @@
+/* common */
+.opacity {
+  opacity: 0;
+  -webkit-animation: fade-in 1s linear;
+  animation: fade-in 1s linear;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+
 /* root loading animation */
 .loading-background {
   position: fixed;
@@ -68,14 +77,6 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-}
-
-.opacity {
-  opacity: 0;
-  -webkit-animation: fade-in 1s linear;
-  animation: fade-in 1s linear;
-  animation-fill-mode: forwards;
-  -webkit-animation-fill-mode: forwards;
 }
 
 .jump {
@@ -212,44 +213,6 @@
   }
 }
 
-/* 1 */
-
-.loading {
-  position: fixed;
-  width: 100%;
-}
-
-.main-iframe-delay {
-  animation-delay: 0.5s;
-}
-
-/* animation */
-
-.height-full {
-  height: 100%;
-}
-
-.overflow {
-  overflow-y: hidden;
-}
-
-.react-bootstrap-table {
-  overflow-x: auto !important;
-}
-
-/* 隱藏滾動條 */
-body::-webkit-scrollbar {
-  width: 0 !important;
-}
-
-.react-bootstrap-table::-webkit-scrollbar {
-  height: 0 !important;
-}
-
-.analysisNone {
-  display: none !important;
-}
-
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -290,6 +253,42 @@ body::-webkit-scrollbar {
   100% {
     transform: translateY(0);
   }
+}
+
+/* other */
+
+.loading {
+  position: fixed;
+  width: 100%;
+}
+
+.main-iframe-delay {
+  animation-delay: 0.5s;
+}
+
+.height-full {
+  height: 100%;
+}
+
+.overflow {
+  /* overflow-y: hidden; */
+}
+
+.react-bootstrap-table {
+  overflow-x: auto !important;
+}
+
+/* 隱藏滾動條 */
+body::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.react-bootstrap-table::-webkit-scrollbar {
+  height: 0 !important;
+}
+
+.analysisNone {
+  display: none !important;
 }
 
 @media screen and (max-width: 575.98px) {
