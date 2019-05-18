@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import LockIcon from '@material-ui/icons/LockOutlined';
 
-import "./Login.css"
+import "./Login.css";
 
 export default class extends Component {
   constructor(props) {
@@ -177,7 +177,7 @@ export default class extends Component {
     //     console.error(err.message);
     //   });
   }
-  
+
   render() {
     return (
       <div className="height-full login d-flex flex-column justify-content-center align-items-center opacity">
