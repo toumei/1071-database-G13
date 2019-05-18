@@ -32,7 +32,7 @@ export default class extends Component {
   render() {
     if (this.state.columns.length > 0) {
       return (
-        <div className="container-fluid opacity" style={{ backgroundColor: "white" }}>
+        <div className="container-fluid opacity animation-one" style={{ backgroundColor: "white" }}>
           <div className="row justify-content-md-center" style={{ marginTop: "10px" }}>
             <div className="col-md-11">
               <ToolkitProvider

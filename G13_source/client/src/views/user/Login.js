@@ -180,7 +180,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="height-full login d-flex flex-column justify-content-center align-items-center opacity">
+      <div className="height-full login d-flex flex-column justify-content-center align-items-center opacity animation-one">
         <form className="loginForm">
           <div className="d-flex flex-column align-items-center" style={{ height: "120px" }}>
             <Avatar style={{ backgroundColor: "#FF4081", height: "80px", width: "80px" }}>

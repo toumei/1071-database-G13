@@ -23,7 +23,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="container-fluid opacity" style={{ backgroundColor: "white" }}>
+      <div className="container-fluid opacity animation-one" style={{ backgroundColor: "white" }}>
         <div className="row" style={{ marginTop: "10px" }}>
           <div className="col-md-2">
             <AnalysisCard

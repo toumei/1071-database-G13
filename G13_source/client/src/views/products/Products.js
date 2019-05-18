@@ -72,7 +72,7 @@ export default class Products extends Component {
 
   render() {
     return (
-      <div className="container opacity">
+      <div className="container opacity animation-one">
         <BootstrapTable
           striped
           hover

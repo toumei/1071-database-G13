@@ -124,7 +124,7 @@ export default class extends Component {
   render() {
     // if (this.state.matter.length > 0) {
     return (
-      <div id="malfunction1" className="d-flex flex-column justify-content-center align-items-center opacity" style={{ backgroundColor: "white" }}>
+      <div id="malfunction1" className="d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
         <form id="malfunctionForm">
           <Name />
           <Room />

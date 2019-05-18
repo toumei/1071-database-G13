@@ -6,57 +6,28 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+  <meta name="theme-color" content="#000000" />
   <link rel="shortcut icon" href="%PUBLIC_URL%/img/favicon.ico" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
   <!-- fontawesome CSS -->
-
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
     integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous" />
 
   <!-- Bootstrap CSS -->
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
 
-  <meta name="theme-color" content="#000000" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <script>
-    function onload() {
-      setTimeout(overflow, 4800);
-      onresize();
-    }
-
-    function onresize() {
-      var width = document.documentElement.clientWidth;
-      var height = document.documentElement.clientHeight;
-      if (width > 767.98) {
-        document.getElementById("progress").style.marginTop = (height - 156) / 2 + 'px';
-        document.getElementById("main").style.height = height - 56 + 'px';
-      } else if (width > 575.98) {
-        document.getElementById("progress").style.marginTop = (height - 149.4) / 2 + 'px';
-        document.getElementById("main").style.height = height - 49.4 + 'px';
-      } else {
-        document.getElementById("progress").style.marginTop = (height - 149.4) / 2 + 'px';
-        document.getElementById("main").style.height = height - 49.4 + 'px';
-      }
-    }
-
-    function overflow() {
-      var classVal = document.getElementById("body").getAttribute("class");
-      classVal = classVal.replace("overflow", "");
-      document.getElementById("body").setAttribute("class", classVal);
-    }
-  </script>
-
   <link rel="stylesheet" href="%PUBLIC_URL%/css/index.css" />
+  <script src="%PUBLIC_URL%/js/index.js"></script>
 </head>
 
 <body onload="onload()" onresize="onresize()" id="body" class="overflow">
-  <div class="wrg-bg"></div>
-  <div class="wrg-ring"></div>
-  <div class="wrg-hand"></div>
-  <div class="wrg-title">
+  <div class="loading-background"></div>
+  <div class="loading-ring"></div>
+  <div class="loading-hand"></div>
+  <div class="loading-title">
     <h1 class="opacity">
       <span class="jump jump-1">R</span>
       <span class="jump jump-2">e</span>
@@ -71,7 +42,7 @@
     </h1>
   </div>
 
-  <div id="root" class="wrg-main"></div>
+  <div id="root" class="loading-main"></div>
   <!-- <div id="root"></div> -->
 
   <!-- Optional JavaScript -->

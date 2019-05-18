@@ -12,7 +12,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div id="profile" className="height-full d-flex flex-column justify-content-center align-items-center opacity" style={{ backgroundColor: "white" }}>
+      <div id="profile" className="height-full d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
         <div className="tag"></div>
         <form id="profileForm">
           <div>

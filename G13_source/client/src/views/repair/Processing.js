@@ -122,7 +122,7 @@ export default class extends Component {
   render() {
     // if (this.state.malfunction.length > 0 && this.state.result.length > 0) {
     return (
-      <div id="processing" className="height-full d-flex flex-column justify-content-center align-items-center opacity" style={{ backgroundColor: "white" }}>
+      <div id="processing" className="height-full d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
         <form id="processingForm">
           <Malfunction malfunction={this.state.malfunction} />
           <Name />
