@@ -1,9 +1,4 @@
 /* common */
-html,
-body {
-  height: 100%;
-}
-
 .opacity {
   opacity: 0;
   -webkit-animation: fade-in 1s linear;
@@ -25,7 +20,6 @@ body {
   .white {
     top: 30%;
   }
-  
 }
 
 /* root loading animation */

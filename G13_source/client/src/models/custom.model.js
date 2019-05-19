@@ -92,6 +92,7 @@ export const CustomClickLink = ({ id, className, style, to, content }) => (
       }
       if (id === "pcLogout" || id === "cellLogout") {
         localStorage.removeItem("token");
+        localStorage.removeItem("role");
         const navbarLogin = document.getElementById("navbarLogin");
         let navbarLoginR = navbarLogin.getAttribute("class").replace("display-none-none", "display-block-none");
         document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
