@@ -209,6 +209,7 @@ const NavUserPC = ({ title }) => (
       </li>
       <li id="navbarLogin" className="nav-item display-block-none">
         <CustomActiveClickLink
+          id="Login"
           active={title}
           activeOptions={["登入", "登出"]}
           to="/user/login"

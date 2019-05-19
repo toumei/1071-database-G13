@@ -17,40 +17,59 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    const data = { table: "_coloption" };
-    apiRequest
-      .get("/database/List", data)
-      .then(res => {
-        const result = decrypt(res.data).filter((x, i) => x.name === "result");
-        this.setState({ result: result[0].value });
-      })
-      .catch();
-    apiRequest
-      .get("/processing/searchNum")
-      .then(res => {
-        const num1 = [];
-        const num2 = [];
-        var temp = [];
-        var temparray = [];
-        decrypt(res.data)[0].filter((x, i) => {
-          num1[i] = x.ID;
-          return false;
-        });
-        decrypt(res.data)[1].filter((x, i) => {
-          num2[i] = x.ID;
-          return false;
-        });
-        for (let i = 0; i < num2.length; i++) {
-          temp[num2[i]] = true;
-        }
-        for (let i = 0; i < num1.length; i++) {
-          if (!temp[num1[i]]) {
-            temparray.push({ ID: num1[i] });
+    if (localStorage.getItem("token") === null) {
+      document.title = "登入";
+      document.getElementById("Login").click();
+    } else {
+      const navbarLogin = document.getElementById("navbarLogin");
+      let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
+      document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
+      const navUserPC = document.getElementById("navUserPC");
+      let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
+      document.getElementById("navUserPC").setAttribute("class", navUserPCR);
+
+      const navbarLoginBtn = document.getElementById("navbarLoginBtn");
+      let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
+      document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
+      const navbarUserBtn = document.getElementById("navbarUserBtn");
+      let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
+      document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+
+      const data = { table: "_coloption" };
+      apiRequest
+        .get("/database/List", data)
+        .then(res => {
+          const result = decrypt(res.data).filter((x, i) => x.name === "result");
+          this.setState({ result: result[0].value });
+        })
+        .catch();
+      apiRequest
+        .get("/processing/searchNum")
+        .then(res => {
+          const num1 = [];
+          const num2 = [];
+          var temp = [];
+          var temparray = [];
+          decrypt(res.data)[0].filter((x, i) => {
+            num1[i] = x.ID;
+            return false;
+          });
+          decrypt(res.data)[1].filter((x, i) => {
+            num2[i] = x.ID;
+            return false;
+          });
+          for (let i = 0; i < num2.length; i++) {
+            temp[num2[i]] = true;
           }
-        }
-        this.setState({ malfunction: temparray });
-      })
-      .catch();
+          for (let i = 0; i < num1.length; i++) {
+            if (!temp[num1[i]]) {
+              temparray.push({ ID: num1[i] });
+            }
+          }
+          this.setState({ malfunction: temparray });
+        })
+        .catch();
+    }
   }
 
   handleClick = async () => {

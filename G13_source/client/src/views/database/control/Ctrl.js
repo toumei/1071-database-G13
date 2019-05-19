@@ -25,8 +25,27 @@ export default class extends Component {
 
   // 載入欄位與資料
   componentDidMount() {
-    postCtrlColumns(this);
-    postCtrlData(this);
+    if (localStorage.getItem("token") === null) {
+      document.title = "登入";
+      document.getElementById("Login").click();
+    } else {
+      const navbarLogin = document.getElementById("navbarLogin");
+      let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
+      document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
+      const navUserPC = document.getElementById("navUserPC");
+      let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
+      document.getElementById("navUserPC").setAttribute("class", navUserPCR);
+
+      const navbarLoginBtn = document.getElementById("navbarLoginBtn");
+      let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
+      document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
+      const navbarUserBtn = document.getElementById("navbarUserBtn");
+      let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
+      document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+
+      postCtrlColumns(this);
+      postCtrlData(this);
+    }
   }
 
   render() {
@@ -35,7 +54,7 @@ export default class extends Component {
       return (
         <div className="height-full container-fluid opacity animation-one" style={{ backgroundColor: "white" }}>
           <div className="white"></div>
-          <div className="row justify-content-center" style={{ marginTop: "10px" }}>
+          <div className="row justify-content-center">
             <div className="col-md-11">
               <CustomBootstrap
                 base={{

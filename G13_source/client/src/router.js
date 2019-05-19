@@ -19,8 +19,6 @@ import Control from "./views/database/control/Ctrl";
 import Malfunction from "./views/repair/Malfunction";
 import Processing from "./views/repair/Processing";
 
-import Products from "./views/products/Products";
-
 import Profile from "./views/user/Profile";
 import Settings from "./views/user/Settings";
 import Login from "./views/user/Login";
@@ -58,7 +56,6 @@ export const Main = () => (
     <Route path="/database/control" component={Control} />
     <Route path="/repair/malfunction" component={Malfunction} />
     <Route path="/repair/processing" component={Processing} />
-    <Route path="/products" component={Products} />
     <Route path="/user/profile" component={Profile} />
     <Route path="/user/settings" component={Settings} />
     <Route path="/user/login" component={Login} />
