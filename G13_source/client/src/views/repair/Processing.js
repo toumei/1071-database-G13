@@ -122,8 +122,8 @@ export default class extends Component {
   render() {
     // if (this.state.malfunction.length > 0 && this.state.result.length > 0) {
     return (
-      <div id="processing" className="height-full d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
-        <form id="processingForm">
+      <div className="processing height-full d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
+        <form className="processingForm">
           <Malfunction malfunction={this.state.malfunction} />
           <Name />
           <DateTime />
@@ -131,7 +131,7 @@ export default class extends Component {
           <Detail />
           <div className="d-flex flex-column align-items-center">
             <Button
-              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "1.9rem", lineHeight: "1.9rem" }}
+              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
               variant="outlined"
               color="secondary"
               onClick={this.handleClick}>

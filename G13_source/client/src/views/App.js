@@ -49,7 +49,7 @@ export default class extends Component {
 }
 
 const Navbar = ({ title }) => (
-  <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ zIndex: "100", boxShadow: "4px 4px 12px 4px rgba(20%,20%,40%,0.5)" }}>
+  <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
     <div className="container">
       <button
         id="navbarBtn"

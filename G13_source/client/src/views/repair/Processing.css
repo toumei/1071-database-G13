@@ -1,10 +1,10 @@
-#processing {
+.processing {
   background-image: url(./wood.jpg);
   background-size: cover;
   background-position: center;
 }
 
-#processingForm {
+.processingForm {
   background-image: url(./paper.png);
   background-size: cover;
   background-position: center;

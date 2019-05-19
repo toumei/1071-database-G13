@@ -34,6 +34,7 @@ export default class extends Component {
     if (this.state.columns.length > 0) {
       return (
         <div className="height-full container-fluid opacity animation-one" style={{ backgroundColor: "white" }}>
+          <div className="white"></div>
           <div className="row justify-content-center" style={{ marginTop: "10px" }}>
             <div className="col-md-11">
               <CustomBootstrap

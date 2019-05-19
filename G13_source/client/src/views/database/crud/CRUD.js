@@ -27,6 +27,7 @@ export default class extends Component {
   render() {
     return (
       <div className="height-full container-fluid opacity animation-one" style={{ backgroundColor: "white" }}>
+        <div className="white"></div>
         <div className="row" style={{ marginTop: "10px" }}>
           <SwipeableDrawer
             open={this.state.left}

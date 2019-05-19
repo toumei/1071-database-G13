@@ -1,14 +1,20 @@
-#malfunction1 {
+.malfunction {
   background-image: url(./wood.jpg);
   background-size: cover;
   background-position: center;
 }
 
-#malfunctionForm {
+@media (min-height: 830px) {
+  .malfunction {
+    height: 100%;
+  }
+}
+
+.malfunctionForm {
   background-image: url(./paper.png);
   background-size: cover;
   background-position: center;
-  margin-top: 6px;
+  margin-top: 5px;
   width: 450px;
   padding: 50px 50px 40px 50px;
 }

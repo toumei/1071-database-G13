@@ -124,8 +124,8 @@ export default class extends Component {
   render() {
     // if (this.state.matter.length > 0) {
     return (
-      <div id="malfunction1" className="height-full d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
-        <form id="malfunctionForm">
+      <div className="malfunction d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
+        <form className="malfunctionForm">
           <Name />
           <Room />
           <Bed bind={this} />
@@ -135,7 +135,7 @@ export default class extends Component {
           <Desc />
           <div className="d-flex flex-column align-items-center">
             <Button
-              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "1.9rem", lineHeight: "1.9rem" }}
+              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
               variant="outlined"
               color="secondary"
               onClick={this.handleClick}>
