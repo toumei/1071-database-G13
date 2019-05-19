@@ -1,6 +1,4 @@
 import apiRequest from "../api/apiRequest";
-
-// model
 import { CtrlMsg } from "../models/log.model";
 import { decrypt, lowerJSONKey } from "../models/crypt.model";
 import { columnsType, CtrlColumns } from "../models/Ctrl.model";
@@ -44,7 +42,7 @@ export const postCtrlData = bind => {
             x.value = JSON.stringify(x.value);
           }
           return x.name !== "ID";
-        })
+        }),
       });
     })
     .catch();

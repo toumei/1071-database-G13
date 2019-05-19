@@ -1,5 +1,4 @@
 const crypto = require("crypto");
-
 const aes = "aes-256-cbc";
 const pwd = "ResNetCMMSResNetCMMSResNetCMMS13";
 const iv = "107-database-G13";

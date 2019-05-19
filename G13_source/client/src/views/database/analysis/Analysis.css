@@ -1,0 +1,19 @@
+.Analysis {
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.Analysis::-webkit-scrollbar {
+  height: 0 !important;
+  width: 0 !important;
+}
+
+.AnalysisMain {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.AnalysisMain::-webkit-scrollbar {
+  height: 0 !important;
+  width: 0 !important;
+}

@@ -1,20 +1,79 @@
 .malfunction {
   background-image: url(./wood.jpg);
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
+  overflow-y: scroll;
 }
 
-@media (min-height: 830px) {
-  .malfunction {
-    height: 100%;
-  }
+.malfunction::-webkit-scrollbar {
+  height: 0 !important;
+  width: 0 !important;
 }
 
 .malfunctionForm {
   background-image: url(./paper.png);
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
-  margin-top: 5px;
-  width: 450px;
-  padding: 50px 50px 40px 50px;
+  padding: 15vmin 12vmin 7vmin 7vmin;
+}
+
+.text-field-malfunction {
+  width: 100%;
+}
+
+.field-margin-malfunction {
+  margin-bottom: 1vh;
+}
+
+.text-field-malfunction label {
+  font-size: 3vmin;
+}
+
+.text-field-malfunction legend {
+  width: 0px;
+}
+
+.text-field-malfunction input {
+  font-size: 3vmin;
+  line-height: 3vmin;
+}
+
+.text-field-malfunction select {
+  font-size: 3vmin;
+  line-height: 3vmin;
+}
+
+.text-field-malfunction textarea {
+  font-size: 3vmin;
+  line-height: 3vmin;
+}
+
+@media (max-width: 575.98px) {
+  .malfunctionForm {
+    width: 95vw;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .malfunctionForm {
+    width: 85vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .malfunctionForm {
+    width: 75vw;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .malfunctionForm {
+    width: 65vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .malfunctionForm {
+    width: 55vw;
+  }
 }

@@ -10,6 +10,12 @@
   background-image: url(./profile.jpg);
   background-size: cover;
   background-position: center;
+  overflow-y: scroll;
+}
+
+.profile::-webkit-scrollbar {
+  height: 0 !important;
+  width: 0 !important;
 }
 
 .profileForm {

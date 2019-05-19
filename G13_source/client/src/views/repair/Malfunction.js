@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-
-// controller
 import apiRequest from "../../api/apiRequest";
-
-// model
+import jwt_decode from "jwt-decode";
 import { decrypt } from "../../models/crypt.model";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -18,11 +15,12 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem("token") === null) {
+    var token = localStorage.getItem("token");
+    if (token === null) {
       document.title = "登入";
       document.getElementById("Login").click();
     } else {
-      if (localStorage.getItem("role") === "2") {
+      if (jwt_decode(token)["role"] === "admin") {
         document.title = "ResNetCMMS";
         document.getElementById("index").click();
       } else {
@@ -146,9 +144,8 @@ export default class extends Component {
   };
 
   render() {
-    // if (this.state.matter.length > 0) {
     return (
-      <div className="malfunction d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
+      <div className="malfunction d-flex flex-column align-items-center opacity animation-one">
         <form className="malfunctionForm">
           <Name />
           <Room />
@@ -159,7 +156,7 @@ export default class extends Component {
           <Desc />
           <div className="d-flex flex-column align-items-center">
             <Button
-              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
+              style={{ width: "12vmin", height: "12vmin", borderRadius: "100%", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
               variant="outlined"
               color="secondary"
               onClick={this.handleClick}>
@@ -169,15 +166,13 @@ export default class extends Component {
         </form>
       </div>
     );
-    // }
-    // return null;
   }
 }
 
 const Name = () => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-malfunction"
       id="name"
       label="申請者姓名"
       margin="normal"
@@ -187,9 +182,9 @@ const Name = () => (
 );
 
 const Room = () => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-malfunction"
       id="room"
       label="寢室編號"
       margin="normal"
@@ -221,16 +216,17 @@ const BedOption = ({ bind }) => {
 };
 
 const Bed = ({ bind }) => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "54%" }}
+      className="text-field-malfunction"
+      style={{ width: "33.7vw" }}
       id="bed"
       label="寢室床號"
       margin="normal"
       variant="outlined"
     />
     <button
-      style={{ marginTop: "15px", height: "55.4px", borderRadius: "0px" }}
+      style={{ margin: "15px 0 0 0", padding: "18.5px 14px", borderRadius: "0px", outline: "none", fontSize: "3vmin", lineHeight: "3vmin" }}
       type="button"
       className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
       data-toggle="dropdown"
@@ -252,9 +248,8 @@ const Bed = ({ bind }) => (
       <BedOption bind={bind} />
     </div>
     <Button
-      style={{ marginTop: "15px", height: "55.4px", borderRadius: "0px" }}
+      style={{ margin: "15px 0 0 0", padding: "18.5px 14px", borderRadius: "0px", outline: "none", fontSize: "3vmin", lineHeight: "3vmin" }}
       variant="outlined"
-      className="btn btn-outline-secondary"
       id="add_edit"
       onClick={e => {
         if (e.target.innerHTML === "新增") {
@@ -312,9 +307,8 @@ const Bed = ({ bind }) => (
       新增
     </Button>
     <Button
-      style={{ marginTop: "15px", height: "55.4px", borderRadius: "0px 5px 5px 0px" }}
+      style={{ margin: "15px 0 0 0", padding: "18.5px 14px", borderRadius: "0px 5px 5px 0px", outline: "none", fontSize: "3vmin", lineHeight: "3vmin" }}
       variant="outlined"
-      className="btn btn-outline-secondary"
       id="clear_delete"
       onClick={e => {
         const bed = document.getElementById("bed");
@@ -331,16 +325,17 @@ const Bed = ({ bind }) => (
           document.getElementById("add_edit").innerHTML = "新增";
           document.getElementById("clear_delete").innerHTML = "清除";
         }
-      }}>
+      }}
+    >
       清除
-      </Button>
+    </Button>
   </div>
 );
 
 const Time = () => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-malfunction"
       id="time"
       label="方便維修時段"
       margin="normal"
@@ -350,9 +345,9 @@ const Time = () => (
 );
 
 const Exc = () => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-malfunction"
       id="exc"
       label="例外時段"
       margin="normal"
@@ -374,9 +369,9 @@ const MatterOption = ({ matter }) => {
 };
 
 const Matter = ({ matter }) => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-malfunction"
       id="matter"
       select
       label="報修事項"
@@ -393,9 +388,9 @@ const Matter = ({ matter }) => (
 );
 
 const Desc = () => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-malfunction"
       id="desc"
       label="狀況描述"
       multiline

@@ -1,6 +1,4 @@
 import React from "react";
-
-// model
 import {
   type,
   Select,

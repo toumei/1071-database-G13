@@ -1,17 +1,13 @@
 import React, { Component } from "react";
-
-// bootstrap
+import jwt_decode from "jwt-decode";
 import cellEditFactory from "react-bootstrap-table2-editor";
-
-// model
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
-
-// controller
 import {
   postCtrlData,
   postCtrlEdit,
   postCtrlColumns
 } from "../../../controllers/Ctrl.controller";
+import "./Ctrl.css";
 
 export default class extends Component {
   constructor(props) {
@@ -25,11 +21,12 @@ export default class extends Component {
 
   // 載入欄位與資料
   componentDidMount() {
-    if (localStorage.getItem("token") === null) {
+    var token = localStorage.getItem("token");
+    if (token === null) {
       document.title = "登入";
       document.getElementById("Login").click();
     } else {
-      if (localStorage.getItem("role") === "3" || localStorage.getItem("role") === "4") {
+      if (jwt_decode(token)["role"] === "worker" || jwt_decode(token)["role"] === "user") {
         document.title = "ResNetCMMS";
         document.getElementById("index").click();
       } else {
@@ -57,8 +54,7 @@ export default class extends Component {
     // 空欄位時，bootstrap table會讀取失敗
     if (this.state.columns.length > 0) {
       return (
-        <div className="height-full container-fluid opacity animation-one" style={{ backgroundColor: "white" }}>
-          <div className="white"></div>
+        <div className="Ctrl container-fluid opacity animation-one">
           <div className="row justify-content-center">
             <div className="col-md-11">
               <CustomBootstrap

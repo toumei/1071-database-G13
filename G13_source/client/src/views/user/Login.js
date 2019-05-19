@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import apiRequest from "../../api/apiRequest";
+import jwt_decode from "jwt-decode";
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -8,7 +9,6 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
 import LockIcon from '@material-ui/icons/LockOutlined';
-
 import "./Login.css";
 
 export default class extends Component {
@@ -131,7 +131,8 @@ export default class extends Component {
         .post("login", this.state)
         .then(res => {
           window.localStorage.setItem("token", res.data.token);
-          window.localStorage.setItem("role", 1);
+          var decode = jwt_decode(res.data.token);	
+          console.log(decode);
           this.sign_in();
         })
         .catch(err => {

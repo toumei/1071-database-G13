@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-// controller
 import apiRequest from "../../api/apiRequest";
-// model
+import jwt_decode from "jwt-decode";
 import { decrypt } from "../../models/crypt.model";
-
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
-import "./Processing.css"
+import "./Processing.css";
 
 export default class extends Component {
   constructor(props) {
@@ -17,11 +14,12 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem("token") === null) {
+    var token = localStorage.getItem("token");
+    if (token === null) {
       document.title = "登入";
       document.getElementById("Login").click();
     } else {
-      if (localStorage.getItem("role") === "2" || localStorage.getItem("role") === "4") {
+      if (jwt_decode(token)["role"] === "admin" || jwt_decode(token)["role"] === "user") {
         document.title = "ResNetCMMS";
         document.getElementById("index").click();
       } else {
@@ -144,9 +142,8 @@ export default class extends Component {
   };
 
   render() {
-    // if (this.state.malfunction.length > 0 && this.state.result.length > 0) {
     return (
-      <div className="processing height-full d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
+      <div className="processing d-flex flex-column align-items-center opacity animation-one">
         <form className="processingForm">
           <Malfunction malfunction={this.state.malfunction} />
           <Name />
@@ -155,7 +152,7 @@ export default class extends Component {
           <Detail />
           <div className="d-flex flex-column align-items-center">
             <Button
-              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
+              style={{ width: "12vmin", height: "12vmin", borderRadius: "100%", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
               variant="outlined"
               color="secondary"
               onClick={this.handleClick}>
@@ -165,8 +162,6 @@ export default class extends Component {
         </form>
       </div>
     );
-    // }
-    // return null;
   }
 }
 
@@ -183,9 +178,9 @@ const MalfunctionOption = ({ malfunction }) => {
 };
 
 const Malfunction = ({ malfunction }) => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-processing"
       id="malfunction"
       select
       label="報修單"
@@ -202,9 +197,9 @@ const Malfunction = ({ malfunction }) => (
 );
 
 const Name = () => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-processing"
       id="name"
       label="員工姓名"
       margin="normal"
@@ -223,9 +218,9 @@ const DateTime = () => {
     -2
   )}`;
   return (
-    <div>
+    <div className="field-margin-processing">
       <TextField
-        style={{ width: "100%" }}
+        className="text-field-processing"
         id="date"
         label="維修日期"
         margin="normal"
@@ -250,9 +245,9 @@ const ResultOption = ({ result }) => {
 };
 
 const Result = ({ result }) => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-processing"
       id="result"
       select
       label="維修結果"
@@ -269,9 +264,9 @@ const Result = ({ result }) => (
 );
 
 const Detail = () => (
-  <div>
+  <div className="field-margin-processing">
     <TextField
-      style={{ width: "100%" }}
+      className="text-field-processing"
       id="detail"
       label="處裡內容"
       multiline

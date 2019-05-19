@@ -1,9 +1,5 @@
 import React, { Component } from "react";
-
-// chart
 import { Bubble } from "react-chartjs-2";
-
-// controller
 import { postAnalysisCabinetData } from "../../../controllers/Analysis.cabinet.controller";
 
 export default class extends Component {
@@ -80,7 +76,7 @@ export default class extends Component {
               type: "category",
               labels: [],
               ticks: {
-                callback: function(value, index, values) {
+                callback: function (value, index, values) {
                   if (value === 0) {
                     return "交換器";
                   }
@@ -104,7 +100,7 @@ export default class extends Component {
               ticks: {
                 stepSize: 1,
                 min: 0,
-                callback: function(value, index, values) {
+                callback: function (value, index, values) {
                   if (value === 0) {
                     return "機櫃";
                   }

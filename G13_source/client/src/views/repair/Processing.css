@@ -1,21 +1,79 @@
 .processing {
   background-image: url(./wood.jpg);
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
+  overflow-y: scroll;
+}
+
+.processing::-webkit-scrollbar {
+  height: 0 !important;
+  width: 0 !important;
 }
 
 .processingForm {
   background-image: url(./paper.png);
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: center;
-  margin-top: 5px;
-  width: 450px;
-  padding: 70px 50px 50px 50px;
+  padding: 15vmin 12vmin 7vmin 7vmin;
 }
 
-@media screen and (max-width: 575.98px) {
+.text-field-processing {
+  width: 100%;
+}
+
+.field-margin-processing {
+  margin-bottom: 1vh;
+}
+
+.text-field-processing label {
+  font-size: 3vmin;
+}
+
+.text-field-processing legend {
+  width: 0px;
+}
+
+.text-field-processing input {
+  font-size: 3vmin;
+  line-height: 3vmin;
+}
+
+.text-field-processing select {
+  font-size: 3vmin;
+  line-height: 3vmin;
+}
+
+.text-field-processing textarea {
+  font-size: 3vmin;
+  line-height: 3vmin;
+}
+
+@media (max-width: 575.98px) {
   .processingForm {
-    margin-top: 56px;
+    width: 95vw;
   }
-  
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .processingForm {
+    width: 85vw;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .processingForm {
+    width: 75vw;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .processingForm {
+    width: 65vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .processingForm {
+    width: 55vw;
+  }
 }

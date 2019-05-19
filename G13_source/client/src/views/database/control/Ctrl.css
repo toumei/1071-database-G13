@@ -1,0 +1,9 @@
+.Ctrl {
+  background-color: white;
+  overflow-y: scroll;
+}
+
+.Ctrl::-webkit-scrollbar {
+  height: 0 !important;
+  width: 0 !important;
+}

@@ -1,4 +1,3 @@
-// model
 import { customColumns } from "./react-bootstrap.model";
 
 export const CrudTableMenuColumns = bind => [

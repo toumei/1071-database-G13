@@ -1,6 +1,4 @@
 import apiRequest from "../api/apiRequest";
-
-// model
 import { decrypt } from "../models/crypt.model";
 
 export const postAnalysisCabinetData = bind => {

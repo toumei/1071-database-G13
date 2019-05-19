@@ -1,6 +1,4 @@
 import apiRequest from "../api/apiRequest";
-
-// model
 import { CSVMsg } from "../models/log.model";
 import { decrypt } from "../models/crypt.model";
 import { CSVColumns, CSVColumnsList } from "../models/CSV.model";

@@ -1,4 +1,3 @@
-// model
 import { customColumns, columnsWidth } from "./react-bootstrap.model";
 
 export const CSVColumns = elm => {

@@ -1,19 +1,13 @@
 import React, { Component } from "react";
-
 import MenuIcon from '@material-ui/icons/Menu';
-
 import { Main } from "../router";
-
 import user from "./user.png";
 import "./App.css"
-
-// model
 import {
   CustomClickLink,
   CustomActiveClickLink,
   CustomActiveDropdownClickLink
 } from "../models/custom.model";
-
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 export default class extends Component {

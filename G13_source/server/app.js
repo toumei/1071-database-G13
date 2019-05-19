@@ -16,7 +16,7 @@ const aclConfig = require("./config/acl");
 var passport = require("passport");
 const expressJwt = require("express-jwt");
 const jwtConfig = require("./config/passport").JWT;
-// API
+// API Security
 var moment = require("moment");
 const cryptModel = require("./utils/crypt");
 
@@ -77,19 +77,19 @@ app.use(function(req, res, next) {
 });
 
 // set jwt auth
-// app.use(
-//   expressJwt({ secret: jwtConfig.secretOrKey }).unless({
-//     path: ["/api/", "/api/login", "/api/sigup"]
-//   })
-// );
+app.use(
+  expressJwt({ secret: jwtConfig.secretOrKey }).unless({
+    path: ["/api/", "/api/login", "/api/sigup"]
+  })
+);
 
 // set acl auth
-// app.use(acl.authorize.unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
+app.use(acl.authorize.unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
 
 var nonceArr = {};
 var clearTime = moment().unix();
 app.use(function(req, res, next) {
-  console.log(nonceArr);
+  console.log("nonceNum: " + Object.keys(nonceArr).length);
   // clear nonce
   if (moment().unix() - clearTime > 60) {
     clearTime = moment().unix();

@@ -1,28 +1,21 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
 import App from "./views/App";
 import Error from "./views/Error";
-
 import Index from "./views/index/Index";
-
 import Analysis from "./views/database/analysis/Analysis";
 import Repair from "./views/database/analysis/Analysis.repair";
 import MalfunctionMatter from "./views/database/analysis/Analysis.malfunctionMatter";
 import Cabinet from "./views/database/analysis/Analysis.cabinet";
 import ProcessingResult from "./views/database/analysis/Analysis.processingResult";
-
 import CRUD from "./views/database/crud/CRUD";
 import CSV from "./views/database/csv/CSV";
 import Control from "./views/database/control/Ctrl";
-
 import Malfunction from "./views/repair/Malfunction";
 import Processing from "./views/repair/Processing";
-
 import Profile from "./views/user/Profile";
 import Settings from "./views/user/Settings";
 import Login from "./views/user/Login";
-
 import "./router.css";
 
 // 全部router都要在此先註冊

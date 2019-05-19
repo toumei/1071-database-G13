@@ -1,12 +1,9 @@
-// model
 import { decrypt, lowerJSONKey } from "../models/crypt.model";
 import {
   CrudTableColumns,
   CrudTableDeleteColumns,
   CrudTableModeColumns
 } from "../models/CRUD.Table.model";
-
-// controller
 import apiRequest from "../api/apiRequest";
 
 // table nav add

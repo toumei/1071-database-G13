@@ -1,13 +1,9 @@
 import React, { Component } from "react";
-
-// router
+import jwt_decode from "jwt-decode";
 import { AnalysisMain } from "../../../router";
-
-// model
 import { CustomActiveBtnLink } from "../../../models/custom.model";
-
-// controller
 import { postAnalysisData } from "../../../controllers/Analysis.controller";
+import "./Analysis.css";
 
 export default class extends Component {
   constructor(props) {
@@ -18,11 +14,12 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem("token") === null) {
+    var token = localStorage.getItem("token");
+    if (token === null) {
       document.title = "登入";
       document.getElementById("Login").click();
     } else {
-      if (localStorage.getItem("role") === "3" || localStorage.getItem("role") === "4") {
+      if (jwt_decode(token)["role"] === "worker" || jwt_decode(token)["role"] === "user") {
         document.title = "ResNetCMMS";
         document.getElementById("index").click();
       } else {
@@ -47,7 +44,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="height-full container-fluid opacity animation-one" style={{ backgroundColor: "white" }}>
+      <div className="Analysis container-fluid opacity animation-one">
         <div className="row">
           <div className="col-md-2">
             <AnalysisCard
@@ -55,7 +52,7 @@ export default class extends Component {
               count={this.state.count}
             />
           </div>
-          <div className="col-md-10" style={{ width: "100%", overflow: "hidden", overflowX: "auto !important;" }}>
+          <div className="AnalysisMain col-md-10">
             <AnalysisMain />
           </div>
         </div>

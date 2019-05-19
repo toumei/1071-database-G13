@@ -10,6 +10,8 @@
     "chart.js": "^2.7.3",
     "http-proxy-middleware": "^0.19.1",
     "jquery": "^3.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
     "react": "^16.6.3",
     "react-bootstrap": "^0.32.4",
     "react-bootstrap-table": "^4.3.1",

@@ -1,6 +1,4 @@
 import apiRequest from "../api/apiRequest";
-
-// model
 import { decrypt, lowerJSONKey } from "../models/crypt.model";
 import { CrudTableMenuData } from "../models/CRUD.TableMenu.model";
 

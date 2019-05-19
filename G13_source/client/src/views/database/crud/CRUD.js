@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-
-// view
+import jwt_decode from "jwt-decode";
 import CrudTable from "./CRUD.Table";
 import CrudTableMenu from "./CRUD.TableMenu";
-
-// controller
 import { handleChangeTable } from "../../../controllers/CRUD.controller";
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import "./CRUD.css";
 
 export default class extends Component {
   constructor(props) {
@@ -20,16 +18,17 @@ export default class extends Component {
 
   toggleDrawer = (side, open) => () => {
     this.setState({
-      [side]: open,
+      [side]: open
     });
   };
 
   componentDidMount() {
-    if (localStorage.getItem("token") === null) {
+    var token = localStorage.getItem("token");
+    if (token === null) {
       document.title = "登入";
       document.getElementById("Login").click();
     } else {
-      if (localStorage.getItem("role") === "3" || localStorage.getItem("role") === "4") {
+      if (jwt_decode(token)["role"] === "worker" || jwt_decode(token)["role"] === "user") {
         document.title = "ResNetCMMS";
         document.getElementById("index").click();
       } else {
@@ -52,8 +51,7 @@ export default class extends Component {
 
   render() {
     return (
-      <div className="height-full container-fluid opacity animation-one" style={{ backgroundColor: "white" }}>
-        <div className="white"></div>
+      <div className="CRUD container-fluid opacity animation-one">
         <div className="row">
           <SwipeableDrawer
             open={this.state.left}

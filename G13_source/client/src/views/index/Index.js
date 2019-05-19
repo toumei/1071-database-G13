@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-
-// iframe
 import Iframe from "react-iframe";
 
 export default class extends Component {
@@ -33,6 +31,13 @@ export default class extends Component {
         <Iframe
           url="https://docs.google.com/forms/d/e/1FAIpQLSeEu9eCnpZK24Vec-SOCQnKJy5VqsjeeLrgepmtDu6XiThFyg/viewform"
           height="100%"
+          width="100%"
+          frameborder="no"
+          border="0"
+          marginwidth="0"
+          marginheight="0"
+          scrolling="no"
+          allowtransparency="yes"
           position="relative"
         />
       </div>
