@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Tag from "./tag.png";
 
 import "./Profile.css";
 
@@ -33,9 +34,11 @@ export default class extends Component {
 
   render() {
     return (
-      <div id="profile" className="height-full d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
-        <div className="tag"></div>
-        <form id="profileForm">
+      <div className="profile height-full d-flex flex-column justify-content-center align-items-center opacity animation-one">
+        <form className="profileForm">
+          <div className="d-flex flex-column align-items-center">
+            <img src={Tag} width="300px" height="300px" alt="tag" />
+          </div>
           <div>
             <TextField
               style={{ width: "100%" }}
@@ -64,6 +67,7 @@ export default class extends Component {
           </div>
           <div>
             <TextField
+              style={{ width: "100%" }}
               id="password"
               label="重新設定密碼"
               type="password"
@@ -73,6 +77,7 @@ export default class extends Component {
           </div>
           <div>
             <TextField
+              style={{ width: "100%" }}
               id="password2"
               label="二次確認密碼"
               type="password"

@@ -130,9 +130,8 @@ export default class extends Component {
       apiRequest
         .post("login", this.state)
         .then(res => {
-          console.log(res.data);
           window.localStorage.setItem("token", res.data.token);
-          window.localStorage.setItem("role", 4);
+          window.localStorage.setItem("role", 1);
           this.sign_in();
         })
         .catch(err => {

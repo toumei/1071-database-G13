@@ -23,6 +23,8 @@ import Profile from "./views/user/Profile";
 import Settings from "./views/user/Settings";
 import Login from "./views/user/Login";
 
+import "./router.css";
+
 // 全部router都要在此先註冊
 export const Router = () => (
   <BrowserRouter>
@@ -64,7 +66,7 @@ export const Main = () => (
 
 // Analysis Router
 export const AnalysisMain = () => (
-  <div>
+  <div className="analysisMain">
     <Route path="/database/analysis/repair" component={Repair} />
     <Route path="/database/analysis/cabinet" component={Cabinet} />
     <Route path="/database/analysis/malfunctionMatter" component={MalfunctionMatter} />

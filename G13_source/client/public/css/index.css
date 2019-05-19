@@ -286,7 +286,7 @@
 }
 
 .overflow {
-  /* overflow-y: hidden; */
+  overflow-y: hidden;
 }
 
 .react-bootstrap-table {

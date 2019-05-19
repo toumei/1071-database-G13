@@ -55,7 +55,7 @@ export default class extends Component {
               count={this.state.count}
             />
           </div>
-          <div className="col-md-10">
+          <div className="col-md-10" style={{ width: "100%", overflow: "hidden", overflowX: "auto !important;" }}>
             <AnalysisMain />
           </div>
         </div>
@@ -66,7 +66,7 @@ export default class extends Component {
 
 const AnalysisCard = ({ path, count }) => (
   <div className="row">
-    <div className="card text-center bg-primary text-white mb-3 col-3 col-md-12">
+    <div className="card text-center bg-primary text-white mb-3 col-3 col-md-12" style={{ padding: "0" }}>
       <div className="card-body">
         <h3 className="analysisBlock">報修/維修</h3>
         <h3 className="analysisBlock">{count[0] + "/" + count[1]}</h3>
@@ -77,7 +77,7 @@ const AnalysisCard = ({ path, count }) => (
       </div>
     </div>
 
-    <div className="card text-center bg-warning text-white mb-3 col-3 col-md-12">
+    <div className="card text-center bg-warning text-white mb-3 col-3 col-md-12" style={{ padding: "0" }}>
       <div className="card-body">
         <h3 className="analysisBlock">報修事項</h3>
         <h3 className="analysisBlock">{count[2]}</h3>
@@ -92,7 +92,7 @@ const AnalysisCard = ({ path, count }) => (
       </div>
     </div>
 
-    <div className="card text-center bg-success text-white mb-3 col-3 col-md-12">
+    <div className="card text-center bg-success text-white mb-3 col-3 col-md-12" style={{ padding: "0" }}>
       <div className="card-body">
         <h3 className="analysisBlock">維修結果</h3>
         <h3 className="analysisBlock">{count[3]}</h3>
@@ -107,7 +107,7 @@ const AnalysisCard = ({ path, count }) => (
       </div>
     </div>
 
-    <div className="card text-center bg-danger text-white mb-3 col-3 col-md-12">
+    <div className="card text-center bg-danger text-white mb-3 col-3 col-md-12" style={{ padding: "0" }}>
       <div className="card-body">
         <h3 className="analysisBlock">機櫃/交換器</h3>
         <h3 className="analysisBlock">{count[4] + "/" + count[5]}</h3>
