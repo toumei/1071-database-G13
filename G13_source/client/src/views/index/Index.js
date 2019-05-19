@@ -22,6 +22,8 @@ export default class extends Component {
       const navbarUserBtn = document.getElementById("navbarUserBtn");
       let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
       document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+
+      document.getElementById("userName").innerHTML = localStorage.getItem("name");
     }
   }
 

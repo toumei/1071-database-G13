@@ -25,40 +25,26 @@ export default class extends Component {
         document.getElementById("index").click();
       } else {
         const navbarLogin = document.getElementById("navbarLogin");
-        let navbarLoginR = navbarLogin
-          .getAttribute("class")
-          .replace("display-block-none", "display-none-none");
-        document
-          .getElementById("navbarLogin")
-          .setAttribute("class", navbarLoginR);
+        let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
+        document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
         const navUserPC = document.getElementById("navUserPC");
-        let navUserPCR = navUserPC
-          .getAttribute("class")
-          .replace("display-none-none", "display-block-none");
+        let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
         document.getElementById("navUserPC").setAttribute("class", navUserPCR);
 
         const navbarLoginBtn = document.getElementById("navbarLoginBtn");
-        let navbarLoginBtnR = navbarLoginBtn
-          .getAttribute("class")
-          .replace("display-none-block", "display-none-none");
-        document
-          .getElementById("navbarLoginBtn")
-          .setAttribute("class", navbarLoginBtnR);
+        let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
+        document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
         const navbarUserBtn = document.getElementById("navbarUserBtn");
-        let navbarUserBtnR = navbarUserBtn
-          .getAttribute("class")
-          .replace("display-none-none", "display-none-block");
-        document
-          .getElementById("navbarUserBtn")
-          .setAttribute("class", navbarUserBtnR);
+        let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
+        document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+
+        document.getElementById("userName").innerHTML = localStorage.getItem("name");
 
         const data = { table: "_coloption" };
         apiRequest
           .get("/database/List", data)
           .then(res => {
-            const matter = decrypt(res.data).filter(
-              (x, i) => x.name === "matter"
-            );
+            const matter = decrypt(res.data).filter((x, i) => x.name === "matter");
             this.setState({ matter: matter[0].value });
           })
           .catch();
@@ -85,7 +71,7 @@ export default class extends Component {
       await apiRequest
         .get("/malfunction/searchID", {
           table: "boarder",
-          name: name
+          name: name,
         })
         .then(res => {
           if (decrypt(res.data)[0] !== undefined) {
@@ -108,31 +94,26 @@ export default class extends Component {
             boarderID: boarderID,
             roomNum: room,
             matter: matter,
-            desc: desc
-          }
+            desc: desc,
+          },
         };
         apiRequest
           .post("/database/add", row)
           .then(res => {
             let malfunctionID = 0;
             decrypt(res.data).filter((x, i) => {
-              if (
-                x.boarderID === boarderID &&
-                x.roomNum === room &&
-                x.matter === matter &&
-                x.desc === desc
-              ) {
+              if (x.boarderID === boarderID && x.roomNum === room && x.matter === matter && x.desc === desc) {
                 malfunctionID = x.ID;
               }
               return false;
             });
             const rowBed = {
               table: "bed",
-              row: { malfunctionID: malfunctionID, bedNum: newBed }
+              row: { malfunctionID: malfunctionID, bedNum: newBed },
             };
             const rowTime = {
               table: "time",
-              row: { malfunctionID: malfunctionID, time: time, exc: exc }
+              row: { malfunctionID: malfunctionID, time: time, exc: exc },
             };
             apiRequest
               .post("/database/add", rowBed)
@@ -172,10 +153,20 @@ export default class extends Component {
           <Desc />
           <div className="d-flex flex-column align-items-center">
             <Button
-              style={{ width: "12vmin", height: "12vmin", borderRadius: "100%", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
+              style={{
+                width: "12vmin",
+                height: "12vmin",
+                borderRadius: "100%",
+                borderWidth: "5px",
+                borderColor: "red",
+                outline: "none",
+                fontSize: "4vmin",
+                lineHeight: "4vmin",
+              }}
               variant="outlined"
               color="secondary"
-              onClick={this.handleClick}>
+              onClick={this.handleClick}
+            >
               確定
             </Button>
           </div>
@@ -187,25 +178,13 @@ export default class extends Component {
 
 const Name = () => (
   <div className="field-margin-processing">
-    <TextField
-      className="text-field-malfunction"
-      id="name"
-      label="申請者姓名"
-      margin="normal"
-      variant="outlined"
-    />
+    <TextField className="text-field-malfunction" id="name" label="申請者姓名" margin="normal" variant="outlined" />
   </div>
 );
 
 const Room = () => (
   <div className="field-margin-processing">
-    <TextField
-      className="text-field-malfunction"
-      id="room"
-      label="寢室編號"
-      margin="normal"
-      variant="outlined"
-    />
+    <TextField className="text-field-malfunction" id="room" label="寢室編號" margin="normal" variant="outlined" />
   </div>
 );
 
@@ -222,7 +201,8 @@ const BedOption = ({ bind }) => {
           bind.clickValue = e.target.value;
           document.getElementById("add_edit").innerHTML = "修改";
           document.getElementById("clear_delete").innerHTML = "刪除";
-        }}>
+        }}
+      >
         {bind.state.bed[i].value}
       </option>
     );
@@ -241,7 +221,14 @@ const Bed = ({ bind }) => (
       variant="outlined"
     />
     <button
-      style={{ margin: "15px 0 0 0", padding: "18.5px 14px", borderRadius: "0px", outline: "none", fontSize: "3vmin", lineHeight: "3vmin" }}
+      style={{
+        margin: "15px 0 0 0",
+        padding: "18.5px 14px",
+        borderRadius: "0px",
+        outline: "none",
+        fontSize: "3vmin",
+        lineHeight: "3vmin",
+      }}
       type="button"
       className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
       data-toggle="dropdown"
@@ -256,13 +243,21 @@ const Bed = ({ bind }) => (
           document.getElementById("bed").value = e.target.value;
           document.getElementById("add_edit").innerHTML = "新增";
           document.getElementById("clear_delete").innerHTML = "清除";
-        }}>
+        }}
+      >
         請輸入床號
       </option>
       <BedOption bind={bind} />
     </div>
     <Button
-      style={{ margin: "15px 0 0 0", padding: "18.5px 14px", borderRadius: "0px", outline: "none", fontSize: "3vmin", lineHeight: "3vmin" }}
+      style={{
+        margin: "15px 0 0 0",
+        padding: "18.5px 14px",
+        borderRadius: "0px",
+        outline: "none",
+        fontSize: "3vmin",
+        lineHeight: "3vmin",
+      }}
       variant="outlined"
       id="add_edit"
       onClick={e => {
@@ -296,9 +291,7 @@ const Bed = ({ bind }) => (
               return false;
             });
             if (isSame === true) {
-              newBed = bind.state.bed.filter(
-                (x, i) => x.value !== bind.clickValue
-              );
+              newBed = bind.state.bed.filter((x, i) => x.value !== bind.clickValue);
             } else {
               newBed = bind.state.bed.filter((x, i) => {
                 if (x.value === bind.clickValue) {
@@ -316,11 +309,19 @@ const Bed = ({ bind }) => (
           document.getElementById("add_edit").innerHTML = "新增";
           document.getElementById("clear_delete").innerHTML = "清除";
         }
-      }}>
+      }}
+    >
       新增
     </Button>
     <Button
-      style={{ margin: "15px 0 0 0", padding: "18.5px 14px", borderRadius: "0px 5px 5px 0px", outline: "none", fontSize: "3vmin", lineHeight: "3vmin" }}
+      style={{
+        margin: "15px 0 0 0",
+        padding: "18.5px 14px",
+        borderRadius: "0px 5px 5px 0px",
+        outline: "none",
+        fontSize: "3vmin",
+        lineHeight: "3vmin",
+      }}
       variant="outlined"
       id="clear_delete"
       onClick={e => {
@@ -331,7 +332,7 @@ const Bed = ({ bind }) => (
         } else {
           const value_input = bed.value;
           bind.setState({
-            bed: bind.state.bed.filter((x, i) => x.value !== value_input)
+            bed: bind.state.bed.filter((x, i) => x.value !== value_input),
           });
           bed.value = "";
           bed.focus();
@@ -347,25 +348,13 @@ const Bed = ({ bind }) => (
 
 const Time = () => (
   <div className="field-margin-processing">
-    <TextField
-      className="text-field-malfunction"
-      id="time"
-      label="方便維修時段"
-      margin="normal"
-      variant="outlined"
-    />
+    <TextField className="text-field-malfunction" id="time" label="方便維修時段" margin="normal" variant="outlined" />
   </div>
 );
 
 const Exc = () => (
   <div className="field-margin-processing">
-    <TextField
-      className="text-field-malfunction"
-      id="exc"
-      label="例外時段"
-      margin="normal"
-      variant="outlined"
-    />
+    <TextField className="text-field-malfunction" id="exc" label="例外時段" margin="normal" variant="outlined" />
   </div>
 );
 
@@ -390,10 +379,11 @@ const Matter = ({ matter }) => (
       label="報修事項"
       defaultValue={matter[0].value}
       SelectProps={{
-        native: true
+        native: true,
       }}
       margin="normal"
-      variant="outlined">
+      variant="outlined"
+    >
       <MatterOption matter={matter} />
     </TextField>
   </div>

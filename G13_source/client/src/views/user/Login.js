@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import apiRequest from "../../api/apiRequest";
-import jwt_decode from "jwt-decode";
-import TextField from '@material-ui/core/TextField';
-import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
-import LockIcon from '@material-ui/icons/LockOutlined';
+import TextField from "@material-ui/core/TextField";
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import Button from "@material-ui/core/Button";
+import Avatar from "@material-ui/core/Avatar";
+import LockIcon from "@material-ui/icons/LockOutlined";
 import "./Login.css";
+import { decrypt } from "../../models/crypt.model";
+import jwt_decode from "jwt-decode";
 
 export default class extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class extends Component {
       password: "",
       idError: false,
       passwordError: false,
-      showPassword: false
+      showPassword: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,7 +36,7 @@ export default class extends Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   }
 
@@ -59,18 +60,8 @@ export default class extends Component {
     const dialog = document.getElementById("dialog");
     const dialogue = document.getElementById("dialogue");
     if (dialog.getAttribute("class").indexOf("dialogblock") === -1) {
-      document
-        .getElementById("dialog")
-        .setAttribute(
-          "class",
-          dialog.getAttribute("class").concat(" dialogblock")
-        );
-      document
-        .getElementById("dialogue")
-        .setAttribute(
-          "class",
-          dialogue.getAttribute("class").concat(" dialogblock")
-        );
+      document.getElementById("dialog").setAttribute("class", dialog.getAttribute("class").concat(" dialogblock"));
+      document.getElementById("dialogue").setAttribute("class", dialogue.getAttribute("class").concat(" dialogblock"));
     }
     dialogue.innerHTML = "請輸入學號!!";
     this.setState({ idError: false });
@@ -96,18 +87,8 @@ export default class extends Component {
     const dialog = document.getElementById("dialog");
     const dialogue = document.getElementById("dialogue");
     if (dialog.getAttribute("class").indexOf("dialogblock") === -1) {
-      document
-        .getElementById("dialog")
-        .setAttribute(
-          "class",
-          dialog.getAttribute("class").concat(" dialogblock")
-        );
-      document
-        .getElementById("dialogue")
-        .setAttribute(
-          "class",
-          dialogue.getAttribute("class").concat(" dialogblock")
-        );
+      document.getElementById("dialog").setAttribute("class", dialog.getAttribute("class").concat(" dialogblock"));
+      document.getElementById("dialogue").setAttribute("class", dialogue.getAttribute("class").concat(" dialogblock"));
     }
     dialogue.innerHTML = "請輸入密碼!!";
     this.setState({ passwordError: false });
@@ -134,18 +115,8 @@ export default class extends Component {
     const dialog = document.getElementById("dialog");
     const dialogue = document.getElementById("dialogue");
     if (dialog.getAttribute("class").indexOf("dialogblock") === -1) {
-      document
-        .getElementById("dialog")
-        .setAttribute(
-          "class",
-          dialog.getAttribute("class").concat(" dialogblock")
-        );
-      document
-        .getElementById("dialogue")
-        .setAttribute(
-          "class",
-          dialogue.getAttribute("class").concat(" dialogblock")
-        );
+      document.getElementById("dialog").setAttribute("class", dialog.getAttribute("class").concat(" dialogblock"));
+      document.getElementById("dialogue").setAttribute("class", dialogue.getAttribute("class").concat(" dialogblock"));
     }
     if (this.state.id === "" && this.state.password === "") {
       dialogue.innerHTML = "學號和密碼不能為空喔!!";
@@ -162,8 +133,21 @@ export default class extends Component {
         .then(res => {
           console.log(res.data);
           window.localStorage.setItem("token", res.data.token);
-          var decode = jwt_decode(res.data.token);	
-          console.log(decode);
+          apiRequest
+            .get("/database/List", {
+              table: "boarder",
+            })
+            .then(res => {
+              if (res.data) {
+                console.log(parseInt(jwt_decode(localStorage.getItem("token"))["id"]));
+                var data = decrypt(res.data).filter(
+                  (x, i) => parseInt(x.ID) === parseInt(jwt_decode(localStorage.getItem("token"))["id"])
+                )[0];
+                window.localStorage.setItem("name", data.name);
+                document.getElementById("userName").innerHTML = data.name;
+              }
+            })
+            .catch();
           this.sign_in();
         })
         .catch(err => {
@@ -176,31 +160,18 @@ export default class extends Component {
 
   sign_in = () => {
     const navbarLogin = document.getElementById("navbarLogin");
-    let navbarLoginR = navbarLogin
-      .getAttribute("class")
-      .replace("display-block-none", "display-none-none");
+    let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
     document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
     const navUserPC = document.getElementById("navUserPC");
-    let navUserPCR = navUserPC
-      .getAttribute("class")
-      .replace("display-none-none", "display-block-none");
+    let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
     document.getElementById("navUserPC").setAttribute("class", navUserPCR);
 
     const navbarLoginBtn = document.getElementById("navbarLoginBtn");
-    let navbarLoginBtnR = navbarLoginBtn
-      .getAttribute("class")
-      .replace("display-none-block", "display-none-none");
-    document
-      .getElementById("navbarLoginBtn")
-      .setAttribute("class", navbarLoginBtnR);
+    let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
+    document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
     const navbarUserBtn = document.getElementById("navbarUserBtn");
-    let navbarUserBtnR = navbarUserBtn
-      .getAttribute("class")
-      .replace("display-none-none", "display-none-block");
-    document
-      .getElementById("navbarUserBtn")
-      .setAttribute("class", navbarUserBtnR);
-
+    let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
+    document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
     document.getElementById("index").click();
   };
 
@@ -214,20 +185,17 @@ export default class extends Component {
     return (
       <div className="height-full login d-flex flex-column justify-content-center align-items-center opacity animation-one">
         <form className="loginForm">
-          <div
-            className="d-flex flex-column align-items-center"
-            style={{ height: "120px" }}>
+          <div className="d-flex flex-column align-items-center" style={{ height: "120px" }}>
             <Avatar
               style={{
                 backgroundColor: "#FF4081",
                 height: "80px",
-                width: "80px"
-              }}>
+                width: "80px",
+              }}
+            >
               <LockIcon style={{ fontSize: "3em" }} />
             </Avatar>
-            <p style={{ marginTop: "20px", color: "gray", opacity: "0.8" }}>
-              Hint: 4 / 4
-            </p>
+            <p style={{ marginTop: "20px", color: "gray", opacity: "0.8" }}>Hint: 4 / 4</p>
           </div>
           <div>
             <TextField
@@ -260,15 +228,12 @@ export default class extends Component {
                     <IconButton
                       style={{ outline: "none" }}
                       aria-label="Toggle password visibility"
-                      onClick={this.handleClickShowPassword}>
-                      {this.state.showPassword ? (
-                        <VisibilityOff />
-                      ) : (
-                        <Visibility />
-                      )}
+                      onClick={this.handleClickShowPassword}
+                    >
+                      {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
-                )
+                ),
               }}
             />
           </div>
@@ -279,11 +244,12 @@ export default class extends Component {
                 height: "50px",
                 marginTop: "40px",
                 outline: "none",
-                borderWidth: "2px"
+                borderWidth: "2px",
               }}
               variant="outlined"
               color="primary"
-              onClick={this.handleSubmit}>
+              onClick={this.handleSubmit}
+            >
               <span style={{ fontSize: "1.5em" }}>登入</span>
             </Button>
           </div>

@@ -74,13 +74,10 @@ export const postAnalysisRepairData = bind => {
       bind.state.data.datasets[1].data = malfunction;
       bind.state.data.datasets[2].data = processing;
       // 此處修改
-      bind.state.options.scales.yAxes[1].ticks.stepSize = Math.pow(
-        10,
-        String(count).length - 1
-      );
+      bind.state.options.scales.yAxes[1].ticks.stepSize = Math.pow(10, String(count).length - 1);
       bind.setState({
         data: bind.state.data,
-        options: bind.state.options
+        options: bind.state.options,
       });
     })
     .catch();

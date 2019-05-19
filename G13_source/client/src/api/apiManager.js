@@ -6,5 +6,5 @@ export default {
   account_role: "/account_role",
   boarder: "/boarder",
 
-  databse: "/database"
+  databse: "/database",
 };

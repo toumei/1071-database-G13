@@ -25,7 +25,7 @@ export default class extends Component {
             borderWidth: 2,
             pointHoverBackgroundColor: "rgba(236,147,47,0.4)",
             pointHoverBorderColor: "rgba(236,147,47,1)",
-            yAxisID: "y-axis-1"
+            yAxisID: "y-axis-1",
           },
           {
             type: "bar",
@@ -37,7 +37,7 @@ export default class extends Component {
             borderWidth: 2,
             hoverBackgroundColor: "rgba(255,99,132,0.4)",
             hoverBorderColor: "rgba(255,99,132,1)",
-            yAxisID: "y-axis-2"
+            yAxisID: "y-axis-2",
           },
           {
             type: "bar",
@@ -49,9 +49,9 @@ export default class extends Component {
             borderWidth: 2,
             hoverBackgroundColor: "rgba(113,179,124,0.4)",
             hoverBorderColor: "rgba(113,179,124,1)",
-            yAxisID: "y-axis-2"
-          }
-        ]
+            yAxisID: "y-axis-2",
+          },
+        ],
       },
       options: {
         responsive: true,
@@ -62,8 +62,8 @@ export default class extends Component {
             {
               display: true,
               gridLines: { display: true },
-              labels: this.MonthList
-            }
+              labels: this.MonthList,
+            },
           ],
           yAxes: [
             {
@@ -78,8 +78,8 @@ export default class extends Component {
                 max: 100,
                 callback: function(value, index, values) {
                   return value + "%";
-                }
-              }
+                },
+              },
             },
             {
               type: "linear",
@@ -88,11 +88,11 @@ export default class extends Component {
               id: "y-axis-2",
               gridLines: { display: false },
               labels: { show: true },
-              ticks: { stepSize: 1 }
-            }
-          ]
-        }
-      }
+              ticks: { stepSize: 1 },
+            },
+          ],
+        },
+      },
     };
     document.title = "資料庫";
   }

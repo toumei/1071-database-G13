@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import jwt_decode from "jwt-decode";
 import ToolkitProvider from "react-bootstrap-table2-toolkit";
 import { CustomBootstrap } from "../../../models/react-bootstrap.model";
-import {
-  postCSVData,
-  postCSVColumns,
-  handleAllExport,
-  handleSelectExport
-} from "../../../controllers/CSV.controller";
+import { postCSVData, postCSVColumns, handleAllExport, handleSelectExport } from "../../../controllers/CSV.controller";
 
 import Fab from "@material-ui/core/Fab";
 import NavigationIcon from "@material-ui/icons/Navigation";
@@ -26,40 +21,25 @@ export default class extends Component {
       document.title = "登入";
       document.getElementById("Login").click();
     } else {
-      if (
-        jwt_decode(token)["role"] === "worker" ||
-        jwt_decode(token)["role"] === "user"
-      ) {
+      if (jwt_decode(token)["role"] === "worker" || jwt_decode(token)["role"] === "user") {
         document.title = "ResNetCMMS";
         document.getElementById("index").click();
       } else {
         const navbarLogin = document.getElementById("navbarLogin");
-        let navbarLoginR = navbarLogin
-          .getAttribute("class")
-          .replace("display-block-none", "display-none-none");
-        document
-          .getElementById("navbarLogin")
-          .setAttribute("class", navbarLoginR);
+        let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
+        document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
         const navUserPC = document.getElementById("navUserPC");
-        let navUserPCR = navUserPC
-          .getAttribute("class")
-          .replace("display-none-none", "display-block-none");
+        let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
         document.getElementById("navUserPC").setAttribute("class", navUserPCR);
 
         const navbarLoginBtn = document.getElementById("navbarLoginBtn");
-        let navbarLoginBtnR = navbarLoginBtn
-          .getAttribute("class")
-          .replace("display-none-block", "display-none-none");
-        document
-          .getElementById("navbarLoginBtn")
-          .setAttribute("class", navbarLoginBtnR);
+        let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
+        document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
         const navbarUserBtn = document.getElementById("navbarUserBtn");
-        let navbarUserBtnR = navbarUserBtn
-          .getAttribute("class")
-          .replace("display-none-none", "display-none-block");
-        document
-          .getElementById("navbarUserBtn")
-          .setAttribute("class", navbarUserBtnR);
+        let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
+        document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+
+        document.getElementById("userName").innerHTML = localStorage.getItem("name");
 
         postCSVColumns(this);
         postCSVData(this);
@@ -80,7 +60,7 @@ export default class extends Component {
                 exportCSV={{
                   fileName: "報修系統.csv",
                   onlyExportSelection: true,
-                  exportAll: true
+                  exportAll: true,
                 }}
               >
                 {props => (

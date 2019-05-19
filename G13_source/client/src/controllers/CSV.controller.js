@@ -9,7 +9,7 @@ export const postCSVColumns = bind => {
     columns.push(CSVColumns(elm));
   });
   bind.setState({
-    columns: columns
+    columns: columns,
   });
 };
 
@@ -27,7 +27,7 @@ export const postCSVData = bind => {
           x.date_p = date_p[0] + " " + date_p[1].split(".")[0];
           x.date_m = date_m[0] + " " + date_m[1].split(".")[0];
           return x;
-        })
+        }),
       });
     })
     .catch();

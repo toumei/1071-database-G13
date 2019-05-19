@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import apiRequest from "../../api/apiRequest";
 import jwt_decode from "jwt-decode";
 import { decrypt } from "../../models/crypt.model";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import "./Processing.css";
 
 export default class extends Component {
@@ -11,7 +11,7 @@ export default class extends Component {
     super(props);
     this.state = {
       malfunction: [{ ID: " " }],
-      result: [{ label: " ", value: " " }]
+      result: [{ label: " ", value: " " }],
     };
     document.title = "維修單";
   }
@@ -27,40 +27,26 @@ export default class extends Component {
         document.getElementById("index").click();
       } else {
         const navbarLogin = document.getElementById("navbarLogin");
-        let navbarLoginR = navbarLogin
-          .getAttribute("class")
-          .replace("display-block-none", "display-none-none");
-        document
-          .getElementById("navbarLogin")
-          .setAttribute("class", navbarLoginR);
+        let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
+        document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
         const navUserPC = document.getElementById("navUserPC");
-        let navUserPCR = navUserPC
-          .getAttribute("class")
-          .replace("display-none-none", "display-block-none");
+        let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
         document.getElementById("navUserPC").setAttribute("class", navUserPCR);
 
         const navbarLoginBtn = document.getElementById("navbarLoginBtn");
-        let navbarLoginBtnR = navbarLoginBtn
-          .getAttribute("class")
-          .replace("display-none-block", "display-none-none");
-        document
-          .getElementById("navbarLoginBtn")
-          .setAttribute("class", navbarLoginBtnR);
+        let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
+        document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
         const navbarUserBtn = document.getElementById("navbarUserBtn");
-        let navbarUserBtnR = navbarUserBtn
-          .getAttribute("class")
-          .replace("display-none-none", "display-none-block");
-        document
-          .getElementById("navbarUserBtn")
-          .setAttribute("class", navbarUserBtnR);
+        let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
+        document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+
+        document.getElementById("userName").innerHTML = localStorage.getItem("name");
 
         const data = { table: "_coloption" };
         apiRequest
           .get("/database/List", data)
           .then(res => {
-            const result = decrypt(res.data).filter(
-              (x, i) => x.name === "result"
-            );
+            const result = decrypt(res.data).filter((x, i) => x.name === "result");
             this.setState({ result: result[0].value });
           })
           .catch();
@@ -110,7 +96,7 @@ export default class extends Component {
       await apiRequest
         .get("/malfunction/searchID", {
           table: "employee",
-          name: name
+          name: name,
         })
         .then(res => {
           if (decrypt(res.data)[0] !== undefined) {
@@ -126,20 +112,17 @@ export default class extends Component {
             employeeID: employeeID,
             date: datetime,
             result: result,
-            detail: detail
-          }
+            detail: detail,
+          },
         };
         apiRequest
           .post("/database/add", row)
           .then(res => {})
           .catch();
         const date = new Date();
-        const today = `${date.getFullYear()}-${(
-          "0" +
-          (date.getMonth() + 1)
-        ).slice(-2)}-${("0" + date.getDate()).slice(-2)}T${(
-          "0" + date.getHours()
-        ).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${(
+        const today = `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(
+          -2
+        )}T${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${(
           "0" + date.getSeconds()
         ).slice(-2)}`;
         nameID.value = "";
@@ -147,9 +130,7 @@ export default class extends Component {
         resultID.value = this.state.result[0].value;
         detailID.value = "";
         this.setState({
-          malfunction: this.state.malfunction.filter(
-            (x, i) => String(x.ID) !== String(malfunctionV)
-          )
+          malfunction: this.state.malfunction.filter((x, i) => String(x.ID) !== String(malfunctionV)),
         });
         alert("新增成功");
       } else {
@@ -171,10 +152,20 @@ export default class extends Component {
           <Detail />
           <div className="d-flex flex-column align-items-center">
             <Button
-              style={{ width: "12vmin", height: "12vmin", borderRadius: "100%", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
+              style={{
+                width: "12vmin",
+                height: "12vmin",
+                borderRadius: "100%",
+                borderWidth: "5px",
+                borderColor: "red",
+                outline: "none",
+                fontSize: "4vmin",
+                lineHeight: "4vmin",
+              }}
               variant="outlined"
               color="secondary"
-              onClick={this.handleClick}>
+              onClick={this.handleClick}
+            >
               確定
             </Button>
           </div>
@@ -205,10 +196,11 @@ const Malfunction = ({ malfunction }) => (
       label="報修單"
       defaultValue={malfunction[0].ID}
       SelectProps={{
-        native: true
+        native: true,
       }}
       margin="normal"
-      variant="outlined">
+      variant="outlined"
+    >
       <MalfunctionOption malfunction={malfunction} />
     </TextField>
   </div>
@@ -216,23 +208,15 @@ const Malfunction = ({ malfunction }) => (
 
 const Name = () => (
   <div className="field-margin-processing">
-    <TextField
-      className="text-field-processing"
-      id="name"
-      label="員工姓名"
-      margin="normal"
-      variant="outlined"
-    />
+    <TextField className="text-field-processing" id="name" label="員工姓名" margin="normal" variant="outlined" />
   </div>
 );
 
 const DateTime = () => {
   const date = new Date();
-  const today = `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(
+  const today = `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDate()).slice(
     -2
-  )}-${("0" + date.getDate()).slice(-2)}T${("0" + date.getHours()).slice(
-    -2
-  )}:${("0" + date.getMinutes()).slice(-2)}:${("0" + date.getSeconds()).slice(
+  )}T${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}:${("0" + date.getSeconds()).slice(
     -2
   )}`;
   return (
@@ -271,10 +255,11 @@ const Result = ({ result }) => (
       label="維修結果"
       defaultValue={result[0].value}
       SelectProps={{
-        native: true
+        native: true,
       }}
       margin="normal"
-      variant="outlined">
+      variant="outlined"
+    >
       <ResultOption result={result} />
     </TextField>
   </div>

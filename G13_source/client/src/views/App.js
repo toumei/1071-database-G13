@@ -1,14 +1,10 @@
 import React, { Component } from "react";
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from "@material-ui/icons/Menu";
 import { Main } from "../router";
 import user from "./user.png";
-import "./App.css"
-import {
-  CustomClickLink,
-  CustomActiveClickLink,
-  CustomActiveDropdownClickLink
-} from "../models/custom.model";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import "./App.css";
+import { CustomClickLink, CustomActiveClickLink, CustomActiveDropdownClickLink } from "../models/custom.model";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 export default class extends Component {
   constructor(props) {
@@ -31,10 +27,7 @@ export default class extends Component {
       <div>
         <Navbar title={this.state.title} />
         <div id="progress" className="progress d-flex flex-column align-items-center">
-          <CircularProgress
-            style={{ width: "25vmin", height: "auto", color: "green" }}
-            value={this.state.completed}
-          />
+          <CircularProgress style={{ width: "25vmin", height: "auto", color: "green" }} value={this.state.completed} />
         </div>
         <Main />
       </div>
@@ -50,9 +43,10 @@ const Navbar = ({ title }) => (
         className="navbar-toggler collapsed"
         data-toggle="collapse"
         data-target="#navbarNav"
-        style={{ borderWidth: "0", outline: "none" }} onClick={() => {
+        style={{ borderWidth: "0", outline: "none" }}
+        onClick={() => {
           const navbarUserBtn = document.getElementById("navbarUserBtn");
-          if (navbarUserBtn.getAttribute("class").indexOf('collapsed') === -1) {
+          if (navbarUserBtn.getAttribute("class").indexOf("collapsed") === -1) {
             navbarUserBtn.click();
           }
         }}
@@ -67,7 +61,7 @@ const Navbar = ({ title }) => (
         style={{ borderWidth: "0", outline: "none" }}
         onClick={() => {
           const navbarBtn = document.getElementById("navbarBtn");
-          if (navbarBtn.getAttribute("class").indexOf('collapsed') === -1) {
+          if (navbarBtn.getAttribute("class").indexOf("collapsed") === -1) {
             navbarBtn.click();
           }
         }}
@@ -174,7 +168,7 @@ const NavUserPC = ({ title }) => (
             <div>
               <img className="img-profile rounded-circle" src={user} width="25em" height="25em" alt={"Sticker"} />
               &nbsp;&nbsp;
-              <i className="fas"> 郭英杰 </i>
+              <i id="userName" className="fas" />
             </div>
           }
         />
@@ -183,7 +177,12 @@ const NavUserPC = ({ title }) => (
             className="dropdown-item"
             style={{ borderRadius: "0.5em" }}
             to="/user/profile"
-            content={<div><i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">個人資料</span></div>}
+            content={
+              <div>
+                <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
+                <span className="fas">個人資料</span>
+              </div>
+            }
           />
           {/* <CustomClickLink
             className="dropdown-item"
@@ -191,13 +190,18 @@ const NavUserPC = ({ title }) => (
             to="/user/settings"
             content={<div><i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">設定</span></div>}
           /> */}
-          <div className="dropdown-divider"></div>
+          <div className="dropdown-divider" />
           <CustomClickLink
             id="pcLogout"
             className="dropdown-item"
             style={{ borderRadius: "0.5em" }}
             to="/"
-            content={<div><i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">登出</span></div>}
+            content={
+              <div>
+                <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
+                <span className="fas">登出</span>
+              </div>
+            }
           />
         </div>
       </li>
@@ -222,7 +226,12 @@ const NavUserCell = ({ title }) => (
           className="dropdown-item"
           style={{ borderRadius: "0.5em" }}
           to="/user/profile"
-          content={<div><i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">個人資料</span></div>}
+          content={
+            <div>
+              <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400" />
+              <span className="fas">個人資料</span>
+            </div>
+          }
         />
       </li>
       {/* <li className="nav-item">
@@ -233,14 +242,19 @@ const NavUserCell = ({ title }) => (
           content={<div><i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">設定</span></div>}
         />
       </li> */}
-      <div className="dropdown-divider"></div>
+      <div className="dropdown-divider" />
       <li className="nav-item">
         <CustomClickLink
           id="cellLogout"
           className="dropdown-item"
           style={{ borderRadius: "0.5em" }}
           to="/"
-          content={<div><i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i><span className="fas">登出</span></div>}
+          content={
+            <div>
+              <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
+              <span className="fas">登出</span>
+            </div>
+          }
         />
       </li>
     </ul>

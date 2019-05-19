@@ -11,27 +11,11 @@ export default class extends Component {
         datasets: [
           {
             data: [],
-            backgroundColor: [
-              "red",
-              "orange",
-              "yellow",
-              "green",
-              "blue",
-              "indigo",
-              "purple"
-            ],
-            hoverBackgroundColor: [
-              "red",
-              "orange",
-              "yellow",
-              "green",
-              "blue",
-              "indigo",
-              "purple"
-            ]
-          }
-        ]
-      }
+            backgroundColor: ["red", "orange", "yellow", "green", "blue", "indigo", "purple"],
+            hoverBackgroundColor: ["red", "orange", "yellow", "green", "blue", "indigo", "purple"],
+          },
+        ],
+      },
     };
     document.title = "資料庫";
   }

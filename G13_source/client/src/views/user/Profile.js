@@ -38,22 +38,16 @@ export default class extends Component {
       let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
       document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
 
+      document.getElementById("userName").innerHTML = localStorage.getItem("name");
+
       apiRequest
         .get("/database/List", {
           table: "boarder",
         })
         .then(res => {
           if (res.data) {
-            var a = decrypt(res.data).filter((x, i) => {
-              if (x.date !== undefined) {
-                x.date = x.date.split(".")[0];
-              }
-              if (x.repair_date !== undefined) {
-                x.repair_date = x.repair_date.split(".")[0];
-              }
-              return x;
-            });
-            console.log(a);
+            var data = decrypt(res.data).filter((x, i) => parseInt(x.ID) === parseInt(jwt_decode(token)["id"]))[0];
+            this.setState({ id: data.studentCode, name: data.name });
           }
         })
         .catch();
@@ -72,7 +66,7 @@ export default class extends Component {
               style={{ width: "100%" }}
               id="name"
               label="姓名"
-              defaultValue={this.state.name}
+              value={this.state.name}
               margin="normal"
               variant="outlined"
               InputProps={{
@@ -85,7 +79,7 @@ export default class extends Component {
               style={{ width: "100%" }}
               id="id"
               label="學號"
-              defaultValue={this.state.id}
+              value={this.state.id}
               margin="normal"
               variant="outlined"
               InputProps={{

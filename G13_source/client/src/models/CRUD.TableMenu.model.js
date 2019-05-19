@@ -8,14 +8,14 @@ export const CrudTableMenuColumns = bind => [
         return { cursor: "pointer", backgroundColor: "#81c784" };
       }
       return { cursor: "pointer", backgroundColor: "white" };
-    }
-  }
+    },
+  },
 ];
 
 export const CrudTableMenuData = elm => {
   return {
     table_comment: elm["table_comment"],
     table_name: elm["table_name"],
-    align: "center"
+    align: "center",
   };
 };

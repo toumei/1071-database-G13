@@ -8,39 +8,27 @@ export const CustoModal = ({
   bodyAttr,
   body,
   footer,
-  modalStyle = "modal-dialog-centered modal-lg"
+  modalStyle = "modal-dialog-centered modal-lg",
 }) => (
-    <div
-      className="modal fade"
-      id={id}
-      tabIndex="-1"
-      role="dialog"
-      aria-hidden="true"
-      data-backdrop="false"
-    >
-      <div className={"modal-dialog " + modalStyle} role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title" {...titleAttr}>
-              {title}
-            </h5>
-            <button
-              type="button"
-              className="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div className="modal-body" {...bodyAttr}>
-            {body}
-          </div>
-          {footer}
+  <div className="modal fade" id={id} tabIndex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
+    <div className={"modal-dialog " + modalStyle} role="document">
+      <div className="modal-content">
+        <div className="modal-header">
+          <h5 className="modal-title" {...titleAttr}>
+            {title}
+          </h5>
+          <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
+        <div className="modal-body" {...bodyAttr}>
+          {body}
+        </div>
+        {footer}
       </div>
     </div>
-  );
+  </div>
+);
 
 const activeLink = (active, link) => {
   let isTrue = false;
@@ -58,23 +46,20 @@ export const CustomLink = ({
   to,
   content,
   dataToggle = "",
-  click = undefined
+  click = undefined,
 }) => (
-    <Link
-      id={id}
-      className={
-        className +
-        (active === to || active === content || activeLink(active, activeOptions)
-          ? "active show"
-          : "")
-      }
-      to={to}
-      data-toggle={dataToggle}
-      onClick={click}
-    >
-      {content}
-    </Link>
-  );
+  <Link
+    id={id}
+    className={
+      className + (active === to || active === content || activeLink(active, activeOptions) ? "active show" : "")
+    }
+    to={to}
+    data-toggle={dataToggle}
+    onClick={click}
+  >
+    {content}
+  </Link>
+);
 
 export const CustomClickLink = ({ id, className, style, to, content }) => (
   <Link
@@ -85,14 +70,14 @@ export const CustomClickLink = ({ id, className, style, to, content }) => (
     onClick={() => {
       const navbarBtn = document.getElementById("navbarBtn");
       const navbarUserBtn = document.getElementById("navbarUserBtn");
-      if (navbarBtn.getAttribute("class").indexOf('collapsed') === -1) {
+      if (navbarBtn.getAttribute("class").indexOf("collapsed") === -1) {
         navbarBtn.click();
-      } else if (navbarUserBtn.getAttribute("class").indexOf('collapsed') === -1) {
+      } else if (navbarUserBtn.getAttribute("class").indexOf("collapsed") === -1) {
         navbarUserBtn.click();
       }
       if (id === "pcLogout" || id === "cellLogout") {
         localStorage.removeItem("token");
-        localStorage.removeItem("role");
+        localStorage.removeItem("name");
         const navbarLogin = document.getElementById("navbarLogin");
         let navbarLoginR = navbarLogin.getAttribute("class").replace("display-none-none", "display-block-none");
         document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
@@ -119,7 +104,10 @@ export const CustomActiveClickLink = props => (
     click={() => {
       const navbarBtn = document.getElementById("navbarBtn");
       const navbarUserBtn = document.getElementById("navbarUserBtn");
-      if (navbarBtn.getAttribute("class") === "navbar-toggler" && navbarUserBtn.getAttribute("class") === "navbar-toggler") {
+      if (
+        navbarBtn.getAttribute("class") === "navbar-toggler" &&
+        navbarUserBtn.getAttribute("class") === "navbar-toggler"
+      ) {
         navbarBtn.click();
         navbarUserBtn.click();
       } else if (navbarBtn.getAttribute("class") === "navbar-toggler") {
@@ -131,10 +119,6 @@ export const CustomActiveClickLink = props => (
   />
 );
 
-export const CustomActiveDropdownClickLink = props => (
-  <CustomLink {...props} className="nav-link dropdown-toggle " />
-);
+export const CustomActiveDropdownClickLink = props => <CustomLink {...props} className="nav-link dropdown-toggle " />;
 
-export const CustomActiveBtnLink = props => (
-  <CustomLink {...props} className="btn btn-outline-light btn-sm " />
-);
+export const CustomActiveBtnLink = props => <CustomLink {...props} className="btn btn-outline-light btn-sm " />;

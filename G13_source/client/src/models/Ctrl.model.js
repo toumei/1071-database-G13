@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  type,
-  Select,
-  CheckBox,
-  ReadOnly,
-  AddOptiont,
-  columnsWidth,
-  customColumns
-} from "./react-bootstrap.model";
+import { type, Select, CheckBox, ReadOnly, AddOptiont, columnsWidth, customColumns } from "./react-bootstrap.model";
 
 // 設定欄位要哪種輸入框
 export const columnsType = {
@@ -22,10 +14,10 @@ export const columnsType = {
       { value: "TEXTAREA", label: "TEXTAREA" },
       { value: "CHECKBOX", label: "CHECKBOX" },
       { value: "DATE", label: "DATE" },
-      { value: "DATETIME", label: "DATETIME" }
-    ]
+      { value: "DATETIME", label: "DATETIME" },
+    ],
   },
-  value: { editable: true, editorType: "TEXTAREA", editorValue: "" }
+  value: { editable: true, editorType: "TEXTAREA", editorValue: "" },
 };
 
 export const CtrlColumns = (elm, editable, editorType, editorValue) => {
@@ -41,11 +33,11 @@ export const CtrlColumns = (elm, editable, editorType, editorValue) => {
       WebkitLineClamp: 1,
       overflow: "hidden",
       textOverflow: "ellipsis",
-      WebkitBoxOrient: "vertical"
+      WebkitBoxOrient: "vertical",
     },
     editor: {
       type: editorType !== "DATETIME" ? type[editorType] : undefined,
-      options: editorType === "SELECT" ? editorValue : undefined
+      options: editorType === "SELECT" ? editorValue : undefined,
     },
     editorRenderer:
       elm["column_name"] === "value"
@@ -64,7 +56,7 @@ export const CtrlColumns = (elm, editable, editorType, editorValue) => {
                     { value: "PK", label: "Primary Key" },
                     { value: "IDCARD", label: "ID card" },
                     { value: "EMAIL", label: "Email" },
-                    { value: "TEL", label: "Telephone" }
+                    { value: "TEL", label: "Telephone" },
                   ]}
                 />
               );
@@ -72,6 +64,6 @@ export const CtrlColumns = (elm, editable, editorType, editorValue) => {
               return <ReadOnly {...editorProps} value={value} />;
             }
           }
-        : undefined
+        : undefined,
   };
 };

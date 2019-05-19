@@ -10,27 +10,19 @@ export default class extends Component {
         datasets: [
           {
             data: [],
-            backgroundColor: [
-              "red",
-              "orange",
-              "yellow",
-              "green",
-              "blue",
-              "indigo",
-              "purple"
-            ]
-          }
+            backgroundColor: ["red", "orange", "yellow", "green", "blue", "indigo", "purple"],
+          },
         ],
-        labels: []
+        labels: [],
       },
       options: {
         scale: {
           ticks: {
             min: 0,
-            stepSize: 1
-          }
-        }
-      }
+            stepSize: 1,
+          },
+        },
+      },
     };
     document.title = "資料庫";
   }

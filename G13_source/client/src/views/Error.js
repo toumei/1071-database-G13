@@ -6,10 +6,7 @@ export default class extends Component {
     return (
       <div>
         <h3>Not Found</h3>
-        <p>
-          The requested URL {this.props.location.pathname} was not found on this
-          server.
-        </p>
+        <p>The requested URL {this.props.location.pathname} was not found on this server.</p>
       </div>
     );
   }
