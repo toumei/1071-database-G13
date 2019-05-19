@@ -2,18 +2,23 @@
   background-image: url(./tag.png);
   background-size: 100% 100%;
   background-position: center;
-  width: 400px;
-  height: 400px;
-  margin-left: -300px;
+  width: 300px;
+  height: 300px;
 }
 
-#profileForm {
-  position: fixed;
-  margin-left: 200px;
-}
-
-#profile {
+.profile {
   background-image: url(./profile.jpg);
   background-size: cover;
   background-position: center;
+}
+
+.profileForm {
+  width: 400px;
+  padding: 50px;
+}
+
+@media screen and (max-width: 575.98px) {
+  .profileForm {
+    margin-top: 19vh;
+  }
 }

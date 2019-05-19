@@ -1,112 +1,104 @@
-.height-full {
-  height: 100%;
+/* common */
+.opacity {
+  opacity: 0;
+  -webkit-animation: fade-in 1s linear;
+  animation: fade-in 1s linear;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
 }
 
-.overflow {
-  overflow-y: hidden;
+.white {
+  position: fixed;
+  top: 20%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: white;
 }
 
-.react-bootstrap-table {
-  overflow-x: auto !important;
+@media screen and (max-width: 575.98px) {
+  .white {
+    top: 30%;
+  }
 }
 
-/* 隱藏滾動條 */
-body::-webkit-scrollbar {
-  width: 0 !important;
-}
-
-.react-bootstrap-table::-webkit-scrollbar {
-  height: 0 !important;
-}
-
-.analysisNone {
-  display: none !important;
-}
-
-/* loading animation */
-.wrg-bg,
-.wrg-ring,
-.wrg-hand,
-.wrg-title {
+/* root loading animation */
+.loading-background {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-}
-
-.loading {
-  position: fixed;
-  width: 100%;
-}
-
-.wrg-bg {
-  /* -webkit-animation: page-out 2.55s linear;
-  animation: page-out 2.55s linear; */
-  animation-delay: 2.9s;
-  background-image: url(../img/bg.jpg);
+  background-image: url(../img/loading-background.jpg);
   background-size: cover;
   background-position: center;
+  animation: page-out-top 2.55s linear;
+  -webkit-animation: page-out-top 2.55s linear;
+  animation-delay: 2.9s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
 }
 
-.wrg-ring {
-  margin-top: 50px;
-  -webkit-animation: page-out 2.75s ease-out;
-  animation: page-out 2.75s ease-out;
-  animation-delay: 2.8s;
-  background-image: url(../img/ring.png);
-  background-size: 110% 80%;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.wrg-hand {
-  -webkit-animation: page-out 2.5s ease-out;
-  animation: page-out 2.5s ease-out;
-  animation-delay: 2.75s;
-  background-image: url(../img/hand.png);
+.loading-ring {
+  position: fixed;
+  top: 15%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url(../img/loading-ring.png);
   background-size: 100% 100%;
   background-position: center;
-  background-repeat: no-repeat;
-}
-
-.wrg-title {
-  -webkit-animation: page-out 2.5s ease-out;
-  animation: page-out 2.5s ease-out;
+  -webkit-animation: page-out-top 2.75s ease-out;
+  animation: page-out-top 2.75s ease-out;
   animation-delay: 2.8s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
 }
 
-.wrg-title h1 {
+.loading-hand {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-image: url(../img/loading-hand.png);
+  background-size: cover;
+  background-position: center;
+  animation: page-out-top 2.5s ease-out;
+  -webkit-animation: page-out-top 2.5s ease-out;
+  animation-delay: 2.75s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+
+.loading-title {
+  position: fixed;
+  top: 10%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  animation: page-out-top 2.5s ease-out;
+  -webkit-animation: page-out-top 2.5s ease-out;
+  animation-delay: 2.8s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+
+.loading-title h1 {
   color: #2600ff;
   font-weight: 400;
-  font-size: 5rem;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  margin: 0;
+  font-size: 16vmin;
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100%;
-}
-
-.wrg-main {
-  opacity: 0;
-  -webkit-transform: translateY(100vh);
-  transform: translateY(100vh);
-  -webkit-animation: page-in 2s ease-out;
-  animation: page-in 2s ease-out;
-  animation-delay: 3s;
-  background-color: white;
-}
-
-.opacity {
-  opacity: 0;
-  -webkit-animation: fade-in 1s linear;
-  animation: fade-in 1s linear;
+  align-items: center;
+  justify-content: center;
 }
 
 .jump {
   -webkit-animation: jump 1s ease-in-out;
   animation: jump 1s ease-in-out;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
 }
 
 .jump-1 {
@@ -149,94 +141,90 @@ body::-webkit-scrollbar {
   animation-delay: 2s;
 }
 
-.wrg-bg,
-.wrg-ring,
-.wrg-hand,
-.wrg-title,
-.wrg-main,
-.opacity,
-.jump {
-  -webkit-animation-fill-mode: forwards;
+.loading-main {
+  opacity: 0;
+  background-color: white;
+  transform: translateY(100vh);
+  -webkit-transform: translateY(100vh);
+  animation: page-in-top 2s ease-out;
+  -webkit-animation: page-in-top 2s ease-out;
+  animation-delay: 3s;
   animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
 }
 
-.main-iframe-delay {
-  animation-delay: 0.5s;
-}
-
-/* animation */
-
-@-webkit-keyframes page-in {
+/* animation keyframes */
+@keyframes page-out-top {
   0% {
-    opacity: 1;
-    -webkit-transform: translateY(100vh);
-    transform: translateY(100vh);
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
   }
 
   20% {
-    opacity: 1;
-    -webkit-transform: translateY(100vh);
-    transform: translateY(100vh);
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
   }
 
   100% {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-}
-
-@keyframes page-in {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateY(100vh);
-    transform: translateY(100vh);
-  }
-
-  20% {
-    opacity: 1;
-    -webkit-transform: translateY(100vh);
-    transform: translateY(100vh);
-  }
-
-  100% {
-    opacity: 1;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-}
-
-@-webkit-keyframes page-out {
-  0% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-
-  20% {
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
-  }
-
-  100% {
-    -webkit-transform: translateY(-100vh);
     transform: translateY(-100vh);
+    -webkit-transform: translateY(-100vh);
   }
 }
 
-@keyframes page-out {
+@-webkit-keyframes page-out-top {
   0% {
-    -webkit-transform: translateY(0);
     transform: translateY(0);
+    -webkit-transform: translateY(0);
   }
 
   20% {
-    -webkit-transform: translateY(0);
     transform: translateY(0);
+    -webkit-transform: translateY(0);
   }
 
   100% {
-    -webkit-transform: translateY(-100vh);
     transform: translateY(-100vh);
+    -webkit-transform: translateY(-100vh);
+  }
+}
+
+@keyframes page-in-top {
+  0% {
+    opacity: 1;
+    transform: translateY(100vh);
+    -webkit-transform: translateY(100vh);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateY(100vh);
+    -webkit-transform: translateY(100vh);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes page-in-top {
+  0% {
+    opacity: 1;
+    transform: translateY(100vh);
+    -webkit-transform: translateY(100vh);
+  }
+
+  20% {
+    opacity: 1;
+    transform: translateY(100vh);
+    -webkit-transform: translateY(100vh);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
   }
 }
 
@@ -282,10 +270,40 @@ body::-webkit-scrollbar {
   }
 }
 
-@media screen and (max-width: 1000px) {
-  .wrg-hand {
-    display: none !important;
-  }
+/* other */
+
+.loading {
+  position: fixed;
+  width: 100%;
+}
+
+.main-iframe-delay {
+  animation-delay: 0.5s;
+}
+
+.height-full {
+  height: 100%;
+}
+
+.overflow {
+  overflow-y: hidden;
+}
+
+.react-bootstrap-table {
+  overflow-x: auto !important;
+}
+
+/* 隱藏滾動條 */
+body::-webkit-scrollbar {
+  width: 0 !important;
+}
+
+.react-bootstrap-table::-webkit-scrollbar {
+  height: 0 !important;
+}
+
+.analysisNone {
+  display: none !important;
 }
 
 @media screen and (max-width: 575.98px) {
@@ -296,21 +314,5 @@ body::-webkit-scrollbar {
   header,
   .analysisBlock {
     display: none !important;
-  }
-
-  .wrg-title h1 {
-    font-size: 4rem;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .wrg-title h1 {
-    font-size: 3.5rem;
-  }
-}
-
-@media screen and (max-width: 350px) {
-  .wrg-title h1 {
-    font-size: 3rem;
   }
 }

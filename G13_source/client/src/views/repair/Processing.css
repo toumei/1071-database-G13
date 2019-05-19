@@ -1,13 +1,21 @@
-#processing {
+.processing {
   background-image: url(./wood.jpg);
   background-size: cover;
   background-position: center;
 }
 
-#processingForm {
+.processingForm {
   background-image: url(./paper.png);
   background-size: cover;
   background-position: center;
+  margin-top: 5px;
   width: 450px;
   padding: 70px 50px 50px 50px;
+}
+
+@media screen and (max-width: 575.98px) {
+  .processingForm {
+    margin-top: 56px;
+  }
+  
 }

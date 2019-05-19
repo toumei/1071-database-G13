@@ -17,40 +17,64 @@ export default class extends Component {
   }
 
   componentDidMount() {
-    const data = { table: "_coloption" };
-    apiRequest
-      .get("/database/List", data)
-      .then(res => {
-        const result = decrypt(res.data).filter((x, i) => x.name === "result");
-        this.setState({ result: result[0].value });
-      })
-      .catch();
-    apiRequest
-      .get("/processing/searchNum")
-      .then(res => {
-        const num1 = [];
-        const num2 = [];
-        var temp = [];
-        var temparray = [];
-        decrypt(res.data)[0].filter((x, i) => {
-          num1[i] = x.ID;
-          return false;
-        });
-        decrypt(res.data)[1].filter((x, i) => {
-          num2[i] = x.ID;
-          return false;
-        });
-        for (let i = 0; i < num2.length; i++) {
-          temp[num2[i]] = true;
-        }
-        for (let i = 0; i < num1.length; i++) {
-          if (!temp[num1[i]]) {
-            temparray.push({ ID: num1[i] });
-          }
-        }
-        this.setState({ malfunction: temparray });
-      })
-      .catch();
+    if (localStorage.getItem("token") === null) {
+      document.title = "登入";
+      document.getElementById("Login").click();
+    } else {
+      if (localStorage.getItem("role") === "2" || localStorage.getItem("role") === "4") {
+        document.title = "ResNetCMMS";
+        document.getElementById("index").click();
+      } else {
+        const navbarLogin = document.getElementById("navbarLogin");
+        let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
+        document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
+        const navUserPC = document.getElementById("navUserPC");
+        let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
+        document.getElementById("navUserPC").setAttribute("class", navUserPCR);
+
+        const navbarLoginBtn = document.getElementById("navbarLoginBtn");
+        let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
+        document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
+        const navbarUserBtn = document.getElementById("navbarUserBtn");
+        let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
+        document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+
+        const data = { table: "_coloption" };
+        apiRequest
+          .get("/database/List", data)
+          .then(res => {
+            const result = decrypt(res.data).filter((x, i) => x.name === "result");
+            this.setState({ result: result[0].value });
+          })
+          .catch();
+        apiRequest
+          .get("/processing/searchNum")
+          .then(res => {
+            const num1 = [];
+            const num2 = [];
+            var temp = [];
+            var temparray = [];
+            decrypt(res.data)[0].filter((x, i) => {
+              num1[i] = x.ID;
+              return false;
+            });
+            decrypt(res.data)[1].filter((x, i) => {
+              num2[i] = x.ID;
+              return false;
+            });
+            for (let i = 0; i < num2.length; i++) {
+              temp[num2[i]] = true;
+            }
+            for (let i = 0; i < num1.length; i++) {
+              if (!temp[num1[i]]) {
+                temparray.push({ ID: num1[i] });
+              }
+            }
+            this.setState({ malfunction: temparray });
+          })
+          .catch();
+      }
+    }
   }
 
   handleClick = async () => {
@@ -122,8 +146,8 @@ export default class extends Component {
   render() {
     // if (this.state.malfunction.length > 0 && this.state.result.length > 0) {
     return (
-      <div id="processing" className="height-full d-flex flex-column justify-content-center align-items-center opacity" style={{ backgroundColor: "white" }}>
-        <form id="processingForm">
+      <div className="processing height-full d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
+        <form className="processingForm">
           <Malfunction malfunction={this.state.malfunction} />
           <Name />
           <DateTime />
@@ -131,7 +155,7 @@ export default class extends Component {
           <Detail />
           <div className="d-flex flex-column align-items-center">
             <Button
-              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "1.9rem", lineHeight: "1.9rem" }}
+              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
               variant="outlined"
               color="secondary"
               onClick={this.handleClick}>

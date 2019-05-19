@@ -34,6 +34,7 @@ axios.interceptors.response.use(
       switch (error.response.status) {
         case 401:
           //window.location.href = "/user/login";
+          // document.getElementById("navbarLoginBtn").click();
           break;
         default:
           break;

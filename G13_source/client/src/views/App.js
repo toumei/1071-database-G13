@@ -4,7 +4,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import { Main } from "../router";
 
-// import logo from "../logo.svg";
 import user from "./user.png";
 import "./App.css"
 
@@ -37,11 +36,10 @@ export default class extends Component {
     return (
       <div>
         <Navbar title={this.state.title} />
-        <div id="progress" className="loading d-flex flex-column align-items-center">
+        <div id="progress" className="progress d-flex flex-column align-items-center">
           <CircularProgress
-            style={{ width: "100px", height: "auto", color: "green" }}
+            style={{ width: "25vmin", height: "auto", color: "green" }}
             value={this.state.completed}
-          // color="secondary"
           />
         </div>
         <Main />
@@ -51,9 +49,8 @@ export default class extends Component {
 }
 
 const Navbar = ({ title }) => (
-  <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ zIndex: "100", boxShadow: "4px 4px 12px 4px rgba(20%,20%,40%,0.5)" }}>
+  <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
     <div className="container">
-      {/* <img className="navbar-brand" src={logo} width="55em" height="55em" alt={"logo"} /> */}
       <button
         id="navbarBtn"
         className="navbar-toggler collapsed"
@@ -68,7 +65,6 @@ const Navbar = ({ title }) => (
       >
         <MenuIcon />
       </button>
-      {/* <h1 className="navbar-toggler">{title}</h1> */}
       <button
         id="navbarUserBtn"
         className="navbar-toggler collapsed display-none-none"
@@ -213,6 +209,7 @@ const NavUserPC = ({ title }) => (
       </li>
       <li id="navbarLogin" className="nav-item display-block-none">
         <CustomActiveClickLink
+          id="Login"
           active={title}
           activeOptions={["登入", "登出"]}
           to="/user/login"

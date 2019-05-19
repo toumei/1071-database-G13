@@ -16,6 +16,7 @@ export const CustoModal = ({
       tabIndex="-1"
       role="dialog"
       aria-hidden="true"
+      data-backdrop="false"
     >
       <div className={"modal-dialog " + modalStyle} role="document">
         <div className="modal-content">
@@ -90,6 +91,8 @@ export const CustomClickLink = ({ id, className, style, to, content }) => (
         navbarUserBtn.click();
       }
       if (id === "pcLogout" || id === "cellLogout") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
         const navbarLogin = document.getElementById("navbarLogin");
         let navbarLoginR = navbarLogin.getAttribute("class").replace("display-none-none", "display-block-none");
         document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);

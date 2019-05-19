@@ -19,11 +19,11 @@ import Control from "./views/database/control/Ctrl";
 import Malfunction from "./views/repair/Malfunction";
 import Processing from "./views/repair/Processing";
 
-import Products from "./views/products/Products";
-
 import Profile from "./views/user/Profile";
 import Settings from "./views/user/Settings";
 import Login from "./views/user/Login";
+
+import "./router.css";
 
 // 全部router都要在此先註冊
 export const Router = () => (
@@ -50,7 +50,7 @@ export const Router = () => (
 
 // App Router
 export const Main = () => (
-  <div id="main" style={{ zIndex: "0" }}>
+  <div id="main">
     <Route exact path="/" component={Index} />
     <Route path="/database/analysis" component={Analysis} />
     <Route path="/database/crud" component={CRUD} />
@@ -58,7 +58,6 @@ export const Main = () => (
     <Route path="/database/control" component={Control} />
     <Route path="/repair/malfunction" component={Malfunction} />
     <Route path="/repair/processing" component={Processing} />
-    <Route path="/products" component={Products} />
     <Route path="/user/profile" component={Profile} />
     <Route path="/user/settings" component={Settings} />
     <Route path="/user/login" component={Login} />
@@ -67,7 +66,7 @@ export const Main = () => (
 
 // Analysis Router
 export const AnalysisMain = () => (
-  <div>
+  <div className="analysisMain">
     <Route path="/database/analysis/repair" component={Repair} />
     <Route path="/database/analysis/cabinet" component={Cabinet} />
     <Route path="/database/analysis/malfunctionMatter" component={MalfunctionMatter} />
