@@ -42,14 +42,14 @@ export default class extends Component {
   handleID(event) {
     const hand = document.getElementById("hand");
     let t_hand = hand.getAttribute("class");
-    if (hand.getAttribute("class").indexOf('t_hand') === -1) {
+    if (hand.getAttribute("class").indexOf("t_hand") === -1) {
       t_hand = t_hand.concat(" t_hand101");
-    } else if (hand.getAttribute("class").indexOf('t_hand2') !== -1) {
+    } else if (hand.getAttribute("class").indexOf("t_hand2") !== -1) {
       t_hand = t_hand.replace(" t_hand202", "");
       t_hand = t_hand.replace(" t_hand212", "");
       t_hand = t_hand.replace(" t_hand232", "");
       t_hand = t_hand.concat(" t_hand121");
-    } else if (hand.getAttribute("class").indexOf('t_hand3') !== -1) {
+    } else if (hand.getAttribute("class").indexOf("t_hand3") !== -1) {
       t_hand = t_hand.replace(" t_hand303", "");
       t_hand = t_hand.replace(" t_hand313", "");
       t_hand = t_hand.replace(" t_hand323", "");
@@ -58,9 +58,19 @@ export default class extends Component {
     document.getElementById("hand").setAttribute("class", t_hand);
     const dialog = document.getElementById("dialog");
     const dialogue = document.getElementById("dialogue");
-    if (dialog.getAttribute("class").indexOf('dialogblock') === -1) {
-      document.getElementById("dialog").setAttribute("class", dialog.getAttribute("class").concat(" dialogblock"));
-      document.getElementById("dialogue").setAttribute("class", dialogue.getAttribute("class").concat(" dialogblock"));
+    if (dialog.getAttribute("class").indexOf("dialogblock") === -1) {
+      document
+        .getElementById("dialog")
+        .setAttribute(
+          "class",
+          dialog.getAttribute("class").concat(" dialogblock")
+        );
+      document
+        .getElementById("dialogue")
+        .setAttribute(
+          "class",
+          dialogue.getAttribute("class").concat(" dialogblock")
+        );
     }
     dialogue.innerHTML = "請輸入學號!!";
     this.setState({ idError: false });
@@ -69,14 +79,14 @@ export default class extends Component {
   handlePassword(event) {
     const hand = document.getElementById("hand");
     let t_hand = hand.getAttribute("class");
-    if (hand.getAttribute("class").indexOf('t_hand') === -1) {
+    if (hand.getAttribute("class").indexOf("t_hand") === -1) {
       t_hand = t_hand.concat(" t_hand202");
-    } else if (hand.getAttribute("class").indexOf('t_hand1') !== -1) {
+    } else if (hand.getAttribute("class").indexOf("t_hand1") !== -1) {
       t_hand = t_hand.replace(" t_hand101", "");
       t_hand = t_hand.replace(" t_hand121", "");
       t_hand = t_hand.replace(" t_hand131", "");
       t_hand = t_hand.concat(" t_hand212");
-    } else if (hand.getAttribute("class").indexOf('t_hand3') !== -1) {
+    } else if (hand.getAttribute("class").indexOf("t_hand3") !== -1) {
       t_hand = t_hand.replace(" t_hand303", "");
       t_hand = t_hand.replace(" t_hand313", "");
       t_hand = t_hand.replace(" t_hand323", "");
@@ -85,9 +95,19 @@ export default class extends Component {
     document.getElementById("hand").setAttribute("class", t_hand);
     const dialog = document.getElementById("dialog");
     const dialogue = document.getElementById("dialogue");
-    if (dialog.getAttribute("class").indexOf('dialogblock') === -1) {
-      document.getElementById("dialog").setAttribute("class", dialog.getAttribute("class").concat(" dialogblock"));
-      document.getElementById("dialogue").setAttribute("class", dialogue.getAttribute("class").concat(" dialogblock"));
+    if (dialog.getAttribute("class").indexOf("dialogblock") === -1) {
+      document
+        .getElementById("dialog")
+        .setAttribute(
+          "class",
+          dialog.getAttribute("class").concat(" dialogblock")
+        );
+      document
+        .getElementById("dialogue")
+        .setAttribute(
+          "class",
+          dialogue.getAttribute("class").concat(" dialogblock")
+        );
     }
     dialogue.innerHTML = "請輸入密碼!!";
     this.setState({ passwordError: false });
@@ -96,14 +116,14 @@ export default class extends Component {
   handleSubmit(event) {
     const hand = document.getElementById("hand");
     let t_hand = hand.getAttribute("class");
-    if (hand.getAttribute("class").indexOf('t_hand') === -1) {
+    if (hand.getAttribute("class").indexOf("t_hand") === -1) {
       t_hand = t_hand.concat(" t_hand303");
-    } else if (hand.getAttribute("class").indexOf('t_hand1') !== -1) {
+    } else if (hand.getAttribute("class").indexOf("t_hand1") !== -1) {
       t_hand = t_hand.replace(" t_hand101", "");
       t_hand = t_hand.replace(" t_hand121", "");
       t_hand = t_hand.replace(" t_hand131", "");
       t_hand = t_hand.concat(" t_hand313");
-    } else if (hand.getAttribute("class").indexOf('t_hand2') !== -1) {
+    } else if (hand.getAttribute("class").indexOf("t_hand2") !== -1) {
       t_hand = t_hand.replace(" t_hand202", "");
       t_hand = t_hand.replace(" t_hand212", "");
       t_hand = t_hand.replace(" t_hand232", "");
@@ -113,9 +133,19 @@ export default class extends Component {
 
     const dialog = document.getElementById("dialog");
     const dialogue = document.getElementById("dialogue");
-    if (dialog.getAttribute("class").indexOf('dialogblock') === -1) {
-      document.getElementById("dialog").setAttribute("class", dialog.getAttribute("class").concat(" dialogblock"));
-      document.getElementById("dialogue").setAttribute("class", dialogue.getAttribute("class").concat(" dialogblock"));
+    if (dialog.getAttribute("class").indexOf("dialogblock") === -1) {
+      document
+        .getElementById("dialog")
+        .setAttribute(
+          "class",
+          dialog.getAttribute("class").concat(" dialogblock")
+        );
+      document
+        .getElementById("dialogue")
+        .setAttribute(
+          "class",
+          dialogue.getAttribute("class").concat(" dialogblock")
+        );
     }
     if (this.state.id === "" && this.state.password === "") {
       dialogue.innerHTML = "學號和密碼不能為空喔!!";
@@ -130,6 +160,7 @@ export default class extends Component {
       apiRequest
         .post("login", this.state)
         .then(res => {
+          console.log(res.data);
           window.localStorage.setItem("token", res.data.token);
           var decode = jwt_decode(res.data.token);	
           console.log(decode);
@@ -145,18 +176,30 @@ export default class extends Component {
 
   sign_in = () => {
     const navbarLogin = document.getElementById("navbarLogin");
-    let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
+    let navbarLoginR = navbarLogin
+      .getAttribute("class")
+      .replace("display-block-none", "display-none-none");
     document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
     const navUserPC = document.getElementById("navUserPC");
-    let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
+    let navUserPCR = navUserPC
+      .getAttribute("class")
+      .replace("display-none-none", "display-block-none");
     document.getElementById("navUserPC").setAttribute("class", navUserPCR);
 
     const navbarLoginBtn = document.getElementById("navbarLoginBtn");
-    let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
-    document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
+    let navbarLoginBtnR = navbarLoginBtn
+      .getAttribute("class")
+      .replace("display-none-block", "display-none-none");
+    document
+      .getElementById("navbarLoginBtn")
+      .setAttribute("class", navbarLoginBtnR);
     const navbarUserBtn = document.getElementById("navbarUserBtn");
-    let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
-    document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+    let navbarUserBtnR = navbarUserBtn
+      .getAttribute("class")
+      .replace("display-none-none", "display-none-block");
+    document
+      .getElementById("navbarUserBtn")
+      .setAttribute("class", navbarUserBtnR);
 
     document.getElementById("index").click();
   };
@@ -171,11 +214,20 @@ export default class extends Component {
     return (
       <div className="height-full login d-flex flex-column justify-content-center align-items-center opacity animation-one">
         <form className="loginForm">
-          <div className="d-flex flex-column align-items-center" style={{ height: "120px" }}>
-            <Avatar style={{ backgroundColor: "#FF4081", height: "80px", width: "80px" }}>
+          <div
+            className="d-flex flex-column align-items-center"
+            style={{ height: "120px" }}>
+            <Avatar
+              style={{
+                backgroundColor: "#FF4081",
+                height: "80px",
+                width: "80px"
+              }}>
               <LockIcon style={{ fontSize: "3em" }} />
             </Avatar>
-            <p style={{ marginTop: "20px", color: "gray", opacity: "0.8" }}>Hint: 4 / 4</p>
+            <p style={{ marginTop: "20px", color: "gray", opacity: "0.8" }}>
+              Hint: 4 / 4
+            </p>
           </div>
           <div>
             <TextField
@@ -197,7 +249,7 @@ export default class extends Component {
               style={{ width: "100%", height: "50px" }}
               id="passwordInput"
               name="password"
-              type={this.state.showPassword ? 'text' : 'password'}
+              type={this.state.showPassword ? "text" : "password"}
               margin="normal"
               label="密碼"
               value={this.state.password}
@@ -208,18 +260,27 @@ export default class extends Component {
                     <IconButton
                       style={{ outline: "none" }}
                       aria-label="Toggle password visibility"
-                      onClick={this.handleClickShowPassword}
-                    >
-                      {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                      onClick={this.handleClickShowPassword}>
+                      {this.state.showPassword ? (
+                        <VisibilityOff />
+                      ) : (
+                        <Visibility />
+                      )}
                     </IconButton>
                   </InputAdornment>
-                ),
+                )
               }}
             />
           </div>
           <div>
             <Button
-              style={{ width: "100%", height: "50px", marginTop: "40px", outline: "none", borderWidth: "2px" }}
+              style={{
+                width: "100%",
+                height: "50px",
+                marginTop: "40px",
+                outline: "none",
+                borderWidth: "2px"
+              }}
               variant="outlined"
               color="primary"
               onClick={this.handleSubmit}>
@@ -227,11 +288,11 @@ export default class extends Component {
             </Button>
           </div>
         </form>
-        <div className="boy"></div>
-        <div className="hand" id="hand"></div>
-        <div className="dialog" id="dialog"></div>
-        <div className="dialogue" id="dialogue"></div>
-      </div >
+        <div className="boy" />
+        <div className="hand" id="hand" />
+        <div className="dialog" id="dialog" />
+        <div className="dialogue" id="dialogue" />
+      </div>
     );
   }
 }

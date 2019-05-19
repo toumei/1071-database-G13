@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import apiRequest from "../../api/apiRequest";
 import jwt_decode from "jwt-decode";
 import { decrypt } from "../../models/crypt.model";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
-import "./Malfunction.css"
+import "./Malfunction.css";
 
 export default class extends Component {
   constructor(props) {
@@ -25,24 +25,40 @@ export default class extends Component {
         document.getElementById("index").click();
       } else {
         const navbarLogin = document.getElementById("navbarLogin");
-        let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
-        document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
+        let navbarLoginR = navbarLogin
+          .getAttribute("class")
+          .replace("display-block-none", "display-none-none");
+        document
+          .getElementById("navbarLogin")
+          .setAttribute("class", navbarLoginR);
         const navUserPC = document.getElementById("navUserPC");
-        let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
+        let navUserPCR = navUserPC
+          .getAttribute("class")
+          .replace("display-none-none", "display-block-none");
         document.getElementById("navUserPC").setAttribute("class", navUserPCR);
 
         const navbarLoginBtn = document.getElementById("navbarLoginBtn");
-        let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
-        document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
+        let navbarLoginBtnR = navbarLoginBtn
+          .getAttribute("class")
+          .replace("display-none-block", "display-none-none");
+        document
+          .getElementById("navbarLoginBtn")
+          .setAttribute("class", navbarLoginBtnR);
         const navbarUserBtn = document.getElementById("navbarUserBtn");
-        let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
-        document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+        let navbarUserBtnR = navbarUserBtn
+          .getAttribute("class")
+          .replace("display-none-none", "display-none-block");
+        document
+          .getElementById("navbarUserBtn")
+          .setAttribute("class", navbarUserBtnR);
 
         const data = { table: "_coloption" };
         apiRequest
           .get("/database/List", data)
           .then(res => {
-            const matter = decrypt(res.data).filter((x, i) => x.name === "matter");
+            const matter = decrypt(res.data).filter(
+              (x, i) => x.name === "matter"
+            );
             this.setState({ matter: matter[0].value });
           })
           .catch();
@@ -120,11 +136,11 @@ export default class extends Component {
             };
             apiRequest
               .post("/database/add", rowBed)
-              .then(res => { })
+              .then(res => {})
               .catch();
             apiRequest
               .post("/database/add", rowTime)
-              .then(res => { })
+              .then(res => {})
               .catch();
           })
           .catch();
@@ -206,8 +222,7 @@ const BedOption = ({ bind }) => {
           bind.clickValue = e.target.value;
           document.getElementById("add_edit").innerHTML = "修改";
           document.getElementById("clear_delete").innerHTML = "刪除";
-        }}
-      >
+        }}>
         {bind.state.bed[i].value}
       </option>
     );
@@ -241,8 +256,7 @@ const Bed = ({ bind }) => (
           document.getElementById("bed").value = e.target.value;
           document.getElementById("add_edit").innerHTML = "新增";
           document.getElementById("clear_delete").innerHTML = "清除";
-        }}
-      >
+        }}>
         請輸入床號
       </option>
       <BedOption bind={bind} />
@@ -302,8 +316,7 @@ const Bed = ({ bind }) => (
           document.getElementById("add_edit").innerHTML = "新增";
           document.getElementById("clear_delete").innerHTML = "清除";
         }
-      }}
-    >
+      }}>
       新增
     </Button>
     <Button
@@ -380,8 +393,7 @@ const Matter = ({ matter }) => (
         native: true
       }}
       margin="normal"
-      variant="outlined"
-    >
+      variant="outlined">
       <MatterOption matter={matter} />
     </TextField>
   </div>

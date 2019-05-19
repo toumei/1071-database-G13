@@ -9,7 +9,10 @@ import "./Processing.css";
 export default class extends Component {
   constructor(props) {
     super(props);
-    this.state = { malfunction: [{ ID: " " }], result: [{ label: " ", value: " " }] };
+    this.state = {
+      malfunction: [{ ID: " " }],
+      result: [{ label: " ", value: " " }]
+    };
     document.title = "維修單";
   }
 
@@ -24,24 +27,40 @@ export default class extends Component {
         document.getElementById("index").click();
       } else {
         const navbarLogin = document.getElementById("navbarLogin");
-        let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
-        document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
+        let navbarLoginR = navbarLogin
+          .getAttribute("class")
+          .replace("display-block-none", "display-none-none");
+        document
+          .getElementById("navbarLogin")
+          .setAttribute("class", navbarLoginR);
         const navUserPC = document.getElementById("navUserPC");
-        let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
+        let navUserPCR = navUserPC
+          .getAttribute("class")
+          .replace("display-none-none", "display-block-none");
         document.getElementById("navUserPC").setAttribute("class", navUserPCR);
 
         const navbarLoginBtn = document.getElementById("navbarLoginBtn");
-        let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
-        document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
+        let navbarLoginBtnR = navbarLoginBtn
+          .getAttribute("class")
+          .replace("display-none-block", "display-none-none");
+        document
+          .getElementById("navbarLoginBtn")
+          .setAttribute("class", navbarLoginBtnR);
         const navbarUserBtn = document.getElementById("navbarUserBtn");
-        let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
-        document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+        let navbarUserBtnR = navbarUserBtn
+          .getAttribute("class")
+          .replace("display-none-none", "display-none-block");
+        document
+          .getElementById("navbarUserBtn")
+          .setAttribute("class", navbarUserBtnR);
 
         const data = { table: "_coloption" };
         apiRequest
           .get("/database/List", data)
           .then(res => {
-            const result = decrypt(res.data).filter((x, i) => x.name === "result");
+            const result = decrypt(res.data).filter(
+              (x, i) => x.name === "result"
+            );
             this.setState({ result: result[0].value });
           })
           .catch();
@@ -112,7 +131,7 @@ export default class extends Component {
         };
         apiRequest
           .post("/database/add", row)
-          .then(res => { })
+          .then(res => {})
           .catch();
         const date = new Date();
         const today = `${date.getFullYear()}-${(
@@ -189,8 +208,7 @@ const Malfunction = ({ malfunction }) => (
         native: true
       }}
       margin="normal"
-      variant="outlined"
-    >
+      variant="outlined">
       <MalfunctionOption malfunction={malfunction} />
     </TextField>
   </div>
@@ -256,8 +274,7 @@ const Result = ({ result }) => (
         native: true
       }}
       margin="normal"
-      variant="outlined"
-    >
+      variant="outlined">
       <ResultOption result={result} />
     </TextField>
   </div>

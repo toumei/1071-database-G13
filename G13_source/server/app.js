@@ -86,6 +86,7 @@ app.use(
 // set acl auth
 app.use(acl.authorize.unless({ path: ["/api/", "/api/login", "/api/sigup"] }));
 
+// API Security
 var nonceArr = {};
 var clearTime = moment().unix();
 app.use(function(req, res, next) {

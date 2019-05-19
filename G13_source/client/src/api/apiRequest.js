@@ -33,6 +33,7 @@ axios.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
+          //window.location.href = "/user/login";
           // document.getElementById("navbarLoginBtn").click();
           break;
         default:
@@ -61,7 +62,7 @@ function Security(url, data = undefined) {
   return data;
 }
 
-export default new class apiRequest {
+export default new (class apiRequest {
   // Read
   get(url, data = undefined, config = {}) {
     return axios.get(url, { params: Security(url, data) }, config);
@@ -81,4 +82,4 @@ export default new class apiRequest {
   delete(url, data = undefined, config = {}) {
     return axios.delete(url, { data: Security(url, data) }, config);
   }
-}();
+})();

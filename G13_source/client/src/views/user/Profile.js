@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import apiRequest from "../../api/apiRequest";
 import jwt_decode from "jwt-decode";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 import Tag from "./tag.png";
 import "./Profile.css";
 import { decrypt } from "../../models/crypt.model";
-
 
 export default class extends Component {
   constructor(props) {
@@ -15,7 +14,7 @@ export default class extends Component {
     this.state = {
       id: "",
       password: "",
-      name: ""
+      name: "",
     };
   }
 
@@ -41,7 +40,7 @@ export default class extends Component {
 
       apiRequest
         .get("/database/List", {
-          table: "boarder"
+          table: "boarder",
         })
         .then(res => {
           if (res.data) {
@@ -116,10 +115,16 @@ export default class extends Component {
           </div>
           <div className="d-flex flex-column align-items-center">
             <Button
-              style={{ width: "100%", marginTop: "20px", outline: "none", borderWidth: "2px" }}
+              style={{
+                width: "100%",
+                marginTop: "20px",
+                outline: "none",
+                borderWidth: "2px",
+              }}
               variant="outlined"
               color="primary"
-              onClick={this.handleSubmit}>
+              onClick={this.handleSubmit}
+            >
               確認
             </Button>
           </div>
