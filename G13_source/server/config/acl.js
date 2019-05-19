@@ -1,6 +1,6 @@
 module.exports = {
   path: "config",
-  defaultRole: "DB_admin",
+  defaultRole: "user",
   baseUrl: "/api",
   decodedObjectName: "user",
   denyCallback: res => {

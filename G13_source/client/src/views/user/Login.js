@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import apiRequest from "../../api/apiRequest";
-import jwt_decode from "jwt-decode";
 import TextField from "@material-ui/core/TextField";
 import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -163,8 +162,6 @@ export default class extends Component {
         .then(res => {
           console.log(res.data);
           window.localStorage.setItem("token", res.data.token);
-          var decode = jwt_decode(res.data.token);
-          console.log(decode);
           this.sign_in();
         })
         .catch(err => {

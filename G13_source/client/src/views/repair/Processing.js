@@ -1,49 +1,74 @@
 import React, { Component } from "react";
 // controller
 import apiRequest from "../../api/apiRequest";
+import jwt_decode from "jwt-decode";
+
 // model
 import { decrypt } from "../../models/crypt.model";
 
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
-import "./Processing.css"
+import "./Processing.css";
 
 export default class extends Component {
   constructor(props) {
     super(props);
-    this.state = { malfunction: [{ ID: " " }], result: [{ label: " ", value: " " }] };
+    this.state = {
+      malfunction: [{ ID: " " }],
+      result: [{ label: " ", value: " " }]
+    };
     document.title = "維修單";
   }
 
   componentDidMount() {
-    if (localStorage.getItem("token") === null) {
+    var token = localStorage.getItem("token");
+    if (token === null) {
       document.title = "登入";
       document.getElementById("Login").click();
     } else {
-      if (localStorage.getItem("role") === "2" || localStorage.getItem("role") === "4") {
+      if (
+        jwt_decode(token)["role"] === "admin" ||
+        jwt_decode(token)["role"] === "user"
+      ) {
         document.title = "ResNetCMMS";
         document.getElementById("index").click();
       } else {
         const navbarLogin = document.getElementById("navbarLogin");
-        let navbarLoginR = navbarLogin.getAttribute("class").replace("display-block-none", "display-none-none");
-        document.getElementById("navbarLogin").setAttribute("class", navbarLoginR);
+        let navbarLoginR = navbarLogin
+          .getAttribute("class")
+          .replace("display-block-none", "display-none-none");
+        document
+          .getElementById("navbarLogin")
+          .setAttribute("class", navbarLoginR);
         const navUserPC = document.getElementById("navUserPC");
-        let navUserPCR = navUserPC.getAttribute("class").replace("display-none-none", "display-block-none");
+        let navUserPCR = navUserPC
+          .getAttribute("class")
+          .replace("display-none-none", "display-block-none");
         document.getElementById("navUserPC").setAttribute("class", navUserPCR);
 
         const navbarLoginBtn = document.getElementById("navbarLoginBtn");
-        let navbarLoginBtnR = navbarLoginBtn.getAttribute("class").replace("display-none-block", "display-none-none");
-        document.getElementById("navbarLoginBtn").setAttribute("class", navbarLoginBtnR);
+        let navbarLoginBtnR = navbarLoginBtn
+          .getAttribute("class")
+          .replace("display-none-block", "display-none-none");
+        document
+          .getElementById("navbarLoginBtn")
+          .setAttribute("class", navbarLoginBtnR);
         const navbarUserBtn = document.getElementById("navbarUserBtn");
-        let navbarUserBtnR = navbarUserBtn.getAttribute("class").replace("display-none-none", "display-none-block");
-        document.getElementById("navbarUserBtn").setAttribute("class", navbarUserBtnR);
+        let navbarUserBtnR = navbarUserBtn
+          .getAttribute("class")
+          .replace("display-none-none", "display-none-block");
+        document
+          .getElementById("navbarUserBtn")
+          .setAttribute("class", navbarUserBtnR);
 
         const data = { table: "_coloption" };
         apiRequest
           .get("/database/List", data)
           .then(res => {
-            const result = decrypt(res.data).filter((x, i) => x.name === "result");
+            const result = decrypt(res.data).filter(
+              (x, i) => x.name === "result"
+            );
             this.setState({ result: result[0].value });
           })
           .catch();
@@ -114,7 +139,7 @@ export default class extends Component {
         };
         apiRequest
           .post("/database/add", row)
-          .then(res => { })
+          .then(res => {})
           .catch();
         const date = new Date();
         const today = `${date.getFullYear()}-${(
@@ -146,7 +171,9 @@ export default class extends Component {
   render() {
     // if (this.state.malfunction.length > 0 && this.state.result.length > 0) {
     return (
-      <div className="processing height-full d-flex flex-column justify-content-center align-items-center opacity animation-one" style={{ backgroundColor: "white" }}>
+      <div
+        className="processing height-full d-flex flex-column justify-content-center align-items-center opacity animation-one"
+        style={{ backgroundColor: "white" }}>
         <form className="processingForm">
           <Malfunction malfunction={this.state.malfunction} />
           <Name />
@@ -155,7 +182,17 @@ export default class extends Component {
           <Detail />
           <div className="d-flex flex-column align-items-center">
             <Button
-              style={{ width: "80px", height: "80px", borderRadius: "100px", marginTop: "20px", borderWidth: "5px", borderColor: "red", outline: "none", fontSize: "4vmin", lineHeight: "4vmin" }}
+              style={{
+                width: "80px",
+                height: "80px",
+                borderRadius: "100px",
+                marginTop: "20px",
+                borderWidth: "5px",
+                borderColor: "red",
+                outline: "none",
+                fontSize: "4vmin",
+                lineHeight: "4vmin"
+              }}
               variant="outlined"
               color="secondary"
               onClick={this.handleClick}>
@@ -194,8 +231,7 @@ const Malfunction = ({ malfunction }) => (
         native: true
       }}
       margin="normal"
-      variant="outlined"
-    >
+      variant="outlined">
       <MalfunctionOption malfunction={malfunction} />
     </TextField>
   </div>
@@ -261,8 +297,7 @@ const Result = ({ result }) => (
         native: true
       }}
       margin="normal"
-      variant="outlined"
-    >
+      variant="outlined">
       <ResultOption result={result} />
     </TextField>
   </div>
