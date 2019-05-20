@@ -36,7 +36,7 @@ export default class extends Component {
 }
 
 const Navbar = ({ title }) => (
-  <nav className="navbar navbar-expand-lg navbar-light bg-transparent">
+  <nav className="navbar navbar-expand-sm navbar-light bg-transparent">
     <div className="container">
       <button
         id="navbarBtn"

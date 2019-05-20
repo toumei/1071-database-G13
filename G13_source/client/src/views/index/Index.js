@@ -38,7 +38,6 @@ export default class extends Component {
           border="0"
           marginwidth="0"
           marginheight="0"
-          scrolling="no"
           allowtransparency="yes"
           position="relative"
         />

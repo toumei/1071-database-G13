@@ -195,7 +195,7 @@ export default class extends Component {
             >
               <LockIcon style={{ fontSize: "3em" }} />
             </Avatar>
-            <p style={{ marginTop: "20px", color: "gray", opacity: "0.8" }}>Hint: 4 / 4</p>
+            <p style={{ marginTop: "20px", color: "gray", opacity: "0.8" }}>Hint: 1 / 2</p>
           </div>
           <div>
             <TextField
