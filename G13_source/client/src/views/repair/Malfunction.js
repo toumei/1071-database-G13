@@ -214,7 +214,7 @@ const Bed = ({ bind }) => (
   <div className="field-margin-processing">
     <TextField
       className="text-field-malfunction"
-      style={{ width: "33.7vw" }}
+      style={{ width: "33vw" }}
       id="bed"
       label="寢室床號"
       margin="normal"
