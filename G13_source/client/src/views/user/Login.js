@@ -131,7 +131,7 @@ export default class extends Component {
       apiRequest
         .post("login", {
           id: this.state.id,
-          password: this.state.password
+          password: this.state.password,
         })
         .then(res => {
           console.log(res.data);
