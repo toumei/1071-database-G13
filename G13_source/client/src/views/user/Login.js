@@ -129,7 +129,10 @@ export default class extends Component {
       this.setState({ idError: false, passwordError: true });
     } else {
       apiRequest
-        .post("login", this.state)
+        .post("login", {
+          id: this.state.id,
+          password: this.state.password
+        })
         .then(res => {
           console.log(res.data);
           window.localStorage.setItem("token", res.data.token);
@@ -195,7 +198,7 @@ export default class extends Component {
             >
               <LockIcon style={{ fontSize: "3em" }} />
             </Avatar>
-            <p style={{ marginTop: "20px", color: "gray", opacity: "0.8" }}>Hint: 4 / 4</p>
+            <p style={{ marginTop: "20px", color: "gray", opacity: "0.8" }}>Hint: 1 / 2</p>
           </div>
           <div>
             <TextField

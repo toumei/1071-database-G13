@@ -7,7 +7,7 @@ var iv = "107-database-G13";
 
 module.exports = class {
   static md5(data) {
-    log.cryptMsg("md5", "encrypt", data);
+    log.cryptMsg("md5", "encrypt", data.toString());
     return crypto
       .createHash("md5")
       .update(data.toString())

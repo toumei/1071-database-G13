@@ -4,7 +4,7 @@ const pwd = "ResNetCMMSResNetCMMSResNetCMMS13";
 const iv = "107-database-G13";
 
 export const md5 = data => {
-  console.log("md5: " + data);
+  console.log("md5: " + data.toString());
   return crypto
     .createHash("md5")
     .update(data.toString())
