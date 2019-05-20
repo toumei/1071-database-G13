@@ -116,7 +116,12 @@ app.use(function(req, res, next) {
     var nonce = req.body.nonce;
     var sign = req.body.sign;
   }
-
+  console.log(cryptModel.md5({
+    url: url,
+    timestamp: timestamp,
+    nonce: nonce
+  }));
+  console.log(sign);
   if (
     cryptModel.md5({
       url: url,

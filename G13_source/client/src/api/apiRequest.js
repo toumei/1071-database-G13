@@ -54,10 +54,12 @@ function Security(url, data = undefined) {
   });
   if (data === undefined) {
     data = { timestamp: timestamp, nonce: nonce, sign: sign };
+    console.log(data);
   } else {
     data["timestamp"] = timestamp;
     data["nonce"] = nonce;
     data["sign"] = sign;
+    console.log(data);
   }
   return data;
 }

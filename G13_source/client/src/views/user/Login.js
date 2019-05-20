@@ -129,7 +129,10 @@ export default class extends Component {
       this.setState({ idError: false, passwordError: true });
     } else {
       apiRequest
-        .post("login", this.state)
+        .post("login", {
+          id: this.state.id,
+          password: this.state.password
+        })
         .then(res => {
           console.log(res.data);
           window.localStorage.setItem("token", res.data.token);
